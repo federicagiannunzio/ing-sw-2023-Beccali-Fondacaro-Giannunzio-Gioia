@@ -36,7 +36,7 @@ public class personalGoal {
     * */
     public void createTheGoal(int id) throws IOException {
 
-        String data = new String(Files.readAllBytes(Paths.get("./demo.json")));
+        String data = new String(Files.readAllBytes(Paths.get("./goals.json")));
         JSONArray jsonArray = new JSONArray(data);
 
         String str = jsonArray.get(id-1).toString();
