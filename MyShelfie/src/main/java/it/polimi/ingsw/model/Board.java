@@ -63,20 +63,20 @@ public class Board {
             return false;
         }
 
-        if(i + 1 < size && getTile(i+1, j).getColor() != Color.BLACK){
-            return false;
+        if(i + 1 < size && getTile(i+1, j).getColor() == Color.BLACK){
+            return true;
         }
-        if(j + 1 < size && getTile(i, j+1).getColor() != Color.BLACK){
-            return false;
+        if(j + 1 < size && getTile(i, j+1).getColor() == Color.BLACK){
+            return true;
         }
-        if(i - 1 > 0 && getTile(i-1, j).getColor() != Color.BLACK){
-            return false;
+        if(i - 1 > 0 && getTile(i-1, j).getColor() == Color.BLACK){
+            return true;
         }
-        if(j - 1 > 0 && getTile(i, j-1).getColor() != Color.BLACK){
-            return false;
+        if(j - 1 > 0 && getTile(i, j-1).getColor() == Color.BLACK){
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     //sets a position in the table to the Tile given
