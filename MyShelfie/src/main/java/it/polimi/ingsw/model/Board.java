@@ -30,7 +30,7 @@ public class Board {
     //removes a Tile from the Board and returns it
     public Tile getTile(int i, int j){
         Tile t = table[i][j];
-        table[i][j] = new Tile(Colors.BLACK, 0);
+        table[i][j] = new Tile(Color.BLACK, 0);
         remainingTiles--;
         return t;
     }
@@ -42,7 +42,7 @@ public class Board {
         for(int i = 0; i<size; i++){
             for(int j = 0; j<size; j++){
                 if(checkTile(i, j) == true){
-                    available = true
+                    available = true;
                 }
             }
         }
@@ -50,7 +50,7 @@ public class Board {
         if(available = false){
             Tile[][] newBoards = new Tile[size][size];
             placeTile(newBoards, gameBag);
-            return newBoards
+            return newBoards;
         }
 
         return null;
@@ -86,7 +86,7 @@ public class Board {
 
     //sets a position in the table to a black Tile, used to mark an empty slot
     public void setBlackTile(int i, int j){
-        table[i][j] = new Tile(Colors.BLACK, 0);
+        table[i][j] = new Tile(Color.BLACK, 0);
     }
 
     //for each cell of the table picks a tile from the bag and place it in the cell

@@ -1,3 +1,5 @@
+import it.polimi.ingsw.model.Tile;
+
 public class Shelfie {
     Tile[][] structure = new Tile[6][5];
 

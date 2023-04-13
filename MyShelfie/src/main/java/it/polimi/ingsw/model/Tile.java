@@ -17,4 +17,8 @@ public class Tile{
     public int getId() {
         return id;
     }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }

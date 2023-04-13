@@ -1,25 +1,30 @@
+package it.polimi.ingsw.model;
+
+import it.polimi.ingsw.model.Color;
+import it.polimi.ingsw.model.Tile;
+
 public class Bag {
     Tile[] bag = new Tile[131];
 
     //generates a bag at the start of every game
     public Bag(){
         for(int i=0; i<22; i++){
-            Tile bag[i] = new Tile(Colors.YELLOW, i);
+            this.bag[i] = new Tile(Color.YELLOW, i);
         }
         for(int i=22; i<44; i++){
-            Tile bag[i] = new Tile(Colors.WHITE, i);
+            this.bag[i] = new Tile(Color.WHITE, i);
         }
         for(int i=44; i<66; i++){
-            Tile bag[i] = new Tile(Colors.GREEN, i);
+            this.bag[i] = new Tile(Color.GREEN, i);
         }
         for(int i=66; i<88; i++){
-            Tile bag[i] = new Tile(Colors.CYAN, i);
+            this.bag[i] = new Tile(Color.CYAN, i);
         }
         for(int i=88; i<110; i++){
-            Tile bag[i] = new Tile(Colors.PURPLE, i);
+            this.bag[i] = new Tile(Color.PURPLE, i);
         }
         for(int i=110; i<132; i++){
-            Tile bag[i] = new Tile(Colors.BLUE, i);
+            this.bag[i] = new Tile(Color.BLUE, i);
         }
     }
 
@@ -49,7 +54,7 @@ public class Bag {
             counter--;
 
             //swap the last element with it
-            int temp = bag[counter];
+            Tile temp = bag[counter];
             bag[counter] = bag[index];
             bag[index] = temp;
         }

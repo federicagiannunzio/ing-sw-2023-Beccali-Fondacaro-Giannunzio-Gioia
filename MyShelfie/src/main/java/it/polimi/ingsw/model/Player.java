@@ -83,6 +83,11 @@ public class Player {
             this.endGame = true;
         }
 
+        /**/
+        public void setPoints(int p) {
+            this.points = p;
+        }
+
         /*
         * (not sure that this method should exist)
         * it returns the tile that the player put in that position
@@ -134,7 +139,6 @@ public class Player {
         }
 
 
-
         /*
         * returns true if the player ends the game
         *
@@ -171,6 +175,8 @@ public class Player {
         public personalGoal getPersonalGoal() {
             return pGoal;
         }
+
+
 
 
 }
