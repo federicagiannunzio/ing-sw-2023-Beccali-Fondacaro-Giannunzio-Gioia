@@ -16,11 +16,11 @@ public class Shelfie {
     }
 
     //receives a Tile and returns the modified Shelfie
-    public Tile[][] addTile(Tile t, int j) {
+    public void addTile(Tile t, int j) {
         for (int i = 5; i >= 0; i--) {
-            if (structure[i][j] == null) {
-                structure[i][j] = t;
-                return structure;
+            if (this.structure[i][j] == null) {
+                this.structure[i][j] = t;
+                //return structure;
             }
         }
     }
