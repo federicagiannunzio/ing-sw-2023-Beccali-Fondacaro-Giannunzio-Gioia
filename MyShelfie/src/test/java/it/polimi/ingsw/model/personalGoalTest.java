@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class personalGoalTest {
 
@@ -21,31 +21,36 @@ public class personalGoalTest {
         goal = null;
     }
 
+    //aggiungi test per createTheGoal
+
     @Test
     public void getId_correctInput_correctOutput() {
-
         assertEquals(1, goal.getId());
     }
 
     @Test
-    public void getTilesCount_correctInput_correctOutput() {
-
+    public void getTilesCount_zeroTiles_correctOutput() {
         assertEquals(0, goal.getTilesCount());
     }
 
     @Test
+    public void getTilesCount_someTiles_correctOutput() {
+
+    }
+
+    @Test
     public void getAchieved_emptyList_correctOutput() {
+        assertTrue(goal.getAchieved().isEmpty());
+    }
+
+    @Test
+    public void getAchieved_notEmptyList_correctOutput() {
 
     }
 
     @Test
-    public void getAchieved_notEmpyList_correctOutput() {
-
-    }
-
-    @Test
-    public void getBody_correctInput_correctOutput() {
-
+    public void getBody_emptyBody_correctOutput() {
+        assertNotEquals(null, goal.getBody());
     }
 
     @Test
@@ -57,9 +62,5 @@ public class personalGoalTest {
     public void checkPoints_somePoints_correctOutput() {
 
     }
-
-    //aggiungi test per createTheGoal
-
-
 
 }
