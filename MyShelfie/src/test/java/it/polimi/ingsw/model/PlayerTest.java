@@ -4,7 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 public class PlayerTest {
 
@@ -12,6 +14,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() {
+
         player = new Player("chiasmo", 0, true);
     }
 
@@ -20,9 +23,31 @@ public class PlayerTest {
         player = null;
     }
 
-    //aggiungi test insertTile una volta sistemato il metodo
+    //aggiungi test pickTiles una volta sistemato il metodo
     //test su getTileByPosition?
-    //test getMyShelfie
+
+    @Test
+    public void insertTile() {
+        Shelfie s = new Shelfie();
+        Tile t1 = new Tile(Color.BLUE, 0);
+        Tile t2 = new Tile(Color.YELLOW, 1);
+        Tile t3 = new Tile(Color.CYAN, 2);
+
+        s.addTile(t1, 0);
+        s.addTile(t2, 0);
+        s.addTile(t3, 0);
+
+        player.getMyTiles().add(t1);
+        player.getMyTiles().add(t2);
+        player.getMyTiles().add(t3);
+        player.insertTile(0,0);
+        player.insertTile(1, 0);
+        player.insertTile(2, 0);
+
+        assertEquals(s, player.getMyShelfie());
+        assertTrue(player.getMyTiles().isEmpty());
+
+    }
 
     @Test
     public void setAndGetSPersonalGoal_correctInput_correctOutput() {
@@ -34,7 +59,13 @@ public class PlayerTest {
     @Test
     public void setAndGetEndGame_correctOutput() {
         player.setEndGame();
-        assertEquals(true, player.isEndGame());
+        assertTrue(player.isEndGame());
+    }
+
+    @Test
+    public void getAndSetPoints_correctInput_correctOutput() {
+        player.setPoints(10);
+        assertEquals(10, player.getPoints());
     }
 
     @Test
@@ -47,14 +78,59 @@ public class PlayerTest {
         assertEquals("chiasmo", player.getUsername());
     }
 
-    @Test
-    public void getAndSetPoints_correctInput_correctOutput() {
-        player.setPoints(10);
-        assertEquals(10, player.getPoints());
-    }
 
     @Test
     public void isYellowChair_correctOutput() {
-        assertEquals(true, player.isYellowChair());
+
+        assertTrue(player.isYellowChair());
     }
+
+    @Test
+    public void getMyShelfie_Empty_correctOutput() {
+        assertNotEquals(null, player.getMyShelfie());
+    }
+
+    //test in cui la shelf del giocatore non è vuota ma ha una tessera dentro, forse va implementato diversamente
+    public void getMyShelfie_notEmpty_correctOutput() {
+        Shelfie s = new Shelfie();
+        Tile t = new Tile(Color.BLUE, 0);
+        s.addTile(t, 0);
+
+        player.getMyShelfie().addTile(t,0);
+        assertNotEquals(s, player.getMyShelfie());
+    }
+
+    @Test
+    public void getMyTiles_Empty_correctOutput() {
+        assertTrue(player.getMyTiles().isEmpty());
+    }
+
+    //stesso discorso di shelfie
+    @Test
+    public void getMyTiles_notEmpty_correctOutput() {
+
+        ArrayList<Tile> a = new ArrayList<>();
+        Tile t1 = new Tile(Color.BLUE, 0);
+        Tile t2 = new Tile(Color.YELLOW, 0);
+        Tile t3 = new Tile(Color.GREEN, 0);
+
+        //setup expected array
+        a.add(t1);
+        a.add(t2);
+        a.add(t3);
+
+        //setup Tiles in the array
+        player.getMyTiles().add(t1);
+        player.getMyTiles().add(t2);
+        player.getMyTiles().add(t3);
+
+        assertEquals(a, player.getMyTiles());
+
+    }
+
+    
+
+
+
+
 }
