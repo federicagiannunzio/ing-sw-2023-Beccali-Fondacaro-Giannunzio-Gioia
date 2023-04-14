@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TileTest {
 
-    private Tile tile = null;
+    private Tile tile;
 
     @Before
     public void setUp() {
