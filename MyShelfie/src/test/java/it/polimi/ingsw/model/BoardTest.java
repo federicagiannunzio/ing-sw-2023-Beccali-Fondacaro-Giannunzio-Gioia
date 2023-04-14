@@ -14,7 +14,7 @@ public class BoardTest {
     @Before
     public void setUp() {
         bag = new Bag();
-        board = new Board(10, bag);
+        board = new Board(7, bag);
     }
 
     @After
