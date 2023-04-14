@@ -47,7 +47,7 @@ public class Board {
             }
         }
 
-        if(available = false){
+        if(available == false){
             Tile[][] newBoards = new Tile[size][size];
             placeTile(newBoards, gameBag);
             return newBoards;

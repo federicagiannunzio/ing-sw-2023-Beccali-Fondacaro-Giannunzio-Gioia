@@ -2,16 +2,15 @@ package it.polimi.ingsw.controller;
 
 import java.util.Random;
 
-//we didn't calready complete this class, it's a draft
-public class GameController {
+//we didn't already complete this class, it's a draft
+//public class GameController {
 
     /*
      * it assigns a personal goal to a player
      *
      * @return yourGoal the goal assigned to that player
      *
-     * */
-    public Shelfie pickGoal() {
+     *     public Shelfie pickGoal() {
         Shelfie yourGoal;
 
         int index = numberGenerator();
@@ -20,13 +19,15 @@ public class GameController {
 
         return yourGoal;
     }
+     * */
+
 
     /*
      * it generates a random number
      *
      * @return an integer
-     * */
-    public int numberGenerator() {
+     *
+     *     public int numberGenerator() {
 
         Random random = new Random();
         int n = random.nextInt(13);
@@ -34,13 +35,16 @@ public class GameController {
         return n;
 
     }
+     * */
+
 
     /*
      * it removes the picked goal from the list
      * the same goal can't be assigned to two different players
      *
-     *  */
-    public void goalRemover(int i) {
+     *  public void goalRemover(int i) {
         goals.remove(i);
     }
 }
+     *  */
+

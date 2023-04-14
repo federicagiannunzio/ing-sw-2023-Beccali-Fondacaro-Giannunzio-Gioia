@@ -130,16 +130,25 @@ public class personalGoal {
             switch(this.tilesCount) {
              case 1:
                newpoints = 1;
+               break;
              case 2:
                newpoints = 2;
+               break;
              case 3:
                newpoints = 4;
+               break;
              case 4:
                newpoints = 6;
+               break;
              case 5:
                newpoints = 9;
+               break;
              case 6:
                newpoints = 12;
+               break;
+             default:
+               newpoints = 0;
+               break;
             }
 
             return newpoints;

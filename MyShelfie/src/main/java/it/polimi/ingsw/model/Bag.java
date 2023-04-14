@@ -9,22 +9,22 @@ public class Bag {
     //generates a bag at the start of every game
     public Bag(){
         for(int i=0; i<22; i++){
-            this.bag[i] = new Tile(Color.YELLOW, i);
+            this.bag[i].setColor(Color.YELLOW);;
         }
         for(int i=22; i<44; i++){
-            this.bag[i] = new Tile(Color.WHITE, i);
+            this.bag[i].setColor(Color.WHITE);
         }
         for(int i=44; i<66; i++){
-            this.bag[i] = new Tile(Color.GREEN, i);
+            this.bag[i].setColor(Color.GREEN);
         }
         for(int i=66; i<88; i++){
-            this.bag[i] = new Tile(Color.CYAN, i);
+            this.bag[i].setColor(Color.CYAN);
         }
         for(int i=88; i<110; i++){
-            this.bag[i] = new Tile(Color.PURPLE, i);
+            this.bag[i].setColor(Color.PURPLE);
         }
         for(int i=110; i<132; i++){
-            this.bag[i] = new Tile(Color.BLUE, i);
+            this.bag[i].setColor(Color.BLUE);
         }
     }
 

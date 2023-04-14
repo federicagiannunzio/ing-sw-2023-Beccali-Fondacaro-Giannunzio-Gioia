@@ -17,16 +17,19 @@ public class personalGoalTest {
 
     @After
     public void tearDown() {
+
         goal = null;
     }
 
     @Test
     public void getId_correctInput_correctOutput() {
+
         assertEquals(1, goal.getId());
     }
 
     @Test
     public void getTilesCount_correctInput_correctOutput() {
+
         assertEquals(0, goal.getTilesCount());
     }
 
