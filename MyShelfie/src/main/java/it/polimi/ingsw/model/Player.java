@@ -45,8 +45,10 @@ public class Player {
             }
 
         }
+
+
         /*
-        *Insert a tile in the shelfie
+        * Insert a tile in the shelfie
         *
         * @param k position (in the arrayList) of the tile that the player wants to insert
         * @param j the column in which the player wants to insert the tile
@@ -54,11 +56,8 @@ public class Player {
         *  */
         public void insertTile(int k, int j) {
 
-            for(int i = 0; i < myTiles.size(); i++) {
-                myShelfie.addTile(myTiles.get(k), j);
-                myTiles.remove(k);
-            }
-
+            myShelfie.addTile(myTiles.get(k), j);
+            myTiles.remove(k);
         }
 
         /*
@@ -97,12 +96,14 @@ public class Player {
         *
         * @return the tile
         * */
-        public Tile getTileByPosition(int row, int col)  {
-            Tile tile;
 
+        //public Tile getTileByPosition(int row, int col)  {
+        //    Tile tile;
             //should call a hypothetical method in "Shelfie" class tha return the tile in that position
-            return tile;
-        }
+        //    return tile;
+        //}
+
+
 
 
         /*
@@ -176,9 +177,12 @@ public class Player {
             return pGoal;
         }
 
-
-
-
+        /*
+        * @return player's picked tiles (in the arrayList)
+        * */
+        public ArrayList<Tile> getMyTiles() {
+            return myTiles;
+        }
 }
 
 
