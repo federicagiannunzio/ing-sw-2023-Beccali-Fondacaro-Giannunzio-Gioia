@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
 public class Bag {
-    ArrayList<Tile> bag;
+    private ArrayList<Tile> bag;
 
     //generates a bag at the start of every game
     public Bag(){
