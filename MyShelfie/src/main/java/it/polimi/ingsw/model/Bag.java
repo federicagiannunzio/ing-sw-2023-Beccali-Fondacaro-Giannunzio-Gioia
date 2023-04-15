@@ -73,4 +73,9 @@ public class Bag {
             this.bag.add(t);
         }
     }
+
+    //getter method for the bag
+    public ArrayList<Tile> getBag() {
+        return bag;
+    }
 }
