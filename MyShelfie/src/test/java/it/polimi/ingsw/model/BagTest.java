@@ -6,8 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 public class BagTest {
 
@@ -70,6 +69,13 @@ public class BagTest {
         ArrayList<Tile> a = b.getBag();
         b.shuffle();
         assertNotEquals(a, b.getBag());
+    }
+
+    @Test
+    public void shuffle_orderedArray_shuffledNotChangedContent() {
+        ArrayList<Tile> a = b.getBag();
+        b.shuffle();
+        assertTrue(a.containsAll(b.getBag()));
     }
 
 }
