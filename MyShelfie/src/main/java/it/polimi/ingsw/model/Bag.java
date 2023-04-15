@@ -13,7 +13,6 @@ public class Bag {
         for(int i=0; i<22; i++){
             Tile t = new Tile(Color.YELLOW, 0);
             this.bag.add(t);
-
         }
         for(int i=22; i<44; i++){
             Tile t = new Tile(Color.GREEN, 0);
@@ -43,10 +42,10 @@ public class Bag {
         int counter = this.bag.size();
 
         //takes the last tile of the array (which has already been shuffled)
-        curr = this.bag.get(counter);
+        curr = this.bag.get(counter-1);
 
         //removes the tile from the array
-        this.bag.remove(counter);
+        this.bag.remove(counter-1);
 
         return curr;
     }
@@ -65,9 +64,10 @@ public class Bag {
             counter--;
 
             //swap the last element with it
-            Tile temp = bag.get(counter); //bag[counter];
-            //bag[counter] = bag[index];
-            //bag[index] = temp;
+            Tile temp = bag.get(counter-1);
+            Tile temp2 = bag.get(index);
+            bag.set(counter-1,temp2);
+            bag.set(index, temp);
         }
     }
 }
