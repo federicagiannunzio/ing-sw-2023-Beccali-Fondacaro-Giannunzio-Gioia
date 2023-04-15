@@ -94,7 +94,7 @@ public class Board {
     private void placeTile(Tile[][] board, Bag bag){
         for(int i = 0; i<size; i++){
             for(int j = 0; j<size; j++){
-                newBoards[i][j] = bag.pickTile();
+                //newBoards[i][j] = bag.pickTile();
             }
         }
     }
