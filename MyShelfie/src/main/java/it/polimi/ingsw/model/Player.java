@@ -55,7 +55,6 @@ public class Player {
         *
         *  */
         public void insertTile(int k, int j) {
-
             myShelfie.addTile(myTiles.get(k), j);
             myTiles.remove(k);
         }
@@ -74,7 +73,6 @@ public class Player {
 
         /*
          * if this player is the first to finish the game, set endGame at 1
-         *
          *
          * */
         public void setEndGame() {
@@ -102,8 +100,6 @@ public class Player {
             //should call a hypothetical method in "Shelfie" class tha return the tile in that position
         //    return tile;
         //}
-
-
 
 
         /*

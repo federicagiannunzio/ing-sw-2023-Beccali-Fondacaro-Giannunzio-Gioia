@@ -14,11 +14,15 @@ public class Shelfie {
         return structure;
     }
 
+    public Tile getCell(int i, int j) {return structure[i][j];}
+
     //receives a Tile and modify the Shelfie
-    public void addTile(Tile t, int j) {
-        for (int i = 5; i >= 0; i--) {
+    public void addTile(Tile t, int j)  {
+        boolean placed = false;
+        for (int i = 5; i >= 0 && !placed; i--) {
             if (this.structure[i][j] == null) {
                 this.structure[i][j] = t;
+                placed = true;
             }
         }
     }
