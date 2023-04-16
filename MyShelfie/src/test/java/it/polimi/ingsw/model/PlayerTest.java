@@ -27,7 +27,7 @@ public class PlayerTest {
     //test su getTileByPosition?
 
     @Test
-    public void insertTile() {
+    public void insertTile_fullArray_correctOutput() {
         Shelfie s = new Shelfie();
         Tile t1 = new Tile(Color.BLUE, 0);
         Tile t2 = new Tile(Color.YELLOW, 1);
@@ -41,12 +41,11 @@ public class PlayerTest {
         player.getMyTiles().add(t2);
         player.getMyTiles().add(t3);
         player.insertTile(0,0);
-        player.insertTile(1, 0);
-        player.insertTile(2, 0);
+        player.insertTile(0, 0);
+        player.insertTile(0, 0);
 
-        assertEquals(s, player.getMyShelfie());
+        assertArrayEquals(s.getStructure(), player.getMyShelfie().getStructure());
         assertTrue(player.getMyTiles().isEmpty());
-
     }
 
     @Test
@@ -91,6 +90,7 @@ public class PlayerTest {
     }
 
     //test in cui la shelf del giocatore non è vuota ma ha una tessera dentro, forse va implementato diversamente
+    @Test
     public void getMyShelfie_notEmpty_correctOutput() {
         Shelfie s = new Shelfie();
         Tile t = new Tile(Color.BLUE, 0);
@@ -127,10 +127,4 @@ public class PlayerTest {
         assertEquals(a, player.getMyTiles());
 
     }
-
-    
-
-
-
-
 }
