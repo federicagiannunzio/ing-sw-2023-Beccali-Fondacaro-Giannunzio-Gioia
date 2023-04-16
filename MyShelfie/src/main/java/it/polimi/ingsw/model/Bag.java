@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Bag {
     private ArrayList<Tile> bag;
@@ -32,15 +33,16 @@ public class Bag {
         while (counter > 0){
 
             //pick a random index
+            Random random = new Random();
             int index = (int) Math.floor(Math.random() * counter);
 
             //decrease counter by 1
             counter--;
 
             //swap the last element with it
-            Tile temp = bag.get(counter-1);
+            Tile temp = bag.get(counter);
             Tile temp2 = bag.get(index);
-            bag.set(counter-1,temp2);
+            bag.set(counter,temp2);
             bag.set(index, temp);
         }
     }
