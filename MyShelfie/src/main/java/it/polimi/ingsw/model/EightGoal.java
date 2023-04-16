@@ -1,4 +1,5 @@
-public class EightGoal implements CommonGoal{
+package it.polimi.ingsw.model;
+public class EightGoal implements CommonGoal {
     Tile[][] structure = new Tile[5][4];
     private int yellow;
     private int white;
@@ -16,32 +17,32 @@ public class EightGoal implements CommonGoal{
         structure = s.getStructure();
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 4; j++){
-                if(structure[i][j].getColor() == Colors.YELLOW) {
+                if(structure[i][j].getColor() == Color.YELLOW) {
                     yellow++;
                     if(yellow == 8)
                         return true;
                 }
-                else if(structure[i][j].getColor() == Colors.WHITE) {
+                else if(structure[i][j].getColor() == Color.WHITE) {
                     white++;
                     if(white == 8)
                         return true;
                 }
-                else if(structure[i][j].getColor() == Colors.GREEN) {
+                else if(structure[i][j].getColor() == Color.GREEN) {
                     green++;
                     if(green == 8)
                         return true;
                 }
-                else if(structure[i][j].getColor() == Colors.BLUE) {
+                else if(structure[i][j].getColor() == Color.BLUE) {
                     blue++;
                     if(blue == 8)
                         return true;
                 }
-                else if(structure[i][j].getColor() == Colors.CYAN) {
+                else if(structure[i][j].getColor() == Color.CYAN) {
                     cyan++;
                     if(cyan == 8)
                         return true;
                 }
-                else if(structure[i][j].getColor() == Colors.PURPLE) {
+                else if(structure[i][j].getColor() == Color.PURPLE) {
                     purple++;
                     if(purple == 8)
                         return true;

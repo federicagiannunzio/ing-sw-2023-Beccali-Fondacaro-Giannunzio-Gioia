@@ -33,7 +33,6 @@ public class Bag {
         while (counter > 0){
 
             //pick a random index
-            Random random = new Random();
             int index = (int) Math.floor(Math.random() * counter);
 
             //decrease counter by 1

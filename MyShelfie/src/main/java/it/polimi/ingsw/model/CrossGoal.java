@@ -1,3 +1,4 @@
+package it.polimi.ingsw.model;
 public class CrossGoal implements CommonGoal{
     Tile[][] structure = new Tile[5][4];
     public boolean commonGoalAlg(Shelfie s) {

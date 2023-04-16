@@ -1,3 +1,8 @@
+package it.polimi.ingsw.model;
+
+import it.polimi.ingsw.model.Shelfie;
+import it.polimi.ingsw.model.Tile;
+
 public class CouplesGoal implements CommonGoal{
     Tile[][] structure = new Tile[5][4];
     private int counter;

@@ -1,3 +1,4 @@
+package it.polimi.ingsw.model;
 public class SquaresGoal implements CommonGoal{
     Tile[][] structure = new Tile[5][4];
     private int yellow;
@@ -21,32 +22,32 @@ public class SquaresGoal implements CommonGoal{
                     structure[i+1][j+1] = null;
                     structure[i+1][j] = null;
                     structure[i][j+1] = null;
-                    if(structure[i][j].getColor() == Colors.YELLOW){
+                    if(structure[i][j].getColor() == Color.YELLOW){
                         yellow--;
                         if(yellow == 0)
                             return true;
                     }
-                    else if(structure[i][j].getColor() == Colors.WHITE){
+                    else if(structure[i][j].getColor() == Color.WHITE){
                         white--;
                         if(white == 0)
                             return true;
                     }
-                    else if(structure[i][j].getColor() == Colors.GREEN){
+                    else if(structure[i][j].getColor() == Color.GREEN){
                         green--;
                         if(green == 0)
                             return true;
                     }
-                    else if(structure[i][j].getColor() == Colors.BLUE){
+                    else if(structure[i][j].getColor() == Color.BLUE){
                         blue--;
                         if(blue == 0)
                             return true;
                     }
-                    else if(structure[i][j].getColor() == Colors.CYAN){
+                    else if(structure[i][j].getColor() == Color.CYAN){
                         cyan--;
                         if(cyan == 0)
                             return true;
                     }
-                    else if(structure[i][j].getColor() == Colors.PURPLE){
+                    else if(structure[i][j].getColor() == Color.PURPLE){
                         purple--;
                         if(purple == 0)
                             return true;
