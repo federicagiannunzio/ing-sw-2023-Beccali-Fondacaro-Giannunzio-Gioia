@@ -46,7 +46,7 @@ public class BagTest {
     }
 
     @Test
-    public void pickTile_oneTilePicked_decreaseDimByOne() {
+    public void pickTile_oneTilePickedDimDecreased_correctNewDim() {
         b.setBag();
         Tile t = b.pickTile();
         assertEquals(131, b.getBag().size());
@@ -55,7 +55,7 @@ public class BagTest {
     @Test
     public void pickTile_lastTilePicked_correctOutput() {
         b.setBag();
-        ArrayList<Tile> a = b.getBag();
+        ArrayList<Tile> a = (ArrayList<Tile>) b.getBag().clone();
         a.remove(131);
         Tile t = b.getBag().get(131);
 
@@ -66,7 +66,8 @@ public class BagTest {
 
     @Test
     public void shuffle_orderedArray_shuffledArray() {
-        ArrayList<Tile> a = b.getBag();
+        b.setBag();
+        ArrayList<Tile> a = (ArrayList<Tile>) b.getBag().clone();
         b.shuffle();
         assertNotEquals(a, b.getBag());
     }
