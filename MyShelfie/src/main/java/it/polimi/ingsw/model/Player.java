@@ -54,7 +54,7 @@ public class Player {
         * @param j the column in which the player wants to insert the tile
         *
         *  */
-        public void insertTile(int k, int j) throws fullColumnException, emptyArrayException {
+        public void insertTile(int k, int j) throws FullColumnException, emptyArrayException {
 
             if(myTiles.isEmpty()){
                 throw new emptyArrayException();

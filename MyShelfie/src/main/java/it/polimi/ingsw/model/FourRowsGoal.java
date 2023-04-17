@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 public class FourRowsGoal implements CommonGoal{
-    Tile[][] structure = new Tile[5][4];
+    Tile[][] structure = new Tile[6][5];
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
         int i, j, k, colorCounter, rowsCounter = 0;

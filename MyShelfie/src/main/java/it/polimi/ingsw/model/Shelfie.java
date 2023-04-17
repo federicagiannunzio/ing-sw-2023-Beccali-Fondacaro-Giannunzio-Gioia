@@ -14,10 +14,14 @@ public class Shelfie {
         return structure;
     }
 
+    public void setShelfTile(Tile t, int i, int j){
+        structure[i][j] = t;
+    }
+
     public Tile getCell(int i, int j) {return structure[i][j];}
 
     //receives a Tile and modify the Shelfie
-    public void addTile(Tile t, int j) throws fullColumnException{
+    public void addTile(Tile t, int j) throws FullColumnException {
         boolean placed = false;
             for (int i = 5; i >= 0 && !placed; i--) {
                 if (this.structure[i][j] == null) {
@@ -26,7 +30,7 @@ public class Shelfie {
                 }
             }
             if(!placed)
-                throw new fullColumnException();
+                throw new FullColumnException();
     }
     public int[] adjacentItem(){
         int[] points = new int[5];

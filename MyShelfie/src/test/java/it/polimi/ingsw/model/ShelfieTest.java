@@ -25,7 +25,7 @@ public class ShelfieTest {
 
 
     @Test
-    public void addTile_correctInput_correctOutput() {
+    public void addTile_correctInput_correctOutput() throws FullColumnException {
         Tile t = new Tile(Color.BLUE, 0);
         Tile[][] s = shelf.getStructure();
         shelf.addTile(t, 1);
@@ -41,7 +41,7 @@ public class ShelfieTest {
     }
 
     @Test
-    public void getStructure_addedTilesSameColumn_correctOutput() {
+    public void getStructure_addedTilesSameColumn_correctOutput() throws FullColumnException {
         Tile[][] expected = new Tile[6][5];
         Tile t1 = new Tile(Color.BLUE, 0);
         Tile t2 = new Tile(Color.YELLOW, 0);
@@ -54,7 +54,7 @@ public class ShelfieTest {
     }
 
     @Test
-    public void getStructure_addedTilesDifferentColumns_correctOutput() {
+    public void getStructure_addedTilesDifferentColumns_correctOutput() throws FullColumnException {
         Tile[][] expected = new Tile[6][5];
         Tile t1 = new Tile(Color.BLUE, 0);
         Tile t2 = new Tile(Color.YELLOW, 0);

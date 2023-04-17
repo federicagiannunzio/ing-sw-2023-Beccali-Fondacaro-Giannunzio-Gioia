@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 public class SquaresGoal implements CommonGoal{
-    Tile[][] structure = new Tile[5][4];
+    Tile[][] structure = new Tile[6][5];
     private int yellow;
     private int white;
     private int green;

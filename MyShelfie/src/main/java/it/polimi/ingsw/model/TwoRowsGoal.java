@@ -2,7 +2,7 @@
 package it.polimi.ingsw.model;
 
 public class TwoRowsGoal implements CommonGoal {
-    Tile[][] structure = new Tile[5][4];
+    Tile[][] structure = new Tile[6][5];
     public boolean commonGoalAlg(Shelfie s) {
         int i, j, k, counter = 0;
         boolean flag = true;
