@@ -26,8 +26,12 @@ public class PlayerTest {
     //aggiungi test pickTiles una volta sistemato il metodo
     //test su getTileByPosition?
 
+    @Test (expected = emptyArrayException.class)
+    public void insertTile_emptyArray_shouldThrowException() throws emptyArrayException, fullColumnException {
+        player.insertTile(0, 1);
+    }
     @Test
-    public void insertTile_fullArray_correctOutput() {
+    public void insertTile_fullArray_correctOutput() throws fullColumnException, emptyArrayException {
         Shelfie s = new Shelfie();
         Tile t1 = new Tile(Color.BLUE, 0);
         Tile t2 = new Tile(Color.YELLOW, 1);
@@ -91,7 +95,7 @@ public class PlayerTest {
 
     //test in cui la shelf del giocatore non è vuota ma ha una tessera dentro, forse va implementato diversamente
     @Test
-    public void getMyShelfie_notEmpty_correctOutput() {
+    public void getMyShelfie_notEmpty_correctOutput() throws fullColumnException {
         Shelfie s = new Shelfie();
         Tile t = new Tile(Color.BLUE, 0);
         s.addTile(t, 0);
