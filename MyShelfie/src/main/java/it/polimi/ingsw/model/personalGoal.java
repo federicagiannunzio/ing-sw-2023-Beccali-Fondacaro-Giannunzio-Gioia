@@ -75,6 +75,7 @@ public class personalGoal {
             }
         } catch (Exception e) {
             System.out.println("This ID is not valid");
+            throw new Exception();
         }
     }
 

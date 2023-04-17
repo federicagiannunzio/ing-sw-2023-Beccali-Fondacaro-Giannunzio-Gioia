@@ -17,14 +17,16 @@ public class Shelfie {
     public Tile getCell(int i, int j) {return structure[i][j];}
 
     //receives a Tile and modify the Shelfie
-    public void addTile(Tile t, int j)  {
+    public void addTile(Tile t, int j) throws fullColumnException{
         boolean placed = false;
-        for (int i = 5; i >= 0 && !placed; i--) {
-            if (this.structure[i][j] == null) {
-                this.structure[i][j] = t;
-                placed = true;
+            for (int i = 5; i >= 0 && !placed; i--) {
+                if (this.structure[i][j] == null) {
+                    this.structure[i][j] = t;
+                    placed = true;
+                }
             }
-        }
+            if(!placed)
+                throw new fullColumnException();
     }
     public int[] adjacentItem(){
         int[] points = new int[5];

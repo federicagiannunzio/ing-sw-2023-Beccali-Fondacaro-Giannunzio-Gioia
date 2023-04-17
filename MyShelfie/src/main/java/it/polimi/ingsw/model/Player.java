@@ -54,7 +54,12 @@ public class Player {
         * @param j the column in which the player wants to insert the tile
         *
         *  */
-        public void insertTile(int k, int j) {
+        public void insertTile(int k, int j) throws fullColumnException, emptyArrayException {
+
+            if(myTiles.isEmpty()){
+                throw new emptyArrayException();
+            }
+
             myShelfie.addTile(myTiles.get(k), j);
             myTiles.remove(k);
         }
