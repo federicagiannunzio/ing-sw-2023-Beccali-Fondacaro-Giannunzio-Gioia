@@ -41,13 +41,13 @@ public class Board {
         boolean available = false;
         for(int i = 0; i<size; i++){
             for(int j = 0; j<size; j++){
-                if(checkTile(i, j) == true){
+                if(checkTile(i, j)){
                     available = true;
                 }
             }
         }
 
-        if(available == false){
+        if(!available){
             Tile[][] newBoards = new Tile[size][size];
             placeTile(newBoards, gameBag);
             return newBoards;
