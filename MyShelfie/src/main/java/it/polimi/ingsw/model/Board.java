@@ -135,7 +135,4 @@ public class Board {
         table[i][j] = new Tile(Color.BLACK, 0);
     }
 
-
-
-
 }
