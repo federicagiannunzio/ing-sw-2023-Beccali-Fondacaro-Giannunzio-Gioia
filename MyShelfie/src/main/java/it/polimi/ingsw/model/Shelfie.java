@@ -28,6 +28,10 @@ public class Shelfie {
             if(!placed)
                 throw new fullColumnException();
     }
+
+    public void setShelfTile(int i, int j, Tile t){
+        this.structure[i][j] = t;
+    }
     public int[] adjacentItem(){
         int[] points = new int[5];
         int i, j, counter;
