@@ -4,8 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class ShelfieTest {
     private Shelfie shelf;
@@ -66,5 +65,60 @@ public class ShelfieTest {
         assertArrayEquals(expected, shelf.getStructure());
     }
 
+    @Test
+    public void isSafe_true(){
+        Tile t = new Tile(Color.YELLOW, 0);
+        int i = 2, j = 4;
+        shelf.setShelfTile(i, j, t);
+        boolean[][] visited = new boolean[6][5];
+        assertTrue(shelf.isSafe(shelf.getStructure(), i, j, visited));
+    }
+
+    @Test
+    public void isSafe_alreadyVisited(){
+        Tile t = new Tile(Color.YELLOW, 0);
+        int i = 2, j = 4;
+        shelf.setShelfTile(i, j, t);
+        boolean[][] visited = new boolean[6][5];
+        visited[i][j] = true;
+        assertFalse(shelf.isSafe(shelf.getStructure(), i, j, visited));
+    }
+
+    @Test
+    public void isSafe_nullTile(){
+        int i = 2, j = 4;
+        boolean[][] visited = new boolean[6][5];
+        assertFalse(shelf.isSafe(shelf.getStructure(), i, j, visited));
+    }
+
+    @Test
+    public void adjacentTile_threeGroups(){
+        Tile t = new Tile(Color.YELLOW, 0);
+        Tile t1 = new Tile(Color.BLUE, 0);
+        Tile t2 = new Tile(Color.BLUE, 0);
+        Tile t3 = new Tile(Color.BLUE, 0);
+        Tile t4 = new Tile(Color.YELLOW, 0);
+        Tile t5 = new Tile(Color.YELLOW, 0);
+        Tile t6 = new Tile(Color.BLUE, 0);
+        Tile t7 = new Tile(Color.BLUE, 0);
+        Tile t8 = new Tile(Color.BLUE, 0);
+        Tile t9 = new Tile(Color.BLUE, 0);
+        Tile t10 = new Tile(Color.BLUE, 0);
+        Tile t11 = new Tile(Color.BLUE, 0);
+        Tile t12 = new Tile(Color.BLUE, 0);
+
+        shelf.setShelfTile(0, 0, t);
+        shelf.setShelfTile(0, 1, t1);
+        shelf.setShelfTile(0, 1, t2);
+        shelf.setShelfTile(0, 1, t3);
+        shelf.setShelfTile(0, 1, t4);
+        shelf.setShelfTile(0, 1, t5);
+        shelf.setShelfTile(0, 1, t6);
+        shelf.setShelfTile(0, 1, t7);
+        shelf.setShelfTile(0, 1, t8);
+
+        boolean[][] visited = new boolean[6][5];
+        assertTrue(shelf.isSafe(shelf.getStructure(), i, j, visited));
+    }
 
 }

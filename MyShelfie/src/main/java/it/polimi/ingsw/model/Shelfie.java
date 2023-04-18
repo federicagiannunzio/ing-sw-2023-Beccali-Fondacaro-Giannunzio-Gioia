@@ -47,7 +47,7 @@ public class Shelfie {
                     counter = 0;
                     counter = DFS(structure, i, j, visited, counter);
                     if(counter == 2)
-                        points[5]++; //sarebbe 4?
+                        points[4]++; //sarebbe 4?
                     if(counter == 3)
                         points[0]++;
                     else if(counter == 4)
