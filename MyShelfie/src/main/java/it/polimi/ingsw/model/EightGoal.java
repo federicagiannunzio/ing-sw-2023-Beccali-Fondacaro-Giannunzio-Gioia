@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 public class EightGoal implements CommonGoal {
-    Tile[][] structure = new Tile[5][4];
+    Tile[][] structure = new Tile[6][5];
     private int yellow;
     private int white;
     private int green;
@@ -15,37 +15,34 @@ public class EightGoal implements CommonGoal {
         cyan = 0;
         purple = 0;
         structure = s.getStructure();
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 4; j++){
-                if(structure[i][j].getColor() == Color.YELLOW) {
-                    yellow++;
-                    if(yellow == 8)
-                        return true;
-                }
-                else if(structure[i][j].getColor() == Color.WHITE) {
-                    white++;
-                    if(white == 8)
-                        return true;
-                }
-                else if(structure[i][j].getColor() == Color.GREEN) {
-                    green++;
-                    if(green == 8)
-                        return true;
-                }
-                else if(structure[i][j].getColor() == Color.BLUE) {
-                    blue++;
-                    if(blue == 8)
-                        return true;
-                }
-                else if(structure[i][j].getColor() == Color.CYAN) {
-                    cyan++;
-                    if(cyan == 8)
-                        return true;
-                }
-                else if(structure[i][j].getColor() == Color.PURPLE) {
-                    purple++;
-                    if(purple == 8)
-                        return true;
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 5; j++) {
+                if (structure[i][j] != null) {
+                    if (structure[i][j].getColor() == Color.YELLOW) {
+                        yellow++;
+                        if (yellow == 8)
+                            return true;
+                    } else if (structure[i][j].getColor() == Color.WHITE) {
+                        white++;
+                        if (white == 8)
+                            return true;
+                    } else if (structure[i][j].getColor() == Color.GREEN) {
+                        green++;
+                        if (green == 8)
+                            return true;
+                    } else if (structure[i][j].getColor() == Color.BLUE) {
+                        blue++;
+                        if (blue == 8)
+                            return true;
+                    } else if (structure[i][j].getColor() == Color.CYAN) {
+                        cyan++;
+                        if (cyan == 8)
+                            return true;
+                    } else if (structure[i][j].getColor() == Color.PURPLE) {
+                        purple++;
+                        if (purple == 8)
+                            return true;
+                    }
                 }
             }
         }
