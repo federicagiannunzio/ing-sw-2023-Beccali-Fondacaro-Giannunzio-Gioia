@@ -80,7 +80,22 @@ public class ShelfieTest {
         m[5][0] = new Tile(Color.BLUE, 0);
 
         shelf.addTile(t1, 0);
+    }
 
+    @Test
+    public void DFS_threeTilesSameColumn_correctOutput () throws fullColumnException {
+        Tile t1 = new Tile(Color.YELLOW, 0);
+        Tile t2 = new Tile(Color.YELLOW, 0);
+        Tile t3 = new Tile(Color.YELLOW, 0);
+
+        boolean [][] b = new boolean[6][5];
+        int c = 1;
+
+        shelf.addTile(t1, 0);
+        shelf.addTile(t2, 0);
+        shelf.addTile(t3, 0);
+
+        assertEquals(3, shelf.DFS(shelf.getStructure(), 3, 0, b,c));
     }
 
 
