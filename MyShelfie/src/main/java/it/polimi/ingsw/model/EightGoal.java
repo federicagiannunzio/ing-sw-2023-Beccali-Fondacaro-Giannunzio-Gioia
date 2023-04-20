@@ -16,8 +16,8 @@ public class EightGoal implements CommonGoal {
         purple = 0;
         structure = s.getStructure();
         for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 5; j++){
-                if(structure[i][j] != null) {
+            for(int j = 0; j < 5; j++) {
+                if (structure[i][j] != null) {
                     if (structure[i][j].getColor() == Color.YELLOW) {
                         yellow++;
                         if (yellow == 8)

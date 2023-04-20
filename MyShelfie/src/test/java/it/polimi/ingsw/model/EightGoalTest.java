@@ -16,10 +16,12 @@ public class EightGoalTest {
     }
 
     @After
-    public void tearDown() {s = null;}
+    public void tearDown() {
+        s = null;
+    }
 
     @Test
-    public void eightGoal_eightEquals(){
+    public void eightGoal_eightEqual(){
         Tile t1 = new Tile(Color.BLUE, 0);
         Tile t2 = new Tile(Color.BLUE, 0);
         Tile t3 = new Tile(Color.BLUE, 0);
@@ -28,44 +30,46 @@ public class EightGoalTest {
         Tile t6 = new Tile(Color.BLUE, 0);
         Tile t7 = new Tile(Color.BLUE, 0);
         Tile t8 = new Tile(Color.BLUE, 0);
-        s.setShelfTile(t1, 2 , 4);
-        s.setShelfTile(t2, 1 , 3);
-        s.setShelfTile(t3, 1 , 2);
-        s.setShelfTile(t4, 5 , 1);
-        s.setShelfTile(t5, 3 , 3);
-        s.setShelfTile(t6, 4 , 4);
-        s.setShelfTile(t7, 4 , 1);
-        s.setShelfTile(t8, 5 , 3);
-        EightGoal corner = new EightGoal();
-        assertTrue(corner.commonGoalAlg(s));
+
+        s.setShelfTile(2, 1, t1);
+        s.setShelfTile(3, 2, t2);
+        s.setShelfTile(4, 3, t3);
+        s.setShelfTile(2, 3, t4);
+        s.setShelfTile(5, 4, t5);
+        s.setShelfTile(5, 1, t6);
+        s.setShelfTile(3, 4, t7);
+        s.setShelfTile(4, 1, t8);
+        EightGoal objective = new EightGoal();
+        assertTrue(objective.commonGoalAlg(s));
     }
 
     @Test
     public void eightGoal_eightDifferent(){
         Tile t1 = new Tile(Color.BLUE, 0);
-        Tile t2 = new Tile(Color.GREEN, 0);
-        Tile t3 = new Tile(Color.WHITE, 0);
-        Tile t4 = new Tile(Color.PURPLE, 0);
-        Tile t5 = new Tile(Color.BLUE, 0);
+        Tile t2 = new Tile(Color.CYAN, 0);
+        Tile t3 = new Tile(Color.BLUE, 0);
+        Tile t4 = new Tile(Color.WHITE, 0);
+        Tile t5 = new Tile(Color.GREEN, 0);
         Tile t6 = new Tile(Color.WHITE, 0);
-        Tile t7 = new Tile(Color.CYAN, 0);
+        Tile t7 = new Tile(Color.PURPLE, 0);
         Tile t8 = new Tile(Color.YELLOW, 0);
-        s.setShelfTile(t1, 2 , 4);
-        s.setShelfTile(t2, 1 , 3);
-        s.setShelfTile(t3, 3 , 2);
-        s.setShelfTile(t4, 5 , 4);
-        s.setShelfTile(t5, 3 , 3);
-        s.setShelfTile(t6, 4 , 4);
-        s.setShelfTile(t7, 4 , 1);
-        s.setShelfTile(t8, 5 , 3);
-        EightGoal corner = new EightGoal();
-        assertFalse(corner.commonGoalAlg(s));
+
+        s.setShelfTile(0, 1, t1);
+        s.setShelfTile(3, 2, t2);
+        s.setShelfTile(4, 3, t3);
+        s.setShelfTile(2, 3, t4);
+        s.setShelfTile(5, 4, t5);
+        s.setShelfTile(1, 1, t6);
+        s.setShelfTile(5, 3, t7);
+        s.setShelfTile(4, 2, t8);
+        EightGoal objective = new EightGoal();
+        assertFalse(objective.commonGoalAlg(s));
     }
 
     @Test
     public void eightGoal_nullMatrix(){
-        EightGoal corner = new EightGoal();
-        assertFalse(corner.commonGoalAlg(s));
+        EightGoal objective = new EightGoal();
+        assertFalse(objective.commonGoalAlg(s));
     }
 
     @Test
@@ -77,14 +81,15 @@ public class EightGoalTest {
         Tile t5 = new Tile(Color.BLUE, 0);
         Tile t6 = new Tile(Color.BLUE, 0);
         Tile t7 = new Tile(Color.BLUE, 0);
-        s.setShelfTile(t1, 2 , 4);
-        s.setShelfTile(t2, 1 , 3);
-        s.setShelfTile(t3, 3 , 2);
-        s.setShelfTile(t4, 5 , 4);
-        s.setShelfTile(t5, 3 , 3);
-        s.setShelfTile(t6, 4 , 4);
-        s.setShelfTile(t7, 4 , 1);
-        EightGoal corner = new EightGoal();
-        assertFalse(corner.commonGoalAlg(s));
+
+        s.setShelfTile(0, 1, t1);
+        s.setShelfTile(3, 2, t2);
+        s.setShelfTile(4, 3, t3);
+        s.setShelfTile(2, 3, t4);
+        s.setShelfTile(5, 4, t5);
+        s.setShelfTile(1, 1, t6);
+        s.setShelfTile(5, 3, t7);
+        EightGoal objective = new EightGoal();
+        assertFalse(objective.commonGoalAlg(s));
     }
 }

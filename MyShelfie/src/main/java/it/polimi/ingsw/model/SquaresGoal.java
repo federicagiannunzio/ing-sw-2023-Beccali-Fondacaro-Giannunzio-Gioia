@@ -17,11 +17,8 @@ public class SquaresGoal implements CommonGoal{
         structure = s.getStructure();
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 4; j++){
-                if(structure[i][j].getColor() == structure[i + 1][j].getColor() && structure[i][j].getColor() == structure[i][j + 1].getColor() && structure[i][j].getColor() == structure[i + 1][j + 1].getColor()){
-                    structure[i][j] = null;
-                    structure[i+1][j+1] = null;
-                    structure[i+1][j] = null;
-                    structure[i][j+1] = null;
+                if(structure[i][j] != null && structure[i+1][j] != null &&  structure[i][j+1] != null && structure[i+1][j+1] != null &&
+                        structure[i][j].getColor() == structure[i + 1][j].getColor() && structure[i][j].getColor() == structure[i][j + 1].getColor() && structure[i][j].getColor() == structure[i + 1][j + 1].getColor()){
                     if(structure[i][j].getColor() == Color.YELLOW){
                         yellow--;
                         if(yellow == 0)
@@ -52,6 +49,10 @@ public class SquaresGoal implements CommonGoal{
                         if(purple == 0)
                             return true;
                     }
+                    structure[i][j] = null;
+                    structure[i+1][j+1] = null;
+                    structure[i+1][j] = null;
+                    structure[i][j+1] = null;
                 }
             }
         }

@@ -5,11 +5,17 @@ public class ThreeColumnsGoal implements CommonGoal {
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
         int i, j, k, columnsCounter = 0, colorCounter;
-        boolean flag = true;
+        boolean flag = true, flag2 = true;
         for (i = 0; i < 5; i++) {
             colorCounter = 0;
             for (j = 0; j < 6; j++) {
+                if(structure[j][i] == null) {
+                    flag = false;
+                    flag2 = false;
+                }
                 for (k = 0; k < j && flag; k++) {
+                    if(structure[k][i] == null)
+                        flag = false;
                     if(structure[j][i].getColor() == structure[k][i].getColor())
                         flag = false;
                 }
@@ -18,8 +24,10 @@ public class ThreeColumnsGoal implements CommonGoal {
                 else
                     flag = true;
             }
-            if(colorCounter <= 3)
+            if(colorCounter <= 3 && flag2)
                 columnsCounter++;
+            else
+                flag2 = true;
         }
         if(columnsCounter == 3)
             return true;

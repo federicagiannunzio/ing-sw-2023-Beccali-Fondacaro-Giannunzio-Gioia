@@ -9,9 +9,14 @@ public class TwoRowsGoal implements CommonGoal {
         structure = s.getStructure();
         for(i = 0; i < 6; i++){
             for(j = 0; j < 5 && flag; j++){
-                for(k = j; k < 5 && flag; k++){
-                    if(structure[i][j].getColor() == structure[i][k].getColor())
+                if(structure[i][j] == null)
+                    flag = false;
+                for(k = j+1; k < 5 && flag; k++){
+                    if(structure[i][k] == null)
                         flag = false;
+                    if(flag && structure[i][j].getColor() == structure[i][k].getColor())
+                        flag = false;
+
                 }
             }
             if(flag)

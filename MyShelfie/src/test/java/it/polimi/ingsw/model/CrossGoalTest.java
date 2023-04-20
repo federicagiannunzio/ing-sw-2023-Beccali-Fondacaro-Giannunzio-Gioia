@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class CrossGoalTest{
+public class CrossGoalTest {
     private Shelfie s;
 
     @Before
@@ -16,57 +16,45 @@ public class CrossGoalTest{
     }
 
     @After
-    public void tearDown() {s = null;}
+    public void tearDown() {
+        s = null;
+    }
 
     @Test
-    public void crossGoal_crossExists(){
+    public void crossGoal_equalCross(){
         Tile t1 = new Tile(Color.BLUE, 0);
         Tile t2 = new Tile(Color.BLUE, 0);
         Tile t3 = new Tile(Color.BLUE, 0);
         Tile t4 = new Tile(Color.BLUE, 0);
         Tile t5 = new Tile(Color.BLUE, 0);
-        s.setShelfTile(t1, 0 , 0);
-        s.setShelfTile(t2, 1 , 1);
-        s.setShelfTile(t3, 2 , 2);
-        s.setShelfTile(t4, 2 , 0);
-        s.setShelfTile(t5, 0 , 2);
-        CrossGoal corner = new CrossGoal();
-        assertTrue(corner.commonGoalAlg(s));
+        s.setShelfTile(0, 0, t1);
+        s.setShelfTile(1, 1, t2);
+        s.setShelfTile(2, 2, t3);
+        s.setShelfTile(0, 2, t4);
+        s.setShelfTile(2, 0, t5);
+        CrossGoal objective = new CrossGoal();
+        assertTrue(objective.commonGoalAlg(s));
     }
 
     @Test
-    public void crossGoal_crossColorsDifferent(){
+    public void crossGoal_differentCross(){
         Tile t1 = new Tile(Color.BLUE, 0);
         Tile t2 = new Tile(Color.WHITE, 0);
-        Tile t3 = new Tile(Color.BLUE, 0);
-        Tile t4 = new Tile(Color.GREEN, 0);
-        Tile t5 = new Tile(Color.BLUE, 0);
-        s.setShelfTile(t1, 0 , 0);
-        s.setShelfTile(t2, 1 , 1);
-        s.setShelfTile(t3, 2 , 2);
-        s.setShelfTile(t4, 2 , 0);
-        s.setShelfTile(t5, 0 , 2);
-        CrossGoal corner = new CrossGoal();
-        assertFalse(corner.commonGoalAlg(s));
-    }
-
-    @Test
-    public void crossGoal_nullMatrix(){
-        CrossGoal corner = new CrossGoal();
-        assertFalse(corner.commonGoalAlg(s));
-    }
-
-    @Test
-    public void crossGoal_nullElementsInCross(){
-        Tile t1 = new Tile(Color.BLUE, 0);
-        Tile t2 = new Tile(Color.BLUE, 0);
-        Tile t3 = new Tile(Color.BLUE, 0);
+        Tile t3 = new Tile(Color.GREEN, 0);
         Tile t4 = new Tile(Color.BLUE, 0);
-        s.setShelfTile(t1, 0 , 0);
-        s.setShelfTile(t2, 1 , 1);
-        s.setShelfTile(t3, 2 , 2);
-        s.setShelfTile(t4, 2 , 0);
-        CrossGoal corner = new CrossGoal();
-        assertFalse(corner.commonGoalAlg(s));
+        Tile t5 = new Tile(Color.CYAN, 0);
+        s.setShelfTile(2, 1, t1);
+        s.setShelfTile(3, 2, t2);
+        s.setShelfTile(4, 3, t3);
+        s.setShelfTile(2, 3, t4);
+        s.setShelfTile(4, 1, t5);
+        CrossGoal objective = new CrossGoal();
+        assertFalse(objective.commonGoalAlg(s));
+    }
+
+    @Test
+    public void crossGoal_nullCross(){
+        CrossGoal objective = new CrossGoal();
+        assertFalse(objective.commonGoalAlg(s));
     }
 }
