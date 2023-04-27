@@ -7,6 +7,12 @@ public class EightGoal implements CommonGoal {
     private int blue;
     private int cyan;
     private int purple;
+
+    /**
+     * checks if there are eight tiles of the same type
+     *
+     * @param s is the shelf of the player that will be checked
+     */
     public boolean commonGoalAlg(Shelfie s) {
         yellow = 0;
         white = 0;

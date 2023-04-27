@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class personalGoal {
-
     private final int id;
     private int tilesCount;
     private ArrayList<Color> achieved;
     private final Tile[][] body;
 
-
-    /*
-    * constructor
-    * */
+    /**
+     * constructor of the class personalGoal
+     *
+     * @param id identifies uniquely the goal
+     * */
     public personalGoal (int id) {
         this.id = id;
         this.tilesCount = 0;
@@ -28,12 +28,12 @@ public class personalGoal {
         this.body = new Tile[6][5];
     }
 
-    /*
-    *this method should only be called at the beginning of the game
-    * it sets the right combination of tiles for that goal
-    *
-    * @param id is the id that identifies a specified goal
-    * */
+    /**
+     * this method should be called at the beginning of the game
+     * it sets the right combination of tiles for that goal
+     *
+     * @param id identifies uniquely the goal
+     * */
     public void createTheGoal(int id) throws IOException, Exception {
         try {
             String data = new String(Files.readAllBytes(Paths.get("./goals1.json")));
@@ -79,46 +79,50 @@ public class personalGoal {
         }
     }
 
-    /*
-    * returns goal's id
-    *
-    * */
+    /**
+     * returns goal's id
+     *
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
-    /*
-    * return number of tiles that the player already matched
-    * */
+    /**
+     * returns the number of tiles that the player already matched
+     *
+     * @return tilesCount
+     */
     public int getTilesCount() {
         return tilesCount;
     }
 
-    /*
-    * returns the array that contains the colors that the player already matched
-    *
-    * */
+    /**
+     * returns the array that contains the colors that the player already matched
+     *
+     * @return achieved
+     */
     public ArrayList<Color> getAchieved() {
         return achieved;
     }
 
-    /*
-    * return personal goal's shelf
-    * */
+    /**
+     * return personal goal's shelf
+     *
+     * @return body
+     * */
     public Tile[][] getBody() {
         return body;
     }
 
 
-    /*
-    * (not sure this method should stay here but rather in the controller)
-    * it should be called at the end of a turn to update the total of that player's points
-    *
-    * @param pshelfie player's shelf
-    * @return amount of points related to the personal goal
-    *
-    *  */
-
+    //(not sure this method should stay here but rather in the controller)
+    /**
+     * it should be called at the end of a turn to update the total of that player's points
+     *
+     * @param pshelfie player's shelf
+     * @return amount of points related to the personal goal
+     */
     public int checkpoints(Shelfie pshelfie) {
         int newpoints = 0;
 
@@ -154,8 +158,6 @@ public class personalGoal {
                newpoints = 0;
                break;
             }
-
             return newpoints;
         }
-
 }

@@ -1,6 +1,11 @@
 package it.polimi.ingsw.model;
 public class TwoColumnsGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
+    /**
+     * checks if there are two columns made up of six different types of tiles
+     *
+     * @param s is the Shelf of the player that will be checked
+     */
     public boolean commonGoalAlg(Shelfie s) {
         int i, j, k, counter = 0;
         boolean flag = true;

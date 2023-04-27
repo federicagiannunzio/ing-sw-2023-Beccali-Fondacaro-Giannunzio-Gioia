@@ -1,6 +1,12 @@
 package it.polimi.ingsw.model;
 public class CrossGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
+
+    /**
+     * checks if there are five tiles of the same type that create a "X" shape
+     *
+     * @param s is the Shelf of the player that will be checked
+     */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
         for(int i = 1; i < 5; i++){

@@ -6,6 +6,12 @@ import it.polimi.ingsw.model.Tile;
 public class CouplesGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
     private int counter;
+
+    /**
+     * checks if there are three columns made up of six tiles of one, two, three different types
+     *
+     * @param s is the Shelf of the player that will be checked
+     */
     public boolean commonGoalAlg(Shelfie s) {
         int[] arrayPoints = new int[5];
         arrayPoints = s.adjacentItem();

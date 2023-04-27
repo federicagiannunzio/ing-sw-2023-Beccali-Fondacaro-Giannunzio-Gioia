@@ -1,6 +1,12 @@
 package it.polimi.ingsw.model;
 public class FourRowsGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
+
+    /**
+     * checks if there are four rows made up of six tiles of one, two, three different types
+     *
+     * @param s is the Shelf of the player that will be checked
+     */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
         int i, j, k, colorCounter, rowsCounter = 0;

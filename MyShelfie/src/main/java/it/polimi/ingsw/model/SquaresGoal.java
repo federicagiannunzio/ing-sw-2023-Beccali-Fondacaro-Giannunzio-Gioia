@@ -7,6 +7,10 @@ public class SquaresGoal implements CommonGoal{
     private int blue;
     private int cyan;
     private int purple;
+
+    /**
+     *
+     * */
     public boolean commonGoalAlg(Shelfie s) {
         yellow = 2;
         white = 2;
