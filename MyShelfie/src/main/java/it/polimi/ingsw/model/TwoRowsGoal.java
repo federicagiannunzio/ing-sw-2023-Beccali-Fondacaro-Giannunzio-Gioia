@@ -1,13 +1,18 @@
 
-package it.polimi.ingsw.model;
 
+package src.main.java.it.polimi.ingsw.model;
+
+/**
+ * Class twoRowsGoal
+ * Two lines formed each from 5 different types of tiles.
+ * @author andreafondacaro
+ */
 public class TwoRowsGoal implements CommonGoal {
     Tile[][] structure = new Tile[6][5];
 
     /**
-     * checks if there are two columns made up of five different types of tiles
-     *
-     * @param s is the Shelf of the player that will be checked
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
      */
     public boolean commonGoalAlg(Shelfie s) {
         int i, j, k, counter = 0;

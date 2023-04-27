@@ -1,11 +1,15 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
+
+/**
+ * Class crossgoal
+ * Five tiles of the same type forming an X.
+ */
 public class CrossGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
 
     /**
-     * checks if there are five tiles of the same type that create a "X" shape
-     *
-     * @param s is the Shelf of the player that will be checked
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
      */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();

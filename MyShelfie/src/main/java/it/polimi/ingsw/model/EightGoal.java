@@ -1,4 +1,10 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
+
+/**
+ * Class eightGoal
+ * Eight tiles of the same type. There are restrictions on the location of these tiles.
+ * @author andreafondacaro
+ */
 public class EightGoal implements CommonGoal {
     Tile[][] structure = new Tile[6][5];
     private int yellow;
@@ -9,9 +15,8 @@ public class EightGoal implements CommonGoal {
     private int purple;
 
     /**
-     * checks if there are eight tiles of the same type
-     *
-     * @param s is the shelf of the player that will be checked
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
      */
     public boolean commonGoalAlg(Shelfie s) {
         yellow = 0;

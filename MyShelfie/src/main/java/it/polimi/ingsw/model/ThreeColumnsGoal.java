@@ -1,11 +1,17 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
+
+/**
+ * Class threeColumnsGoal
+ * Three columns each formed by 6 tiles of one, two or three different types. Different column
+ * may have different combinations of tile types.
+ * @author andreafondacaro
+ */
 public class ThreeColumnsGoal implements CommonGoal {
     Tile[][] structure = new Tile[6][5];
 
     /**
-     * checks if there are three columns made up of six tiles of one, two, three different types
-     *
-     * @param s is the Shelf of the player that will be checked
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
      */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();

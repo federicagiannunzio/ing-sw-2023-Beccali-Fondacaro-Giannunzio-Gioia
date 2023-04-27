@@ -1,11 +1,16 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
+
+/**
+ * Class diagonalGoal
+ * Five tiles of the same type that form a diagonal.
+ * @author andreafondacaro
+ */
 public class DiagonalGoal implements CommonGoal {
     Tile[][] structure = new Tile[6][5];
 
     /**
-     * checks if there are five tiles of the same type on the diagonal
-     *
-     * @param s is the Shelf of the player that will be checked
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
      */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
@@ -28,3 +33,4 @@ public class DiagonalGoal implements CommonGoal {
         return false;
     }
 }
+

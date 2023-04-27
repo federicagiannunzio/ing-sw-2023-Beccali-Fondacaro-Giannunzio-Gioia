@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 

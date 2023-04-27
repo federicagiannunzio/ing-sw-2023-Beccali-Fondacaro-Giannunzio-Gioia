@@ -1,10 +1,16 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
+
+/**
+ * Class twoColumnsGoal
+ * Two columns formed each from 6 different types of tiles.
+ * @author andreafondacaro
+ */
 public class TwoColumnsGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
+
     /**
-     * checks if there are two columns made up of six different types of tiles
-     *
-     * @param s is the Shelf of the player that will be checked
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
      */
     public boolean commonGoalAlg(Shelfie s) {
         int i, j, k, counter = 0;

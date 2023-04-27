@@ -1,11 +1,17 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
+
+/**
+ * Class fourRowsGoal
+ * Four lines formed each from 5 tiles of one, two or three types different.
+ * Different lines may have different combinations of tile types.
+ * @author andreafondacaro
+ */
 public class FourRowsGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
 
     /**
-     * checks if there are four rows made up of six tiles of one, two, three different types
-     *
-     * @param s is the Shelf of the player that will be checked
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
      */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
@@ -43,3 +49,4 @@ public class FourRowsGoal implements CommonGoal{
             return false;
     }
 }
+

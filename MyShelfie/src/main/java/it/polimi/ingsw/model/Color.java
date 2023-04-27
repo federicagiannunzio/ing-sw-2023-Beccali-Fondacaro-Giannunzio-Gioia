@@ -1,6 +1,8 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
 
-//this enum defines tile's colors
+/**
+ * this enum defines tile's colors.
+ */
 public enum Color {
     YELLOW,
     GREEN,

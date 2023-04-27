@@ -1,11 +1,17 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
+
+/**
+ * Class fourGroupGoal
+ * Four separate groups formed each from four adjacent tiles of the same color.
+ * The tiles of a group can be different from those of another group.
+ * @author andreafondacaro
+ */
 public class FourGroupsGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
 
     /**
-     * checks if there are four separated groups in which there are four adjacent tiles of the same type
-     *
-     * @param s is the Shelf of the player that will be checked
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
      */
     public boolean commonGoalAlg(Shelfie s){
         int[] arrayPoints = new int[5];
@@ -17,3 +23,4 @@ public class FourGroupsGoal implements CommonGoal{
 
     }
 }
+

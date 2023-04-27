@@ -1,11 +1,16 @@
-package it.polimi.ingsw.model;
+package src.main.java.it.polimi.ingsw.model;
+
+/**
+ * Class cornersGoal
+ * Four tiles of the same type at the four corners of the Library.
+ * @author andreafondacaro
+ */
 public class CornersGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
 
     /**
-     * checks if there are four types of the  same type at the corners pf the shelfs
-     *
-     * @param s is the Shelf of the player that will be checked
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
      */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
@@ -16,3 +21,4 @@ public class CornersGoal implements CommonGoal{
             return false;
     }
 }
+
