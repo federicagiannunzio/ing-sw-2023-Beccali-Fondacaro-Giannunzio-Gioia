@@ -1,5 +1,4 @@
-package src.main.java.it.polimi.ingsw.model;
-
+package it.polimi.ingsw.model;
 /**
  * Class fourGroupGoal
  * Four separate groups formed each from four adjacent tiles of the same color.

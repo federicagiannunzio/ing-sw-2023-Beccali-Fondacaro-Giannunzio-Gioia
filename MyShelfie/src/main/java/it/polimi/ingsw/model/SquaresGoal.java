@@ -1,5 +1,4 @@
-package src.main.java.it.polimi.ingsw.model;
-
+package it.polimi.ingsw.model;
 /**
  * Class squaresGoal
  * Two separate groups of 4 tiles same type that form a 2x2 square.

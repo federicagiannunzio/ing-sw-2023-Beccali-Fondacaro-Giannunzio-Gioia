@@ -1,7 +1,4 @@
-package src.main.java.it.polimi.ingsw.model;
-
-import src.main.java.it.polimi.ingsw.model.Shelfie;
-import src.main.java.it.polimi.ingsw.model.Tile;
+package it.polimi.ingsw.model;
 
 /**
  * Class coupleGaol

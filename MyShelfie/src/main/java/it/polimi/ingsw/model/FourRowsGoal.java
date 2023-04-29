@@ -1,5 +1,4 @@
-package src.main.java.it.polimi.ingsw.model;
-
+package it.polimi.ingsw.model;
 /**
  * Class fourRowsGoal
  * Four lines formed each from 5 tiles of one, two or three types different.

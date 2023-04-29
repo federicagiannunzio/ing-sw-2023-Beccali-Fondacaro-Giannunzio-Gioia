@@ -1,5 +1,4 @@
-package src.main.java.it.polimi.ingsw.model;
-
+package it.polimi.ingsw.model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

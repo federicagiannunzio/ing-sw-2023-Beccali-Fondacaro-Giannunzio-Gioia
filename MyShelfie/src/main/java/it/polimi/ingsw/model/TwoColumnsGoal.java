@@ -1,5 +1,4 @@
-package src.main.java.it.polimi.ingsw.model;
-
+package it.polimi.ingsw.model;
 /**
  * Class twoColumnsGoal
  * Two columns formed each from 6 different types of tiles.

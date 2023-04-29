@@ -1,7 +1,6 @@
 
 
-package src.main.java.it.polimi.ingsw.model;
-
+package it.polimi.ingsw.model;
 /**
  * Class twoRowsGoal
  * Two lines formed each from 5 different types of tiles.

@@ -1,8 +1,5 @@
-package src.main.java.it.polimi.ingsw.model;
+package it.polimi.ingsw.model;
 
-import src.main.java.it.polimi.ingsw.model.CommonGoal;
-import src.main.java.it.polimi.ingsw.model.Shelfie;
-import src.main.java.it.polimi.ingsw.model.Tile;
 
 /**
  * Class stairsGoal

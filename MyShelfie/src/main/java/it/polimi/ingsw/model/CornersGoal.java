@@ -1,5 +1,4 @@
-package src.main.java.it.polimi.ingsw.model;
-
+package it.polimi.ingsw.model;
 /**
  * Class cornersGoal
  * Four tiles of the same type at the four corners of the Library.

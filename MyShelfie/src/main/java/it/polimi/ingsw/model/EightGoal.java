@@ -1,5 +1,4 @@
-package src.main.java.it.polimi.ingsw.model;
-
+package it.polimi.ingsw.model;
 /**
  * Class eightGoal
  * Eight tiles of the same type. There are restrictions on the location of these tiles.
