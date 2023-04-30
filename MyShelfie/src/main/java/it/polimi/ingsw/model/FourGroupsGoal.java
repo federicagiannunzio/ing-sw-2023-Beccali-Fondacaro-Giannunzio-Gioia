@@ -15,7 +15,7 @@ public class FourGroupsGoal implements CommonGoal{
     public boolean commonGoalAlg(Shelfie s){
         int[] arrayPoints = new int[5];
         arrayPoints = s.adjacentItem();
-        if(arrayPoints[1] + arrayPoints[2] + arrayPoints[3] >= 4)
+        if(arrayPoints[2] + arrayPoints[3] + arrayPoints[4] >= 4)
             return true;
         else
             return false;

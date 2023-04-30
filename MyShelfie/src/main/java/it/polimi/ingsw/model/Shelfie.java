@@ -35,9 +35,9 @@ public class Shelfie {
      * receives a Tile and modify the Shelfie
      * @param t tile selected from the board
      * @param j counter for columns
-     * @throws fullColumnException is thrown when the column is full
+     * @throws FullColumnException is thrown when the column is full
      */
-    public void addTile(Tile t, int j) throws fullColumnException{
+    public void addTile(Tile t, int j) throws FullColumnException{
         boolean placed = false;
             for (int i = 5; i >= 0 && !placed; i--) {
                 if (this.structure[i][j] == null) {
@@ -46,7 +46,7 @@ public class Shelfie {
                 }
             }
             if(!placed)
-                throw new fullColumnException();
+                throw new FullColumnException();
     }
 
     public void setShelfTile(int i, int j, Tile t){
@@ -69,18 +69,18 @@ public class Shelfie {
         for(i = 0; i < 6; i++){
             for(j = 0; j < 5;j++){
                 if(structure[i][j] != null && !visited[i][j]){
-                    counter = 0;
+                    counter = 1;
                     counter = DFS(structure, i, j, visited, counter);
                     if(counter == 2)
-                        points[5]++; //sarebbe 4?
-                    if(counter == 3)
                         points[0]++;
-                    else if(counter == 4)
+                    if(counter == 3)
                         points[1]++;
-                    else if(counter == 5)
+                    else if(counter == 4)
                         points[2]++;
-                    else if(counter >= 6)
+                    else if(counter == 5)
                         points[3]++;
+                    else if(counter >= 6)
+                        points[4]++;
                 }
             }
         }
@@ -98,10 +98,9 @@ public class Shelfie {
     public int DFS(Tile structure[][], int i, int j, boolean visited[][], int counter){
         int[] row = new int[] {-1, 0, 0, 1};
         int[] col = new int[] {0, -1, 1, 0};
-
+        visited[i][j] = true;
         for (int k = 0; k < 4; ++k) {
             if (isSafe(structure, i + row[k], j + col[k], visited) && structure[i][j].getColor() == structure[i + row[k]][j + col[k]].getColor()) {
-                visited[i][j] = true;
                 counter = DFS(structure, i + row[k], j + col[k], visited, counter) + 1;
 
             }

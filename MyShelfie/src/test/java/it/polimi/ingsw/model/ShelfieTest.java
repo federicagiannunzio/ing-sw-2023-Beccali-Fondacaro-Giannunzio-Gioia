@@ -41,7 +41,7 @@ public class ShelfieTest {
     }
 
     @Test
-    public void getStructure_addedTilesSameColumn_correctOutput() throws fullColumnException {
+    public void getStructure_addedTilesSameColumn_correctOutput() throws FullColumnException {
         Tile[][] expected = new Tile[6][5];
         Tile t1 = new Tile(Color.BLUE, 0);
         Tile t2 = new Tile(Color.YELLOW, 0);
@@ -55,7 +55,7 @@ public class ShelfieTest {
     }
 
     @Test
-    public void getStructure_addedTilesDifferentColumns_correctOutput() throws fullColumnException {
+    public void getStructure_addedTilesDifferentColumns_correctOutput() throws FullColumnException {
         Tile[][] expected = new Tile[6][5];
         Tile t1 = new Tile(Color.BLUE, 0);
         Tile t2 = new Tile(Color.YELLOW, 0);
@@ -67,8 +67,8 @@ public class ShelfieTest {
         assertArrayEquals(expected, shelf.getStructure());
     }
 
-    @Test (expected = fullColumnException.class)
-    public void addTiles_alreadyFull_shouldThrowException() throws fullColumnException {
+    @Test (expected = FullColumnException.class)
+    public void addTiles_alreadyFull_shouldThrowException() throws FullColumnException {
         Tile [][] m = shelf.getStructure();
         Tile t1 = new Tile(Color.YELLOW, 0);
 
@@ -83,7 +83,7 @@ public class ShelfieTest {
     }
 
     @Test
-    public void DFS_threeTilesSameColumn_correctOutput () throws fullColumnException {
+    public void DFS_threeTilesSameColumn_correctOutput () throws FullColumnException {
         Tile t1 = new Tile(Color.YELLOW, 0);
         Tile t2 = new Tile(Color.YELLOW, 0);
         Tile t3 = new Tile(Color.YELLOW, 0);
@@ -98,5 +98,82 @@ public class ShelfieTest {
         assertEquals(3, shelf.DFS(shelf.getStructure(), 3, 0, b,c));
     }
 
+    @Test
+    public void DFS_noSameColorTiles_correctOutput () throws FullColumnException {
+        Tile t1 = new Tile(Color.YELLOW, 0);
+        Tile t2 = new Tile(Color.BLUE, 0);
+        Tile t3 = new Tile(Color.WHITE, 0);
 
+        boolean [][] b = new boolean[6][5];
+        int c = 1;
+
+        shelf.addTile(t1, 0);
+        shelf.addTile(t2, 0);
+        shelf.addTile(t3, 0);
+
+        assertEquals(1, shelf.DFS(shelf.getStructure(), 3, 0, b,c));
+    }
+
+    @Test
+    public void DFS_nullMatrix_correctOutput () throws FullColumnException {
+
+        boolean [][] b = new boolean[6][5];
+        int c = 1;
+
+        assertEquals(1, shelf.DFS(shelf.getStructure(), 3, 0, b,c));
+    }
+
+    @Test
+    public void adjacentItems_correctOutput(){
+        int[] arr = new int[5];
+        Tile t1 = new Tile(Color.BLUE, 0);
+        Tile t2 = new Tile(Color.BLUE, 0);
+        Tile t3 = new Tile(Color.BLUE, 0);
+        Tile t4 = new Tile(Color.BLUE, 0);
+        Tile t5 = new Tile(Color.BLUE, 0);
+        Tile t6 = new Tile(Color.GREEN, 0);
+        Tile t7 = new Tile(Color.GREEN, 0);
+        Tile t8 = new Tile(Color.WHITE, 0);
+        Tile t9 = new Tile(Color.WHITE, 0);
+        Tile t10 = new Tile(Color.WHITE, 0);
+        Tile t11 = new Tile(Color.PURPLE, 0);
+        Tile t12 = new Tile(Color.PURPLE, 0);
+        Tile t13 = new Tile(Color.PURPLE, 0);
+        Tile t14 = new Tile(Color.PURPLE, 0);
+        Tile t15 = new Tile(Color.GREEN, 0);
+        shelf.setShelfTile(0, 0, t1);
+        shelf.setShelfTile(0, 1, t2);
+        shelf.setShelfTile(1, 1, t3);
+        shelf.setShelfTile(0, 2, t4);
+        shelf.setShelfTile(2, 1, t5);
+        shelf.setShelfTile(3, 3, t6);
+        shelf.setShelfTile(3, 4, t7);
+        shelf.setShelfTile(4, 4, t8);
+        shelf.setShelfTile(5, 4, t9);
+        shelf.setShelfTile(5, 3, t10);
+        shelf.setShelfTile(3, 0, t11);
+        shelf.setShelfTile(4, 0, t12);
+        shelf.setShelfTile(5, 1, t13);
+        shelf.setShelfTile(3, 1, t14);
+        shelf.setShelfTile(2, 2, t15);
+        arr = shelf.adjacentItem();
+        assertEquals(1, arr[0]);
+        assertEquals(2, arr[1]);
+        assertEquals(0, arr[2]);
+        assertEquals(1, arr[3]);
+        assertEquals(0, arr[4]);
+
+    }
+
+    @Test
+    public void adjacentItems_nullMatrix(){
+        int[] arr = new int[5];
+        arr = shelf.adjacentItem();
+        assertEquals(0, arr[0]);
+        assertEquals(0, arr[1]);
+        assertEquals(0, arr[2]);
+        assertEquals(0, arr[3]);
+        assertEquals(0, arr[4]);
+
+    }
 }

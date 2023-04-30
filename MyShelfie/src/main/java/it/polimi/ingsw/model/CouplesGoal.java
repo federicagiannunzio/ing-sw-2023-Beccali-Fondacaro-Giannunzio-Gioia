@@ -17,7 +17,7 @@ public class CouplesGoal implements CommonGoal{
     public boolean commonGoalAlg(Shelfie s) {
         int[] arrayPoints = new int[5];
         arrayPoints = s.adjacentItem();
-        if(arrayPoints[1] + arrayPoints[2] + arrayPoints[3] + arrayPoints[0] + arrayPoints[5] >= 6)
+        if(arrayPoints[0] + arrayPoints[1] + arrayPoints[2] + arrayPoints[3] + arrayPoints[4] >= 6)
             return true;
         else
             return false;
