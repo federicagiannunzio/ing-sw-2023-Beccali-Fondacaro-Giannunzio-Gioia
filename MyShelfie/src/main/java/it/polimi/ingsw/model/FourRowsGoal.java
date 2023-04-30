@@ -1,6 +1,17 @@
 package it.polimi.ingsw.model;
+/**
+ * Class fourRowsGoal
+ * Four lines formed each from 5 tiles of one, two or three types different.
+ * Different lines may have different combinations of tile types.
+ * @author andreafondacaro
+ */
 public class FourRowsGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
+
+    /**
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
+     */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
         int i, j, k, colorCounter, rowsCounter = 0;
@@ -37,3 +48,4 @@ public class FourRowsGoal implements CommonGoal{
             return false;
     }
 }
+

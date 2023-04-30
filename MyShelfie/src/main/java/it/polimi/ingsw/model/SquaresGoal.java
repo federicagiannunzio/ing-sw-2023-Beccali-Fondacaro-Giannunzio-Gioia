@@ -1,4 +1,10 @@
 package it.polimi.ingsw.model;
+/**
+ * Class squaresGoal
+ * Two separate groups of 4 tiles same type that form a 2x2 square.
+ * The tiles of the two groups must be of the same type.
+ * @author andreafondacaro
+ */
 public class SquaresGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
     private int yellow;
@@ -7,6 +13,11 @@ public class SquaresGoal implements CommonGoal{
     private int blue;
     private int cyan;
     private int purple;
+
+    /**
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
+     */
     public boolean commonGoalAlg(Shelfie s) {
         yellow = 2;
         white = 2;

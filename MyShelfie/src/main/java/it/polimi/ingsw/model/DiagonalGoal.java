@@ -1,6 +1,16 @@
 package it.polimi.ingsw.model;
+/**
+ * Class diagonalGoal
+ * Five tiles of the same type that form a diagonal.
+ * @author andreafondacaro
+ */
 public class DiagonalGoal implements CommonGoal {
     Tile[][] structure = new Tile[6][5];
+
+    /**
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
+     */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
         if(structure[0][0] != null && structure[1][1] != null && structure[2][2] != null && structure[3][3] != null && structure[4][4] != null &&
@@ -22,3 +32,4 @@ public class DiagonalGoal implements CommonGoal {
         return false;
     }
 }
+

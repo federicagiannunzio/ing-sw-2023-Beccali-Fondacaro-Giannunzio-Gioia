@@ -1,6 +1,15 @@
 package it.polimi.ingsw.model;
+/**
+ * Class crossgoal
+ * Five tiles of the same type forming an X.
+ */
 public class CrossGoal implements CommonGoal{
     Tile[][] structure = new Tile[6][5];
+
+    /**
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
+     */
     public boolean commonGoalAlg(Shelfie s) {
         structure = s.getStructure();
         for(int i = 1; i < 5; i++){

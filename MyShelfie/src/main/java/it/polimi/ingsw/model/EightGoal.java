@@ -1,4 +1,9 @@
 package it.polimi.ingsw.model;
+/**
+ * Class eightGoal
+ * Eight tiles of the same type. There are restrictions on the location of these tiles.
+ * @author andreafondacaro
+ */
 public class EightGoal implements CommonGoal {
     Tile[][] structure = new Tile[6][5];
     private int yellow;
@@ -7,6 +12,11 @@ public class EightGoal implements CommonGoal {
     private int blue;
     private int cyan;
     private int purple;
+
+    /**
+     * @param s shelfie where to check the goal
+     * @return true if the goal is verified, otherwise false
+     */
     public boolean commonGoalAlg(Shelfie s) {
         yellow = 0;
         white = 0;
