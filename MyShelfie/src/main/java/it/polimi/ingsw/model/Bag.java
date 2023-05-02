@@ -1,17 +1,26 @@
 package it.polimi.ingsw.model;
-
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Class bag (object that contains the tiles)
+ * @author piegioia
+ */
 public class Bag {
     private ArrayList<Tile> bag;
 
-    //generates a bag at the start of every game
+
+    /**
+     * generates a bag at the start of every game
+     */
     public Bag(){
         this.bag = new ArrayList<>();
     }
 
-    //picks a Tile from the bag and removes it from the array
+    /**
+     * picks a tile from the bag and removes it from the array
+     * @return is returned the tile that has been picked from the bag
+     */
     public Tile pickTile(){
         Tile curr;
         int counter = this.bag.size();
@@ -25,7 +34,9 @@ public class Bag {
         return curr;
     }
 
-    //shuffles the array of tiles generated at the start of every game
+    /**
+     * shuffles the array of tiles generated at the start of every game
+     */
     public void shuffle() {
         int counter = this.bag.size();
 
@@ -46,8 +57,10 @@ public class Bag {
         }
     }
 
-    //this method should be called only at the beginning of every game
-    //it generates the array that represents the bag, witch 22 tiles for each color
+    /**
+     * this method should be called only at the beginning of every game,
+     * it generates the array that represents the bag, witch 22 tiles for each color
+     */
     public void setBag() {
         for(int i=0; i<22; i++){
             Tile t = new Tile(Color.YELLOW, 0);
@@ -75,7 +88,10 @@ public class Bag {
         }
     }
 
-    //getter method for the bag
+    /**
+     * getter method for the bag
+     * @return is returned the bag of tiles
+     */
     public ArrayList<Tile> getBag() {
         return bag;
     }
