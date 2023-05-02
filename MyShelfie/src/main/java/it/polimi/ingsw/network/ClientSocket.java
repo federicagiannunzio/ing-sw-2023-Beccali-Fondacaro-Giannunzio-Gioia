@@ -1,14 +1,18 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.network.Events.ErrorEvent;
+import it.polimi.ingsw.network.Events.Event;
+
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientSocket {
+public class ClientSocket extends Observable{
     private final Socket socket;
-    private final DataOutputStream output;
-    private final DataInputStream input;
+    private final ObjectOutputStream output;
+    private final ObjectInputStream input;
     private boolean connection = false;
     private Scanner scanner = new Scanner(System.in);
 
@@ -24,31 +28,30 @@ public class ClientSocket {
             System.err.println("The client is unable to reach the server");
             throw exc;
         }
-        this.input = new DataInputStream(socket.getInputStream());
-        this.output = new DataOutputStream(socket.getOutputStream());
+        this.input = new ObjectInputStream(socket.getInputStream());
+        this.output = new ObjectOutputStream(socket.getOutputStream());
 
     }
 
     public void receiveMessage() throws IOException {
+        Event event;
         if(connection) {
             try {
-                String received = input.readUTF();
-                System.out.println(received);
-            }catch(IOException exc){
-                System.err.println("Client unable to receive message from the server");
-                throw exc;
+            event = (Event) input.readObject();
+            notifyObserver(event);
+            }catch(IOException | ClassNotFoundException exc){
+                event = new ErrorEvent(null, "Unable to reach the server");
             }
         }
     }
 
-    public void sendMessage() throws IOException {
+    public void sendMessage(Event event) throws IOException {
         if (connection) {
             try {
-                String toSend = scanner.nextLine();
-                output.writeUTF(toSend);
+                output.writeObject(event);
+                output.flush();
             } catch (IOException exc) {
-                System.err.println("Client unable to receive message from the server");
-                throw exc;
+                notifyObserver(new ErrorEvent(null, "Unable to send message"));
             }
         }
     }

@@ -3,6 +3,8 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.View.GameView;
 import it.polimi.ingsw.model.Shelfie;
 import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.network.Events.Event;
+import it.polimi.ingsw.network.Events.UsersNumberEvent;
 
 
 public class InputController {
@@ -101,10 +103,10 @@ public class InputController {
      *
      * @param message message from the client
      */
-    public boolean playerNumberReplyCheck(Message message) {
-        PlayerNumberReply playerNumberReply = (PlayerNumberReply) message;
+    public boolean usersNumberEventCheck(Event event) {
+        UsersNumberEvent usersNumberEvent = (UsersNumberEvent) event;
 
-        if(playerNumberReply.getPlayerNumber() < 4 && playerNumberReply.getPlayerNumber() < 1) {
+        if(usersNumberEvent.getPlayerNumber() < 4 && usersNumberEvent.getPlayerNumber() < 1) {
             return true;
         } else {
             view.showGenericMessage("Please select a valid number of players");

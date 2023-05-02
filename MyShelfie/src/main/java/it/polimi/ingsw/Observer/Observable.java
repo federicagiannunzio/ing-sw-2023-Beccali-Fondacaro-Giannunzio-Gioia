@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Observer;
 
-import it.polimi.ingsw.network.Messages.Message;
+import it.polimi.ingsw.network.Events.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +26,9 @@ public class Observable {
         observers.add(observer);
     }
 
-    public void notifyObserver(Message message) {
+    public void notifyObserver(Event event) {
         for (Observer observer : observers) {
-            observer.update(message);
+            observer.update(event);
         }
     }
 
