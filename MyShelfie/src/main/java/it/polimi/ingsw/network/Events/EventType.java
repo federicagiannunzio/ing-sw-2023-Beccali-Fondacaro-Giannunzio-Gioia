@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.Events;
 
 public enum EventType {
+    LOGIN_REQUEST,
     TURN_START,
     NUMBER_OF_USERS,
     TILES_NUMBER_REQUEST,
