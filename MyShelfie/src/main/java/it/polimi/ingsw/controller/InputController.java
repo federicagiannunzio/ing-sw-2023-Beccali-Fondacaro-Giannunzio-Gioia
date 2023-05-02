@@ -26,13 +26,13 @@ public class InputController {
      * @return {code @true} if it's a valid nickname {code @false} otherwise
      */
     //TO DO: aggiungere anche i messaggi "proibiti" da client a server
-    public boolean verifyReceivedData(Message message) {
+    public boolean verifyReceivedData(Event event) {
 
-        switch(message.getMessageType()) {
-            case TILE_PICKED:
-                return pickTileCheck(message);
-            case TILE_INSERTED:
-                return insertedTileCheck(message);
+        switch(event.getEventType()) {
+            case CHOOSE_TILE_REPLY:
+                return pickTileCheck(event);
+            case PLACE_TILE_REPLY:
+                return insertedTileCheck(event);
         }
 
     }
@@ -64,8 +64,8 @@ public class InputController {
      * @param message message from the client
      * @return {code @true} id it's a valid position {code @false} otherwise
      * */
-    public boolean pickTileCheck(Message message) {
-        PositionMessage positionMessage = ((PositionMessage) message);
+    public boolean pickTileCheck(Event event) {
+        PositionEvent positionMessage = ((PositionEvent) event);
         //salvo la posizione
         boolean isAvailable = gameController.getBoard().checkTile(..)
 
@@ -83,9 +83,9 @@ public class InputController {
      * @param message message from the client
      * @return {code @true} id it's a valid position {code @false} otherwise
      */
-    public boolean insertedTileCheck(Message message) {
+    public boolean insertedTileCheck(Event event) {
         String username; //salvo qui username di quello che mi ha inviato il messaggio
-        PositionMessage positionMessage = ((PositionMessage) message);
+        PositionEvent positionMessage = ((PositionEvent) event);
         //salvo la posizione
         Shelfie playerShelf = gameController.getPlayerByUsername(username).getShelfie();
 
@@ -119,8 +119,8 @@ public class InputController {
      * @param receivedMessage message from client
      * @return {code @true} id it's a valid position {code @false} otherwise
      */
-    public boolean checkUser(Message receivedMessage) {
-        return receivedMessage.getUsername().equals(gameController.getTurnController().getActivePlayer());
+    public boolean checkUser(Event event) {
+        return event.getUser().equals(gameController.getGameController().getActivePlayer());
     }
 
 
