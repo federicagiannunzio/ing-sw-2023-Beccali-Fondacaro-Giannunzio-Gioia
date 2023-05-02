@@ -7,4 +7,12 @@ public class GameView {
         System.out.println("ciao");
 
     }
+
+    public void askPlayersNumber(){
+        System.out.println("Please insert the number of players");
+    }
+
+    public void askTilesNumber(){
+        System.out.println("Please insert the number of tiles you wanna retrieve");
+    }
 }
