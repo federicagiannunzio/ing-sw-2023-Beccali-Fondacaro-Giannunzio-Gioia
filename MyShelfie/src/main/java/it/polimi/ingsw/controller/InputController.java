@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller;
+package main.java.it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.View.GameView;
 import it.polimi.ingsw.model.Shelfie;
