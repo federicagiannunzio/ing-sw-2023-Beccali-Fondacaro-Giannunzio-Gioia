@@ -1,0 +1,18 @@
+package it.polimi.ingsw.network.Events;
+
+public enum EventType {
+    LOGIN_REQUEST,
+    TURN_START,
+    NUMBER_OF_USERS,
+    TILES_NUMBER_REQUEST,
+    TILES_NUMBER_REPLY,
+    CHOOSE_TILE_REQUEST,
+    CHOOSE_TILE_REPLY,
+    PLACE_TILE_REQUEST,
+    PLACE_TILE_REPLY,
+    CURRENT_POINTS,
+    WINNER_NOTIFY,
+    LOSER_NOTIFY,
+    FINAL_POINTS,
+    ERROR
+}
