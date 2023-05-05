@@ -32,7 +32,7 @@ public class GameController {
 
     public boolean playerJoin(String username){
         if(players.size()+1 <= 4){
-            Player newPlayer = new Player(username, players.size(), first);
+            Player newPlayer = new Player(username, players.size(), false);
             players.add(newPlayer);
             return true;
         } else{
@@ -67,7 +67,9 @@ public class GameController {
         }
 
         //select first player
-        //...
+        int first = r.nextInt(players.size()-1);
+        players.get(first).setFirst(true);
+        currentPlayer = first;
 
         //game loop
         while(inGame){

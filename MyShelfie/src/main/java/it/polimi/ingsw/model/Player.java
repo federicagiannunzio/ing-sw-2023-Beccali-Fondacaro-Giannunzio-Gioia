@@ -95,6 +95,15 @@ public class Player {
         }
 
         /**
+         * set if player is first player
+         *
+         *  @param isFirst boolean to say if the player is the first player
+        * */
+        public void setFirst(boolean isFirst) {
+        this.yellowChair = isFirst;
+        }
+
+        /**
         * returns player's id
         *
         * @return id of the Player
