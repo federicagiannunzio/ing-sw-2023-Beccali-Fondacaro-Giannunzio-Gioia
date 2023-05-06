@@ -51,10 +51,23 @@ public class Cli extends Observable implements View {
     @Override
     public void askTilesNumber() {
 
+        out.print("Choose how many tiles you want to take");
+
     }
 
     @Override
     public void askTilePositionOnBoard(int numberOfTiles) {
+
+        out.print("Select which tile you want to take");
+        try {
+            for(int i=0; i < numberOfTiles; i++) {
+                out.print("Tile number " + (i+1));
+                int row; //salva qui la riga
+            }
+
+        } catch {
+
+        }
 
     }
 
