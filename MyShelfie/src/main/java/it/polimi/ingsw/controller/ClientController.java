@@ -1,6 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.View.View;
+import it.polimi.ingsw.model.Shelfie;
 import it.polimi.ingsw.network.Client.ClientSocket;
 import it.polimi.ingsw.network.Events.Event;
 import it.polimi.ingsw.network.Events.LoginRequestEvent;
@@ -11,6 +13,8 @@ import java.io.IOException;
 public class ClientController implements Observer {
     private String username;
     private ClientSocket client;
+
+    private View view;
 
     /**
      * Sends a message to the server that contains the username that he has picked
@@ -48,11 +52,54 @@ public class ClientController implements Observer {
     /**
      *
      */
-    public void sendTilePosition(String )
+    public void sendTilePosition(String use) {
+
+    }
+
+    /**
+     * Sends the server the column in which the player wants to put the tiles that he has just picked.
+     *
+     * @param column the column in which he wants to put the tiles.
+     */
+    public void sendShelfieColumn(int column) {
+        client.sendMessage(new PlaceTileRequest());
+    }
+
+
+    /**
+     * Message from the server
+     */
+    @Override
+    public void update(Event event) {
+
+        switch(event.getEventType()) {
+            case BOARD:
+                BoardEvent boardEvent = (BoardEvent) Event;
+                view.showBoard();
+                break;
+            case MYSHELFIE:
+                MyShelfieEvent myShelfieEvent = (MyShelfieEvent) Event;
+                view.showMyShelfie();
+                break;
+            case OTHERSHELFIES:
+                OtherhelfiesEvent otherhelfiesEvent = (otherShelfiesEvent) Event;
+                view.showMyShelfie();
+                break;
+            case PERSONALGOAL_REPLY:
+                PersonalGoalReply personalGoalReply = (personalGoalReply) Event;
+                view.showMyPersonalGoal();
+                break;
+            case COMMONGOAL_REPLY:
+                CommonGoalReply commonGoalReply = (CommonGoalReply) Event;
+                view.showCommonGoals();
+                break;
+            case COMMONGOAL_COMPLETED:
+                CommonGoalCompleted commonGoalCompleted = (CommonGoalCompleted) Event;
+                view.showCommonGoalCompletion();
 
 
 
+        }
 
-
-
+    }
 }
