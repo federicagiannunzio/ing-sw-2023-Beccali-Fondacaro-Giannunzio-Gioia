@@ -18,7 +18,6 @@ public class GameController {
     private boolean inGame;
     private TurnController turn = new TurnController();
 
-
     private Random r = new Random();
 
     public GameController(){
@@ -28,6 +27,14 @@ public class GameController {
         personalGoal = new int[]{0,1,2,3,4,5,6,7,8,9,10,11};
         bag = new Bag();
         board = new Board(bag);
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public TurnController getTurnController() {
+        return turn;
     }
 
     public boolean playerJoin(String username){
@@ -140,4 +147,6 @@ public class GameController {
         }
 
     }
+
+
 }

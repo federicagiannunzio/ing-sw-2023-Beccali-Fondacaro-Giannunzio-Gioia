@@ -2,8 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Tile;
-import it.polimi.ingsw.View.GameView;
-import it.polimi.ingsw.network.ServerSckt;
+import it.polimi.ingsw.network.Server.ServerSckt;
 
 import java.io.IOException;
 import java.io.Serializable;
