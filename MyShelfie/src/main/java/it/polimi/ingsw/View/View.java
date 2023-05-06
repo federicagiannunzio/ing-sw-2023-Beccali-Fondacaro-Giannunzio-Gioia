@@ -4,7 +4,7 @@ public interface View {
 
     /**
      * Asks the user to choose a username
-     * */
+     */
     void askUsername();
 
     /**
