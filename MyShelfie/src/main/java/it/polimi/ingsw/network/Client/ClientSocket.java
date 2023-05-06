@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.Client;
 
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.network.Events.ErrorEvent;
@@ -9,7 +9,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientSocket extends Observable{
+public class ClientSocket  extends Observable{
     private final Socket socket;
     private final ObjectOutputStream output;
     private final ObjectInputStream input;
