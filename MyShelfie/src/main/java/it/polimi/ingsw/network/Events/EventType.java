@@ -1,6 +1,15 @@
 package it.polimi.ingsw.network.Events;
 
 public enum EventType {
+    BOARD,
+    MYSHELFIE,
+    OTHERSHELFIES,
+    PERSONALGOAL_REQUEST,
+    PERSONALGOAL_REPLY,
+    COMMONGOAL_REQUEST,
+    COMMONGOAL_REPLY,
+    COMMONGOAL_COMPLETED,
+
     LOGIN_REQUEST,
     TURN_START,
     NUMBER_OF_USERS,
