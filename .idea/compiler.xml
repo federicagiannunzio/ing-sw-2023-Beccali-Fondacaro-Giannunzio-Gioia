@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="PSP53" target="19" />
+      <module name="PSP53" target="18" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -8,8 +8,10 @@ public class Player {
         private int points;
         private boolean yellowChair;
         private boolean endGame;
+        private boolean commonFlag1;
+        private boolean commonFlag2;
         private Shelfie myShelfie;
-        private ArrayList<Tile> myTiles;
+        public ArrayList<Tile> myTiles;
         private personalGoal pGoal;
 
 
@@ -29,6 +31,8 @@ public class Player {
             this.endGame = false;
             this.myTiles = new ArrayList<>();
             this.points = 0;
+            this.commonFlag1 = true;
+            this.commonFlag2 = true;
         }
 
 
@@ -102,6 +106,13 @@ public class Player {
         public void setFirst(boolean isFirst) {
         this.yellowChair = isFirst;
         }
+
+        public void setCommonFlag1(boolean flag){this.commonFlag1 = flag;}
+        public void setCommonFlag2(boolean flag){this.commonFlag2 = flag;}
+
+        public boolean getCommonFlag1(){return commonFlag1;}
+        public boolean getCommonFlag2(){return commonFlag2;}
+
 
         /**
         * returns player's id
