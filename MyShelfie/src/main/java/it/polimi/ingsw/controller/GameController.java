@@ -14,6 +14,8 @@ public class GameController {
     private int[] personalGoal;
     private Bag bag;
     private Board board;
+    private List<Integer> firstGoalPoints;
+    private List<Integer> secondGoalPoints;
 
     private boolean inGame;
     private TurnController turn = new TurnController();
@@ -27,6 +29,8 @@ public class GameController {
         personalGoal = new int[]{0,1,2,3,4,5,6,7,8,9,10,11};
         bag = new Bag();
         board = new Board(bag);
+        initGoalPoints(firstGoalPoints);
+        initGoalPoints(secondGoalPoints);
     }
 
     public Board getBoard() {
@@ -35,6 +39,25 @@ public class GameController {
 
     public TurnController getTurnController() {
         return turn;
+    }
+
+    public List<CommonGoal> getCommonGoals(){return commonGoals;}
+
+    public List<Integer> getFirstGoalPoints(){return firstGoalPoints;}
+
+    public List<Integer> getSecondGoalPoints(){return secondGoalPoints;}
+
+    public void initGoalPoints(List<Integer> list){
+        list.add(8);
+        list.add(6);
+        list.add(4);
+        list.add(2);
+    }
+
+    public int popGoalPoints(List<Integer> points){
+        int i = points.get(0);
+        points.remove(0);
+        return i;
     }
 
     public boolean playerJoin(String username){

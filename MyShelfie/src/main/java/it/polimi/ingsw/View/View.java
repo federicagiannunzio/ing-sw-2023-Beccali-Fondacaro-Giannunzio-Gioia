@@ -34,6 +34,8 @@ public interface View {
      */
     void askShelfieColumn();
 
+    void askPlacingTile();
+
     /**
      * Shows the board on the screen
      */
@@ -106,4 +108,11 @@ public interface View {
      * @param disconnectedUser the user that has just disconnected.
      */
     void showDisconnectionMessage(String disconnectedUser);
+
+    void showStartTurnMessage(String user);
+
+    void showEndTurnMessage(String user);
+
+    void showTilesArray(String currentPlayer);
+
 }
