@@ -7,19 +7,18 @@ import java.util.*;
 
 public class GameController {
 
-    List<Player> players;
-    int currentPlayer;
+    private List<Player> players;
+    private int currentPlayer;
 
-    List<CommonGoal> commonGoals;
-    int[] personalGoal;
-    Bag bag;
-    Board board;
+    private List<CommonGoal> commonGoals;
+    private int[] personalGoal;
+    private Bag bag;
+    private Board board;
 
-    boolean inGame;
-    TurnController turn = new TurnController();
+    private boolean inGame;
+    private TurnController turn = new TurnController();
 
-
-    Random r = new Random();
+    private Random r = new Random();
 
     public GameController(){
         inGame = false;
@@ -28,6 +27,14 @@ public class GameController {
         personalGoal = new int[]{0,1,2,3,4,5,6,7,8,9,10,11};
         bag = new Bag();
         board = new Board(bag);
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public TurnController getTurnController() {
+        return turn;
     }
 
     public boolean playerJoin(String username){
@@ -89,6 +96,22 @@ public class GameController {
 
     }
 
+    public List<Player> getPlayers(){
+        List<Player> tmp = new ArrayList<>();
+        tmp.addAll(players);
+        return tmp;
+    }
+
+    public Optional<Player> getPlayerByUsername(String username){
+        Player tmp = null;
+        for(Player p : players){
+            if(p.getUsername().equals(username)){
+                tmp = p;
+            }
+        }
+        return tmp == null ? Optional.empty() : Optional.of(tmp);
+    }
+
     //problema: possono uscire due commonGoal uguali
     private CommonGoal pickCommonGoal(){
 
@@ -124,4 +147,6 @@ public class GameController {
         }
 
     }
+
+
 }
