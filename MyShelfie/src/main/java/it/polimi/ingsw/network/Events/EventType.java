@@ -27,5 +27,6 @@ public enum EventType {
     WINNER_NOTIFY,
     LOSER_NOTIFY,
     FINAL_POINTS,
+    TURN_STATE,
     ERROR
 }

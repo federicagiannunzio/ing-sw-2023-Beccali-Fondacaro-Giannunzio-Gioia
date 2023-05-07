@@ -28,7 +28,6 @@ public class InputController {
      * @param event message sent by the client
      * @return {code @true} if it's a valid nickname {code @false} otherwise
      */
-    //TO DO: aggiungere anche i messaggi "proibiti" da client a server
     public boolean verifyReceivedData(Event event) {
 
         switch(event.getEventType()) {
@@ -81,7 +80,7 @@ public class InputController {
     }
 
     /**
-     * receives a message from the client (receives the position of the selfie in which he wants to put ) and check if the tile is available
+     * receives a message from the client (receives the position of the selfie in which he wants to put ) and check if the position is empty.
      *
      * @param event message from the client
      * @return {code @true} id it's a valid position {code @false} otherwise
@@ -119,7 +118,7 @@ public class InputController {
             return true;
         } else {
             view.showGenericMessage("Please select a valid number of players");
-            //view.askPlayersNumber();
+            view.askPlayersNumber();
             return false;
         }
     }

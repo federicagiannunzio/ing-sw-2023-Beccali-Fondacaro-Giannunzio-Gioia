@@ -50,12 +50,21 @@ public class ClientController implements Observer {
         client.sendMessage(new tilesNumberRequestEvent());
     }
 
+
     /**
-     *
+     * Sends the server the position of the tile that the player wants to pick.
      */
     public void sendTilePosition(String use) {
 
     }
+
+    /**
+     * Sends the server the column chosen by the player in which he wants to insert the tile.
+     */
+    public void sendShelfieColumn() {
+
+    }
+
 
     /**
      * Sends the server the column in which the player wants to put the tiles that he has just picked.
@@ -132,9 +141,10 @@ public class ClientController implements Observer {
                 ShowCurrentPoints showCurrentPoints = (ShowCurrentPoints) event;
                 view.showMyPoints();
                 break;
-
+            case TURN_STATE:
+                ShowTurnState showTurnState = (ShowTurnState) event;
+                //metodo della view
 
         }
-
     }
 }
