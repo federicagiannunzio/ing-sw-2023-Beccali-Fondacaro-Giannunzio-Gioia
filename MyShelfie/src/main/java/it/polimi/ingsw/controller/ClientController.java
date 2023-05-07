@@ -5,6 +5,7 @@ import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.model.Shelfie;
 import it.polimi.ingsw.network.Client.ClientSocket;
 import it.polimi.ingsw.network.Events.Event;
+import it.polimi.ingsw.network.Events.LoginReplyEvent;
 import it.polimi.ingsw.network.Events.LoginRequestEvent;
 import it.polimi.ingsw.network.Events.UsersNumberEvent;
 
@@ -23,14 +24,14 @@ public class ClientController implements Observer {
      * */
     public void sendUsername(String username) throws IOException {
         this.username = username;
-        client.sendMessage(new LoginRequestEvent(username));
+        client.sendMessage(new LoginReplyEvent(username));
     }
 
     /**
      * Sends a message to the server with the player number chosen by the user
      */
     public void sendPlayersNumber(int playersNum) throws IOException {
-        client.sendMessage(new UsersNumberEvent(username, playersNum));
+        client.sendMessage(new UsersNumberReplyEvent(username, playersNum));
     }
 
     /**
@@ -73,30 +74,64 @@ public class ClientController implements Observer {
     public void update(Event event) {
 
         switch(event.getEventType()) {
+            case SERVERINFO_REQUEST:
+                ServerInforRequest serverInforRequest = (ServerInforRequest) event;
+                view.askServerInfo();
+                break;
+            //case LOBBY:
+            //turno di altri
+
+            case LOGIN_REQUEST:
+                LoginRequestEvent loginRequestEvent = (LoginRequestEvent) event;
+                view.askUsername();
+                break;
+            case NUMBER_OF_USERS_REQUEST:
+                NumberOfUsersRequest numberOfUsersRequest = (NumberOfUsersRequest)  event;
+                view.askPlayersNumber();
+                break;
+            case FIRSTPLAYER_REQUEST:
+                FirstPlayerRequest firstPlayerRequest = (FirstPlayerRequest) event;
+                view.askFirstPLayer();
+                break;
+            case TILES_NUMBER_REQUEST:
+                TilesNumberRequest tilesNumberRequest = (TilesNumberRequest) event;
+                view.askTilesNumber();
+                break;
+            case CHOOSE_TILE_REQUEST:
+                ChooseTileRequest chooseTileRequest = (ChooseTileRequest) event;
+                view.askTilePositionOnBoard();
+                break;
+            case PLACE_TILE_REQUEST:
+                PlaceTileRequest placeTileRequest = (PlaceTileRequest) event;
+                view.askShelfieColumn();
             case BOARD:
-                BoardEvent boardEvent = (BoardEvent) Event;
+                BoardEvent boardEvent = (BoardEvent) event;
                 view.showBoard();
                 break;
             case MYSHELFIE:
-                MyShelfieEvent myShelfieEvent = (MyShelfieEvent) Event;
+                MyShelfieEvent myShelfieEvent = (MyShelfieEvent) event;
                 view.showMyShelfie();
                 break;
             case OTHERSHELFIES:
-                OtherhelfiesEvent otherhelfiesEvent = (otherShelfiesEvent) Event;
-                view.showMyShelfie();
+                OtherhelfiesEvent otherhelfiesEvent = (otherShelfiesEvent) event;
+                view.showOtherPlayersShelfie();
                 break;
-            case PERSONALGOAL_REPLY:
-                PersonalGoalReply personalGoalReply = (personalGoalReply) Event;
+            case SHOWPERSONALGOAL:
+                PersonalGoalReply personalGoalReply = (PersonalGoalReply) event;
                 view.showMyPersonalGoal();
                 break;
-            case COMMONGOAL_REPLY:
-                CommonGoalReply commonGoalReply = (CommonGoalReply) Event;
+            case SHOWCOMMONGOALS:
+                CommonGoalReply commonGoalReply = (CommonGoalReply) event;
                 view.showCommonGoals();
                 break;
             case COMMONGOAL_COMPLETED:
-                CommonGoalCompleted commonGoalCompleted = (CommonGoalCompleted) Event;
+                CommonGoalCompleted commonGoalCompleted = (CommonGoalCompleted) event;
                 view.showCommonGoalCompletion();
-
+                break;
+            case CURRENT_POINTS:
+                ShowCurrentPoints showCurrentPoints = (ShowCurrentPoints) event;
+                view.showMyPoints();
+                break;
 
 
         }
