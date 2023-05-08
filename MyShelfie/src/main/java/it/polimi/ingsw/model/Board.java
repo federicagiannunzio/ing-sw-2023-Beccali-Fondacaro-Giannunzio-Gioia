@@ -54,7 +54,7 @@ public class Board {
     }
 
     /**
-     * returns the number of tiles on the board
+     * returns the tile in a specific position of the board
      *
      * @param i row of the tile that the Player wants to get
      * @param j column of the tile that the Player wants to get
