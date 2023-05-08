@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.Client;
 
-import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.controller.Observer.Observable;
 import it.polimi.ingsw.network.Events.ErrorEvent;
 import it.polimi.ingsw.network.Events.Event;
 
