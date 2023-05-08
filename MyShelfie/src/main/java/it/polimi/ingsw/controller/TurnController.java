@@ -1,10 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.View.View;
-import it.polimi.ingsw.model.Board;
-import it.polimi.ingsw.model.FullColumnException;
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.Server.ServerSckt;
 
 import java.io.IOException;
@@ -15,14 +12,14 @@ import java.util.ArrayList;
 public class TurnController implements Serializable {
     private static final long serialVersionUID = 1L;
     private String currentUser;
-    private ServerSckt socket;
     private View view;
     private GameController controller;
     private Board board;
 
-    public TurnController(GameController GameController){
+    public TurnController(GameController GameController, View view){
         this.controller = GameController;
         this.board = GameController.getBoard();
+        this.view = view;
     }
 
     public void startTurn(Player p) throws IOException, FullColumnException {
@@ -37,16 +34,24 @@ public class TurnController implements Serializable {
         pointsUpdating(p);
     }
 
-    private void tilesPicking(Player p) throws IOException {
+    private void tilesPicking(Player p) throws IOException, notAvailableTileException {
         int[] tilesPos = new int[2];
         int tilesNumber, i;
+        boolean flag = false;
         view.askTilesNumber();
         tilesNumber = controller.getTilesNumber();
-        //inserire errore se l'array di tiles del player non è vuoto
-        for(i = 0; i < tilesNumber; i++){
-            view.askTilePositionOnBoard(tilesNumber);
-            tilesPos = controller.getTilesPosition();
-            p.myTiles.add(board.getTile(tilesPos[0], tilesPos[1]));
+        if(p.getMyTiles() == null) {
+            for (i = 0; i < tilesNumber; i++) {
+                view.askTilePositionOnBoard(tilesNumber);
+                tilesPos = controller.getTilesPosition();
+                while (!board.checkTile(tilesPos[0], tilesPos[1])) {
+                    view.showErrorMessage("The selected tile can't be taken from the board. Choose a new one");
+                    tilesPos = controller.getTilesPosition();
+                }
+                p.myTiles.add(board.takeTileFromBoard(tilesPos[0], tilesPos[1]));
+            }
+        }else{
+            view.showErrorMessage("You still have to place some tiles in your shelf.");
         }
     }
 
