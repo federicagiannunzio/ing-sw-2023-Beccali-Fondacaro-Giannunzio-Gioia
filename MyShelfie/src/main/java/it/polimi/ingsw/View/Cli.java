@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.controller.Observer.Observable;
+import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Color;
 import it.polimi.ingsw.model.Shelfie;
 import it.polimi.ingsw.model.Tile;
@@ -149,10 +150,32 @@ public class Cli extends Observable implements View {
     }
 
     @Override
-    public void showBoard(Tile[][] board) {
+    public void showBoard(Board board) {
 
+        StringBuilder strRowBld = new StringBuilder();
+        StringBuilder strColBld = new StringBuilder();
 
+        strRowBld.append(Color.YELLOW_BOLD).append("\n   +-----+-----+-----+-----+-----+\n").append(Color.RESET);
+        strColBld.append(Color.YELLOW_BOLD).append("   |").append(Color.RESET);
+        //tile.append(Colori.GREEN).append(" x").append(Colori.RESET);
+
+        for (int i = 0; i < 9; i++) {
+            System.out.print(strRowBld);
+            for (int j = 0; j < 9; j++) {
+                System.out.print(strColBld);
+                if (board.getTile(i, j) != null) {
+                    StringBuilder tile = new StringBuilder();
+                    tile.append(board.getTile(i, j).getColor()).append(" x").append(Color.RESET);
+                    System.out.print(tile);
+                } else {
+                    System.out.print("  ");
+                }
+            }
+            System.out.print(strColBld);
+        }
+        System.out.println(strRowBld);
     }
+
 
     @Override
     public void showMyShelfie(Shelfie shelf) {
@@ -193,22 +216,33 @@ public class Cli extends Observable implements View {
 
     @Override
     public void showCommonGoals() {
+        switch(commonGoalTitle) {
+
+        }
+    }
+
+    @Override
+    public void showMyPoints(int currentPoints) {
+        System.out.println("ACTUAL SCORE: " + currentPoints);
 
     }
 
     @Override
-    public void showMyPoints() {
-
+    public void showCommonGoalCompletionWinner(String commonGoal, int pointsAchieved) {
+        System.out.println("Congratulation! You have completed " + commonGoal + " common goal.");
+        System.out.println("You have achieved " + pointsAchieved + " points.");
     }
 
     @Override
-    public void showCommonGoalCompletion() {
-
+    public void showCommonGoalCompletionOthers(String username, String commonGoal, int pointsAchieved) {
+        System.out.println(username + " has completed " + commonGoal + " common goal.");
+        System.out.println(username + " has achieved " + pointsAchieved + " points.");
     }
 
     @Override
     public void showWinMessage(String winner) {
-
+        System.out.println("Game finished: " + winner + " WINS!");
+        //System.exit(0);
     }
 
     @Override
@@ -250,8 +284,11 @@ public class Cli extends Observable implements View {
     }
 
     @Override
-    public void showTilesArray(String currentPlayer) {
-
+    public void showTilesArray(List<Tile> tilesPicked) {
+        System.out.println("These are the tiles that you have picked. ");
+        for(int i=0; i < tilesPicked.size(); i++) {
+            System.out.println(i + "): " + tilesPicked.get(i).getColor() + tilesPicked.get(i).getColor().parseToString(tilesPicked.get(i).getColor()) + " tile" +Color.RESET);
+        }
     }
 
 
