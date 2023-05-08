@@ -1,13 +1,11 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.controller.Observer.Observer;
 import it.polimi.ingsw.View.View;
-import it.polimi.ingsw.model.Shelfie;
 import it.polimi.ingsw.network.Client.ClientSocket;
 import it.polimi.ingsw.network.Events.Event;
 import it.polimi.ingsw.network.Events.LoginReplyEvent;
 import it.polimi.ingsw.network.Events.LoginRequestEvent;
-import it.polimi.ingsw.network.Events.UsersNumberEvent;
 
 import java.io.IOException;
 

@@ -79,6 +79,7 @@ public class InputController {
         return true;
     }
 
+    //da sistemare e rifare
     /**
      * receives a message from the client (receives the position of the selfie in which he wants to put ) and check if the position is empty.
      *
