@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.model.*;
 
 import java.io.IOException;
@@ -18,11 +19,12 @@ public class GameController {
     private List<Integer> secondGoalPoints;
 
     private boolean inGame;
-    private TurnController turn = new TurnController();
+    private TurnController turn;
+    private View view;
 
     private Random r = new Random();
 
-    public GameController(){
+    public GameController(View view){
         inGame = false;
         players = new ArrayList<>();
         commonGoals = new ArrayList<>();
@@ -31,6 +33,9 @@ public class GameController {
         board = new Board(bag);
         initGoalPoints(firstGoalPoints);
         initGoalPoints(secondGoalPoints);
+        this.view = view;
+
+        turn = new TurnController(this, view);
     }
 
     public Board getBoard() {
@@ -81,16 +86,21 @@ public class GameController {
         board.fillTheBoard(players.size());
 
         //Common goals
-        commonGoals.add(pickCommonGoal());
-        commonGoals.add(pickCommonGoal());
+        CommonGoal firstGoal = pickCommonGoal();
+        CommonGoal secondGoal = pickCommonGoal();
+        while (secondGoal.equals(firstGoal)){
+            secondGoal = pickCommonGoal();
+        }
+        commonGoals.add(firstGoal);
+        commonGoals.add(secondGoal);
 
         //Persona goals
         for(Player p: players){
             int random = r.nextInt(11);
-            while(!commonGoals.contains(random)){
+            while(personalGoal[random] == -1){
                 random = r.nextInt(11);
             }
-            commonGoals.remove(random);
+            personalGoal[random] = -1;
             personalGoal goal = new personalGoal(random);
             goal.createTheGoal(random);
             p.setPersonalGoal(goal);
@@ -101,14 +111,23 @@ public class GameController {
         players.get(first).setFirst(true);
         currentPlayer = first;
 
+        boolean playerFinished = false;
+
         //game loop
         while(inGame){
 
            Player turnPlayer = players.get(currentPlayer);
            turn.startTurn(turnPlayer);
 
-            //point
-            // ...
+            if(playerFinished == false){
+                playerFinished = turnPlayer.getMyShelfie().isComplete();
+            }
+            if(playerFinished && currentPlayer == first){
+                inGame = false;
+            }
+
+            //controllo viene fatto in classe Board
+            board.refreshBoard();
 
             if(currentPlayer+1 < players.size()){
                 currentPlayer++;
@@ -116,6 +135,16 @@ public class GameController {
                 currentPlayer = 0;
             }
         }
+
+        Player winner = players.get(0);
+        for(Player p: players){
+            if(p.getPoints() > winner.getPoints()){
+                winner = p;
+            }
+        }
+
+        view.showGenericMessage("Game over!");
+        view.showGenericMessage("Winner is: "+winner.getUsername()+"!");
 
     }
 
@@ -135,7 +164,6 @@ public class GameController {
         return tmp == null ? Optional.empty() : Optional.of(tmp);
     }
 
-    //problema: possono uscire due commonGoal uguali
     private CommonGoal pickCommonGoal(){
 
         int random = r.nextInt(11);

@@ -152,19 +152,26 @@ public class Board {
             return false;
         }
 
+        int free = 0;
+
         if(i + 1 < 9 && (table[i+1][j]==null || table[i+1][j].getColor() == Color.BLACK )){
-            return true;
+            free++;
         }
         if(j + 1 < 9  && (table[i][j+1]==null || table[i][j+1].getColor()==Color.BLACK) ){
-            return true;
+            free++;
         }
         if(i - 1 > 0 && (table[i-1][j]==null || table[i-1][j].getColor() == Color.BLACK)){
-            return true;
+            free++;
         }
         if(j - 1 > 0 && (table[i][j-1]==null || table[i][j-1].getColor() == Color.BLACK)){
-            return true;
+            free++;
         }
-        return false;
+
+        if(free > 0 && free < 4){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
