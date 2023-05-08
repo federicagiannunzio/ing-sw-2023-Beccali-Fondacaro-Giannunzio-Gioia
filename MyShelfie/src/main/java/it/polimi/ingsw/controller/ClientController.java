@@ -31,7 +31,7 @@ public class ClientController implements Observer {
      * Sends a message to the server with the player number chosen by the user
      */
     public void sendPlayersNumber(int playersNum) throws IOException {
-        client.sendMessage(new UsersNumberReplyEvent(username, playersNum));
+        client.sendMessage(new UsersNumberEvent(username, playersNum));
     }
 
     /**
@@ -47,7 +47,7 @@ public class ClientController implements Observer {
      * Sends a message to the server that contains the number of tiles
      */
     public void sendTilesNumberChosen(int numberOfTiles) {
-        client.sendMessage(new tilesNumberRequestEvent());
+        client.sendMessage(new TilesNumberRequestEvent());
     }
 
 
