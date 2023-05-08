@@ -1,16 +1,16 @@
 package it.polimi.ingsw.network.Events;
 
-public class LoginReplyEvent {
+public class LoginReplyEvent extends Event{
 
     public final boolean usernameAccepted;
     public final boolean connectionSuccessful;
 
-
-    public LoginReplyEvent(boolean usernameAccepted, boolean connectionSuccessful) {
-        //manca un pezzo, capire bene
+    public LoginReplyEvent(String user, EventType eventType, boolean usernameAccepted, boolean connectionSuccessful) {
+        super(user, EventType.LOGIN_REPLY);
         this.usernameAccepted = usernameAccepted;
         this.connectionSuccessful = connectionSuccessful;
     }
+
 
     public boolean isUsernameAccepted() {
         return usernameAccepted;

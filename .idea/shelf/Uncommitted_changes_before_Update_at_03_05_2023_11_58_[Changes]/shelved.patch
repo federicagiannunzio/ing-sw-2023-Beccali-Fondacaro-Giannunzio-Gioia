@@ -1,0 +1,41 @@
+Index: MyShelfie/src/main/java/it/polimi/ingsw/controller/TurnController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/MyShelfie/src/main/java/it/polimi/ingsw/controller/TurnController.java b/MyShelfie/src/main/java/it/polimi/ingsw/controller/TurnController.java
+new file mode 100644
+--- /dev/null	(date 1682970274914)
++++ b/MyShelfie/src/main/java/it/polimi/ingsw/controller/TurnController.java	(date 1682970274914)
+@@ -0,0 +1,31 @@
++package it.polimi.ingsw.controller;
++
++import it.polimi.ingsw.model.Player;
++import it.polimi.ingsw.model.Tile;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++
++
++public class TurnController implements Serializable{
++
++    private static final long serialVersionUID = 1L;
++    private ArrayList<Tile> myTiles;
++
++    private String currentPlayer;
++
++    public void startTurn(Player p){
++        currentPlayer = p.getUsername();
++        //messaggio della view che in broadcast annuncia il turno del player
++        myTiles = firstPhase(p);
++
++    }
++
++    private ArrayList<Tile> firstPhase(Player p){
++        ArrayList<Tile> tiles;
++        //print a numberOfTilesMessage
++        while(int i = 0; i < )
++
++        return ;
++    }
++}
