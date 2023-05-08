@@ -54,7 +54,8 @@ public class TurnController implements Serializable {
         int j;
         Tile t;
         while (p.getMyTiles() != null) {
-            view.showTilesArray(currentUser);
+            ArrayList<Tile> playerTiles = p.getMyTiles();
+            view.showTilesArray(playerTiles);
             view.askPlacingTile();
             t = controller.getPlacingTile();
             view.askShelfieColumn();
