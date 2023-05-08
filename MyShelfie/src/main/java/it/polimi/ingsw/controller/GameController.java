@@ -168,7 +168,6 @@ public class GameController {
             default:
                 return new CornersGoal();
         }
-
     }
 
 
