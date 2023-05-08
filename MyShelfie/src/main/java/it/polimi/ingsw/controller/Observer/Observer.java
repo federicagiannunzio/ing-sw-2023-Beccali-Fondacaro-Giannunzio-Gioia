@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Observer;
+package it.polimi.ingsw.controller.Observer;
 
 import it.polimi.ingsw.network.Events.Event;
 
