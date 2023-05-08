@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ac4a4ea-e119-48b5-9da3-0d77e3447c1a" name="Changes" comment="Board small fix">
-      <change afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/CommonGoalsName.java" afterDir="false" />
+    <list default="true" id="7ac4a4ea-e119-48b5-9da3-0d77e3447c1a" name="Changes" comment="cli updated">
       <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Cli.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Cli.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/CommonGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/CommonGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/fullColumnException.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/fullColumnException.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +168,7 @@
       <workItem from="1683030213661" duration="30000" />
       <workItem from="1683391119461" duration="679000" />
       <workItem from="1683451904840" duration="6350000" />
-      <workItem from="1683535789042" duration="18795000" />
+      <workItem from="1683535789042" duration="19650000" />
     </task>
     <task id="LOCAL-00001" summary="added test methods and fixed some things">
       <created>1681807994835</created>
@@ -284,7 +282,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683558783652</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="updates">
+      <created>1683562496624</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1683562496624</updated>
+    </task>
+    <task id="LOCAL-00018" summary="cli updated">
+      <created>1683562510476</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1683562510476</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,12 +320,13 @@
     <MESSAGE value="added client and server app" />
     <MESSAGE value="added ANSI colors" />
     <MESSAGE value="observer/observable updated" />
-    <MESSAGE value="cli updated" />
     <MESSAGE value="client controller and input controller updated" />
     <MESSAGE value="client socket updated" />
     <MESSAGE value="color updated" />
     <MESSAGE value="turncontroller small fix" />
     <MESSAGE value="Board small fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Board small fix" />
+    <MESSAGE value="updates" />
+    <MESSAGE value="cli updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="cli updated" />
   </component>
 </project>

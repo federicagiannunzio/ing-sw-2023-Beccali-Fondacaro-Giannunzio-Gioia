@@ -269,17 +269,21 @@ public class Cli extends Observable implements View {
     }
 
     @Override
-    public void showDisconnectionMessage(String disconnectedUser) {
+    public void showDisconnectionMessage(String nicknameDisconnected) {
+        inputThread.interrupt();
+        System.out.println("\n" + nicknameDisconnected + "has just disconnected. GAME ENDED ");
 
+        System.exit(1);
     }
 
     @Override
     public void showStartTurnMessage(String user) {
-
+        System.out.println(user + " started his turn");
     }
 
     @Override
     public void showEndTurnMessage(String user) {
+        System.out.println(user + " ended his turn");
 
     }
 
@@ -289,6 +293,15 @@ public class Cli extends Observable implements View {
         for(int i=0; i < tilesPicked.size(); i++) {
             System.out.println(i + "): " + tilesPicked.get(i).getColor() + tilesPicked.get(i).getColor().parseToString(tilesPicked.get(i).getColor()) + " tile" +Color.RESET);
         }
+    }
+
+    public void showLobby(List<String> nicknameList, int numPlayers) {
+        System.out.println("LOBBY:");
+        for (String nick : nicknameList) {
+            System.out.println(nick + "\n");
+        }
+
+        System.out.println("Current players in lobby: " + nicknameList.size() + " / " + numPlayers);
     }
 
 
