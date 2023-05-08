@@ -1,7 +1,12 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.controller.Observer.Observable;
+import it.polimi.ingsw.model.Color;
+import it.polimi.ingsw.model.Shelfie;
+import it.polimi.ingsw.model.Tile;
 
+import java.io.PrintStream;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static java.lang.System.out;
@@ -9,14 +14,32 @@ import static java.lang.System.out;
 public class Cli extends Observable implements View {
 
 
+    private Thread inputThread;
+
+
     public void start() {
+        System.out.print("\n" +
+                ".___  ___. ____    ____         _______. __    __   _______  __       _______  __   _______ \n" +
+                "|   \\/   | \\   \\  /   /        /       ||  |  |  | |   ____||  |     |   ____||  | |   ____|\n" +
+                "|  \\  /  |  \\   \\/   /        |   (----`|  |__|  | |  |__   |  |     |  |__   |  | |  |__   \n" +
+                "|  |\\/|  |   \\_    _/          \\   \\    |   __   | |   __|  |  |     |   __|  |  | |   __|  \n" +
+                "|  |  |  |     |  |        .----)   |   |  |  |  | |  |____ |  `----.|  |     |  | |  |____ \n" +
+                "|__|  |__|     |__|        |_______/    |__|  |__| |_______||_______||__|     |__| |_______|\n" +
+                "                                                                                            \n");
         System.out.println("Welcome to MyShelfie!");
 
         try {
             askServerInfo();
-        } catch (ExecutionException e) {
+        } catch () {
 
         }
+    }
+
+    /**
+     * Read line from the standard input.
+     */
+    public String readLine() {
+
     }
 
     public void askServerInfo() {
@@ -24,7 +47,7 @@ public class Cli extends Observable implements View {
 
         while (!valid) {
             System.out.println("Please enter the server address: ");
-            String address;
+            String address = readLine();
             //leggi da terminale input utente e salva nella variabile address
         }
     }
@@ -32,7 +55,7 @@ public class Cli extends Observable implements View {
     public void askUsername() {
         out.print("Please enter your username: ");
         try {
-            String username;
+            String username = readLine();
             //notifyObserver();
         } catch() {
         }
@@ -40,28 +63,54 @@ public class Cli extends Observable implements View {
 
     @Override
     public void askPlayersNumber() {
+        int playersNumber;
 
+        try {
+            System.out.println("Please select the number of players. Choose a number between 2 and 4");
+            String playerNumberString = readLine();
+            playersNumber = Integer.parseInt(playerNumberString);
+            //notifyObserver()
+        } catch () {
+
+        }
     }
 
     @Override
-    public void askFirstPLayer() {
+    public void askFirstPLayer(List<String> usersOnGame) {
+        System.out.println("Your the first player that has connected. Please choose the player who will starts the game.");
+        System.out.println("These are the players online: ");
+        for(String users : usersOnGame)
+            System.out.println(users + ",");
+        try {
+            //System.out.println("Type the exact name of the player.");
+            String userChosen;
+            do {
+                System.out.println("Type the exact name of the player.");
+                userChosen = readLine();
+                if(!usersOnGame.contains(userChosen))
+                    System.out.println("This username is not valid. Please type another name.");
+            } while(!usersOnGame.contains(userChosen));
+            //notifyObserver();
+        } catch() {
 
+        }
     }
 
     @Override
     public void askTilesNumber() {
+        int numberOfTiles;
+        System.out.println("How many tiles you want to pick?");
 
-        out.print("Choose how many tiles you want to take");
+        numberOfTiles = Integer.parseInt(readLine());
 
     }
 
     @Override
     public void askTilePositionOnBoard(int numberOfTiles) {
-
-        out.print("Select which tile you want to take");
+        System.out.println("Select the tiles you want to pick.");
         try {
             for(int i=0; i < numberOfTiles; i++) {
-                out.print("Tile number " + (i+1));
+                System.out.print("Tile number " + (i+1));
                 int row; //salva qui la riga
             }
 
@@ -73,26 +122,72 @@ public class Cli extends Observable implements View {
 
     @Override
     public void askShelfieColumn() {
+        System.out.println("In which column you want to put your tiles?");
+        int col;
+        try {
+            col = Integer.parseInt(readLine());
+        } catch() {
+
+        }
+    }
+
+    @Override
+    public void askPlacingTile(List<Tile> tilesPicked) {
+        try {
+            do {
+                for(int i=0; i < tilesPicked.size(); i++) {
+                    System.out.println((i+1) + ") " + tilesPicked.get(i).getColor() + " tile");
+                }
+                System.out.println("Which tile do you want to insert? Please select a number.");
+                int n = Integer.parseInt(readLine());
+                //notifyObserver();
+                tilesPicked.remove(n-1);
+            } while (!tilesPicked.isEmpty());
+        } catch() {
+
+        }
+    }
+
+    @Override
+    public void showBoard(Tile[][] board) {
+
 
     }
 
     @Override
-    public void showBoard() {
+    public void showMyShelfie(Shelfie shelf) {
+
+        StringBuilder strRowBld = new StringBuilder();
+        StringBuilder strColBld = new StringBuilder();
+
+        strRowBld.append(Color.YELLOW_BOLD).append("\n   +-----+-----+-----+-----+-----+\n").append(Color.RESET);
+        strColBld.append(Color.YELLOW_BOLD).append("   |").append(Color.RESET);
+        //tile.append(Colori.GREEN).append(" x").append(Colori.RESET);
+
+        for (int i = 0; i < 6; i++) {
+            System.out.print(strRowBld);
+            for (int j = 0; j < 5; j++) {
+                System.out.print(strColBld);
+                if (shelf.getCell(i, j) != null) {
+                    StringBuilder tile = new StringBuilder();
+                    tile.append(shelf.getCell(i, j).getColor()).append(" x").append(Color.RESET);
+                    System.out.print(tile);
+                } else {
+                    System.out.print("  ");
+                }
+            }
+            System.out.print(strColBld);
+        }
+        System.out.println(strRowBld);
+    }
+
+    @Override
+    public void showOtherPlayersShelfie(Tile[][] shelf) {
 
     }
 
     @Override
-    public void showMyShelfie() {
-
-    }
-
-    @Override
-    public void showOtherPlayersShelfie() {
-
-    }
-
-    @Override
-    public void showMyPersonalGoal() {
+    public void showMyPersonalGoal(Tile[][] personalGoalShelf) {
 
     }
 
@@ -126,7 +221,7 @@ public class Cli extends Observable implements View {
      * Prints
      */
     public void showGenericMessage(String messageToSend) {
-        out.println(messageToSend);
+        System.out.println(messageToSend);
     }
 
     @Override
@@ -141,6 +236,21 @@ public class Cli extends Observable implements View {
 
     @Override
     public void showDisconnectionMessage(String disconnectedUser) {
+
+    }
+
+    @Override
+    public void showStartTurnMessage(String user) {
+
+    }
+
+    @Override
+    public void showEndTurnMessage(String user) {
+
+    }
+
+    @Override
+    public void showTilesArray(String currentPlayer) {
 
     }
 
