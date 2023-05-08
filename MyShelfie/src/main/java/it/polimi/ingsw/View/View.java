@@ -1,5 +1,9 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.model.Tile;
+
+import java.util.List;
+
 public interface View {
 
     /**
@@ -67,9 +71,14 @@ public interface View {
     void showMyPoints();
 
     /**
-     * Notify all the players when someone has completed a common goal.
+     * Shows a message that announce that someone has completed a common goal.
      */
     void showCommonGoalCompletion();
+
+    /**
+     * Shows a message to the player that has completed a personal goal.
+     */
+    void showCommonGoalCompletionWinner();
 
     /**
      * Shows a win message.
@@ -113,6 +122,6 @@ public interface View {
 
     void showEndTurnMessage(String user);
 
-    void showTilesArray(String currentPlayer);
+    void showTilesArray(List<Tile> tilesPicked);
 
 }

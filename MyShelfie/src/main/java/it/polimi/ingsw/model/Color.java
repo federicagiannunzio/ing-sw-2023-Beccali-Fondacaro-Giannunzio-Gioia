@@ -28,4 +28,29 @@ public enum Color {
     public String toString() {
         return code;
     }
+
+    public String parseToString(Color color) {
+        String colorString = null;
+        switch(color) {
+            case YELLOW:
+                colorString = "YELLOW";
+                break;
+            case CYAN:
+                colorString = "CYAN";
+                break;
+            case GREEN:
+                colorString = "GREEN";
+                break;
+            case WHITE:
+                colorString = "WHITE";
+                break;
+            case PURPLE:
+                colorString = "PURPLE";
+                break;
+            case BLUE:
+                colorString = "BLUE";
+                break;
+        }
+        return colorString;
+    }
 }
