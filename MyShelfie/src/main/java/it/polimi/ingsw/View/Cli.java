@@ -1,24 +1,24 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.controller.Observer.Observable;
-import it.polimi.ingsw.model.Board;
-import it.polimi.ingsw.model.Color;
-import it.polimi.ingsw.model.Shelfie;
-import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.model.*;
 
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 import static java.lang.System.out;
 
 public class Cli extends Observable implements View {
 
 
+    private Scanner input;
     private Thread inputThread;
 
 
-    public void start() {
+    public void start() throws ExecutionException {
         System.out.print("\n" +
                 ".___  ___. ____    ____         _______. __    __   _______  __       _______  __   _______ \n" +
                 "|   \\/   | \\   \\  /   /        /       ||  |  |  | |   ____||  |     |   ____||  | |   ____|\n" +
@@ -39,31 +39,39 @@ public class Cli extends Observable implements View {
     /**
      * Read line from the standard input.
      */
+    /**
+     * Reads a line from the standard input.
+     *
+     * @return the string read from the input.
+     * @throws ExecutionException if the input stream thread is interrupted.
+     */
     public String readLine() {
-
+        input = new Scanner(System.in);
+        input.reset();
+        String str = input.nextLine();
+        return str;
     }
 
-    public void askServerInfo() {
+    public void askServerInfo() throws ExecutionException {
         boolean valid = false;
 
         while (!valid) {
             System.out.println("Please enter the server address: ");
             String address = readLine();
-            //leggi da terminale input utente e salva nella variabile address
+            System.out.println("Please enter the port number: ");
+            String port = readLine();
+            valid = checkValidIP(address);
         }
     }
 
     public void askUsername() {
         out.print("Please enter your username: ");
-        try {
-            String username = readLine();
-            //notifyObserver();
-        } catch() {
-        }
+        String username = readLine();
+        //notifyObserver();
     }
 
     @Override
-    public void askPlayersNumber() {
+    public void askPlayersNumber() throws ExecutionException {
         int playersNumber;
 
         try {
@@ -101,9 +109,7 @@ public class Cli extends Observable implements View {
     public void askTilesNumber() {
         int numberOfTiles;
         System.out.println("How many tiles you want to pick?");
-
         numberOfTiles = Integer.parseInt(readLine());
-
     }
 
     @Override
@@ -112,10 +118,14 @@ public class Cli extends Observable implements View {
         try {
             for(int i=0; i < numberOfTiles; i++) {
                 System.out.print("Tile number " + (i+1));
-                int row; //salva qui la riga
+                System.out.println("ROW: ");
+                int row = Integer.parseInt(readLine());
+                System.out.println("COLUMN: ");
+                int col = Integer.parseInt(readLine());
             }
+            //notifyobserver
 
-        } catch {
+        } catch () {
 
         }
 
@@ -127,7 +137,8 @@ public class Cli extends Observable implements View {
         int col;
         try {
             col = Integer.parseInt(readLine());
-        } catch() {
+            //notifyObserver
+        } catch () {
 
         }
     }
@@ -205,19 +216,54 @@ public class Cli extends Observable implements View {
     }
 
     @Override
-    public void showOtherPlayersShelfie(Tile[][] shelf) {
+    public void showOtherPlayersShelfie(Shelfie shelf) {
 
     }
 
     @Override
-    public void showMyPersonalGoal(Tile[][] personalGoalShelf) {
+    public void showMyPersonalGoal(Shelfie personalGoalShelf) {
 
     }
 
     @Override
-    public void showCommonGoals() {
-        switch(commonGoalTitle) {
-
+    public void showCommonGoal(CommonGoalsName name) {
+        switch(name) {
+            case CORNERS:
+                System.out.println("Four tiles of the same type in the four corners of the bookshelf. ");
+                break;
+            case COUPLES:
+                System.out.println("Six groups each containing at least 2 tiles of the same type (not necessarily in the depicted shape). The tiles of one group can be different from those of another group.");
+                break;
+            case CROSS:
+                System.out.println("Five tiles of the same type forming an X.");
+                break;
+            case DIAGONAL:
+                System.out.println("Five tiles of the same type forming a diagonal. ");
+                break;
+            case EIGHT:
+                System.out.println("Eight tiles of the same type. There’s no restriction about the position of these tiles.");
+                break;
+            case FOURGROUPS:
+                System.out.println("Four groups each containing at least 4 tiles of the same type (not necessarily in the depicted shape). The tiles of one group can be different from those of another group");
+                break;
+            case FOURROWS:
+                System.out.println("Four lines each formed by 5 tiles of maximum three different types. One line can show the same or a different combination of another line");
+                break;
+            case SQUARES:
+                System.out.println("Two groups each containing 4 tiles of the same type in a 2x2 square. The tiles of one square can be different from those of the other square.");
+                break;
+            case STAIRS:
+                System.out.println("Five columns of increasing or decreasing height. Starting from the first column on the left or on the right, each next column must be made of exactly one more tile. Tiles can be of any type.");
+                break;
+            case THREE:
+                System.out.println("Three columns each formed by 6 tiles Five tiles of the same type forming an X of maximum three different types column can show the same or a different combination of another column");
+                break;
+            case TWOCOLUMNS:
+                System.out.println("Two columns each formed by 6 different types of tiles.");
+                break;
+            case TWOROWS:
+                System.out.println("Two lines each formed by 5 different types of tiles. One line can show the same or a different combination of the other line");
+                break;
         }
     }
 
@@ -250,10 +296,6 @@ public class Cli extends Observable implements View {
 
     }
 
-
-    /**
-     * Prints
-     */
     public void showGenericMessage(String messageToSend) {
         System.out.println(messageToSend);
     }
@@ -302,6 +344,29 @@ public class Cli extends Observable implements View {
         }
 
         System.out.println("Current players in lobby: " + nicknameList.size() + " / " + numPlayers);
+    }
+
+    public void showChoicesBeginTurn() {
+        System.out.println("Please choose what do you want to do.");
+        System.out.println("1) View common goals.");
+        System.out.println("2) View my personal goal.");
+        System.out.println("3) View other players' shelves.");
+        System.out.println("4) View common goals.");
+    }
+
+    public void askChoiceBeginTurn() {
+        showChoicesBeginTurn();
+        int choice = Integer.parseInt(readLine());
+        //notifyObserver
+    }
+
+    public boolean checkValidIP(String IP) {
+        boolean notValid = (IP == null || IP.length() < 7 || IP.length() > 15);
+        if (notValid) {
+            return false;
+        } else {
+            return IP.matches("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+        }
     }
 
 
