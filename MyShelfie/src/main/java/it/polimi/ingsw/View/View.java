@@ -1,8 +1,9 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.model.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public interface View {
 
@@ -14,17 +15,17 @@ public interface View {
     /**
      * Asks the first user connected how many players he wants to play with
      */
-    void askPlayersNumber();
+    void askPlayersNumber() throws ExecutionException;
 
     /**
      * Asks the first user connected to choose the first player.
      */
-    void askFirstPLayer();
+    void askFirstPLayer(List<String> usersOnGame) throws ExecutionException;
 
     /**
      * Asks the player how many tiles he wants to pick.
      */
-    void askTilesNumber();
+    void askTilesNumber() throws ExecutionException;
 
     /**
      * Asks the player the position (coordinates) of the tile that he has picked.
@@ -38,47 +39,47 @@ public interface View {
      */
     void askShelfieColumn();
 
-    void askPlacingTile();
+    void askPlacingTile(List<Tile> tilesPicked) throws ExecutionException;
 
     /**
      * Shows the board on the screen
      */
-    void showBoard();
+    void showBoard(Board board);
 
     /**
      * Shows the shelfie of the player that asked for it.
      */
-    void showMyShelfie();
+    void showMyShelfie(Shelfie shelf);
 
     /**
      * Shows the shelf of all the other players.
      */
-    void showOtherPlayersShelfie();
+    void showOtherPlayersShelfie(Shelfie shelf);
 
     /**
      * Shows this player's personal goal
      */
-    void showMyPersonalGoal();
+    void showMyPersonalGoal(Shelfie personalGoalShelf);
 
     /**
      * Shows the common goals
      */
-    void showCommonGoals();
+    void showCommonGoals(CommonGoalsName name);
 
     /**
      * Shows the points that the player has achieved till now.
      */
-    void showMyPoints();
+    void showMyPoints(int currentPoints);
 
     /**
      * Shows a message that announce that someone has completed a common goal.
      */
-    void showCommonGoalCompletion();
+    void showCommonGoalCompletionOthers(String username, String commonGoal, int pointsAchieved);
 
     /**
      * Shows a message to the player that has completed a personal goal.
      */
-    void showCommonGoalCompletionWinner();
+    void showCommonGoalCompletionWinner(String commonGoal, int pointsAchieved);
 
     /**
      * Shows a win message.
@@ -123,5 +124,9 @@ public interface View {
     void showEndTurnMessage(String user);
 
     void showTilesArray(List<Tile> tilesPicked);
+
+    void showChoicesBeginTurn();
+
+    public void askChoiceBeginTurn();
 
 }

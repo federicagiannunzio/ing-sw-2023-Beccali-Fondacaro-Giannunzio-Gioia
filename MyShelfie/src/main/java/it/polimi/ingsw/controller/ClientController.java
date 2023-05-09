@@ -2,16 +2,15 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.Observer.Observer;
 import it.polimi.ingsw.View.View;
-import it.polimi.ingsw.network.Client.ClientSocket;
-import it.polimi.ingsw.network.Events.Event;
-import it.polimi.ingsw.network.Events.LoginReplyEvent;
-import it.polimi.ingsw.network.Events.LoginRequestEvent;
+import it.polimi.ingsw.network.Client.Client;
+
+import it.polimi.ingsw.network.Events.*;
 
 import java.io.IOException;
 
 public class ClientController implements Observer {
     private String username;
-    private ClientSocket client;
+    private Client client;
 
     private View view;
 
@@ -22,14 +21,14 @@ public class ClientController implements Observer {
      * */
     public void sendUsername(String username) throws IOException {
         this.username = username;
-        client.sendMessage(new LoginReplyEvent(username));
+        client.sendMessage(new LoginRequestEvent(this.username));
     }
 
     /**
      * Sends a message to the server with the player number chosen by the user
      */
     public void sendPlayersNumber(int playersNum) throws IOException {
-        client.sendMessage(new UsersNumberEvent(username, playersNum));
+        client.sendMessage(new UsersNumberEvent(this.username, playersNum));
     }
 
     /**
@@ -37,8 +36,8 @@ public class ClientController implements Observer {
      *
      * @param usernameFirst the username of the first player
      */
-    public void sendFirstPlayerChosen(String usernameFirst) {
-
+    public void sendFirstPlayerChosen(String usernameFirst) throws IOException {
+        client.sendMessage( new FirstPlayerRequestEvent(this.username, EventType.FIRSTPLAYER_REQUEST));
     }
 
     /**
@@ -70,7 +69,7 @@ public class ClientController implements Observer {
      * @param column the column in which he wants to put the tiles.
      */
     public void sendShelfieColumn(int column) {
-        client.sendMessage(new PlaceTileRequest());
+        client.sendMessage(new PlaceTileRequestEvent());
     }
 
 
@@ -82,7 +81,7 @@ public class ClientController implements Observer {
 
         switch(event.getEventType()) {
             case SERVERINFO_REQUEST:
-                ServerInforRequest serverInforRequest = (ServerInforRequest) event;
+                InfoServerEvent serverInforRequest = (InfoServerEvent) event;
                 view.askServerInfo();
                 break;
             //case LOBBY:
@@ -93,23 +92,23 @@ public class ClientController implements Observer {
                 view.askUsername();
                 break;
             case NUMBER_OF_USERS_REQUEST:
-                NumberOfUsersRequest numberOfUsersRequest = (NumberOfUsersRequest)  event;
+                UsersNumberEvent numberOfUsersRequest = (UsersNumberEvent)  event;
                 view.askPlayersNumber();
                 break;
             case FIRSTPLAYER_REQUEST:
-                FirstPlayerRequest firstPlayerRequest = (FirstPlayerRequest) event;
+                FirstPlayerRequestEvent firstPlayerRequest = (FirstPlayerRequestEvent) event;
                 view.askFirstPLayer();
                 break;
             case TILES_NUMBER_REQUEST:
-                TilesNumberRequest tilesNumberRequest = (TilesNumberRequest) event;
+                TilesNumberRequestEvent tilesNumberRequest = (TilesNumberRequestEvent) event;
                 view.askTilesNumber();
                 break;
             case CHOOSE_TILE_REQUEST:
-                ChooseTileRequest chooseTileRequest = (ChooseTileRequest) event;
+                ChooseTileRequestEvent chooseTileRequest = (ChooseTileRequestEvent) event;
                 view.askTilePositionOnBoard();
                 break;
             case PLACE_TILE_REQUEST:
-                PlaceTileRequest placeTileRequest = (PlaceTileRequest) event;
+                PlaceTileRequestEvent placeTileRequest = (PlaceTileRequestEvent) event;
                 view.askShelfieColumn();
             case BOARD:
                 BoardEvent boardEvent = (BoardEvent) event;
@@ -120,27 +119,27 @@ public class ClientController implements Observer {
                 view.showMyShelfie();
                 break;
             case OTHERSHELFIES:
-                OtherhelfiesEvent otherhelfiesEvent = (otherShelfiesEvent) event;
+                OtherShelfiesEvent otherhelfiesEvent = (OtherShelfiesEvent) event;
                 view.showOtherPlayersShelfie();
                 break;
             case SHOWPERSONALGOAL:
-                PersonalGoalReply personalGoalReply = (PersonalGoalReply) event;
+                ShowPersonalGoalEvent personalGoalReply = (ShowPersonalGoalEvent) event;
                 view.showMyPersonalGoal();
                 break;
             case SHOWCOMMONGOALS:
-                CommonGoalReply commonGoalReply = (CommonGoalReply) event;
+                ShowCommonGoalsEvent commonGoalReply = (ShowCommonGoalsEvent) event;
                 view.showCommonGoals();
                 break;
             case COMMONGOAL_COMPLETED:
-                CommonGoalCompleted commonGoalCompleted = (CommonGoalCompleted) event;
+                CommonGoalCompletedEvent commonGoalCompleted = (CommonGoalCompletedEvent) event;
                 view.showCommonGoalCompletion();
                 break;
             case CURRENT_POINTS:
-                ShowCurrentPoints showCurrentPoints = (ShowCurrentPoints) event;
+                FinalPointsEvent showCurrentPoints = (FinalPointsEvent) event;
                 view.showMyPoints();
                 break;
             case TURN_STATE:
-                ShowTurnState showTurnState = (ShowTurnState) event;
+                TurnStateEvent showTurnState = (TurnStateEvent) event;
                 //metodo della view
 
         }

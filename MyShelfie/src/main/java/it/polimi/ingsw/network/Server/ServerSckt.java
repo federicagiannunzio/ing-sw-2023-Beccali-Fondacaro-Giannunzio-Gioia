@@ -28,7 +28,7 @@ public class ServerSckt {
 
         while (true) {
             Socket newClient = server.accept();
-            ClientHandlerSocket clientHandler = new ClientHandlerSocket(this);
+            ClientHandlerSocket clientHandler = new ClientHandlerSocket(server);
             Thread thread = new Thread(clientHandler);
             thread.start();
         }
