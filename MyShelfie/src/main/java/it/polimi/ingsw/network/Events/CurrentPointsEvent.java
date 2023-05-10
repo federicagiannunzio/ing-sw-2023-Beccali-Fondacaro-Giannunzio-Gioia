@@ -31,7 +31,7 @@ public class CurrentPointsEvent extends Event{
 
    @Override
     public String toString(){
-        return getUser() + "has" + getPoints() + "points";
+        return getUser() + "has" + getPoints() + "points.";
 }
 
 
