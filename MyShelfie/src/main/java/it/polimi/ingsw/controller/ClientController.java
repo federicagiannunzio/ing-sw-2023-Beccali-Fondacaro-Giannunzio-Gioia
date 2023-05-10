@@ -37,8 +37,8 @@ public class ClientController implements Observer {
      *
      * @param usernameFirst the username of the first player
      */
-    public void sendFirstPlayerChosen(String usernameFirst, List<String> usersOnGame){
-        client.sendMessage( new FirstPlayerRequestEvent(this.username, usersOnGame));
+    public void sendFirstPlayerChosen(String usernameFirst){
+        client.sendMessage( new FirstPlayerReplyEvent(this.username, usernameFirst));
     }
 
     /**
@@ -134,7 +134,9 @@ public class ClientController implements Observer {
             case TURN_STATE:
                 TurnStateEvent showTurnState = (TurnStateEvent) event;
                 view.showTurnState(showTurnState.getUser());
-
+            case TILE_ARRAY_REQUEST:
+                TileArrayRequestEvent requestArrayIndex = (TileArrayRequestEvent) event;
+                view.askPlacingTile(requestArrayIndex.getTilesList());
         }
     }
 }

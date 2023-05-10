@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.controller.Observer.Observable;
+import it.polimi.ingsw.controller.Observer.ViewObservable;
 import it.polimi.ingsw.model.*;
 
 import java.io.PrintStream;
@@ -73,15 +74,10 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void askPlayersNumber(){
         int playersNumber;
-
-        try {
-            System.out.println("Please select the number of players. Choose a number between 2 and 4");
-            String playerNumberString = readLine();
-            playersNumber = Integer.parseInt(playerNumberString);
-            //notifyObserver()
-        } catch () {
-
-        }
+        System.out.println("Please select the number of players. Choose a number between 2 and 4");
+        String playerNumberString = readLine();
+        playersNumber = Integer.parseInt(playerNumberString);
+        notifyObserver(obs -> obs.sendPlayersNumber(playersNumber));
     }
 
     @Override
@@ -89,76 +85,79 @@ public class Cli extends ViewObservable implements View {
         System.out.println("Your the first player that has connected. Please choose the player who will starts the game.");
         System.out.println("These are the players online: ");
         for(String users : usersOnGame)
-            System.out.println(users + ",");
-        try {
-            //System.out.println("Type the exact name of the player.");
-            String userChosen;
-            do {
-                System.out.println("Type the exact name of the player.");
-                userChosen = readLine();
-                if(!usersOnGame.contains(userChosen))
-                    System.out.println("This username is not valid. Please type another name.");
-            } while(!usersOnGame.contains(userChosen));
-            //notifyObserver();
-        } catch() {
-
-        }
+            System.out.println(users + ", ");
+        String tryUserChosen;
+        do {
+            System.out.println("Type the exact name of the player.");
+            tryUserChosen = readLine();
+            if(!usersOnGame.contains(tryUserChosen))
+                System.out.println("This username is not valid. Please try again.");
+        } while(!usersOnGame.contains(tryUserChosen));
+        String userChosen = tryUserChosen;
+        notifyObserver(obs -> obs.sendFirstPlayerChosen(userChosen));
     }
 
     @Override
     public void askTilesNumber(){
-        int numberOfTiles;
-        System.out.println("How many tiles you want to pick?");
-        numberOfTiles = Integer.parseInt(readLine());
+        int tryNumberOfTiles;
+        do {
+            System.out.println("How many tiles you want to pick?");
+            tryNumberOfTiles = Integer.parseInt(readLine());
+            if(tryNumberOfTiles < 1 || tryNumberOfTiles > 3){
+                System.out.println("The number of tiles must be between 1 and 3. Please try again.");
+            }
+        }while(tryNumberOfTiles < 1 || tryNumberOfTiles > 3);
+        int numberOfTiles = tryNumberOfTiles;
+        notifyObserver(obs -> obs.sendTilesNumberChosen(numberOfTiles));
     }
 
     @Override
     public void askTilePositionOnBoard(int numberOfTiles) {
+        int tryRow = 0, tryCol = 0;
         System.out.println("Select the tiles you want to pick.");
-        try {
-            for(int i=0; i < numberOfTiles; i++) {
-                System.out.print("Tile number " + (i+1));
+        for(int i=0; i < numberOfTiles; i++) {
+            System.out.print("Tile number " + (i+1));
+            do {
                 System.out.println("ROW: ");
-                int row = Integer.parseInt(readLine());
-                System.out.println("COLUMN: ");
-                int col = Integer.parseInt(readLine());
-            }
-            //notifyobserver
-
-        } catch () {
-
+                tryRow = Integer.parseInt(readLine());
+                if(tryRow >= 9 || tryRow < 0)
+                    System.out.println("The board in 9x9 so the number has to be between 0 and 8. Please try again.");
+            }while(tryRow >= 9 || tryRow < 0);
+            System.out.println("COLUMN: ");
+            tryCol = Integer.parseInt(readLine());
         }
-
+        int row = tryRow;
+        int col = tryCol;
+        notifyObserver(obs -> obs.sendTilePosition(row, col));
     }
 
     @Override
     public void askShelfieColumn() {
+        int tryCol;
         System.out.println("In which column you want to put your tiles?");
-        int col;
-        try {
-            col = Integer.parseInt(readLine());
-            //notifyObserver
-        } catch () {
-
-        }
+        do {
+            tryCol = Integer.parseInt(readLine());
+            if (tryCol >= 5 || tryCol < 0)
+                System.out.println("The inserted number has to be between 0 and 4. Please try again.");
+        }while(tryCol >= 5 || tryCol < 0);
+        int col = tryCol;
+        notifyObserver(obs -> obs.sendShelfieColumn(col));
     }
 
     @Override
-    public void askPlacingTile(List<Tile> tilesPicked) {
-        try {
-            do {
-                for(int i=0; i < tilesPicked.size(); i++) {
-                    System.out.println((i+1) + ") " + tilesPicked.get(i).getColor() + " tile");
-                }
-                System.out.println("Which tile do you want to insert? Please select a number.");
-                int n = Integer.parseInt(readLine());
-                //notifyObserver();
-                tilesPicked.remove(n-1);
-            } while (!tilesPicked.isEmpty());
-        } catch() {
-
-        }
+    public void askPlacingTile(List<Tile> tilesArray){
+        int tryN;
+        showTilesArray(tilesArray);
+        do {
+            System.out.println("Which tile do you want to insert? Please select a number.");
+            tryN = Integer.parseInt(readLine());
+            if(tryN > 3 || tryN < 1)
+                System.out.println("The number chose must be between 1 and 3. Please try again.")
+        }while(tryN > 3 || tryN < 1);
+        int n = tryN - 1;
+        notifyObserver();
     }
+
 
     @Override
     public void showBoard(Tile[][] structure) {

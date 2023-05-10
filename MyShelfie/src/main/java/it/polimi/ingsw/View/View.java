@@ -54,16 +54,6 @@ public interface View {
     void showMyShelfie(Tile[][] structure);
 
     /**
-     * Shows the shelf of all the other players.
-     */
-    void showOtherPlayersShelfie(Shelfie shelf);
-
-    /**
-     * Shows this player's personal goal
-     */
-    void showMyPersonalGoal(Shelfie personalGoalShelf);
-
-    /**
      * Shows the common goals
      */
     void showCommonGoals(CommonGoalsName name);
