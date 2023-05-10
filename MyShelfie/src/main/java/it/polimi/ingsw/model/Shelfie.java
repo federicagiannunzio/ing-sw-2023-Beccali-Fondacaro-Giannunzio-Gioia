@@ -117,8 +117,17 @@ public class Shelfie {
      * @param visited boolean that expresses whether a tile has already been checked or not
      * @return is returned true if the cell given is not null and has not been visited before, otherwise false
      */
-    boolean isSafe(Tile structure[][], int i, int j, boolean visited[][]) {
+    public boolean isSafe(Tile structure[][], int i, int j, boolean visited[][]) {
         return (i >= 0) && (i < 6) && (j >= 0) && (j < 5) && (structure[i][j] != null && !visited[i][j]);
+    }
+
+    public boolean isComplete(){
+        int i;
+        for(i = 0; i < 5; i++){
+            if(structure[0][i] == null)
+                return false;
+        }
+        return true;
     }
 }
 

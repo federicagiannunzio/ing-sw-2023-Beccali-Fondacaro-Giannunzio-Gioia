@@ -11,7 +11,7 @@ import java.util.concurrent.FutureTask;
 
 import static java.lang.System.out;
 
-public class Cli extends Observable implements View {
+public class Cli extends ViewObservable implements View {
 
 
     private Scanner input;
@@ -52,7 +52,7 @@ public class Cli extends Observable implements View {
         return str;
     }
 
-    public void askServerInfo() throws ExecutionException {
+    public void askServerInfo(){
         boolean valid = false;
 
         while (!valid) {
@@ -67,11 +67,11 @@ public class Cli extends Observable implements View {
     public void askUsername() {
         out.print("Please enter your username: ");
         String username = readLine();
-        //notifyObserver();
+        notifyObserver(obs -> obs.sendUsername(username));
     }
 
     @Override
-    public void askPlayersNumber() throws ExecutionException {
+    public void askPlayersNumber(){
         int playersNumber;
 
         try {
@@ -106,7 +106,7 @@ public class Cli extends Observable implements View {
     }
 
     @Override
-    public void askTilesNumber() {
+    public void askTilesNumber(){
         int numberOfTiles;
         System.out.println("How many tiles you want to pick?");
         numberOfTiles = Integer.parseInt(readLine());
@@ -161,7 +161,7 @@ public class Cli extends Observable implements View {
     }
 
     @Override
-    public void showBoard(Board board) {
+    public void showBoard(Tile[][] structure) {
 
         StringBuilder strRowBld = new StringBuilder();
         StringBuilder strColBld = new StringBuilder();
@@ -174,9 +174,9 @@ public class Cli extends Observable implements View {
             System.out.print(strRowBld);
             for (int j = 0; j < 9; j++) {
                 System.out.print(strColBld);
-                if (board.getTile(i, j) != null) {
+                if (structure[i][j] != null) {
                     StringBuilder tile = new StringBuilder();
-                    tile.append(board.getTile(i, j).getColor()).append(" x").append(Color.RESET);
+                    tile.append(structure[i][j].getColor()).append(" x").append(Color.RESET);
                     System.out.print(tile);
                 } else {
                     System.out.print("  ");
@@ -189,7 +189,7 @@ public class Cli extends Observable implements View {
 
 
     @Override
-    public void showMyShelfie(Shelfie shelf) {
+    public void showMyShelfie(Tile[][] structure) {
 
         StringBuilder strRowBld = new StringBuilder();
         StringBuilder strColBld = new StringBuilder();
@@ -202,9 +202,9 @@ public class Cli extends Observable implements View {
             System.out.print(strRowBld);
             for (int j = 0; j < 5; j++) {
                 System.out.print(strColBld);
-                if (shelf.getCell(i, j) != null) {
+                if (structure[i][j] != null) {
                     StringBuilder tile = new StringBuilder();
-                    tile.append(shelf.getCell(i, j).getColor()).append(" x").append(Color.RESET);
+                    tile.append(structure[i][j].getColor()).append(" x").append(Color.RESET);
                     System.out.print(tile);
                 } else {
                     System.out.print("  ");
@@ -215,18 +215,9 @@ public class Cli extends Observable implements View {
         System.out.println(strRowBld);
     }
 
-    @Override
-    public void showOtherPlayersShelfie(Shelfie shelf) {
-
-    }
 
     @Override
-    public void showMyPersonalGoal(Shelfie personalGoalShelf) {
-
-    }
-
-    @Override
-    public void showCommonGoal(CommonGoalsName name) {
+    public void showCommonGoals(CommonGoalsName name) {
         switch(name) {
             case CORNERS:
                 System.out.println("Four tiles of the same type in the four corners of the bookshelf. ");
@@ -274,13 +265,7 @@ public class Cli extends Observable implements View {
     }
 
     @Override
-    public void showCommonGoalCompletionWinner(String commonGoal, int pointsAchieved) {
-        System.out.println("Congratulation! You have completed " + commonGoal + " common goal.");
-        System.out.println("You have achieved " + pointsAchieved + " points.");
-    }
-
-    @Override
-    public void showCommonGoalCompletionOthers(String username, String commonGoal, int pointsAchieved) {
+    public void showCommonGoalCompletion(String username, String commonGoal, int pointsAchieved) {
         System.out.println(username + " has completed " + commonGoal + " common goal.");
         System.out.println(username + " has achieved " + pointsAchieved + " points.");
     }
@@ -319,14 +304,8 @@ public class Cli extends Observable implements View {
     }
 
     @Override
-    public void showStartTurnMessage(String user) {
+    public void showTurnState(String user) {
         System.out.println(user + " started his turn");
-    }
-
-    @Override
-    public void showEndTurnMessage(String user) {
-        System.out.println(user + " ended his turn");
-
     }
 
     @Override

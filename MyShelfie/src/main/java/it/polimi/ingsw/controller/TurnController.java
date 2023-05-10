@@ -24,7 +24,7 @@ public class TurnController implements Serializable {
 
     public void startTurn(Player p) throws IOException, FullColumnException {
         currentUser = p.getUsername();
-        view.showStartTurnMessage(currentUser);
+        view.showTurnState(currentUser);
         tilesPicking(p);
         if(p.myTiles != null){
             tilesPlacing(p);
@@ -39,7 +39,7 @@ public class TurnController implements Serializable {
         int tilesNumber, i;
         boolean flag = false;
         view.askTilesNumber();
-        tilesNumber = controller.getTilesNumber();
+        tilesNumber = controller.getNumberOfTiles();
         if(p.getMyTiles() == null) {
             for (i = 0; i < tilesNumber; i++) {
                 view.askTilePositionOnBoard(tilesNumber);
@@ -67,7 +67,6 @@ public class TurnController implements Serializable {
             j = controller.getShelfieColumn();
             p.getMyShelfie().addTile(t, j);
         }
-        view.showEndTurnMessage(currentUser);
     }
 
     public void pointsUpdating(Player p){

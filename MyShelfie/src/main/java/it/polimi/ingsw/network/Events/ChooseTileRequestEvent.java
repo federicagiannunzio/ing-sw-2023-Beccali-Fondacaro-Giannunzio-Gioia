@@ -5,6 +5,7 @@ package it.polimi.ingsw.network.Events;
  */
 
 public class ChooseTileRequestEvent extends Event{
+    public final int tilesNumber;
 
     /**
      * Default constructor.
@@ -12,33 +13,24 @@ public class ChooseTileRequestEvent extends Event{
      * @param row index for rows
      * @param column index for columns
      */
-    public ChooseTileRequestEvent(int row, int column) {
+    public ChooseTileRequestEvent(String user, int tilesNumber) {
         super(user, EventType.CHOOSE_TILE_REQUEST);
-        this.row = row;
-        this.column = column;
+        this.tilesNumber = tilesNumber;
     }
-
-    public final int row;
-
-    public final int column;
 
     /**
      * Returns the cell that the player has selected.
      *
      * @return the row and the column of the tile selected..
      */
-    public int getrow(){
-        return row;
+    public int getTilesNumber(){
+        return tilesNumber;
     }
 
-    public int getcolumn() {
-        return column;
-    }
 
 
     public String toString() {
-        return getUser() + "chose the Tile in the position" + "[row:" + getrow() + " ; column:"
-                + getcolumn() + "]";
+        return getUser() + " has to pick " + tilesNumber + " tiles from the board.";
     }
 
 

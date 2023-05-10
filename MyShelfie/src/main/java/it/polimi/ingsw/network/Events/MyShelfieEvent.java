@@ -7,7 +7,7 @@ import java.util.Arrays;
 /**
  * Message that contains the personal shelfie. Used to send the updated shelfie to the client.
  */
-public class MyshelfieEvent extends Event{
+public class MyShelfieEvent extends Event{
 
     private final Tile[][] shelfie;
 
@@ -16,7 +16,7 @@ public class MyshelfieEvent extends Event{
      *
      * @param shelfie
      */
-    public MyshelfieEvent(String user, EventType eventType, Tile[][] shelfie) {
+    public MyShelfieEvent(String user,Tile[][] shelfie) {
         super(user, EventType.MYSHELFIE);
         this.shelfie = shelfie;
     }
@@ -38,4 +38,3 @@ public class MyshelfieEvent extends Event{
     }
 }
 
-}

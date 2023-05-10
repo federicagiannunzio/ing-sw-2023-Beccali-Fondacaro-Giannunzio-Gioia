@@ -7,6 +7,7 @@ import it.polimi.ingsw.network.Client.Client;
 import it.polimi.ingsw.network.Events.*;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ClientController implements Observer {
     private String username;
@@ -36,32 +37,24 @@ public class ClientController implements Observer {
      *
      * @param usernameFirst the username of the first player
      */
-    public void sendFirstPlayerChosen(String usernameFirst) throws IOException {
-        client.sendMessage( new FirstPlayerRequestEvent(this.username, EventType.FIRSTPLAYER_REQUEST));
+    public void sendFirstPlayerChosen(String usernameFirst, List<String> usersOnGame){
+        client.sendMessage( new FirstPlayerRequestEvent(this.username, usersOnGame));
     }
 
     /**
      * Sends a message to the server that contains the number of tiles
      */
     public void sendTilesNumberChosen(int numberOfTiles) {
-        client.sendMessage(new TilesNumberRequestEvent());
+        client.sendMessage(new TilesNumberRequestEvent(this.username, numberOfTiles));
     }
 
 
     /**
      * Sends the server the position of the tile that the player wants to pick.
      */
-    public void sendTilePosition(String use) {
-
+    public void sendTilePosition(int row, int column) {
+        client.sendMessage(new ChooseTileReplyEvent(this.username, row, column);
     }
-
-    /**
-     * Sends the server the column chosen by the player in which he wants to insert the tile.
-     */
-    public void sendShelfieColumn() {
-
-    }
-
 
     /**
      * Sends the server the column in which the player wants to put the tiles that he has just picked.
@@ -69,7 +62,7 @@ public class ClientController implements Observer {
      * @param column the column in which he wants to put the tiles.
      */
     public void sendShelfieColumn(int column) {
-        client.sendMessage(new PlaceTileRequestEvent());
+        client.sendMessage(new PlaceTileRequestEvent(this.username, column));
     }
 
 
@@ -80,7 +73,7 @@ public class ClientController implements Observer {
     public void update(Event event) {
 
         switch(event.getEventType()) {
-            case SERVERINFO_REQUEST:
+            case SERVER_INFO:
                 InfoServerEvent serverInforRequest = (InfoServerEvent) event;
                 view.askServerInfo();
                 break;
@@ -97,7 +90,7 @@ public class ClientController implements Observer {
                 break;
             case FIRSTPLAYER_REQUEST:
                 FirstPlayerRequestEvent firstPlayerRequest = (FirstPlayerRequestEvent) event;
-                view.askFirstPLayer();
+                view.askFirstPLayer(firstPlayerRequest.getUsersOnGame());
                 break;
             case TILES_NUMBER_REQUEST:
                 TilesNumberRequestEvent tilesNumberRequest = (TilesNumberRequestEvent) event;
@@ -105,26 +98,26 @@ public class ClientController implements Observer {
                 break;
             case CHOOSE_TILE_REQUEST:
                 ChooseTileRequestEvent chooseTileRequest = (ChooseTileRequestEvent) event;
-                view.askTilePositionOnBoard();
+                view.askTilePositionOnBoard(chooseTileRequest.getTilesNumber());
                 break;
             case PLACE_TILE_REQUEST:
                 PlaceTileRequestEvent placeTileRequest = (PlaceTileRequestEvent) event;
                 view.askShelfieColumn();
             case BOARD:
                 BoardEvent boardEvent = (BoardEvent) event;
-                view.showBoard();
+                view.showBoard(boardEvent.getBoard());
                 break;
             case MYSHELFIE:
                 MyShelfieEvent myShelfieEvent = (MyShelfieEvent) event;
-                view.showMyShelfie();
+                view.showMyShelfie(myShelfieEvent.getBoard());
                 break;
             case OTHERSHELFIES:
-                OtherShelfiesEvent otherhelfiesEvent = (OtherShelfiesEvent) event;
-                view.showOtherPlayersShelfie();
+                OtherShelfiesEvent otherShelfiesEvent = (OtherShelfiesEvent) event;
+                view.showMyShelfie(otherShelfiesEvent.getBoard());
                 break;
             case SHOWPERSONALGOAL:
                 ShowPersonalGoalEvent personalGoalReply = (ShowPersonalGoalEvent) event;
-                view.showMyPersonalGoal();
+                view.showMyShelfie(personalGoalReply.getBoard());
                 break;
             case SHOWCOMMONGOALS:
                 ShowCommonGoalsEvent commonGoalReply = (ShowCommonGoalsEvent) event;
@@ -140,7 +133,7 @@ public class ClientController implements Observer {
                 break;
             case TURN_STATE:
                 TurnStateEvent showTurnState = (TurnStateEvent) event;
-                //metodo della view
+                view.showTurnState();
 
         }
     }
