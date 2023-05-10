@@ -129,7 +129,7 @@ public class ClientController implements Observer {
                 break;
             case CURRENT_POINTS:
                 FinalPointsEvent showCurrentPoints = (FinalPointsEvent) event;
-                view.showMyPoints(showCurrentPoints.getFPoints());
+                view.showMyPoints(showCurrentPoints.getFpoints());
                 break;
             case TURN_STATE:
                 TurnStateEvent showTurnState = (TurnStateEvent) event;
