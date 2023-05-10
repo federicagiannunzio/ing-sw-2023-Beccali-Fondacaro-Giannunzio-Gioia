@@ -10,8 +10,6 @@ public class ChooseTileRequestEvent extends Event{
     /**
      * Default constructor.
      *
-     * @param row index for rows
-     * @param column index for columns
      */
     public ChooseTileRequestEvent(String user, int tilesNumber) {
         super(user, EventType.CHOOSE_TILE_REQUEST);

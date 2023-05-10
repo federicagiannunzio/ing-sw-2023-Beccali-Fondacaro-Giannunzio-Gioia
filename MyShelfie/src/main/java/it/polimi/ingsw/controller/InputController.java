@@ -3,7 +3,9 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Shelfie;
+import it.polimi.ingsw.network.Events.ChooseTileReplyEvent;
 import it.polimi.ingsw.network.Events.Event;
+import it.polimi.ingsw.network.Events.PlaceTileReplyEvent;
 
 import java.util.Optional;
 
@@ -35,8 +37,8 @@ public class InputController {
                 return pickedTileCheck(event);
             case PLACE_TILE_REPLY:
                 return insertedTileCheck(event);
-        }
 
+        }
     }
 
     /**
@@ -66,9 +68,9 @@ public class InputController {
      * @return {code @true} id it's a valid position {code @false} otherwise
      * */
     public boolean pickedTileCheck(Event event) {
-        ChooseTileRequest pickedTileMessage = ((ChooseTileRequest) event);
-        int row = pickedTileMessage.getRow();
-        int column = pickedTileMessage.getColumn();
+        ChooseTileReplyEvent pickedTileMessage = ((ChooseTileReplyEvent) event);
+        int row = pickedTileMessage.getrow();
+        int column = pickedTileMessage.getcolumn();
         boolean isAvailable = gameController.getBoard().checkTile(row, column);
 
         if (isAvailable) {
@@ -81,16 +83,15 @@ public class InputController {
 
     //da sistemare e rifare
     /**
-     * receives a message from the client (receives the position of the selfie in which he wants to put ) and check if the position is empty.
+     * receives a message from the client (receives the position of the shelf in which he wants to put ) and check if the position is empty.
      *
      * @param event message from the client
      * @return {code @true} id it's a valid position {code @false} otherwise
      */
     public boolean insertedTileCheck(Event event) {
         String activePlayerusername = gameController.getTurnController().getActivePlayer();
-        PlaceTileRequest tileToPlaceMessage= ((PlaceTileRequest) event);
-        int row = tileToPlaceMessage.getRow();
-        int column = tileToPlaceMessage.getColumn();
+        PlaceTileReplyEvent tileToPlace= ((PlaceTileReplyEvent) event);
+        int column = tileToPlace.getcolumn();
         Optional<Player> activePlayer = gameController.getPlayerByUsername(activePlayerusername);
         if(activePlayer.isEmpty()) {
             System.out.println("This user doesn't exist");
@@ -99,7 +100,7 @@ public class InputController {
 
         Shelfie playerShelf = activePlayer.get().getMyShelfie();
 
-        if(playerShelf.getCell(row, column) != null) {
+        if(playerShelf.getCell(0, column) != null) {
             view.showGenericMessage("You have already filled this spot");
             return false;
         }

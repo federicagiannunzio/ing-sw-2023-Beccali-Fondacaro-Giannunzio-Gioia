@@ -19,7 +19,7 @@ public class Cli extends ViewObservable implements View {
     private Thread inputThread;
 
 
-    public void start() throws ExecutionException {
+    public void start() {
         System.out.print("\n" +
                 ".___  ___. ____    ____         _______. __    __   _______  __       _______  __   _______ \n" +
                 "|   \\/   | \\   \\  /   /        /       ||  |  |  | |   ____||  |     |   ____||  | |   ____|\n" +
@@ -46,7 +46,7 @@ public class Cli extends ViewObservable implements View {
      * @return the string read from the input.
      * @throws ExecutionException if the input stream thread is interrupted.
      */
-    public String readLine() {
+    private String readLine() {
         input = new Scanner(System.in);
         input.reset();
         String str = input.nextLine();
@@ -152,7 +152,7 @@ public class Cli extends ViewObservable implements View {
             System.out.println("Which tile do you want to insert? Please select a number.");
             tryN = Integer.parseInt(readLine());
             if(tryN > 3 || tryN < 1)
-                System.out.println("The number chose must be between 1 and 3. Please try again.")
+                System.out.println("The number chose must be between 1 and 3. Please try again.");
         }while(tryN > 3 || tryN < 1);
         int n = tryN - 1;
         notifyObserver();
@@ -320,7 +320,6 @@ public class Cli extends ViewObservable implements View {
         for (String nick : nicknameList) {
             System.out.println(nick + "\n");
         }
-
         System.out.println("Current players in lobby: " + nicknameList.size() + " / " + numPlayers);
     }
 
@@ -328,14 +327,21 @@ public class Cli extends ViewObservable implements View {
         System.out.println("Please choose what do you want to do.");
         System.out.println("1) View common goals.");
         System.out.println("2) View my personal goal.");
-        System.out.println("3) View other players' shelves.");
-        System.out.println("4) View common goals.");
+        System.out.println("3) View common goals.");
+        //3 my shelfie
+        //4 common goals
     }
 
     public void askChoiceBeginTurn() {
         showChoicesBeginTurn();
-        int choice = Integer.parseInt(readLine());
-        //notifyObserver
+        int tryChoice = Integer.parseInt(readLine());
+        do {
+            if(tryChoice < 1 || tryChoice > 4)
+                System.out.println("Please insert a valid number");
+            tryChoice = Integer.parseInt(readLine());
+        }while(tryChoice < 1 || tryChoice > 4);
+        int choice = tryChoice;
+        notifyObserver(obs -> obs.sendChoiceBeginTurn(choice));
     }
 
     public boolean checkValidIP(String IP) {

@@ -62,7 +62,16 @@ public class ClientController implements Observer {
      * @param column the column in which he wants to put the tiles.
      */
     public void sendShelfieColumn(int column) {
-        client.sendMessage(new PlaceTileRequestEvent(this.username, column));
+        client.sendMessage(new PlaceTileReplyEvent(this.username, column));
+    }
+
+    /**
+     * Sends the server the choice that the player did at the beginning of his turn: He can choose between 4 action.
+     *
+     * @param choice is the number that correspond to that choice
+     */
+    public void sendChoiceBeginTurn(int choice) {
+        client.sendMessage(new ChoiceBeginTurnEvent(this.username, choice));
     }
 
 

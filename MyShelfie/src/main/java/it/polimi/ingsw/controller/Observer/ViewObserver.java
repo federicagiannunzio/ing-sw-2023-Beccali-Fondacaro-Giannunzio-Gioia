@@ -14,5 +14,7 @@ public interface ViewObserver {
 
     void sendShelfieColumn(int column);
 
+    void sendChoiceBeginTurn(int choice);
+
 
 }
