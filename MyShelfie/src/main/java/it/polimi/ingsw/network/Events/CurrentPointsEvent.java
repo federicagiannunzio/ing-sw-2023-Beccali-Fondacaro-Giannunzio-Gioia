@@ -23,7 +23,7 @@ public class CurrentPointsEvent extends Event{
 
     /**
      *
-     * @return the current points.
+     * @return the current points
      */
     public int getPoints() {
         return points;
