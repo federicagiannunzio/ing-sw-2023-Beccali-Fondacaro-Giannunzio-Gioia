@@ -53,7 +53,7 @@ public class ClientController implements Observer {
      * Sends the server the position of the tile that the player wants to pick.
      */
     public void sendTilePosition(int row, int column) {
-        client.sendMessage(new ChooseTileReplyEvent(this.username, row, column);
+        client.sendMessage(new ChooseTileReplyEvent(this.username, row, column));
     }
 
     /**
@@ -129,7 +129,7 @@ public class ClientController implements Observer {
                 break;
             case CURRENT_POINTS:
                 FinalPointsEvent showCurrentPoints = (FinalPointsEvent) event;
-                view.showMyPoints(showCurrentPoints.getFPoints());
+                view.showMyPoints(showCurrentPoints.getFpoints());
                 break;
             case TURN_STATE:
                 TurnStateEvent showTurnState = (TurnStateEvent) event;
