@@ -121,19 +121,19 @@ public class ClientController implements Observer {
                 break;
             case SHOWCOMMONGOALS:
                 ShowCommonGoalsEvent commonGoalReply = (ShowCommonGoalsEvent) event;
-                view.showCommonGoals();
+                view.showCommonGoals(commonGoalReply.getName());
                 break;
             case COMMONGOAL_COMPLETED:
                 CommonGoalCompletedEvent commonGoalCompleted = (CommonGoalCompletedEvent) event;
-                view.showCommonGoalCompletion();
+                view.showCommonGoalCompletion(commonGoalCompleted.getUser(),commonGoalCompleted.getCommonGoal(), commonGoalCompleted.getPointsAchieved());
                 break;
             case CURRENT_POINTS:
                 FinalPointsEvent showCurrentPoints = (FinalPointsEvent) event;
-                view.showMyPoints();
+                view.showMyPoints(showCurrentPoints.getFPoints());
                 break;
             case TURN_STATE:
                 TurnStateEvent showTurnState = (TurnStateEvent) event;
-                view.showTurnState();
+                view.showTurnState(showTurnState.getUser());
 
         }
     }
