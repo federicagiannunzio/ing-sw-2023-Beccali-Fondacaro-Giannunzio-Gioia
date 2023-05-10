@@ -53,7 +53,7 @@ public class ClientController implements Observer {
      * Sends the server the position of the tile that the player wants to pick.
      */
     public void sendTilePosition(int row, int column) {
-        client.sendMessage(new ChooseTileReplyEvent(this.username, row, column);
+        client.sendMessage(new ChooseTileReplyEvent(this.username, row, column));
     }
 
     /**
