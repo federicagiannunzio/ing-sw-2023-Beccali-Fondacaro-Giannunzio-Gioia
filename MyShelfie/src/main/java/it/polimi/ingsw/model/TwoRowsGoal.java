@@ -1,6 +1,9 @@
 
 
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.TWOROWS;
+
 /**
  * Class twoRowsGoal
  * Two lines formed each from 5 different types of tiles.
@@ -39,4 +42,6 @@ public class TwoRowsGoal implements CommonGoal {
         else
             return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return TWOROWS;}
 }

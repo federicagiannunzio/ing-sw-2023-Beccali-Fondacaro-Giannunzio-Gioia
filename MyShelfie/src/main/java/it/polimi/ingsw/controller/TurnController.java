@@ -25,6 +25,18 @@ public class TurnController implements Serializable {
     public void startTurn(Player p) throws IOException, FullColumnException {
         currentUser = p.getUsername();
         view.showTurnState(currentUser);
+        view.askChoiceBeginTurn();
+        int choice = controller.getChoice();
+        while(choice != 1){
+            if(choice == 2)
+                view.showMyShelfie(p.getPersonalGoal().getBody());
+            else if(choice == 3)
+                view.showMyShelfie(p.getMyShelfie().getStructure());
+            else if(choice == 4) {
+                view.showCommonGoals(controller.getCommonGoals().get(0).getGoalsName());
+                view.showCommonGoals(controller.getCommonGoals().get(1).getGoalsName());
+            }
+        }
         tilesPicking(p);
         if(p.myTiles != null){
             tilesPlacing(p);
@@ -32,9 +44,10 @@ public class TurnController implements Serializable {
         else
             view.showErrorMessage("No tiles selected, skipping placing phase");
         pointsUpdating(p);
+        view.showMyPoints(p.getPoints());
     }
 
-    private void tilesPicking(Player p) throws IOException, notAvailableTileException {
+    private void tilesPicking(Player p) throws notAvailableTileException {
         int[] tilesPos = new int[2];
         int tilesNumber, i;
         boolean flag = false;
@@ -60,8 +73,7 @@ public class TurnController implements Serializable {
         Tile t;
         while (p.getMyTiles() != null) {
             ArrayList<Tile> playerTiles = p.getMyTiles();
-            view.showTilesArray(playerTiles);
-            view.askPlacingTile();
+            view.askPlacingTile(playerTiles);
             t = controller.getPlacingTile();
             view.askShelfieColumn();
             j = controller.getShelfieColumn();
@@ -70,9 +82,15 @@ public class TurnController implements Serializable {
     }
 
     public void pointsUpdating(Player p){
-        int personalPoints = 0, commonPoints1 = 0, commonPoints2 = 0, previousPoints;
+        int personalPoints, commonPoints1 = 0, commonPoints2 = 0, adjacentPoints;
+        int[] pointsArr = new int[5];
         boolean flag;
         personalPoints = p.getPersonalGoal().checkpoints(p.getMyShelfie());
+        pointsArr = p.getMyShelfie().adjacentItem();
+        adjacentPoints = (pointsArr[1] * 2);
+        adjacentPoints = adjacentPoints + (pointsArr[2] * 3);
+        adjacentPoints = adjacentPoints + (pointsArr[3] * 5);
+        adjacentPoints = adjacentPoints + (pointsArr[4] * 8);
         if(p.getCommonFlag1()) {
             flag = controller.getCommonGoals().get(0).commonGoalAlg(p.getMyShelfie());
             if (flag) {
@@ -87,7 +105,6 @@ public class TurnController implements Serializable {
                 p.setCommonFlag2(false);
             }
         }
-        previousPoints = p.getPoints();
-        p.setPoints(previousPoints + personalPoints + commonPoints2 + commonPoints1);
+        p.setPoints(personalPoints + commonPoints2 + commonPoints1 + adjacentPoints);
     }
 }

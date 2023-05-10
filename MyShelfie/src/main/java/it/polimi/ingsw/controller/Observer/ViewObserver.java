@@ -14,5 +14,7 @@ public interface ViewObserver {
 
     void sendShelfieColumn(int column);
 
+    void sendArrayTileIndex(int index);
+
 
 }

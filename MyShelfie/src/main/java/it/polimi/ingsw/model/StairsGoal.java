@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 
+import static it.polimi.ingsw.model.CommonGoalsName.STAIRS;
+
 /**
  * Class stairsGoal
  * Five columns of increasing height or descending: starting from the first column
@@ -28,4 +30,6 @@ public class StairsGoal implements CommonGoal {
         else
             return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return STAIRS;}
 }

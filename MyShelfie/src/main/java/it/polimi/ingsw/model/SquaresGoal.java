@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.SQUARES;
+
 /**
  * Class squaresGoal
  * Two separate groups of 4 tiles same type that form a 2x2 square.
@@ -69,4 +72,6 @@ public class SquaresGoal implements CommonGoal{
         }
         return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return SQUARES;}
 }

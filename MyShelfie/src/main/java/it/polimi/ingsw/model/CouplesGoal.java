@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import static it.polimi.ingsw.model.CommonGoalsName.COUPLES;
+
 /**
  * Class coupleGaol
  * Six separate groups formed each from two adjacent tiles of the same type.
@@ -22,4 +24,6 @@ public class CouplesGoal implements CommonGoal{
         else
             return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return COUPLES;}
 }

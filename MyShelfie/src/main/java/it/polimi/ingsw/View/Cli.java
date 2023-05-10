@@ -155,7 +155,7 @@ public class Cli extends ViewObservable implements View {
                 System.out.println("The number chose must be between 1 and 3. Please try again.")
         }while(tryN > 3 || tryN < 1);
         int n = tryN - 1;
-        notifyObserver();
+        notifyObserver(obs -> obs.sendArrayTileIndex(n));
     }
 
 
@@ -272,7 +272,6 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void showWinMessage(String winner) {
         System.out.println("Game finished: " + winner + " WINS!");
-        //System.exit(0);
     }
 
     @Override
@@ -326,9 +325,9 @@ public class Cli extends ViewObservable implements View {
 
     public void showChoicesBeginTurn() {
         System.out.println("Please choose what do you want to do.");
-        System.out.println("1) View common goals.");
+        System.out.println("1) start my turn.");
         System.out.println("2) View my personal goal.");
-        System.out.println("3) View other players' shelves.");
+        System.out.println("3) View my shelfie.");
         System.out.println("4) View common goals.");
     }
 

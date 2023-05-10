@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.FOURROWS;
+
 /**
  * Class fourRowsGoal
  * Four lines formed each from 5 tiles of one, two or three types different.
@@ -47,5 +50,6 @@ public class FourRowsGoal implements CommonGoal{
         else
             return false;
     }
+    public CommonGoalsName getGoalsName(){ return FOURROWS;}
 }
 
