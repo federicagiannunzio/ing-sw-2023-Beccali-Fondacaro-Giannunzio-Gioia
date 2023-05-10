@@ -74,6 +74,8 @@ public class ClientController implements Observer {
         client.sendMessage(new ChoiceBeginTurnEvent(this.username, choice));
     }
 
+    public void sendArrayTileIndex(int index){client.sendMessage(new TileArrayReplyEvent(this.username, index));}
+
 
     /**
      * Message from the server

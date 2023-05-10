@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.DIAGONAL;
+
 /**
  * Class diagonalGoal
  * Five tiles of the same type that form a diagonal.
@@ -31,5 +34,7 @@ public class DiagonalGoal implements CommonGoal {
         }
         return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return DIAGONAL;}
 }
 

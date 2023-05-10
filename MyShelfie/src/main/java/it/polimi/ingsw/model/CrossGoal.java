@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.CROSS;
+
 /**
  * Class crossgoal
  * Five tiles of the same type forming an X.
@@ -21,4 +24,6 @@ public class CrossGoal implements CommonGoal{
         }
         return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return CROSS;}
 }

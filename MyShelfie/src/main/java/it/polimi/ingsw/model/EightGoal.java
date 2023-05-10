@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.EIGHT;
+
 /**
  * Class eightGoal
  * Eight tiles of the same type. There are restrictions on the location of these tiles.
@@ -58,4 +61,6 @@ public class EightGoal implements CommonGoal {
         }
         return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return EIGHT;}
 }

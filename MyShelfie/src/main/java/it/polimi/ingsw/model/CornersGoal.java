@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.CORNERS;
+
 /**
  * Class cornersGoal
  * Four tiles of the same type at the four corners of the Library.
@@ -19,5 +22,7 @@ public class CornersGoal implements CommonGoal{
         else
             return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return CORNERS;}
 }
 

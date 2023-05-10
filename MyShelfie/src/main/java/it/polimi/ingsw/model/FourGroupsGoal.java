@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.FOURGROUPS;
+
 /**
  * Class fourGroupGoal
  * Four separate groups formed each from four adjacent tiles of the same color.
@@ -21,5 +24,7 @@ public class FourGroupsGoal implements CommonGoal{
             return false;
 
     }
+
+    public CommonGoalsName getGoalsName(){ return FOURGROUPS;}
 }
 

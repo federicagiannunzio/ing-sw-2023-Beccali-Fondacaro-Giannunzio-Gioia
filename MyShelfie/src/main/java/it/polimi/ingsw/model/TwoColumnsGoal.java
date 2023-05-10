@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.TWOCOLUMNS;
+
 /**
  * Class twoColumnsGoal
  * Two columns formed each from 6 different types of tiles.
@@ -37,4 +40,6 @@ public class TwoColumnsGoal implements CommonGoal{
         else
             return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return TWOCOLUMNS;}
 }

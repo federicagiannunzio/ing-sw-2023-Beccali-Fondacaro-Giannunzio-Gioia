@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+
+import static it.polimi.ingsw.model.CommonGoalsName.THREE;
+
 /**
  * Class threeColumnsGoal
  * Three columns each formed by 6 tiles of one, two or three different types. Different column
@@ -44,4 +47,6 @@ public class ThreeColumnsGoal implements CommonGoal {
         else
             return false;
     }
+
+    public CommonGoalsName getGoalsName(){ return THREE;}
 }
