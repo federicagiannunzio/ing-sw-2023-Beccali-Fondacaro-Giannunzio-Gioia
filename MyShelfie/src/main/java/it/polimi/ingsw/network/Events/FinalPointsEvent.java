@@ -17,7 +17,7 @@ public class FinalPointsEvent extends Event{
 
     /**
      *
-     * @return the final points.
+     * @return the final points of the player.
      */
     public int getFpoints(){
         return fpoints;
