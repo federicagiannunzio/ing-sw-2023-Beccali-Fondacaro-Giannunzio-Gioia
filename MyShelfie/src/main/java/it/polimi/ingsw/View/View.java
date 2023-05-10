@@ -12,20 +12,22 @@ public interface View {
      */
     void askUsername();
 
+    void askServerInfo();
+
     /**
      * Asks the first user connected how many players he wants to play with
      */
-    void askPlayersNumber() throws ExecutionException;
+    void askPlayersNumber();
 
     /**
      * Asks the first user connected to choose the first player.
      */
-    void askFirstPLayer(List<String> usersOnGame) throws ExecutionException;
+    void askFirstPLayer(List<String> usersOnGame);
 
     /**
      * Asks the player how many tiles he wants to pick.
      */
-    void askTilesNumber() throws ExecutionException;
+    void askTilesNumber();
 
     /**
      * Asks the player the position (coordinates) of the tile that he has picked.
@@ -39,17 +41,17 @@ public interface View {
      */
     void askShelfieColumn();
 
-    void askPlacingTile(List<Tile> tilesPicked) throws ExecutionException;
+    void askPlacingTile(List<Tile> tilesPicked);
 
     /**
      * Shows the board on the screen
      */
-    void showBoard(Board board);
+    void showBoard(Tile[][] structure);
 
     /**
      * Shows the shelfie of the player that asked for it.
      */
-    void showMyShelfie(Shelfie shelf);
+    void showMyShelfie(Tile[][] structure);
 
     /**
      * Shows the shelf of all the other players.
@@ -74,12 +76,7 @@ public interface View {
     /**
      * Shows a message that announce that someone has completed a common goal.
      */
-    void showCommonGoalCompletionOthers(String username, String commonGoal, int pointsAchieved);
-
-    /**
-     * Shows a message to the player that has completed a personal goal.
-     */
-    void showCommonGoalCompletionWinner(String commonGoal, int pointsAchieved);
+    void showCommonGoalCompletion(String username, String commonGoal, int pointsAchieved);
 
     /**
      * Shows a win message.
@@ -119,14 +116,12 @@ public interface View {
      */
     void showDisconnectionMessage(String disconnectedUser);
 
-    void showStartTurnMessage(String user);
-
-    void showEndTurnMessage(String user);
+    void showTurnState(String user);
 
     void showTilesArray(List<Tile> tilesPicked);
 
     void showChoicesBeginTurn();
 
-    public void askChoiceBeginTurn();
+    void askChoiceBeginTurn();
 
 }

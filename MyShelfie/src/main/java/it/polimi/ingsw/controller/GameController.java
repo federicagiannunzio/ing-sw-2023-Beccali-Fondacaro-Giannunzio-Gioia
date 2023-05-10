@@ -122,7 +122,7 @@ public class GameController {
             if(playerFinished == false){
                 playerFinished = turnPlayer.getMyShelfie().isComplete();
             }
-            if(playerFinished && currentPlayer == first){
+            if(playerFinished && currentPlayer == (players.size() - 1)){
                 inGame = false;
             }
 
