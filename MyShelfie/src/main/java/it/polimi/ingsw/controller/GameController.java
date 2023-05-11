@@ -52,7 +52,7 @@ public class GameController {
 
     public List<Integer> getSecondGoalPoints(){return secondGoalPoints;}
 
-    public void initGoalPoints(List<Integer> list){
+    private void initGoalPoints(List<Integer> list){
         list.add(8);
         list.add(6);
         list.add(4);

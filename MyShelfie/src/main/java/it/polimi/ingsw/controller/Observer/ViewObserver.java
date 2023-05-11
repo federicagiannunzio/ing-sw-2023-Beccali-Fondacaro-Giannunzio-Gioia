@@ -16,5 +16,7 @@ public interface ViewObserver {
 
     void sendChoiceBeginTurn(int choice);
 
+    void sendArrayTileIndex(int index);
+
 
 }
