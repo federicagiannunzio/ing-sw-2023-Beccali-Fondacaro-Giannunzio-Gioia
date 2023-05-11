@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-private static class ClientHandlerSocket implements ClientHandler, Runnable {
+public class ClientHandlerSocket implements ClientHandler, Runnable {
 
     private final Socket connectedClient;
     private final ObjectOutputStream output;
