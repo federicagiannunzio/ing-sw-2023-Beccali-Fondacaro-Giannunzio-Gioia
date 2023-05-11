@@ -31,6 +31,16 @@ public class ClientController implements Observer {
     }
 
     /**
+     * Sends a message to the server that contains the address and the port to create a connnection:
+     *
+     * @param address
+     * @param port
+     */
+    public void sendServerInfo(String address, int port) {
+        client.sendMessage(new InfoServerEvent(this.username, address, port));
+    }
+
+    /**
      * Sends a message to the server with the player number chosen by the user
      */
     public void sendPlayersNumber(int playersNum) throws IOException {

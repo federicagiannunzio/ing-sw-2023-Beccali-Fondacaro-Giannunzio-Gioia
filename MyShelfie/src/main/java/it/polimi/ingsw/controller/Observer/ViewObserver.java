@@ -16,5 +16,9 @@ public interface ViewObserver {
 
     void sendChoiceBeginTurn(int choice);
 
+    void sendServerInfo(String address, int port);
+
+    void sendArrayTileIndex(int index);
+
 
 }

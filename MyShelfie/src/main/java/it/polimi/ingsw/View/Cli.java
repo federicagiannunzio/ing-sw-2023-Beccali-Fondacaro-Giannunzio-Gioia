@@ -50,14 +50,19 @@ public class Cli extends ViewObservable implements View {
 
     public void askServerInfo(){
         boolean valid = false;
+        String tryAddress = null;
+        int tryPort = 0;
 
         while (!valid) {
             System.out.println("Please enter the server address: ");
-            String address = readLine();
+            tryAddress = readLine();
             System.out.println("Please enter the port number: ");
-            String port = readLine();
-            valid = checkValidIP(address);
+            tryPort = Integer.parseInt(readLine());
+            checkValidIP(tryAddress);
         }
+        String address = tryAddress;
+        int port = tryPort;
+        notifyObserver(obs->obs.sendServerInfo(address, port));
     }
 
     public void askUsername() {
@@ -150,7 +155,7 @@ public class Cli extends ViewObservable implements View {
                 System.out.println("The number chose must be between 1 and 3. Please try again.");
         }while(tryN > 3 || tryN < 1);
         int n = tryN - 1;
-        notifyObserver();
+        notifyObserver(obs->obs.sendArrayTileIndex(n));
     }
 
 
@@ -162,8 +167,6 @@ public class Cli extends ViewObservable implements View {
 
         strRowBld.append(Color.YELLOW_BOLD).append("\n   +-----+-----+-----+-----+-----+\n").append(Color.RESET);
         strColBld.append(Color.YELLOW_BOLD).append("   |").append(Color.RESET);
-        //tile.append(Colori.GREEN).append(" x").append(Colori.RESET);
-
         for (int i = 0; i < 9; i++) {
             System.out.print(strRowBld);
             for (int j = 0; j < 9; j++) {
@@ -190,7 +193,6 @@ public class Cli extends ViewObservable implements View {
 
         strRowBld.append(Color.YELLOW_BOLD).append("\n   +-----+-----+-----+-----+-----+\n").append(Color.RESET);
         strColBld.append(Color.YELLOW_BOLD).append("   |").append(Color.RESET);
-        //tile.append(Colori.GREEN).append(" x").append(Colori.RESET);
 
         for (int i = 0; i < 6; i++) {
             System.out.print(strRowBld);
@@ -267,7 +269,7 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void showWinMessage(String winner) {
         System.out.println("Game finished: " + winner + " WINS!");
-        //System.exit(0);
+        System.exit(0);
     }
 
     @Override
@@ -281,12 +283,12 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showErrorMessage(String errorMessage) {
-
+        System.out.println("[ERROR]: " + errorMessage);
     }
 
     @Override
     public void showConnectionMessage(String connectedUser) {
-
+        System.out.println("Hello " + connectedUser + " welcome to the game!");
     }
 
     @Override
@@ -321,16 +323,23 @@ public class Cli extends ViewObservable implements View {
 
     public void showChoicesBeginTurn() {
         System.out.println("Please choose what do you want to do.");
-        System.out.println("1) View common goals.");
+        System.out.println("1) Start my turn.");
         System.out.println("2) View my personal goal.");
-        System.out.println("3) View other players' shelves.");
+        System.out.println("3) View my shelfie.");
         System.out.println("4) View common goals.");
     }
 
     public void askChoiceBeginTurn() {
         showChoicesBeginTurn();
-        int choice = Integer.parseInt(readLine());
-        //notifyObserver
+        int choice;
+        int tryChoice;
+        do {
+            tryChoice = Integer.parseInt(readLine());
+            if(tryChoice < 1 || tryChoice>4)
+                System.out.println("Please insert a valid number. The number should be selected between 1 and 4");
+        } while(tryChoice < 1 || tryChoice>4);
+        choice = tryChoice;
+        notifyObserver(obs->obs.sendChoiceBeginTurn(choice));
     }
 
     public boolean checkValidIP(String IP) {

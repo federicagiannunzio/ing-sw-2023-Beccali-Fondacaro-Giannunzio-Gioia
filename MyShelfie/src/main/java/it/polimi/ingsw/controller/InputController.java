@@ -38,7 +38,6 @@ public class InputController {
                 return pickedTileCheck(event);
             case PLACE_TILE_REPLY:
                 return insertedTileCheck(event);
-
         }
     }
 
@@ -90,7 +89,7 @@ public class InputController {
      * @return {code @true} id it's a valid position {code @false} otherwise
      */
     public boolean insertedTileCheck(Event event) {
-        String activePlayerusername = gameController.getTurnController().getActivePlayer();
+        String activePlayerusername = gameController.getActivePlayer();
         PlaceTileReplyEvent tileToPlace= ((PlaceTileReplyEvent) event);
         int column = tileToPlace.getcolumn();
         Optional<Player> activePlayer = gameController.getPlayerByUsername(activePlayerusername);
@@ -133,6 +132,6 @@ public class InputController {
      * @return {code @true} id it's a valid position {code @false} otherwise
      */
     public boolean checkUser(Event event) {
-        return event.getUser().equals(gameController.getTurnController().getActivePlayer());
+        return event.getUser().equals(gameController.getActivePlayer());
     }
 }
