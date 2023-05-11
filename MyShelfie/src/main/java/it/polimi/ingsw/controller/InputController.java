@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Shelfie;
 import it.polimi.ingsw.network.Events.ChooseTileReplyEvent;
 import it.polimi.ingsw.network.Events.Event;
+import it.polimi.ingsw.network.Events.NumberOfUsersReplyEvent;
 import it.polimi.ingsw.network.Events.PlaceTileReplyEvent;
 
 import java.util.Optional;
@@ -114,9 +115,9 @@ public class InputController {
      * @param event message from the client
      */
     public boolean playerNumberReplyCheck(Event event) {
-        PlayerNumberReply playerNumberMessage = (PlayerNumberReply) event;
+        NumberOfUsersReplyEvent playerNumberMessage = (NumberOfUsersReplyEvent) event;
 
-        if(playerNumberMessage.getPlayerNumber() > 4 && playerNumberMessage.getPlayerNumber() < 1) {
+        if(playerNumberMessage.getNumPlayers() > 4 && playerNumberMessage.getNumPlayers() < 1) {
             return true;
         } else {
             view.showGenericMessage("Please select a valid number of players");
@@ -134,6 +135,4 @@ public class InputController {
     public boolean checkUser(Event event) {
         return event.getUser().equals(gameController.getTurnController().getActivePlayer());
     }
-
-
 }

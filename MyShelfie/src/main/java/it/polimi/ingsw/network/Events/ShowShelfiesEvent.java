@@ -4,12 +4,13 @@ import it.polimi.ingsw.model.Tile;
 
 import java.util.Arrays;
 
-public class ShowPersonalGoalEvent extends Event{
+public class ShowShelvesEvent extends Event{
     private final Tile[][] shelfie;
-    public ShowPersonalGoalEvent(String user, Tile[][] shelfie) {
-        super(user, EventType.SHOWPERSONALGOAL);
+    public ShowShelvesEvent(String user, Tile[][] shelfie) {
+        super(user, EventType.SHOWSHELFIE;
         this.shelfie = shelfie;
     }
+
     public Tile[][] getBoard() {
         return shelfie;
     }

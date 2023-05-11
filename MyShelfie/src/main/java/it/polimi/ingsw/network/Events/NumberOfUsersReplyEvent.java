@@ -2,7 +2,13 @@ package it.polimi.ingsw.network.Events;
 
 
 public class NumberOfUsersReplyEvent extends Event{
-    public NumberOfUsersReplyEvent(String user, EventType eventType) {
+    int numPlayers;
+    public NumberOfUsersReplyEvent(String user, int numPlayers) {
         super(user, EventType.NUMBER_OF_USERS_REPLY);
+        this.numPlayers = numPlayers;
+    }
+
+    public int getNumPlayers() {
+        return numPlayers;
     }
 }

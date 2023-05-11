@@ -19,7 +19,7 @@ public class Cli extends ViewObservable implements View {
     private Thread inputThread;
 
 
-    public void start() throws ExecutionException {
+    public void start()  {
         System.out.print("\n" +
                 ".___  ___. ____    ____         _______. __    __   _______  __       _______  __   _______ \n" +
                 "|   \\/   | \\   \\  /   /        /       ||  |  |  | |   ____||  |     |   ____||  | |   ____|\n" +
@@ -30,11 +30,7 @@ public class Cli extends ViewObservable implements View {
                 "                                                                                            \n");
         System.out.println("Welcome to MyShelfie!");
 
-        try {
-            askServerInfo();
-        } catch () {
-
-        }
+        askServerInfo();
     }
 
     /**
@@ -44,7 +40,6 @@ public class Cli extends ViewObservable implements View {
      * Reads a line from the standard input.
      *
      * @return the string read from the input.
-     * @throws ExecutionException if the input stream thread is interrupted.
      */
     public String readLine() {
         input = new Scanner(System.in);
@@ -152,7 +147,7 @@ public class Cli extends ViewObservable implements View {
             System.out.println("Which tile do you want to insert? Please select a number.");
             tryN = Integer.parseInt(readLine());
             if(tryN > 3 || tryN < 1)
-                System.out.println("The number chose must be between 1 and 3. Please try again.")
+                System.out.println("The number chose must be between 1 and 3. Please try again.");
         }while(tryN > 3 || tryN < 1);
         int n = tryN - 1;
         notifyObserver();

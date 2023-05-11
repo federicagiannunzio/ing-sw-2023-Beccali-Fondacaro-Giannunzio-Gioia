@@ -15,6 +15,11 @@ public class ClientController implements Observer {
 
     private View view;
 
+    public ClientController(View view) {
+        this.view = view;
+        //taskQueue = Executors.newSingleThreadExecutor();
+    }
+
     /**
      * Sends a message to the server that contains the username that he has picked
      *
@@ -118,17 +123,9 @@ public class ClientController implements Observer {
                 BoardEvent boardEvent = (BoardEvent) event;
                 view.showBoard(boardEvent.getBoard());
                 break;
-            case MYSHELFIE:
-                MyShelfieEvent myShelfieEvent = (MyShelfieEvent) event;
+            case SHOWSHELFIE:
+                ShowShelvesEvent myShelfieEvent = (ShowShelvesEvent) event;
                 view.showMyShelfie(myShelfieEvent.getBoard());
-                break;
-            case OTHERSHELFIES:
-                OtherShelfiesEvent otherShelfiesEvent = (OtherShelfiesEvent) event;
-                view.showMyShelfie(otherShelfiesEvent.getBoard());
-                break;
-            case SHOWPERSONALGOAL:
-                ShowPersonalGoalEvent personalGoalReply = (ShowPersonalGoalEvent) event;
-                view.showMyShelfie(personalGoalReply.getBoard());
                 break;
             case SHOWCOMMONGOALS:
                 ShowCommonGoalsEvent commonGoalReply = (ShowCommonGoalsEvent) event;

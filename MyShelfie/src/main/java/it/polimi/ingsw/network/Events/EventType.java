@@ -3,7 +3,7 @@ package it.polimi.ingsw.network.Events;
 public enum EventType {
     BOARD,
     SERVER_INFO,
-    MYSHELFIE,
+    SHOWSHELFIE,
     OTHERSHELFIES,
     CHOICEBEGINTURN_REQUEST,
     SHOWPERSONALGOAL,
