@@ -1,12 +1,14 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.CROSS;
 
 /**
  * Class crossgoal
  * Five tiles of the same type forming an X.
  */
-public class CrossGoal implements CommonGoal{
+public class CrossGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
 
     /**

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.DIAGONAL;
 
 /**
@@ -7,7 +9,7 @@ import static it.polimi.ingsw.model.CommonGoalsName.DIAGONAL;
  * Five tiles of the same type that form a diagonal.
  * @author andreafondacaro
  */
-public class DiagonalGoal implements CommonGoal {
+public class DiagonalGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
 
     /**

@@ -3,10 +3,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Board {
+public class Board implements Serializable {
     private int remainingTiles;
     private Tile[][] table;
     private Bag gameBag;

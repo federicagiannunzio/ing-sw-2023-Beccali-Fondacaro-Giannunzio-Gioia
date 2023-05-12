@@ -277,6 +277,23 @@ public class Cli extends ViewObservable implements View {
 
     }
 
+    @Override
+    public void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username) {
+
+        if (usernameAccepted && connectionSuccessful) {
+            out.println("Hi, " + username + "! You connected to the server.");
+        } else if (connectionSuccessful) {
+            askUsername();
+        } else if (usernameAccepted) {
+            out.println("Max players reached. Connection refused.");
+            out.println("EXIT.");
+            System.exit(1);
+        } else {
+            showErrorMessage("Could not contact server.");
+            System.exit(1);
+        }
+    }
+
     public void showGenericMessage(String messageToSend) {
         System.out.println(messageToSend);
     }

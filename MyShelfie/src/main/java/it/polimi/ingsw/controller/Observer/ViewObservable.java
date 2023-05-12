@@ -23,4 +23,6 @@ public abstract class ViewObservable {
             consumer.accept(observer);
         }
     }
+
+
 }

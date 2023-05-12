@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.FOURGROUPS;
 
 /**
@@ -8,7 +10,7 @@ import static it.polimi.ingsw.model.CommonGoalsName.FOURGROUPS;
  * The tiles of a group can be different from those of another group.
  * @author andreafondacaro
  */
-public class FourGroupsGoal implements CommonGoal{
+public class FourGroupsGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
 
     /**

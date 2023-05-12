@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.COUPLES;
 
 /**
@@ -7,7 +9,7 @@ import static it.polimi.ingsw.model.CommonGoalsName.COUPLES;
  * Six separate groups formed each from two adjacent tiles of the same type.
  * The tiles of a group can be different from those of another group.
  */
-public class CouplesGoal implements CommonGoal{
+public class CouplesGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
     private int counter;
 

@@ -4,12 +4,13 @@ import org.json.JSONObject;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class personalGoal {
+public class personalGoal implements Serializable {
     private final int id;
     private int tilesCount;
     private ArrayList<Color> achieved;

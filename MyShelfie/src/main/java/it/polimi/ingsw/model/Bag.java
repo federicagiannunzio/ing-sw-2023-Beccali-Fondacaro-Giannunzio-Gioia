@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -6,7 +7,7 @@ import java.util.Random;
  * Class bag (object that contains the tiles)
  * @author piegioia
  */
-public class Bag {
+public class Bag implements Serializable {
     private ArrayList<Tile> bag;
 
 

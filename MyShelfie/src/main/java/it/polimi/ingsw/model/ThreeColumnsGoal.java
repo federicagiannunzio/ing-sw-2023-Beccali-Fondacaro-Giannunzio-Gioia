@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.THREE;
 
 /**
@@ -8,7 +10,7 @@ import static it.polimi.ingsw.model.CommonGoalsName.THREE;
  * may have different combinations of tile types.
  * @author andreafondacaro
  */
-public class ThreeColumnsGoal implements CommonGoal {
+public class ThreeColumnsGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
 
     /**

@@ -114,4 +114,7 @@ public interface View {
 
     void askChoiceBeginTurn();
 
+    void showLobby(List<String> nicknameList, int numPlayers);
+
+    void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username);
 }

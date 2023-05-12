@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
-public class Tile{
+
+import java.io.Serializable;
+
+public class Tile implements Serializable {
     private Color color;
     private int id;
 

@@ -5,7 +5,7 @@ public class ErrorEvent extends Event {
     private final String error;
 
     public ErrorEvent(String user, String error) {
-        super(user, EventType.ERROR);
+        super(user, EventType.ERRORMESSAGE);
         this.error = error;
     }
 

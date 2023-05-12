@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.STAIRS;
 
 /**
@@ -10,7 +12,7 @@ import static it.polimi.ingsw.model.CommonGoalsName.STAIRS;
  * Tiles can be of any type.
  * @author andreafondacaro
  */
-public class StairsGoal implements CommonGoal {
+public class StairsGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
 
     /**

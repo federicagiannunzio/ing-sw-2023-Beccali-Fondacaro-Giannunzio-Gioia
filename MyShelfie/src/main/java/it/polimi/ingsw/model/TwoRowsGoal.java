@@ -2,6 +2,8 @@
 
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.TWOROWS;
 
 /**
@@ -9,7 +11,7 @@ import static it.polimi.ingsw.model.CommonGoalsName.TWOROWS;
  * Two lines formed each from 5 different types of tiles.
  * @author andreafondacaro
  */
-public class TwoRowsGoal implements CommonGoal {
+public class TwoRowsGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
 
     /**

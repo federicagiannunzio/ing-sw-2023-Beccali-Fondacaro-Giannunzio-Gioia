@@ -1,11 +1,13 @@
 package it.polimi.ingsw.model;
 
 
+import java.io.Serializable;
+
 /**
  * Class shelfie (object where to put the tiles chosen by a player)
  * @author piegioia
  */
-public class Shelfie {
+public class Shelfie implements Serializable {
     private Tile[][] structure;
 
     /**

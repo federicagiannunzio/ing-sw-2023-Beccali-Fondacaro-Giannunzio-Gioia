@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.EIGHT;
 
 /**
@@ -7,7 +9,7 @@ import static it.polimi.ingsw.model.CommonGoalsName.EIGHT;
  * Eight tiles of the same type. There are restrictions on the location of these tiles.
  * @author andreafondacaro
  */
-public class EightGoal implements CommonGoal {
+public class EightGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
     private int yellow;
     private int white;

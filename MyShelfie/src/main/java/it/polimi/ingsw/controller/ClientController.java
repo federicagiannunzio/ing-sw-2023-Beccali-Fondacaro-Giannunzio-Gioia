@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.Observer.Observer;
 import it.polimi.ingsw.View.View;
+import it.polimi.ingsw.controller.Observer.ViewObserver;
 import it.polimi.ingsw.network.Client.Client;
 
 import it.polimi.ingsw.network.Events.*;
@@ -9,7 +10,7 @@ import it.polimi.ingsw.network.Events.*;
 import java.io.IOException;
 import java.util.List;
 
-public class ClientController implements Observer {
+public class ClientController implements ViewObserver, Observer {
     private String username;
     private Client client;
 
@@ -25,25 +26,26 @@ public class ClientController implements Observer {
      *
      * @param username username that will be sent
      * */
-    public void sendUsername(String username) throws IOException {
+    public void sendUsername(String username) {
         this.username = username;
         client.sendMessage(new LoginRequestEvent(this.username));
     }
 
     /**
-     * Sends a message to the server that contains the address and the port to create a connnection:
+     * Sends a message to the server that contains the address and the port to create a connection.
      *
      * @param address
      * @param port
      */
     public void sendServerInfo(String address, int port) {
         client.sendMessage(new InfoServerEvent(this.username, address, port));
+        //istanza connessione
     }
 
     /**
      * Sends a message to the server with the player number chosen by the user
      */
-    public void sendPlayersNumber(int playersNum) throws IOException {
+    public void sendPlayersNumber(int playersNum) {
         client.sendMessage(new UsersNumberEvent(this.username, playersNum));
     }
 
@@ -89,6 +91,12 @@ public class ClientController implements Observer {
         client.sendMessage(new ChoiceBeginTurnEvent(this.username, choice));
     }
 
+
+    /**
+     * Sends the server the number that correspond to the position of the array that contains the tile that the player wants to put in his shelf.
+     *
+     * @param index the index of the array
+     */
     public void sendArrayTileIndex(int index){client.sendMessage(new TileArrayReplyEvent(this.username, index));}
 
 
@@ -100,12 +108,9 @@ public class ClientController implements Observer {
 
         switch(event.getEventType()) {
             case SERVER_INFO:
-                InfoServerEvent serverInforRequest = (InfoServerEvent) event;
+                InfoServerEvent serverInfoRequest = (InfoServerEvent) event;
                 view.askServerInfo();
                 break;
-            //case LOBBY:
-            //turno di altri
-
             case LOGIN_REQUEST:
                 LoginRequestEvent loginRequestEvent = (LoginRequestEvent) event;
                 view.askUsername();
@@ -152,9 +157,38 @@ public class ClientController implements Observer {
             case TURN_STATE:
                 TurnStateEvent showTurnState = (TurnStateEvent) event;
                 view.showTurnState(showTurnState.getUser());
+                break;
             case TILE_ARRAY_REQUEST:
                 TileArrayRequestEvent requestArrayIndex = (TileArrayRequestEvent) event;
                 view.askPlacingTile(requestArrayIndex.getTilesList());
+                break;
+            case CHOICEBEGINTURN_REQUEST:
+                view.askChoiceBeginTurn();
+                break;
+            case USERCONNECTED:
+                ConnectionMessageEvent connectionMessage = ( ConnectionMessageEvent) event;
+                view.showConnectionMessage(connectionMessage.getConnectedUser());
+                break;
+            case USERDISCONNECTED:
+                DisconnectionMessageEvent disconnectionMex = (DisconnectionMessageEvent) event;
+                view.showDisconnectionMessage(disconnectionMex.getNicknameDisconnected());
+                break;
+            case ERRORMESSAGE:
+                ErrorEvent errorEvent = (ErrorEvent) event;
+                view.showErrorMessage(errorEvent.getError());
+                break;
+            case GENERICMESSAGE:
+                GenericMessageEvent genericMessage = (GenericMessageEvent) event;
+                view.showGenericMessage(genericMessage.getMessage());
+                break;
+            case LOBBY:
+                LobbyEvent lobby = (LobbyEvent) event;
+                view.showLobby(lobby.getUsersList(), lobby.getMaxPlayers());
+                break;
+            case WINNER_NOTIFY:
+                NotifyWinnerEvent winMessage = (NotifyWinnerEvent) event;
+                view.showWinMessage(winMessage.getWinnerUsername());
+                break;
         }
     }
 }

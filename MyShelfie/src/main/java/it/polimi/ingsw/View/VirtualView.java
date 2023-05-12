@@ -1,0 +1,135 @@
+package it.polimi.ingsw.View;
+
+import it.polimi.ingsw.controller.Observer.Observer;
+import it.polimi.ingsw.model.CommonGoalsName;
+import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.network.Events.Event;
+
+import java.util.List;
+
+public class VirtualView implements View, Observer {
+    @Override
+    public void askUsername() {
+
+    }
+
+    @Override
+    public void askServerInfo() {
+
+    }
+
+    @Override
+    public void askPlayersNumber() {
+
+    }
+
+    @Override
+    public void askFirstPLayer(List<String> usersOnGame) {
+
+    }
+
+    @Override
+    public void askTilesNumber() {
+
+    }
+
+    @Override
+    public void askTilePositionOnBoard(int numberOfTiles) {
+
+    }
+
+    @Override
+    public void askShelfieColumn() {
+
+    }
+
+    @Override
+    public void askPlacingTile(List<Tile> tilesPicked) {
+
+    }
+
+    @Override
+    public void showBoard(Tile[][] structure) {
+
+    }
+
+    @Override
+    public void showMyShelfie(Tile[][] structure) {
+
+    }
+
+    @Override
+    public void showCommonGoals(CommonGoalsName name) {
+
+    }
+
+    @Override
+    public void showMyPoints(int currentPoints) {
+
+    }
+
+    @Override
+    public void showCommonGoalCompletion(String username, String commonGoal, int pointsAchieved) {
+
+    }
+
+    @Override
+    public void showWinMessage(String winner) {
+
+    }
+
+    @Override
+    public void showLoginResult() {
+
+    }
+
+    @Override
+    public void showGenericMessage(String messageToSend) {
+
+    }
+
+    @Override
+    public void showErrorMessage(String errorMessage) {
+
+    }
+
+    @Override
+    public void showConnectionMessage(String connectedUser) {
+
+    }
+
+    @Override
+    public void showDisconnectionMessage(String disconnectedUser) {
+
+    }
+
+    @Override
+    public void showTurnState(String user) {
+
+    }
+
+    @Override
+    public void showTilesArray(List<Tile> tilesPicked) {
+
+    }
+
+    @Override
+    public void showChoicesBeginTurn() {
+
+    }
+
+    @Override
+    public void askChoiceBeginTurn() {
+
+    }
+
+    @Override
+    public void showLobby(List<String> nicknameList, int numPlayers) {
+
+    }
+
+    @Override
+    public void update(Event event) {
+
+    }
+}

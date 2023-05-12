@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.CORNERS;
 
 /**
@@ -7,7 +9,7 @@ import static it.polimi.ingsw.model.CommonGoalsName.CORNERS;
  * Four tiles of the same type at the four corners of the Library.
  * @author andreafondacaro
  */
-public class CornersGoal implements CommonGoal{
+public class CornersGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
 
     /**

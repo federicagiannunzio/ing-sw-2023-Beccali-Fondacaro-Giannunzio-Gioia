@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.model.CommonGoalsName.SQUARES;
 
 /**
@@ -8,7 +10,7 @@ import static it.polimi.ingsw.model.CommonGoalsName.SQUARES;
  * The tiles of the two groups must be of the same type.
  * @author andreafondacaro
  */
-public class SquaresGoal implements CommonGoal{
+public class SquaresGoal implements CommonGoal, Serializable {
     Tile[][] structure = new Tile[6][5];
     private int yellow;
     private int white;
