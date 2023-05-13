@@ -4,10 +4,10 @@ import it.polimi.ingsw.model.Tile;
 
 import java.util.Arrays;
 
-public class ShowShelvesEvent extends Event{
+public class ShowShelfiesEvent extends Event{
     private final Tile[][] shelfie;
-    public ShowShelvesEvent(String user, Tile[][] shelfie) {
-        super(user, EventType.SHOWSHELFIE;
+    public ShowShelfiesEvent(String user, Tile[][] shelfie) {
+        super(user, EventType.SHOWSHELFIE);
         this.shelfie = shelfie;
     }
 

@@ -9,7 +9,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientSocket  extends Observable{
+public class ClientSocket extends Observable implements Client{
     private final Socket socket;
     private final ObjectOutputStream output;
     private final ObjectInputStream input;
@@ -33,7 +33,7 @@ public class ClientSocket  extends Observable{
 
     }
 
-    public void receiveMessage() throws IOException {
+    public void receiveMessage() {
         Event event;
         if(connection) {
             try {
@@ -45,7 +45,8 @@ public class ClientSocket  extends Observable{
         }
     }
 
-    public void sendMessage(Event event) throws IOException {
+    @Override
+    public void sendMessage(Event event) {
         if (connection) {
             try {
                 output.writeObject(event);
@@ -56,14 +57,14 @@ public class ClientSocket  extends Observable{
         }
     }
 
-    public void closeConnection() throws IOException {
+    @Override
+    public void closeConnection() {
         if (connection) {
             try {
                 socket.close();
                 System.exit(0);
             } catch (IOException exc) {
                 System.err.println("Client unable to close the socket");
-                throw exc;
             }
         } else {
             System.err.println("There is no connection currently active");

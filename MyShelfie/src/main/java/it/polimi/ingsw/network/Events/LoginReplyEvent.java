@@ -5,7 +5,7 @@ public class LoginReplyEvent extends Event{
     public final boolean usernameAccepted;
     public final boolean connectionSuccessful;
 
-    public LoginReplyEvent(String user, EventType eventType, boolean usernameAccepted, boolean connectionSuccessful) {
+    public LoginReplyEvent(String user, boolean usernameAccepted, boolean connectionSuccessful) {
         super(user, EventType.LOGIN_REPLY);
         this.usernameAccepted = usernameAccepted;
         this.connectionSuccessful = connectionSuccessful;
@@ -21,6 +21,6 @@ public class LoginReplyEvent extends Event{
     }
 
     public String toString() {
-        
+        return "The username is acceptable and the connection was successful.";
     }
 }

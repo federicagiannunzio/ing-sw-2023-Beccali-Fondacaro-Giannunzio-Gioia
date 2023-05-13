@@ -45,7 +45,7 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
             throw new RuntimeException(e);
         }
     }
-    public void sendMessage(Event event) throws IOException {
+    public void sendMessage(Event event){
         if (inGame) {
             try {
                 output.writeObject(event);

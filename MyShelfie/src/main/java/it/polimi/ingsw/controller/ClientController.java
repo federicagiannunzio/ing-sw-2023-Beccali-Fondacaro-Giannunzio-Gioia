@@ -7,9 +7,6 @@ import it.polimi.ingsw.network.Client.Client;
 
 import it.polimi.ingsw.network.Events.*;
 
-import java.io.IOException;
-import java.util.List;
-
 public class ClientController implements ViewObserver, Observer {
     private String username;
     private Client client;
@@ -46,7 +43,7 @@ public class ClientController implements ViewObserver, Observer {
      * Sends a message to the server with the player number chosen by the user
      */
     public void sendPlayersNumber(int playersNum) {
-        client.sendMessage(new UsersNumberEvent(this.username, playersNum));
+        client.sendMessage(new NumberOfUsersReplyEvent(this.username, playersNum));
     }
 
     /**
@@ -62,7 +59,7 @@ public class ClientController implements ViewObserver, Observer {
      * Sends a message to the server that contains the number of tiles
      */
     public void sendTilesNumberChosen(int numberOfTiles) {
-        client.sendMessage(new TilesNumberRequestEvent(this.username, numberOfTiles));
+        client.sendMessage(new TilesNumberReplyEvent(this.username, numberOfTiles));
     }
 
 
@@ -107,16 +104,12 @@ public class ClientController implements ViewObserver, Observer {
     public void update(Event event) {
 
         switch(event.getEventType()) {
-            case SERVER_INFO:
-                InfoServerEvent serverInfoRequest = (InfoServerEvent) event;
-                view.askServerInfo();
-                break;
             case LOGIN_REQUEST:
                 LoginRequestEvent loginRequestEvent = (LoginRequestEvent) event;
                 view.askUsername();
                 break;
             case NUMBER_OF_USERS_REQUEST:
-                UsersNumberEvent numberOfUsersRequest = (UsersNumberEvent)  event;
+                NumberOfUsersRequestEvent numberOfUsersRequest = (NumberOfUsersRequestEvent)  event;
                 view.askPlayersNumber();
                 break;
             case FIRSTPLAYER_REQUEST:
@@ -139,7 +132,7 @@ public class ClientController implements ViewObserver, Observer {
                 view.showBoard(boardEvent.getBoard());
                 break;
             case SHOWSHELFIE:
-                ShowShelvesEvent myShelfieEvent = (ShowShelvesEvent) event;
+                ShowShelfiesEvent myShelfieEvent = (ShowShelfiesEvent) event;
                 view.showMyShelfie(myShelfieEvent.getBoard());
                 break;
             case SHOWCOMMONGOALS:

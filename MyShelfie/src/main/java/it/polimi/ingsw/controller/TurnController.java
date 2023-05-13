@@ -1,28 +1,27 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.View.View;
+import it.polimi.ingsw.View.VirtualView;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.Server.ServerSckt;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TurnController implements Serializable {
     private static final long serialVersionUID = 1L;
     private String currentUser;
-    private View view;
+    private VirtualView view;
     private GameController controller;
     private Board board;
 
-    public TurnController(GameController GameController, View view){
+    public TurnController(GameController GameController, VirtualView view){
         this.controller = GameController;
         this.board = GameController.getBoard();
         this.view = view;
     }
 
-    public void startTurn(Player p) throws IOException, FullColumnException {
+    public void startTurn(Player p) throws IOException, FullColumnException, notAvailableTileException {
         currentUser = p.getUsername();
         view.showTurnState(currentUser);
         view.askChoiceBeginTurn();

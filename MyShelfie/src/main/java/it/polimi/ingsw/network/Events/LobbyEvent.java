@@ -6,8 +6,8 @@ public class LobbyEvent extends Event {
     private final List<String> usersList;
     private final int maxPlayers;
 
-    public LobbyEvent(List<String> usersList, int maxPlayers) {
-        super("server", EventType.LOBBY);
+    public LobbyEvent(String user, List<String> usersList, int maxPlayers) {
+        super(user, EventType.LOBBY);
         this.usersList = usersList;
         this.maxPlayers = maxPlayers;
     }

@@ -11,4 +11,8 @@ public class NumberOfUsersReplyEvent extends Event{
     public int getNumPlayers() {
         return numPlayers;
     }
+
+    public String toString() {
+        return getUser() + " selected a number of " + numPlayers + " players.";
+    }
 }

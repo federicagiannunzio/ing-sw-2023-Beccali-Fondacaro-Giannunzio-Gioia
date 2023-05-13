@@ -1,26 +1,20 @@
 package it.polimi.ingsw.network.Server;
 
-import it.polimi.ingsw.network.Events.ErrorEvent;
-import it.polimi.ingsw.network.Events.Event;
-
 import java.io.*;
 import java.net.Socket;
-import java.net.ServerSocket;
-import java.net.InetSocketAddress;
-import java.util.Scanner;
 import java.lang.*;
 
 
-public class ServerSckt {
+public class ServerSocket {
 
-    private ServerSocket server;
+    private java.net.ServerSocket server;
 
     public static final int PORT = 5050;
     private static final int SOCKET_TIMEOUT = 1000;
 
-    public ServerSckt() throws IOException {
+    public ServerSocket() throws IOException {
         try {
-            this.server = new ServerSocket(PORT, SOCKET_TIMEOUT);
+            this.server = new java.net.ServerSocket(PORT, SOCKET_TIMEOUT);
         } catch (IOException error) {
             System.err.println("Can't start the server");
             throw error;

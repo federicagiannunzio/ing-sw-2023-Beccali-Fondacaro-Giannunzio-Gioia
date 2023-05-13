@@ -13,7 +13,7 @@ public class NotifyWinnerEvent extends Event{
      *
      * @param user player that won the match.
      */
-    public NotifyWinnerEvent(String user, EventType eventType, String winner) {
+    public NotifyWinnerEvent(String user, String winner) {
         super("server", EventType.WINNER_NOTIFY);
         this.winnerUsername = winner;
     }

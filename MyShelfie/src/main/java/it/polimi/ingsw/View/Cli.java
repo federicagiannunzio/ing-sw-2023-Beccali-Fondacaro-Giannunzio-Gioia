@@ -273,11 +273,6 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showLoginResult() {
-
-    }
-
-    @Override
     public void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username) {
 
         if (usernameAccepted && connectionSuccessful) {

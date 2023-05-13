@@ -11,7 +11,7 @@ public class TilesNumberReplyEvent extends Event{
      *
      * @param ntiles number of tiles that the player wants to take from the board
      */
-    public TilesNumberReplyEvent(String user, EventType eventType, int ntiles) {
+    public TilesNumberReplyEvent(String user, int ntiles) {
         super(user, EventType.TILES_NUMBER_REPLY);
         this.ntiles = ntiles;
     }

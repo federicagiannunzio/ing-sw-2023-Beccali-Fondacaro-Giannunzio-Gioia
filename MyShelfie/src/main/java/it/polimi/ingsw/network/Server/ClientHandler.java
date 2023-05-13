@@ -1,4 +1,11 @@
 package it.polimi.ingsw.network.Server;
 
-public interface ClientHandler {
+import it.polimi.ingsw.network.Events.Event;
+
+import java.io.IOException;
+import java.rmi.Remote;
+
+public interface ClientHandler extends Remote {
+    void run();
+    void sendMessage(Event event);
 }

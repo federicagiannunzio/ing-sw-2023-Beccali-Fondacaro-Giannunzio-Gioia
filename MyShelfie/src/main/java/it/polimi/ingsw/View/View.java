@@ -2,6 +2,7 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.model.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -12,7 +13,6 @@ public interface View {
      */
     void askUsername();
 
-    void askServerInfo();
 
     /**
      * Asks the first user connected how many players he wants to play with
@@ -76,11 +76,6 @@ public interface View {
     void showWinMessage(String winner);
 
     /**
-     *
-     */
-    void showLoginResult();
-
-    /**
      * Shows a generic message
      *
      * @param messageToSend the message to be shown.
@@ -110,11 +105,9 @@ public interface View {
 
     void showTilesArray(List<Tile> tilesPicked);
 
-    void showChoicesBeginTurn();
-
     void askChoiceBeginTurn();
 
     void showLobby(List<String> nicknameList, int numPlayers);
 
-    void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username);
+    void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username) throws IOException;
 }
