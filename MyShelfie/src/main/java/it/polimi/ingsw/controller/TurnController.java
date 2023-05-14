@@ -25,7 +25,7 @@ public class TurnController implements Serializable {
         currentUser = p.getUsername();
         view.showTurnState(currentUser);
         view.askChoiceBeginTurn();
-        int choice = controller.getChoice();
+        int choice = controller.getChoosedChoise();
         while(choice != 1){
             if(choice == 2)
                 view.showMyShelfie(p.getPersonalGoal().getBody());
@@ -47,16 +47,17 @@ public class TurnController implements Serializable {
     }
 
     private void tilesPicking(Player p) throws notAvailableTileException {
-        int[] tilesPos = new int[2];
+        int tilesCol, tilesRow;
         int tilesNumber, i;
         boolean flag = false;
         view.askTilesNumber();
-        tilesNumber = controller.getNumberOfTiles();
+        tilesNumber = controller.getChoosedTileNumber();
         if(p.getMyTiles() == null) {
             for (i = 0; i < tilesNumber; i++) {
                 view.askTilePositionOnBoard();
-                tilesPos = controller.getTilesPosition();
-                p.myTiles.add(board.takeTileFromBoard(tilesPos[0], tilesPos[1]));
+               tilesCol = controller.getChoosedTileColumn();
+               tilesRow = controller.getChoosedTileRow();
+                p.myTiles.add(board.takeTileFromBoard(tilesCol, tilesRow));
             }
         }else{
             view.showErrorMessage("You still have to place some tiles in your shelf.");
@@ -69,9 +70,9 @@ public class TurnController implements Serializable {
         while (p.getMyTiles() != null) {
             ArrayList<Tile> playerTiles = p.getMyTiles();
             view.askPlacingTile(playerTiles);
-            t = controller.getPlacingTile();
+            t = p.getMyTiles().get(controller.getArrayIndex());
             view.askShelfieColumn();
-            j = controller.getShelfieColumn();
+            j = controller.getChoosedColumn();
             p.getMyShelfie().addTile(t, j);
         }
     }

@@ -236,8 +236,8 @@ public class GameController implements Observer {
         view.askTilesNumber();
     }
 
-    public void ChooseTilesRequest(VirtualView view, int numberOfTiles) {
-        view.askTilePositionOnBoard(numberOfTiles);
+    public void ChooseTilesRequest(VirtualView view) {
+        view.askTilePositionOnBoard();
     }
 
     public void placeTilesRequest(VirtualView view, List<Tile> tilesList) {
