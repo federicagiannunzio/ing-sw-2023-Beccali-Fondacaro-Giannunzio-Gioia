@@ -83,8 +83,9 @@ public class InputController implements Serializable {
             return true;
         } else {
             view.showGenericMessage("This position is not valid");
+            view.askTilePositionOnBoard();
+            return false;
         }
-        return true;
     }
 
     //da sistemare e rifare
@@ -110,6 +111,7 @@ public class InputController implements Serializable {
 
         if(playerShelf.getCell(0, column) != null) {
             view.showGenericMessage("You have already filled this spot");
+            view.askShelfieColumn();
             return false;
         }
         return true;
