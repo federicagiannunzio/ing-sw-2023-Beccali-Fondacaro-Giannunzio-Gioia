@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.View.View;
+import it.polimi.ingsw.View.VirtualView;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Shelfie;
 import it.polimi.ingsw.network.Events.*;
@@ -29,7 +30,7 @@ public class InputController implements Serializable {
      * @param view view for the active client
      * @return {code @true} if it's a valid nickname {code @false} otherwise
      */
-    public boolean verifyReceivedData(Event event, View view) {
+    public boolean verifyReceivedData(Event event, VirtualView view) {
 
         switch(event.getEventType()) {
             case LOGIN_REPLY:
@@ -51,7 +52,7 @@ public class InputController implements Serializable {
      * @param username username chose by the player (the client)
      * @return {code @true} if it's a valid nickname {code @false} otherwise.
      */
-    public boolean checkUsernameValidity(String username, View view) {
+    public boolean checkUsernameValidity(String username, VirtualView view) {
 
         if(username.isEmpty()) {
             view.showGenericMessage("This username is not valid");
@@ -72,7 +73,7 @@ public class InputController implements Serializable {
      * @param view view for the active client
      * @return {code @true} id it's a valid position {code @false} otherwise
      * */
-    public boolean pickedTileCheck(Event event, View view) {
+    public boolean pickedTileCheck(Event event, VirtualView view) {
         ChooseTileReplyEvent pickedTileMessage = ((ChooseTileReplyEvent) event);
         int row = pickedTileMessage.getrow();
         int column = pickedTileMessage.getcolumn();
@@ -95,10 +96,10 @@ public class InputController implements Serializable {
      * @return {code @true} id it's a valid position {code @false} otherwise
      *
      */
-    public boolean insertedTileCheck(Event event, View view) {
+    public boolean insertedTileCheck(Event event, VirtualView view) {
         String activePlayerusername = gameController.getActivePlayer();
         PlaceTileReplyEvent tileToPlace= ((PlaceTileReplyEvent) event);
-        int column = tileToPlace.getcolumn();
+        int column = tileToPlace.getColumn();
         Optional<Player> activePlayer = gameController.getPlayerByUsername(activePlayerusername);
         if(activePlayer.isEmpty()) {
             System.out.println("This user doesn't exist");
@@ -121,7 +122,7 @@ public class InputController implements Serializable {
      * @param event message from the client
      *
      */
-    public boolean playerNumberReplyCheck(Event event, View view) {
+    public boolean playerNumberReplyCheck(Event event, VirtualView view) {
         NumberOfUsersReplyEvent playerNumberMessage = (NumberOfUsersReplyEvent) event;
 
         if(playerNumberMessage.getNumPlayers() > 4 && playerNumberMessage.getNumPlayers() < 1) {

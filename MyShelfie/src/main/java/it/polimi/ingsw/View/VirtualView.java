@@ -40,8 +40,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askTilePositionOnBoard(int numberOfTiles) {
-        clientHandler.sendMessage(new ChooseTileRequestEvent(SERVER_NAME, numberOfTiles));
+    public void askTilePositionOnBoard() {
+        clientHandler.sendMessage(new ChooseTileRequestEvent(SERVER_NAME));
     }
 
     @Override

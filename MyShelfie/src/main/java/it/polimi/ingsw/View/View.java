@@ -34,7 +34,7 @@ public interface View {
      *
      * @param numberOfTiles is the number of tiles that he has picked.
      */
-    void askTilePositionOnBoard(int numberOfTiles);
+    void askTilePositionOnBoard();
 
     /**
      * Asks the player in which column of his shelf wants to insert the tiles.

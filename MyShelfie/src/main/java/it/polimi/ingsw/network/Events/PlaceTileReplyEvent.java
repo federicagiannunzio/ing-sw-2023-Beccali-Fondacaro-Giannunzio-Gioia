@@ -8,7 +8,7 @@ public class PlaceTileReplyEvent extends Event{
 
     public final int column;
 
-    public int getcolumn() {
+    public int getColumn() {
         return column;
     }
 }

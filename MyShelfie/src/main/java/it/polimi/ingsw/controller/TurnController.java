@@ -54,12 +54,8 @@ public class TurnController implements Serializable {
         tilesNumber = controller.getNumberOfTiles();
         if(p.getMyTiles() == null) {
             for (i = 0; i < tilesNumber; i++) {
-                view.askTilePositionOnBoard(tilesNumber);
+                view.askTilePositionOnBoard();
                 tilesPos = controller.getTilesPosition();
-                while (!board.checkTile(tilesPos[0], tilesPos[1])) {
-                    view.showErrorMessage("The selected tile can't be taken from the board. Choose a new one");
-                    tilesPos = controller.getTilesPosition();
-                }
                 p.myTiles.add(board.takeTileFromBoard(tilesPos[0], tilesPos[1]));
             }
         }else{

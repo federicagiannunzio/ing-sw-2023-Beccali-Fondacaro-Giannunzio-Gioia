@@ -122,7 +122,7 @@ public class ClientController implements ViewObserver, Observer {
                 break;
             case CHOOSE_TILE_REQUEST:
                 ChooseTileRequestEvent chooseTileRequest = (ChooseTileRequestEvent) event;
-                view.askTilePositionOnBoard(chooseTileRequest.getTilesNumber());
+                view.askTilePositionOnBoard();
                 break;
             case PLACE_TILE_REQUEST:
                 PlaceTileRequestEvent placeTileRequest = (PlaceTileRequestEvent) event;

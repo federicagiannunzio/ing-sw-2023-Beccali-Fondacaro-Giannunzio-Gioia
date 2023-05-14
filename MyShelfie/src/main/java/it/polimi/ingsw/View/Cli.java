@@ -112,20 +112,17 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void askTilePositionOnBoard(int numberOfTiles) {
+    public void askTilePositionOnBoard() {
         int tryRow = 0, tryCol = 0;
-        System.out.println("Select the tiles you want to pick.");
-        for(int i=0; i < numberOfTiles; i++) {
-            System.out.print("Tile number " + (i+1));
-            do {
-                System.out.println("ROW: ");
-                tryRow = Integer.parseInt(readLine());
-                if(tryRow >= 9 || tryRow < 0)
-                    System.out.println("The board in 9x9 so the number has to be between 0 and 8. Please try again.");
-            }while(tryRow >= 9 || tryRow < 0);
-            System.out.println("COLUMN: ");
-            tryCol = Integer.parseInt(readLine());
-        }
+        System.out.println("Select the tile you want to pick.");
+        do {
+            System.out.println("ROW: ");
+            tryRow = Integer.parseInt(readLine());
+            if(tryRow >= 9 || tryRow < 0)
+                System.out.println("The board in 9x9 so the number has to be between 0 and 8. Please try again.");
+        }while(tryRow >= 9 || tryRow < 0);
+        System.out.println("COLUMN: ");
+        tryCol = Integer.parseInt(readLine());
         int row = tryRow;
         int col = tryCol;
         notifyObserver(obs -> obs.sendTilePosition(row, col));
