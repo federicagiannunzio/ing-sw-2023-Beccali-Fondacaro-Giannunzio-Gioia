@@ -8,41 +8,40 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class ClientSocket extends Observable implements Client{
+public class ClientSocket extends Client{
     private final Socket socket;
     private final ObjectOutputStream output;
     private final ObjectInputStream input;
     private boolean connection = false;
-    private Scanner scanner = new Scanner(System.in);
+    private final ExecutorService readQueue;
 
     public static final int PORT = 5050;
-    private static final int SOCKET_TIMEOUT = 1000;
+    private static final int SOCKET_TIMEOUT = 10000;
 
-    public ClientSocket(String ip) throws IOException{
+    public ClientSocket(String ip, int port) throws IOException{
         this.socket = new Socket();
-        try {
-            this.socket.connect(new InetSocketAddress(ip, PORT), SOCKET_TIMEOUT);
-            connection = true;
-        } catch(IOException exc){
-            System.err.println("The client is unable to reach the server");
-            throw exc;
-        }
-        this.input = new ObjectInputStream(socket.getInputStream());
+        this.socket.connect(new InetSocketAddress(ip, port), SOCKET_TIMEOUT);
+        connection = true;
         this.output = new ObjectOutputStream(socket.getOutputStream());
-
+        this.input = new ObjectInputStream(socket.getInputStream());
+        this.readQueue = Executors.newSingleThreadExecutor();
     }
 
     public void receiveMessage() {
-        Event event;
-        if(connection) {
-            try {
-            event = (Event) input.readObject();
-            notifyObserver(event);
-            }catch(IOException | ClassNotFoundException exc){
-                event = new ErrorEvent(null, "Unable to reach the server");
+        readQueue.execute(() -> {
+            if (connection) {
+                Event event;
+                try {
+                    event = (Event) input.readObject();
+                    notifyObserver(event);
+                } catch (IOException | ClassNotFoundException exc) {
+                    event = new ErrorEvent(null, "Unable to reach the server");
+                }
             }
-        }
+        });
     }
 
     @Override

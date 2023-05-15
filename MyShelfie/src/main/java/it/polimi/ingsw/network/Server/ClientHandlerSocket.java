@@ -24,20 +24,18 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
 
         this.connectedClient = socket;
         this.serverSocket = serverSocket;
-        this.input = new ObjectInputStream(connectedClient.getInputStream());
         this.output = new ObjectOutputStream(connectedClient.getOutputStream());
-
+        this.input = new ObjectInputStream(connectedClient.getInputStream());
     }
 
     @Override
     public void run() {
         Event event;
-
         while (inGame) {
             try {
                 event = (Event) input.readObject();
-                if(event.getEventType() == EventType.LOGIN_REQUEST)
-                    serverSocket.addClient(event.getUser(), this);
+                if(event.getEventType() == EventType.LOGIN_REQUEST){
+                    serverSocket.addClient(event.getUser(), this);}
                 serverSocket.update(event);
             } catch (IOException | ClassNotFoundException exc) {
                 event = new ErrorEvent(null, "Unable read from client input");

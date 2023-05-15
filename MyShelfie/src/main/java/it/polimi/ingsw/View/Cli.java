@@ -58,7 +58,7 @@ public class Cli extends ViewObservable implements View {
             tryAddress = readLine();
             System.out.println("Please enter the port number: ");
             tryPort = Integer.parseInt(readLine());
-            checkValidIP(tryAddress);
+            valid = checkValidIP(tryAddress);
         }
         String address = tryAddress;
         int port = tryPort;
@@ -66,7 +66,7 @@ public class Cli extends ViewObservable implements View {
     }
 
     public void askUsername() {
-        out.print("Please enter your username: ");
+        System.out.println("Please enter your username: ");
         String username = readLine();
         notifyObserver(obs -> obs.sendUsername(username));
     }
@@ -356,7 +356,7 @@ public class Cli extends ViewObservable implements View {
         if (notValid) {
             return false;
         } else {
-            return IP.matches("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+            return IP.matches("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$") || IP.matches("localhost");
         }
     }
 

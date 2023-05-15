@@ -5,17 +5,23 @@ import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.controller.Observer.ViewObserver;
 import it.polimi.ingsw.network.Client.Client;
 
+import it.polimi.ingsw.network.Client.ClientSocket;
 import it.polimi.ingsw.network.Events.*;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ClientController implements ViewObserver, Observer {
     private String username;
     private Client client;
+    private final ExecutorService taskQueue;
 
     private View view;
 
     public ClientController(View view) {
         this.view = view;
-        //taskQueue = Executors.newSingleThreadExecutor();
+        taskQueue = Executors.newSingleThreadExecutor();
     }
 
     /**
@@ -35,7 +41,14 @@ public class ClientController implements ViewObserver, Observer {
      * @param port
      */
     public void sendServerInfo(String address, int port) {
-        client.sendMessage(new InfoServerEvent(this.username, address, port));
+        try {
+            client = new ClientSocket(address, port);
+            client.addObserver(this);
+            client.receiveMessage();
+            taskQueue.execute(view::askUsername);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         //istanza connessione
     }
 

@@ -50,8 +50,8 @@ public class GameController implements Observer {
         personalGoal = new int[]{0,1,2,3,4,5,6,7,8,9,10,11};
         bag = new Bag();
         board = new Board(bag);
-        initGoalPoints(firstGoalPoints);
-        initGoalPoints(secondGoalPoints);
+        this.firstGoalPoints = new ArrayList<>();
+        this.secondGoalPoints = new ArrayList<>();
     }
 
     public Board getBoard() {
@@ -111,6 +111,8 @@ public class GameController implements Observer {
         }
         commonGoals.add(firstGoal);
         commonGoals.add(secondGoal);
+        initGoalPoints(firstGoalPoints);
+        initGoalPoints(secondGoalPoints);
 
         //Persona goals
         for(Player p: players){
@@ -318,6 +320,10 @@ public class GameController implements Observer {
 
     public boolean isInGame() {
         return inGame;
+    }
+
+    public String getActivePlayer(){
+        return players.get(currentPlayer).getUsername();
     }
     public VirtualView getVirutalViewByUser(String user){
         return virtualViewMap.get(user);

@@ -32,6 +32,7 @@ public class ServerSocket implements Runnable{
             Socket newClient = null;
             try {
                 newClient = serverSocket.accept();
+                System.out.println("new client connection found");
                 ClientHandlerSocket clientHandler = new ClientHandlerSocket(this, newClient);
                 Thread thread = new Thread(clientHandler);
                 thread.start();

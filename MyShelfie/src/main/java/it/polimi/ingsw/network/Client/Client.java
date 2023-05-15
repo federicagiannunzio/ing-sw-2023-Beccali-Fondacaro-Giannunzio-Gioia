@@ -1,15 +1,16 @@
 package it.polimi.ingsw.network.Client;
 
+import it.polimi.ingsw.controller.Observer.Observable;
 import it.polimi.ingsw.network.Events.ErrorEvent;
 import it.polimi.ingsw.network.Events.Event;
 
 import java.io.IOException;
 
-public interface Client {
+public abstract class Client extends Observable {
 
-    public void receiveMessage();
+    public abstract void receiveMessage();
 
-    public void sendMessage(Event event);
+    public abstract void sendMessage(Event event);
 
-    public void closeConnection();
+    public abstract void closeConnection();
 }

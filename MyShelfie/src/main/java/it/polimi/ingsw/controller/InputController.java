@@ -36,13 +36,12 @@ public class InputController implements Serializable {
             case LOGIN_REPLY:
                 LoginReplyEvent loginReplyEvent = (LoginReplyEvent) event;
                 return checkUsernameValidity(loginReplyEvent.getUser(), view);
-                break;
             case CHOOSE_TILE_REPLY:
                 return pickedTileCheck(event, view);
-                break;
             case PLACE_TILE_REPLY:
                 return insertedTileCheck(event, view);
-                break;
+            default:
+                return false;
         }
     }
 
