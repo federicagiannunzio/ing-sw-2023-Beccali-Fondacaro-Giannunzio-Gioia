@@ -8,4 +8,6 @@ import java.rmi.Remote;
 public interface ClientHandler extends Remote {
     void run();
     void sendMessage(Event event);
+
+    void disconnect();
 }

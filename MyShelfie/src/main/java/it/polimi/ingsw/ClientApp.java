@@ -12,11 +12,11 @@ import java.util.concurrent.ExecutionException;
  * Hello world!
  *
  */
-public class ClientApp
-{
+public class ClientApp{
     public static void main( String[] args ) {
         Cli cli = new Cli();
         ClientController clientController = new ClientController(cli);
+        cli.addObserver(clientController);
         cli.start();
     }
 }

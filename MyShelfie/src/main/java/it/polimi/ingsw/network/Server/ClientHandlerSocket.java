@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.Server;
 
 import it.polimi.ingsw.network.Events.ErrorEvent;
 import it.polimi.ingsw.network.Events.Event;
+import it.polimi.ingsw.network.Events.EventType;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,14 +15,15 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
     private final Socket connectedClient;
     private final ObjectOutputStream output;
     private final ObjectInputStream input;
+    private final ServerSocket serverSocket;
     private final Scanner scanner = new Scanner(System.in);
 
     private boolean inGame = true;
 
-    public ClientHandlerSocket(Socket socket) throws IOException {
+    public ClientHandlerSocket(ServerSocket serverSocket, Socket socket) throws IOException {
 
         this.connectedClient = socket;
-
+        this.serverSocket = serverSocket;
         this.input = new ObjectInputStream(connectedClient.getInputStream());
         this.output = new ObjectOutputStream(connectedClient.getOutputStream());
 
@@ -34,7 +36,9 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
         while (inGame) {
             try {
                 event = (Event) input.readObject();
-                //gameController.eventReceived();
+                if(event.getEventType() == EventType.LOGIN_REQUEST)
+                    serverSocket.addClient(event.getUser(), this);
+                serverSocket.update(event);
             } catch (IOException | ClassNotFoundException exc) {
                 event = new ErrorEvent(null, "Unable read from client input");
             }
@@ -55,6 +59,20 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
             }
         }
     }
+
+    @Override
+    public void disconnect(){
+        if(inGame){
+            try {
+                connectedClient.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        inGame = false;
+        Thread.currentThread().interrupt();
+    }
+
 
     public void finishGame(){
         this.inGame = false;

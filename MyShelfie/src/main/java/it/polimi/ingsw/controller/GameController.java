@@ -316,6 +316,13 @@ public class GameController implements Observer {
         return choosedArrayIndex;
     }
 
+    public boolean isInGame() {
+        return inGame;
+    }
+    public VirtualView getVirutalViewByUser(String user){
+        return virtualViewMap.get(user);
+    }
+
     private CommonGoal pickCommonGoal(){
 
         int random = r.nextInt(11);
