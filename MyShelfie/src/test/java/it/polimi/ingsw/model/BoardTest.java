@@ -57,7 +57,7 @@ public class BoardTest {
 
         for(int i=0; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
-                if(m[i][j] != null)
+                if(m[i][j] != null && !m[i][j].getColor().equals(Color.BLACK))
                     counter++;
             }
         }
@@ -108,7 +108,7 @@ public class BoardTest {
     @Test
     public void refreshBoard_fullBoard_noRefresh() throws IOException {
         bag.setBag();
-        board.fillTheBoard(3);
+        board.fillTheBoard(1);
         Tile [][] expected = board.getBoard();
         board.refreshBoard();
         assertArrayEquals(expected, board.getBoard());

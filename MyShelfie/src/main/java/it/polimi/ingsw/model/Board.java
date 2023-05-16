@@ -74,7 +74,7 @@ public class Board implements Serializable {
             throw new notAvailableTileException();
         }
         Tile t = table[i][j];
-        table[i][j] = new Tile(Color.BLACK, 0);
+        table[i][j].setColor(Color.BLACK);
         remainingTiles--;
         return t;
     }
@@ -104,7 +104,7 @@ public class Board implements Serializable {
      *
      * */
     public JSONArray openAvailableCellJson(int index) throws IOException {
-        String data = new String(Files.readAllBytes(Paths.get("./availableCells.json")));
+        String data = new String(Files.readAllBytes(Paths.get("C:\\Users\\tutel\\Documents\\INGEGNERIA DEL SOFTWARE\\MYSHELFIE\\ing-sw-2023-Beccali-Fondacaro-Giannunzio-Gioia2\\MyShelfie\\src\\main\\resources\\availableCells.json")));
         JSONArray jsonArray = new JSONArray(data);
 
         String str = jsonArray.get(index).toString();
