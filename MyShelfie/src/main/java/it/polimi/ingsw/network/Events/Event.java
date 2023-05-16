@@ -1,6 +1,8 @@
 package it.polimi.ingsw.network.Events;
 
-public abstract class Event {
+import java.io.Serializable;
+
+public abstract class Event implements Serializable {
     private final String user;
     private final EventType eventType;
 

@@ -31,6 +31,7 @@ public class ClientController implements ViewObserver, Observer {
      * */
     public void sendUsername(String username) {
         this.username = username;
+        System.out.println("a");
         client.sendMessage(new LoginRequestEvent(this.username));
     }
 

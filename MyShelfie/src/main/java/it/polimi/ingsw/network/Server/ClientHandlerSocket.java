@@ -3,6 +3,7 @@ package it.polimi.ingsw.network.Server;
 import it.polimi.ingsw.network.Events.ErrorEvent;
 import it.polimi.ingsw.network.Events.Event;
 import it.polimi.ingsw.network.Events.EventType;
+import it.polimi.ingsw.network.Events.LoginRequestEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

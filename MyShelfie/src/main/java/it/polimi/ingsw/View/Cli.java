@@ -73,10 +73,13 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void askPlayersNumber(){
-        int playersNumber;
+        int playersNumber, tryPlayersNumber;
         System.out.println("Please select the number of players. Choose a number between 2 and 4");
-        String playerNumberString = readLine();
-        playersNumber = Integer.parseInt(playerNumberString);
+        do {
+            String playerNumberString = readLine();
+            tryPlayersNumber = Integer.parseInt(playerNumberString);
+        }while(tryPlayersNumber > 4 || tryPlayersNumber < 2);
+        playersNumber = tryPlayersNumber;
         notifyObserver(obs -> obs.sendPlayersNumber(playersNumber));
     }
 

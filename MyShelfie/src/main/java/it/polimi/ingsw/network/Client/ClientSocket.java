@@ -48,6 +48,7 @@ public class ClientSocket extends Client{
     public void sendMessage(Event event) {
         if (connection) {
             try {
+                System.out.println("B");
                 output.writeObject(event);
                 output.flush();
             } catch (IOException exc) {

@@ -54,10 +54,12 @@ public class InputController implements Serializable {
     public boolean checkUsernameValidity(String username, VirtualView view) {
 
         if(username.isEmpty()) {
+            System.out.println("L");
             view.showGenericMessage("This username is not valid");
             view.showLoginResult(false, true, null);
             return false;
         } else if (gameController.getPlayers().contains(username)) {
+            System.out.println("M");
             view.showGenericMessage("This username is already taken");
             view.showLoginResult(false, true, null);
             return false;

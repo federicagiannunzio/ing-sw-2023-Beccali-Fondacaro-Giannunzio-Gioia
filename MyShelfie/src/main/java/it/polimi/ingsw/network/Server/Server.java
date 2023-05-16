@@ -12,6 +12,7 @@ public class Server{
 
     public void addClient(String user, ClientHandler clientHandler){
         if(!gameController.isInGame()){
+            System.out.println("F");
             gameController.playerJoin(user, clientHandler);
         }else{
             gameController.getVirutalViewByUser(user).showLoginResult(true, false, null);

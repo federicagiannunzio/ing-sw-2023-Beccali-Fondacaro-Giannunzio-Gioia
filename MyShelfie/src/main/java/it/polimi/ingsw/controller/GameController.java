@@ -81,15 +81,20 @@ public class GameController implements Observer {
         return i;
     }
 
-    public boolean playerJoin(String username, ClientHandler handler){
+    public void playerJoin(String username, ClientHandler handler){
         VirtualView VView = new VirtualView(handler);
+        if(maxPlayers == 0)
+            VView.askPlayersNumber();
+        System.out.println(maxPlayers);
         if(players.size()+1 <= maxPlayers && inputController.checkUsernameValidity(username, VView)){
             Player newPlayer = new Player(username, players.size(), false);
             players.add(newPlayer);
             virtualViewMap.put(username, VView);
-            return true;
+            System.out.println("G");
+            VView.showLoginResult(true, true, username);
         } else{
-            return false;
+            System.out.println("I");
+            VView.showLoginResult(false, true, username);
         }
     }
 
