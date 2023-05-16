@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class VirtualView implements View, Observer {
-
     private final ClientHandler clientHandler;
     public static final String SERVER_NAME = "server";
 
@@ -26,7 +25,6 @@ public class VirtualView implements View, Observer {
     @Override
     public void askPlayersNumber() {
         clientHandler.sendMessage(new NumberOfUsersRequestEvent(SERVER_NAME));
-
     }
 
     @Override

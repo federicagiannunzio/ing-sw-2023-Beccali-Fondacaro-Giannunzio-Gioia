@@ -32,14 +32,14 @@ public class ClientSocket extends Client{
 
     public void receiveMessage() {
         readQueue.execute(() -> {
-            if (connection) {
+            while(connection) {
                 Event event;
                 try {
                     event = (Event) input.readObject();
-                    notifyObserver(event);
                 } catch (IOException | ClassNotFoundException exc) {
                     event = new ErrorEvent(null, "Unable to reach the server");
                 }
+                notifyObserver(event);
             }
         });
     }
@@ -48,7 +48,6 @@ public class ClientSocket extends Client{
     public void sendMessage(Event event) {
         if (connection) {
             try {
-                System.out.println("B");
                 output.writeObject(event);
                 output.flush();
             } catch (IOException exc) {

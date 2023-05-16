@@ -16,6 +16,8 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
     private final Socket connectedClient;
     private final ObjectOutputStream output;
     private final ObjectInputStream input;
+    private final Object inputLock;
+    private final Object outputLock;
     private final ServerSocket serverSocket;
     private final Scanner scanner = new Scanner(System.in);
 
@@ -25,6 +27,8 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
 
         this.connectedClient = socket;
         this.serverSocket = serverSocket;
+        this.inputLock = new Object();
+        this.outputLock = new Object();
         this.output = new ObjectOutputStream(connectedClient.getOutputStream());
         this.input = new ObjectInputStream(connectedClient.getInputStream());
     }
@@ -34,10 +38,13 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
         Event event;
         while (inGame) {
             try {
-                event = (Event) input.readObject();
-                if(event.getEventType() == EventType.LOGIN_REQUEST){
-                    serverSocket.addClient(event.getUser(), this);}
-                serverSocket.update(event);
+                synchronized (inputLock) {
+                    event = (Event) input.readObject();
+                    if (event.getEventType() == EventType.LOGIN_REQUEST) {
+                        serverSocket.addClient(event.getUser(), this);
+                    }
+                    serverSocket.update(event);
+                }
             } catch (IOException | ClassNotFoundException exc) {
                 event = new ErrorEvent(null, "Unable read from client input");
             }
@@ -51,8 +58,10 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
     public void sendMessage(Event event){
         if (inGame) {
             try {
-                output.writeObject(event);
-                output.flush();
+                synchronized (outputLock){
+                    output.writeObject(event);
+                    output.flush();
+                }
             } catch (IOException error) {
                 event = new ErrorEvent(null, "Unable to send message to the client");
             }

@@ -31,7 +31,6 @@ public class ClientController implements ViewObserver, Observer {
      * */
     public void sendUsername(String username) {
         this.username = username;
-        System.out.println("a");
         client.sendMessage(new LoginRequestEvent(this.username));
     }
 
@@ -124,7 +123,7 @@ public class ClientController implements ViewObserver, Observer {
                 break;
             case NUMBER_OF_USERS_REQUEST:
                 NumberOfUsersRequestEvent numberOfUsersRequest = (NumberOfUsersRequestEvent)  event;
-                view.askPlayersNumber();
+                taskQueue.execute(()->view.askPlayersNumber());
                 break;
             case FIRSTPLAYER_REQUEST:
                 FirstPlayerRequestEvent firstPlayerRequest = (FirstPlayerRequestEvent) event;
@@ -195,6 +194,10 @@ public class ClientController implements ViewObserver, Observer {
             case WINNER_NOTIFY:
                 NotifyWinnerEvent winMessage = (NotifyWinnerEvent) event;
                 view.showWinMessage(winMessage.getWinnerUsername());
+                break;
+            case LOGIN_REPLY:
+                LoginReplyEvent loginReplyEvent = (LoginReplyEvent) event;
+                taskQueue.execute(()->view.showLoginResult(loginReplyEvent.isUsernameAccepted(), loginReplyEvent.isConnectionSuccessful(), loginReplyEvent.getUser()));
                 break;
         }
     }

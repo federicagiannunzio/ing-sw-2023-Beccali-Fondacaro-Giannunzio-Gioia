@@ -8,12 +8,14 @@ import it.polimi.ingsw.network.Server.ClientHandler;
 
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class GameController implements Observer {
+public class GameController implements Observer, Serializable {
 
     private List<Player> players;
+    private List<String> nicknames;
     private Map<String, VirtualView> virtualViewMap;
     private int currentPlayer;
     private int first;
@@ -38,6 +40,7 @@ public class GameController implements Observer {
     private int choosedColumn;
     private int choosedChoice;
     private int choosedArrayIndex;
+    private boolean flag;
 
     private Random r = new Random();
 
@@ -45,6 +48,7 @@ public class GameController implements Observer {
         inputController = new InputController(this);
         inGame = false;
         players = new ArrayList<>();
+        nicknames = new ArrayList<>();
         virtualViewMap = new HashMap<>();
         commonGoals = new ArrayList<>();
         personalGoal = new int[]{0,1,2,3,4,5,6,7,8,9,10,11};
@@ -83,17 +87,28 @@ public class GameController implements Observer {
 
     public void playerJoin(String username, ClientHandler handler){
         VirtualView VView = new VirtualView(handler);
-        if(maxPlayers == 0)
-            VView.askPlayersNumber();
-        System.out.println(maxPlayers);
-        if(players.size()+1 <= maxPlayers && inputController.checkUsernameValidity(username, VView)){
+        if(maxPlayers == 0) {
             Player newPlayer = new Player(username, players.size(), false);
             players.add(newPlayer);
+            nicknames.add(newPlayer.getUsername());
             virtualViewMap.put(username, VView);
-            System.out.println("G");
             VView.showLoginResult(true, true, username);
+            VView.askPlayersNumber();
+        }
+        else if(players.size()+1 <= maxPlayers && inputController.checkUsernameValidity(username, VView)){
+            Player newPlayer = new Player(username, players.size(), false);
+            players.add(newPlayer);
+            nicknames.add(newPlayer.getUsername());
+            virtualViewMap.put(username, VView);
+            VView.showLoginResult(true, true, username);
+            if(players.size() == maxPlayers){
+                try {
+                    startGame();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
         } else{
-            System.out.println("I");
             VView.showLoginResult(false, true, username);
         }
     }
@@ -332,6 +347,10 @@ public class GameController implements Observer {
     }
     public VirtualView getVirutalViewByUser(String user){
         return virtualViewMap.get(user);
+    }
+
+    public List<String> getNicknames(){
+        return this.nicknames;
     }
 
     private CommonGoal pickCommonGoal(){

@@ -32,7 +32,6 @@ public interface View {
     /**
      * Asks the player the position (coordinates) of the tile that he has picked.
      *
-     * @param numberOfTiles is the number of tiles that he has picked.
      */
     void askTilePositionOnBoard();
 
@@ -109,5 +108,5 @@ public interface View {
 
     void showLobby(List<String> nicknameList, int numPlayers);
 
-    void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username) throws IOException;
+    void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username);
 }

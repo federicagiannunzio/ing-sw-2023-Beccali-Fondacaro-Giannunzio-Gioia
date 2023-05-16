@@ -114,7 +114,7 @@ public class Gui implements View{
     }
 
     @Override
-    public void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username) throws IOException {
+    public void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username){
 
     }
 }
