@@ -25,6 +25,7 @@ public class Bag implements Serializable {
     public Tile pickTile(){
         Tile curr;
         int counter = this.bag.size();
+        System.out.println(counter);
 
         //takes the last tile of the array (which has already been shuffled)
         curr = this.bag.get(counter-1);

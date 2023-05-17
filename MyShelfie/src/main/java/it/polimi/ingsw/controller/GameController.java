@@ -118,6 +118,7 @@ public class GameController implements Observer, Serializable {
         inGame = true;
 
         //bag init
+        bag.setBag();
         bag.shuffle();
 
         //board init
