@@ -72,15 +72,16 @@ public class InputController implements Serializable {
      * */
     public boolean pickedTileCheck(Event event, VirtualView view) {
         ChooseTileReplyEvent pickedTileMessage = ((ChooseTileReplyEvent) event);
-        int row = pickedTileMessage.getrow();
-        int column = pickedTileMessage.getcolumn();
-        boolean isAvailable = gameController.getBoard().checkTile(row, column);
-
+        int[] row = pickedTileMessage.getRow();
+        int[] column = pickedTileMessage.getCol();
+        boolean isAvailable = true;
+        for(int i = 0; i < row.length && isAvailable; i++) {
+            isAvailable = gameController.getBoard().checkTile(row[i], column[i]);
+        }
         if (isAvailable) {
             return true;
         } else {
             view.showGenericMessage("This position is not valid");
-            view.askTilePositionOnBoard();
             return false;
         }
     }

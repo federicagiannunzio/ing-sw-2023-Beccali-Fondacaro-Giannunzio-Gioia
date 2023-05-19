@@ -33,7 +33,7 @@ public interface View {
      * Asks the player the position (coordinates) of the tile that he has picked.
      *
      */
-    void askTilePositionOnBoard();
+    void askTilePositionOnBoard(int tilesNumber);
 
     /**
      * Asks the player in which column of his shelf wants to insert the tiles.

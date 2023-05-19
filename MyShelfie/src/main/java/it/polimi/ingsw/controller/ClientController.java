@@ -3,12 +3,14 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.controller.Observer.Observer;
 import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.controller.Observer.ViewObserver;
+import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.Client.Client;
 
 import it.polimi.ingsw.network.Client.ClientSocket;
 import it.polimi.ingsw.network.Events.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -79,8 +81,8 @@ public class ClientController implements ViewObserver, Observer {
     /**
      * Sends the server the position of the tile that the player wants to pick.
      */
-    public void sendTilePosition(int row, int column) {
-        client.sendMessage(new ChooseTileReplyEvent(this.username, row, column));
+    public void sendTilePosition(int[] row, int[]col) {
+        client.sendMessage(new ChooseTileReplyEvent(this.username, row, col));
     }
 
     /**
@@ -135,7 +137,7 @@ public class ClientController implements ViewObserver, Observer {
                 break;
             case CHOOSE_TILE_REQUEST:
                 ChooseTileRequestEvent chooseTileRequest = (ChooseTileRequestEvent) event;
-                view.askTilePositionOnBoard();
+                view.askTilePositionOnBoard(chooseTileRequest.getTilesNumber());
                 break;
             case PLACE_TILE_REQUEST:
                 PlaceTileRequestEvent placeTileRequest = (PlaceTileRequestEvent) event;
@@ -166,7 +168,7 @@ public class ClientController implements ViewObserver, Observer {
                 break;
             case TILE_ARRAY_REQUEST:
                 TileArrayRequestEvent requestArrayIndex = (TileArrayRequestEvent) event;
-                view.askPlacingTile(requestArrayIndex.getTilesList());
+                taskQueue.execute(()->view.askPlacingTile(requestArrayIndex.getTilesList()));
                 break;
             case CHOICEBEGINTURN_REQUEST:
                 taskQueue.execute(()->view.askChoiceBeginTurn());

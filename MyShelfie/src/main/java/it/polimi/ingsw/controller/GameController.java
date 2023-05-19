@@ -35,12 +35,13 @@ public class GameController implements Observer, Serializable {
 
     //per il turn controller
     private int choosedTileNumber;
-    private int choosedTileRow;
-    private int choosedTileColumn;
+    private int choosedTileRow[];
+    private int choosedTileColumn[];
     private int choosedColumn;
     private int choosedChoice;
     private int choosedArrayIndex;
     private boolean flag;
+    private Tile tileToPlace;
 
     private Random r = new Random();
 
@@ -122,7 +123,7 @@ public class GameController implements Observer, Serializable {
         bag.shuffle();
 
         //board init
-        board.fillTheBoard(players.size());
+        board.fillTheBoard(players.size()-2);
 
         //Common goals
         CommonGoal firstGoal = pickCommonGoal();
@@ -192,15 +193,25 @@ public class GameController implements Observer, Serializable {
             case CHOOSE_TILE_REPLY:
                 ChooseTileReplyEvent chooseTiles = (ChooseTileReplyEvent) event;
                 if(inputController.pickedTileCheck(chooseTiles, virtualViewMap.get(chooseTiles.getUser()))){
-                    choosedTileRow = chooseTiles.getrow();
-                    choosedTileColumn = chooseTiles.getcolumn();
+                    choosedTileRow = chooseTiles.getRow();
+                    choosedTileColumn = chooseTiles.getCol();
+                    for(int i = 0; i < choosedTileRow.length; i++)
+                        getPlayerByUser(chooseTiles.getUser()).myTiles.add(board.takeTileFromBoard(choosedTileRow[i], choosedTileColumn[i]));
+                    currentTurn.tilesPlacing();
+                }
+                else{
+                    virtualViewMap.get(chooseTiles.getUser()).showGenericMessage("You can't retrieve those tiles from the board, choose some new ones.");
+                    virtualViewMap.get(chooseTiles.getUser()).askTilePositionOnBoard(choosedTileColumn.length);
                 }
                 break;
             case PLACE_TILE_REPLY:
+                System.out.println("C");
                 PlaceTileReplyEvent placedTiles = (PlaceTileReplyEvent) event;
                 if(inputController.insertedTileCheck(placedTiles, virtualViewMap.get(placedTiles.getUser()))){
                     choosedColumn = placedTiles.getColumn();
                 }
+                getPlayerByUser(placedTiles.getUser()).getMyShelfie().addTile(tileToPlace, choosedColumn);
+                currentTurn.tilesPlacing();
                 break;
             case CHOICEBEGINTURN_REPLY:
                 ChoiceBeginTurnEvent choiceBegin = (ChoiceBeginTurnEvent) event;
@@ -210,6 +221,9 @@ public class GameController implements Observer, Serializable {
             case TILE_ARRAY_REPLY:
                 TileArrayReplyEvent tileArray = (TileArrayReplyEvent) event;
                 choosedArrayIndex = tileArray.getNtiles();
+                tileToPlace = getPlayerByUser(tileArray.getUser()).getMyTiles().remove(choosedArrayIndex);
+                System.out.println("CIAO");
+                virtualViewMap.get(tileArray.getUser()).askShelfieColumn();
                 break;
         }
 
@@ -236,11 +250,6 @@ public class GameController implements Observer, Serializable {
     public void sendTilesNumberRequest(VirtualView view) {
         view.askTilesNumber();
     }
-
-    public void ChooseTilesRequest(VirtualView view) {
-        view.askTilePositionOnBoard();
-    }
-
     public void placeTilesRequest(VirtualView view, List<Tile> tilesList) {
         view.askPlacingTile(tilesList);
     }
@@ -297,11 +306,11 @@ public class GameController implements Observer, Serializable {
         return choosedTileNumber;
     }
 
-    public int getChoosedTileRow(){
+    public int[] getChoosedTileRow(){
         return choosedTileRow;
     }
 
-    public int getChoosedTileColumn(){
+    public int[] getChoosedTileColumn(){
         return choosedTileColumn;
     }
 
@@ -319,6 +328,13 @@ public class GameController implements Observer, Serializable {
 
     public boolean isInGame() {
         return inGame;
+    }
+
+    public Player getPlayerByUser(String username){
+        for(Player p : players)
+            if(p.getUsername().equals(username))
+                return p;
+        return null;
     }
 
     public String getActivePlayer(){

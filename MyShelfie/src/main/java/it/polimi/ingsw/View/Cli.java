@@ -115,19 +115,16 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void askTilePositionOnBoard() {
-        int tryRow = 0, tryCol = 0;
+    public void askTilePositionOnBoard(int tilesNumber) {
+        int[] row = new int[tilesNumber];
+        int[] col = new int[tilesNumber];
         System.out.println("Select the tile you want to pick.");
-        do {
+        for(int i = 0; i < tilesNumber; i++){
             System.out.println("ROW: ");
-            tryRow = Integer.parseInt(readLine());
-            if(tryRow >= 9 || tryRow < 0)
-                System.out.println("The board in 9x9 so the number has to be between 0 and 8. Please try again.");
-        }while(tryRow >= 9 || tryRow < 0);
-        System.out.println("COLUMN: ");
-        tryCol = Integer.parseInt(readLine());
-        int row = tryRow;
-        int col = tryCol;
+            row[i] = Integer.parseInt(readLine());
+            System.out.println("COLUMN: ");
+            col[i] = Integer.parseInt(readLine());
+        }
         notifyObserver(obs -> obs.sendTilePosition(row, col));
     }
 
@@ -148,6 +145,7 @@ public class Cli extends ViewObservable implements View {
     public void askPlacingTile(List<Tile> tilesArray){
         int tryN;
         showTilesArray(tilesArray);
+        System.out.println("b");
         do {
             System.out.println("Which tile do you want to insert? Please select a number.");
             tryN = Integer.parseInt(readLine());
@@ -155,6 +153,7 @@ public class Cli extends ViewObservable implements View {
                 System.out.println("The number chose must be between 1 and 3. Please try again.");
         }while(tryN > 3 || tryN < 1);
         int n = tryN - 1;
+        System.out.println(n);
         notifyObserver(obs->obs.sendArrayTileIndex(n));
     }
 
@@ -164,11 +163,17 @@ public class Cli extends ViewObservable implements View {
 
         StringBuilder strRowBld = new StringBuilder();
         StringBuilder strColBld = new StringBuilder();
+        StringBuilder strIndxBld = new StringBuilder();
 
-        strRowBld.append(Color.YELLOW_BOLD).append("\n   +-----+-----+-----+-----+-----+\n").append(Color.RESET);
+        strIndxBld.append(Color.YELLOW_BOLD).append("       0     1     2     3     4     5     6     7     8").append(Color.RESET);
+        strRowBld.append(Color.YELLOW_BOLD).append("\n    +-----+-----+-----+-----+-----+-----+-----+-----+-----+\n").append(Color.RESET);
         strColBld.append(Color.YELLOW_BOLD).append("   |").append(Color.RESET);
+        System.out.print(strIndxBld);
         for (int i = 0; i < 9; i++) {
+            StringBuilder strColIndxBld = new StringBuilder();
             System.out.print(strRowBld);
+            strColIndxBld.append(Color.YELLOW_BOLD).append(i).append(Color.RESET);
+            System.out.print(strColIndxBld);
             for (int j = 0; j < 9; j++) {
                 System.out.print(strColBld);
                 if (structure[i][j] != null) {
@@ -320,7 +325,7 @@ public class Cli extends ViewObservable implements View {
     public void showTilesArray(List<Tile> tilesPicked) {
         System.out.println("These are the tiles that you have picked. ");
         for(int i=0; i < tilesPicked.size(); i++) {
-            System.out.println(i + "): " + tilesPicked.get(i).getColor() + tilesPicked.get(i).getColor().parseToString(tilesPicked.get(i).getColor()) + " tile" +Color.RESET);
+            System.out.println((i + 1) + "): " + tilesPicked.get(i).getColor() + tilesPicked.get(i).getColor().parseToString(tilesPicked.get(i).getColor()) + " tile" +Color.RESET);
         }
     }
 

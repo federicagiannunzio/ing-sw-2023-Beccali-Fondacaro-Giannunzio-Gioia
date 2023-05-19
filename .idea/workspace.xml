@@ -4,23 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ac4a4ea-e119-48b5-9da3-0d77e3447c1a" name="Changes" comment="fixed mains and network stuff">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="7ac4a4ea-e119-48b5-9da3-0d77e3447c1a" name="Changes" comment="send message fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Cli.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Cli.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/VirtualView.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/VirtualView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/InputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/InputController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/Observer/ViewObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/Observer/ViewObserver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/TurnController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/TurnController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Bag.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Bag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/personalGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/personalGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Shelfie.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Shelfie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Events/ChooseTileReplyEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Events/ChooseTileReplyEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Events/ChooseTileRequestEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Events/ChooseTileRequestEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/Gui.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/View.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/ClientController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/ClientController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/ClientController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/GameController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/Bag.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/Bag.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/InputController.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/InputController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/TurnController.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/TurnController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/personalGoal.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/personalGoal.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

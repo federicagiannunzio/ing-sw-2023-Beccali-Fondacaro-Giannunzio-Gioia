@@ -34,7 +34,7 @@ public class TurnController implements Serializable {
     private void initTurn(){
         players = controller.getPlayers();
         Random rand = new Random();
-        firstPlayer = rand.nextInt(players.size() - 1);
+        firstPlayer = rand.nextInt(players.size());
         players.get(firstPlayer).setFirst(true);
         currentUser = players.get(firstPlayer).getUsername();
         currentPlayerIndex = firstPlayer;
@@ -68,6 +68,7 @@ public class TurnController implements Serializable {
             int choice = controller.getChoosedChoise();
             switch (choice) {
                 case 1:
+                    view.showBoard(controller.getBoard().getBoard());
                     view.askTilesNumber();
                     break;
                 case 2:
@@ -102,33 +103,26 @@ public class TurnController implements Serializable {
                     view.showMyPoints(p.getPoints());*/
 
     public void tilesPicking(){
-        int tilesCol, tilesRow;
         int tilesNumber, i;
         Player p = players.get(currentPlayerIndex);
         tilesNumber = controller.getChoosedTileNumber();
-        if(p.getMyTiles().isEmpty()) {
-            for (i = 0; i < tilesNumber; i++) {
-                view.askTilePositionOnBoard();
-                tilesCol = controller.getChoosedTileColumn();
-                tilesRow = controller.getChoosedTileRow();
-                p.myTiles.add(board.takeTileFromBoard(tilesCol, tilesRow));
-            }
-        }else{
+        if(p.getMyTiles().isEmpty())
+                view.askTilePositionOnBoard(tilesNumber);
+        else{
             view.showErrorMessage("You still have to place some tiles in your shelf.");
+            tilesPlacing();
         }
     }
 
-    private void tilesPlacing(Player p) throws FullColumnException {
-        int j;
-        Tile t;
-        while (p.getMyTiles() != null) {
+    public void tilesPlacing(){
+        Player p = players.get(currentPlayerIndex);
+        if(!p.getMyTiles().isEmpty()) {
             ArrayList<Tile> playerTiles = p.getMyTiles();
             view.askPlacingTile(playerTiles);
-            t = p.getMyTiles().get(controller.getArrayIndex());
-            view.askShelfieColumn();
-            j = controller.getChoosedColumn();
-            p.getMyShelfie().addTile(t, j);
+            System.out.println("a");
         }
+        else
+            pointsUpdating(p);
     }
 
     public void pointsUpdating(Player p){

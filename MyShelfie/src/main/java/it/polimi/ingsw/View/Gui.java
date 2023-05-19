@@ -29,7 +29,7 @@ public class Gui implements View{
     }
 
     @Override
-    public void askTilePositionOnBoard() {
+    public void askTilePositionOnBoard(int tilesNumber) {
 
     }
 

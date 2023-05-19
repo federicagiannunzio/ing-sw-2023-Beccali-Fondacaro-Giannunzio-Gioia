@@ -39,7 +39,7 @@ public class Shelfie implements Serializable {
      * @param j counter for columns
      * @throws FullColumnException is thrown when the column is full
      */
-    public void addTile(Tile t, int j) throws FullColumnException{
+    public void addTile(Tile t, int j){
         boolean placed = false;
             for (int i = 5; i >= 0 && !placed; i--) {
                 if (this.structure[i][j] == null) {
@@ -48,7 +48,11 @@ public class Shelfie implements Serializable {
                 }
             }
             if(!placed)
-                throw new FullColumnException();
+                try {
+                    throw new FullColumnException();
+                } catch (FullColumnException e) {
+                    throw new RuntimeException(e);
+                }
     }
 
     public void setShelfTile(int i, int j, Tile t){

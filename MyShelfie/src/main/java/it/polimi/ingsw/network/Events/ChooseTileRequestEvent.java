@@ -5,14 +5,16 @@ package it.polimi.ingsw.network.Events;
  */
 
 public class ChooseTileRequestEvent extends Event{
+    private final int tilesNumber;
 
 
     /**
      * Default constructor.
      *
      */
-    public ChooseTileRequestEvent(String user) {
+    public ChooseTileRequestEvent(String user, int tilesNumber) {
         super(user, EventType.CHOOSE_TILE_REQUEST);
+        this.tilesNumber = tilesNumber;
     }
 
     /**
@@ -21,7 +23,9 @@ public class ChooseTileRequestEvent extends Event{
      * @return the row and the column of the tile selected..
      */
 
-
+    public int getTilesNumber(){
+        return this.tilesNumber;
+    }
 
 
     public String toString() {

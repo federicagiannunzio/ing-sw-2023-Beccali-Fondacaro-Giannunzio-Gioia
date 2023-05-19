@@ -1,5 +1,9 @@
 package it.polimi.ingsw.controller.Observer;
 
+import it.polimi.ingsw.model.Tile;
+
+import java.util.ArrayList;
+
 public interface ViewObserver {
 
     void sendUsername(String username);
@@ -10,7 +14,7 @@ public interface ViewObserver {
 
     void sendTilesNumberChosen(int numberOfTiles);
 
-    void sendTilePosition(int i, int j);
+    void sendTilePosition(int[] row, int[] col);
 
     void sendShelfieColumn(int column);
 
