@@ -37,22 +37,6 @@ public class Player implements Serializable {
         }
 
 
-        /*pick tiles from the board and save them in an arraylist
-        *
-        * @param num the number of tiles that the player wants to pick
-        *
-        * */
-        public void pickTiles(int num) {
-            Tile currTile;
-
-            for(int i = 0; i<num; i++) {
-                //currTile = come faccio a chiamare il metodo della board?
-                //myTiles.add(currTile);
-            }
-
-        }
-
-
         /**
         * Insert a tile in the shelfie
         *

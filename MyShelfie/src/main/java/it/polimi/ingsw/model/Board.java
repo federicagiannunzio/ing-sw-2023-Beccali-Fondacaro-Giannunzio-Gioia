@@ -69,9 +69,13 @@ public class Board implements Serializable {
      * @param j column of the tile that the Player wants to get
      * @throws  notAvailableTileException
      */
-    public Tile takeTileFromBoard(int i, int j) throws notAvailableTileException{
+    public Tile takeTileFromBoard(int i, int j){
         if(!checkTile(i,j)) {
-            throw new notAvailableTileException();
+            try {
+                throw new notAvailableTileException();
+            } catch (notAvailableTileException e) {
+                throw new RuntimeException(e);
+            }
         }
         Tile t = table[i][j];
         table[i][j].setColor(Color.BLACK);
@@ -104,7 +108,7 @@ public class Board implements Serializable {
      *
      * */
     public JSONArray openAvailableCellJson(int index) throws IOException {
-        String data = new String(Files.readAllBytes(Paths.get("C:\\Users\\tutel\\Documents\\INGEGNERIA DEL SOFTWARE\\MYSHELFIE\\ing-sw-2023-Beccali-Fondacaro-Giannunzio-Gioia2\\MyShelfie\\src\\main\\resources\\availableCells.json")));
+        String data = new String(Files.readAllBytes(Paths.get("MyShelfie/src/main/resources/availableCells.json")));
         JSONArray jsonArray = new JSONArray(data);
 
         String str = jsonArray.get(index).toString();

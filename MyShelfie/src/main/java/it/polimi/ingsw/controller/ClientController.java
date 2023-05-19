@@ -131,7 +131,7 @@ public class ClientController implements ViewObserver, Observer {
                 break;
             case TILES_NUMBER_REQUEST:
                 TilesNumberRequestEvent tilesNumberRequest = (TilesNumberRequestEvent) event;
-                view.askTilesNumber();
+                taskQueue.execute(()->view.askTilesNumber());
                 break;
             case CHOOSE_TILE_REQUEST:
                 ChooseTileRequestEvent chooseTileRequest = (ChooseTileRequestEvent) event;
@@ -169,7 +169,7 @@ public class ClientController implements ViewObserver, Observer {
                 view.askPlacingTile(requestArrayIndex.getTilesList());
                 break;
             case CHOICEBEGINTURN_REQUEST:
-                view.askChoiceBeginTurn();
+                taskQueue.execute(()->view.askChoiceBeginTurn());
                 break;
             case USERCONNECTED:
                 ConnectionMessageEvent connectionMessage = ( ConnectionMessageEvent) event;

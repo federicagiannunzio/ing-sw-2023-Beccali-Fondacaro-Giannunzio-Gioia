@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class TurnController implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -14,49 +17,100 @@ public class TurnController implements Serializable {
     private VirtualView view;
     private GameController controller;
     private Board board;
+    private static int firstPlayer;
+    private int currentPlayerIndex;
+    private Map<String, VirtualView> virtualViewMap;
+    private List<Player> players;
+    private boolean endGame;
+    private boolean playerFinished;
 
-    public TurnController(GameController GameController, VirtualView view){
+    public TurnController(GameController GameController, Map<String, VirtualView> virtualViewMap){
         this.controller = GameController;
         this.board = GameController.getBoard();
-        this.view = view;
+        this.virtualViewMap = virtualViewMap;
+        initTurn();
     }
 
-    public void startTurn(Player p) throws IOException, FullColumnException, notAvailableTileException {
-        currentUser = p.getUsername();
+    private void initTurn(){
+        players = controller.getPlayers();
+        Random rand = new Random();
+        firstPlayer = rand.nextInt(players.size() - 1);
+        players.get(firstPlayer).setFirst(true);
+        currentUser = players.get(firstPlayer).getUsername();
+        currentPlayerIndex = firstPlayer;
+        controller.broadcastGenericMessage("The game is starting!");
+        startTurn();
+    }
+    private void startTurn(){
+        controller.broadcastGenericMessage("It's " + currentUser + "'s turn!!");
+        view = virtualViewMap.get(currentUser);
         view.showTurnState(currentUser);
         view.askChoiceBeginTurn();
-        int choice = controller.getChoosedChoise();
-        while(choice != 1){
-            if(choice == 2)
-                view.showMyShelfie(p.getPersonalGoal().getBody());
-            else if(choice == 3)
-                view.showMyShelfie(p.getMyShelfie().getStructure());
-            else if(choice == 4) {
-                view.showCommonGoals(controller.getCommonGoals().get(0).getGoalsName());
-                view.showCommonGoals(controller.getCommonGoals().get(1).getGoalsName());
-            }
-        }
-        tilesPicking(p);
-        if(p.myTiles != null){
-            tilesPlacing(p);
-        }
-        else
-            view.showErrorMessage("No tiles selected, skipping placing phase");
-        pointsUpdating(p);
-        view.showMyPoints(p.getPoints());
     }
 
-    private void tilesPicking(Player p) throws notAvailableTileException {
+    private void endTurn(){
+        view.showMyPoints(players.get(currentPlayerIndex).getPoints());
+        if(!playerFinished)
+            playerFinished = players.get(currentPlayerIndex).getMyShelfie().isComplete();
+        if(currentPlayerIndex + 1 < players.size())
+            currentPlayerIndex++;
+        else
+            currentPlayerIndex = 0;
+        if(playerFinished && players.get(currentPlayerIndex).isYellowChair())
+            endGame = true;
+        if(!endGame)
+            startTurn();
+        else
+            controller.endGame();
+    }
+
+    public void beginTurnChoice(Player p){
+            int choice = controller.getChoosedChoise();
+            switch (choice) {
+                case 1:
+                    view.askTilesNumber();
+                    break;
+                case 2:
+                    System.out.println("2");
+                    view.showMyShelfie(p.getPersonalGoal().getBody());
+                    view.askChoiceBeginTurn();
+                    break;
+                case 3:
+                    System.out.println("3");
+                    view.showMyShelfie(p.getMyShelfie().getStructure());
+                    view.askChoiceBeginTurn();
+                    break;
+                case 4:
+                    System.out.println("4");
+                    view.showCommonGoals(controller.getCommonGoals().get(0).getGoalsName());
+                    view.showCommonGoals(controller.getCommonGoals().get(1).getGoalsName());
+                    view.askChoiceBeginTurn();
+                    break;
+            }
+        }
+
+        /*                    if(p.myTiles != null){
+                        try {
+                            tilesPlacing(p);
+                        } catch (FullColumnException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    else
+                        view.showErrorMessage("No tiles selected, skipping placing phase");
+                    pointsUpdating(p);
+                    view.showMyPoints(p.getPoints());*/
+
+    public void tilesPicking(){
         int tilesCol, tilesRow;
         int tilesNumber, i;
-        boolean flag = false;
-        view.askTilesNumber();
+        Player p = players.get(currentPlayerIndex);
         tilesNumber = controller.getChoosedTileNumber();
-        if(p.getMyTiles() == null) {
+        if(p.getMyTiles().isEmpty()) {
             for (i = 0; i < tilesNumber; i++) {
                 view.askTilePositionOnBoard();
-               tilesCol = controller.getChoosedTileColumn();
-               tilesRow = controller.getChoosedTileRow();
+                tilesCol = controller.getChoosedTileColumn();
+                tilesRow = controller.getChoosedTileRow();
                 p.myTiles.add(board.takeTileFromBoard(tilesCol, tilesRow));
             }
         }else{
@@ -102,5 +156,6 @@ public class TurnController implements Serializable {
             }
         }
         p.setPoints(personalPoints + commonPoints2 + commonPoints1 + adjacentPoints);
+        endTurn();
     }
 }

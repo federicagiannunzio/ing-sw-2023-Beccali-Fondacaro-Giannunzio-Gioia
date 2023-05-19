@@ -34,12 +34,12 @@ public class personalGoal implements Serializable {
      *
      * @param id identifies uniquely the goal
      * */
-    public void createTheGoal(int id) throws IOException, Exception {
+    public void createTheGoal(int id) throws Exception {
         try {
-            String data = new String(Files.readAllBytes(Paths.get("C:\\Users\\tutel\\Documents\\INGEGNERIA DEL SOFTWARE\\MYSHELFIE\\ing-sw-2023-Beccali-Fondacaro-Giannunzio-Gioia2\\MyShelfie\\src\\main\\resources\\goals1.json")));
+            String data = new String(Files.readAllBytes(Paths.get("MyShelfie/src/main/resources/goals1.json")));
             JSONArray jsonArray = new JSONArray(data);
 
-            String str = jsonArray.get(id - 1).toString();
+            String str = jsonArray.get(id).toString();
             JSONObject object1 = new JSONObject(str);
 
             JSONArray tiles = object1.getJSONArray("tiles");

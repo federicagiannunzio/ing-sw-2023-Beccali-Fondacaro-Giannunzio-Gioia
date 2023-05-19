@@ -147,39 +147,11 @@ public class GameController implements Observer, Serializable {
             p.setPersonalGoal(goal);
         }
 
-        //select first player
-        first = r.nextInt(players.size()-1);
-        players.get(first).setFirst(true);
-        currentPlayer = first;
+        currentTurn = new TurnController(this, virtualViewMap);
 
-        boolean playerFinished = false;
+    }
 
-        //game loop
-        while(inGame){
-
-            Player turnPlayer = players.get(currentPlayer);
-
-            TurnController turn = new TurnController(this, virtualViewMap.get(turnPlayer));
-            currentTurn = turn;
-            turn.startTurn(turnPlayer);
-
-            if(playerFinished == false){
-                playerFinished = turnPlayer.getMyShelfie().isComplete();
-            }
-            if(playerFinished && currentPlayer == (players.size() - 1)){
-                inGame = false;
-            }
-
-            //controllo viene fatto in classe Board
-            board.refreshBoard();
-
-            if(currentPlayer+1 < players.size()){
-                currentPlayer++;
-            }else{
-                currentPlayer = 0;
-            }
-        }
-
+    public void endGame(){
         Player winner = players.get(0);
         for(Player p: players){
             if(p.getPoints() > winner.getPoints()){
@@ -190,9 +162,7 @@ public class GameController implements Observer, Serializable {
         for(VirtualView v : virtualViewMap.values()){
             winnerNotify(v, winner.getUsername());
         }
-
     }
-
     @Override
     public void update(Event event) {
 
@@ -217,6 +187,7 @@ public class GameController implements Observer, Serializable {
             case TILES_NUMBER_REPLY:
                 TilesNumberReplyEvent chooseNumber = (TilesNumberReplyEvent) event;
                 choosedTileNumber = chooseNumber.getNtiles();
+                currentTurn.tilesPicking();
                 break;
             case CHOOSE_TILE_REPLY:
                 ChooseTileReplyEvent chooseTiles = (ChooseTileReplyEvent) event;
@@ -234,6 +205,7 @@ public class GameController implements Observer, Serializable {
             case CHOICEBEGINTURN_REPLY:
                 ChoiceBeginTurnEvent choiceBegin = (ChoiceBeginTurnEvent) event;
                 choosedChoice = choiceBegin.getChoice();
+                currentTurn.beginTurnChoice(players.get(currentPlayer));
                 break;
             case TILE_ARRAY_REPLY:
                 TileArrayReplyEvent tileArray = (TileArrayReplyEvent) event;
@@ -245,6 +217,12 @@ public class GameController implements Observer, Serializable {
 
     public void sendLogInRequest(VirtualView view, String username) {
         view.showLoginResult(true, true, username);
+    }
+
+    public void broadcastGenericMessage(String string){
+        for(Player player : players){
+            getVirutalViewByUser(player.getUsername()).showGenericMessage(string);
+        }
     }
 
     public void sendNumberOfUserRequest(VirtualView view) {
