@@ -54,6 +54,12 @@ public class Player implements Serializable {
             myTiles.remove(k);
         }
 
+        public Tile popTile(int index){
+            Tile t;
+            t = this.myTiles.get(index);
+            this.myTiles.remove(index);
+            return t;
+        }
         /**
         * set the goal associated to this player
         *

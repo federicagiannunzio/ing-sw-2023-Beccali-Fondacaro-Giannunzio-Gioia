@@ -11,6 +11,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
+import static java.lang.Thread.sleep;
+
 public class ClientHandlerSocket implements ClientHandler, Runnable {
 
     private final Socket connectedClient;
@@ -39,7 +41,7 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
         while (inGame) {
             try {
                 synchronized (inputLock) {
-                    event = (Event) input.readObject();
+                    event = (Event) input.readUnshared();
                     if (event.getEventType() == EventType.LOGIN_REQUEST) {
                         serverSocket.addClient(event.getUser(), this);
                     }
@@ -59,7 +61,7 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
         if (inGame) {
             try {
                 synchronized (outputLock){
-                    output.writeObject(event);
+                    output.writeUnshared(event);
                     output.flush();
                 }
             } catch (IOException error) {

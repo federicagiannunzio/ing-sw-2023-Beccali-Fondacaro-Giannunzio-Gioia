@@ -31,7 +31,7 @@ public class FourRowsGoal implements CommonGoal, Serializable {
                 for(k = 0; k < j && flag;k++){
                     if(structure[i][k] == null)
                         flag = false;
-                    if(structure[i][j].getColor() == structure[i][k].getColor())
+                    if(flag && structure[i][j].getColor() == structure[i][k].getColor())
                         flag = false;
                 }
                 if(flag){

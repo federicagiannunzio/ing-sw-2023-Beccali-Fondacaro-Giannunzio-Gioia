@@ -11,6 +11,8 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static java.lang.Thread.sleep;
+
 public class ClientSocket extends Client{
     private final Socket socket;
     private final ObjectOutputStream output;
@@ -35,7 +37,7 @@ public class ClientSocket extends Client{
             while(connection) {
                 Event event;
                 try {
-                    event = (Event) input.readObject();
+                    event = (Event) input.readUnshared();
                 } catch (IOException | ClassNotFoundException exc) {
                     event = new ErrorEvent(null, "Unable to reach the server");
                 }
@@ -48,7 +50,7 @@ public class ClientSocket extends Client{
     public void sendMessage(Event event) {
         if (connection) {
             try {
-                output.writeObject(event);
+                output.writeUnshared(event);
                 output.flush();
             } catch (IOException exc) {
                 notifyObserver(new ErrorEvent(null, "Unable to send message"));

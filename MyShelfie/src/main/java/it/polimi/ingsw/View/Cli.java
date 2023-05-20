@@ -145,7 +145,6 @@ public class Cli extends ViewObservable implements View {
     public void askPlacingTile(List<Tile> tilesArray){
         int tryN;
         showTilesArray(tilesArray);
-        System.out.println("b");
         do {
             System.out.println("Which tile do you want to insert? Please select a number.");
             tryN = Integer.parseInt(readLine());
@@ -153,7 +152,6 @@ public class Cli extends ViewObservable implements View {
                 System.out.println("The number chose must be between 1 and 3. Please try again.");
         }while(tryN > 3 || tryN < 1);
         int n = tryN - 1;
-        System.out.println(n);
         notifyObserver(obs->obs.sendArrayTileIndex(n));
     }
 

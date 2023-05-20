@@ -56,6 +56,7 @@ public class TurnController implements Serializable {
             currentPlayerIndex++;
         else
             currentPlayerIndex = 0;
+        currentUser = players.get(currentPlayerIndex).getUsername();
         if(playerFinished && players.get(currentPlayerIndex).isYellowChair())
             endGame = true;
         if(!endGame)
@@ -117,18 +118,17 @@ public class TurnController implements Serializable {
     public void tilesPlacing(){
         Player p = players.get(currentPlayerIndex);
         if(!p.getMyTiles().isEmpty()) {
-            ArrayList<Tile> playerTiles = p.getMyTiles();
-            view.askPlacingTile(playerTiles);
-            System.out.println("a");
+            view.askShelfieColumn();
         }
         else
-            pointsUpdating(p);
+            pointsUpdating();
     }
 
-    public void pointsUpdating(Player p){
+    public void pointsUpdating(){
         int personalPoints, commonPoints1 = 0, commonPoints2 = 0, adjacentPoints;
         int[] pointsArr = new int[5];
         boolean flag;
+        Player p = players.get(currentPlayerIndex);
         personalPoints = p.getPersonalGoal().checkpoints(p.getMyShelfie());
         pointsArr = p.getMyShelfie().adjacentItem();
         adjacentPoints = (pointsArr[1] * 2);

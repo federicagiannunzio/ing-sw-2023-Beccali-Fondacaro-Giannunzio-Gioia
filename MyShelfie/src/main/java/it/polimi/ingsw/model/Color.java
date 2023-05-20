@@ -50,6 +50,8 @@ public enum Color {
             case BLUE:
                 colorString = "BLUE";
                 break;
+            case BLACK:
+                colorString = "BLACK";
         }
         return colorString;
     }

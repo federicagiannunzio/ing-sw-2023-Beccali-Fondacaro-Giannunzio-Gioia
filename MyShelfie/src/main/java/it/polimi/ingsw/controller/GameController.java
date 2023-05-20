@@ -41,7 +41,7 @@ public class GameController implements Observer, Serializable {
     private int choosedChoice;
     private int choosedArrayIndex;
     private boolean flag;
-    private Tile tileToPlace;
+
 
     private Random r = new Random();
 
@@ -197,21 +197,21 @@ public class GameController implements Observer, Serializable {
                     choosedTileColumn = chooseTiles.getCol();
                     for(int i = 0; i < choosedTileRow.length; i++)
                         getPlayerByUser(chooseTiles.getUser()).myTiles.add(board.takeTileFromBoard(choosedTileRow[i], choosedTileColumn[i]));
+                    System.out.println(getPlayerByUser(chooseTiles.getUser()).getMyTiles().get(0).getColor());
+                    System.out.println(getPlayerByUser(chooseTiles.getUser()).getMyTiles().get(1).getColor());
                     currentTurn.tilesPlacing();
                 }
                 else{
                     virtualViewMap.get(chooseTiles.getUser()).showGenericMessage("You can't retrieve those tiles from the board, choose some new ones.");
-                    virtualViewMap.get(chooseTiles.getUser()).askTilePositionOnBoard(choosedTileColumn.length);
+                    currentTurn.tilesPicking();
                 }
                 break;
             case PLACE_TILE_REPLY:
-                System.out.println("C");
                 PlaceTileReplyEvent placedTiles = (PlaceTileReplyEvent) event;
                 if(inputController.insertedTileCheck(placedTiles, virtualViewMap.get(placedTiles.getUser()))){
                     choosedColumn = placedTiles.getColumn();
                 }
-                getPlayerByUser(placedTiles.getUser()).getMyShelfie().addTile(tileToPlace, choosedColumn);
-                currentTurn.tilesPlacing();
+                virtualViewMap.get(placedTiles.getUser()).askPlacingTile(getPlayerByUser(placedTiles.getUser()).getMyTiles());
                 break;
             case CHOICEBEGINTURN_REPLY:
                 ChoiceBeginTurnEvent choiceBegin = (ChoiceBeginTurnEvent) event;
@@ -221,9 +221,12 @@ public class GameController implements Observer, Serializable {
             case TILE_ARRAY_REPLY:
                 TileArrayReplyEvent tileArray = (TileArrayReplyEvent) event;
                 choosedArrayIndex = tileArray.getNtiles();
-                tileToPlace = getPlayerByUser(tileArray.getUser()).getMyTiles().remove(choosedArrayIndex);
-                System.out.println("CIAO");
-                virtualViewMap.get(tileArray.getUser()).askShelfieColumn();
+                getPlayerByUser(tileArray.getUser()).getMyShelfie().addTile(getPlayerByUser(tileArray.getUser()).popTile(choosedArrayIndex), choosedColumn);
+
+                if(getPlayerByUser(tileArray.getUser()).getMyTiles().isEmpty())
+                    currentTurn.pointsUpdating();
+                else
+                    virtualViewMap.get(tileArray.getUser()).askPlacingTile(getPlayerByUser(tileArray.getUser()).getMyTiles());
                 break;
         }
 

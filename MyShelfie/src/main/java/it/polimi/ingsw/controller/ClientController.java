@@ -121,7 +121,7 @@ public class ClientController implements ViewObserver, Observer {
         switch(event.getEventType()) {
             case LOGIN_REQUEST:
                 LoginRequestEvent loginRequestEvent = (LoginRequestEvent) event;
-                view.askUsername();
+                taskQueue.execute(()->view.askUsername());
                 break;
             case NUMBER_OF_USERS_REQUEST:
                 NumberOfUsersRequestEvent numberOfUsersRequest = (NumberOfUsersRequestEvent)  event;
@@ -129,7 +129,7 @@ public class ClientController implements ViewObserver, Observer {
                 break;
             case FIRSTPLAYER_REQUEST:
                 FirstPlayerRequestEvent firstPlayerRequest = (FirstPlayerRequestEvent) event;
-                view.askFirstPLayer(firstPlayerRequest.getUsersOnGame());
+                taskQueue.execute(()->view.askFirstPLayer(firstPlayerRequest.getUsersOnGame()));
                 break;
             case TILES_NUMBER_REQUEST:
                 TilesNumberRequestEvent tilesNumberRequest = (TilesNumberRequestEvent) event;
@@ -137,34 +137,35 @@ public class ClientController implements ViewObserver, Observer {
                 break;
             case CHOOSE_TILE_REQUEST:
                 ChooseTileRequestEvent chooseTileRequest = (ChooseTileRequestEvent) event;
-                view.askTilePositionOnBoard(chooseTileRequest.getTilesNumber());
+                taskQueue.execute(()->view.askTilePositionOnBoard(chooseTileRequest.getTilesNumber()));
                 break;
             case PLACE_TILE_REQUEST:
                 PlaceTileRequestEvent placeTileRequest = (PlaceTileRequestEvent) event;
-                view.askShelfieColumn();
+                taskQueue.execute(()->view.askShelfieColumn());
+                break;
             case BOARD:
                 BoardEvent boardEvent = (BoardEvent) event;
-                view.showBoard(boardEvent.getBoard());
+                taskQueue.execute(()->view.showBoard(boardEvent.getBoard()));
                 break;
             case SHOWSHELFIE:
                 ShowShelfiesEvent myShelfieEvent = (ShowShelfiesEvent) event;
-                view.showMyShelfie(myShelfieEvent.getBoard());
+                taskQueue.execute(()->view.showMyShelfie(myShelfieEvent.getBoard()));
                 break;
             case SHOWCOMMONGOALS:
                 ShowCommonGoalsEvent commonGoalReply = (ShowCommonGoalsEvent) event;
-                view.showCommonGoals(commonGoalReply.getName());
+                taskQueue.execute(()->view.showCommonGoals(commonGoalReply.getName()));
                 break;
             case COMMONGOAL_COMPLETED:
                 CommonGoalCompletedEvent commonGoalCompleted = (CommonGoalCompletedEvent) event;
-                view.showCommonGoalCompletion(commonGoalCompleted.getUser(),commonGoalCompleted.getCommonGoal(), commonGoalCompleted.getPointsAchieved());
+                taskQueue.execute(()->view.showCommonGoalCompletion(commonGoalCompleted.getUser(),commonGoalCompleted.getCommonGoal(), commonGoalCompleted.getPointsAchieved()));
                 break;
             case CURRENT_POINTS:
                 FinalPointsEvent showCurrentPoints = (FinalPointsEvent) event;
-                view.showMyPoints(showCurrentPoints.getFpoints());
+                taskQueue.execute(()->view.showMyPoints(showCurrentPoints.getFpoints()));
                 break;
             case TURN_STATE:
                 TurnStateEvent showTurnState = (TurnStateEvent) event;
-                view.showTurnState(showTurnState.getUser());
+                taskQueue.execute(()->view.showTurnState(showTurnState.getUser()));
                 break;
             case TILE_ARRAY_REQUEST:
                 TileArrayRequestEvent requestArrayIndex = (TileArrayRequestEvent) event;
@@ -175,27 +176,27 @@ public class ClientController implements ViewObserver, Observer {
                 break;
             case USERCONNECTED:
                 ConnectionMessageEvent connectionMessage = ( ConnectionMessageEvent) event;
-                view.showConnectionMessage(connectionMessage.getConnectedUser());
+                taskQueue.execute(()->view.showConnectionMessage(connectionMessage.getConnectedUser()));
                 break;
             case USERDISCONNECTED:
                 DisconnectionMessageEvent disconnectionMex = (DisconnectionMessageEvent) event;
-                view.showDisconnectionMessage(disconnectionMex.getNicknameDisconnected());
+                taskQueue.execute(()->view.showDisconnectionMessage(disconnectionMex.getNicknameDisconnected()));
                 break;
             case ERRORMESSAGE:
                 ErrorEvent errorEvent = (ErrorEvent) event;
-                view.showErrorMessage(errorEvent.getError());
+                taskQueue.execute(()->view.showErrorMessage(errorEvent.getError()));
                 break;
             case GENERICMESSAGE:
                 GenericMessageEvent genericMessage = (GenericMessageEvent) event;
-                view.showGenericMessage(genericMessage.getMessage());
+                taskQueue.execute(()->view.showGenericMessage(genericMessage.getMessage()));
                 break;
             case LOBBY:
                 LobbyEvent lobby = (LobbyEvent) event;
-                view.showLobby(lobby.getUsersList(), lobby.getMaxPlayers());
+                taskQueue.execute(()->view.showLobby(lobby.getUsersList(), lobby.getMaxPlayers()));
                 break;
             case WINNER_NOTIFY:
                 NotifyWinnerEvent winMessage = (NotifyWinnerEvent) event;
-                view.showWinMessage(winMessage.getWinnerUsername());
+                taskQueue.execute(()->view.showWinMessage(winMessage.getWinnerUsername()));
                 break;
             case LOGIN_REPLY:
                 LoginReplyEvent loginReplyEvent = (LoginReplyEvent) event;

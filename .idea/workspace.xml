@@ -5,14 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ac4a4ea-e119-48b5-9da3-0d77e3447c1a" name="Changes" comment="debugging">
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/Cli$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/Cli$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/Cli.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/Cli.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/VirtualView.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/VirtualView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/Observer/ViewObserver.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/Observer/ViewObserver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/TurnController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/TurnController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/FourRowsGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/FourRowsGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Client/ClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Client/ClientSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Events/PlaceTileReplyEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Events/PlaceTileReplyEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Server/ClientHandlerSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Server/ClientHandlerSocket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/Shelfie.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/Shelfie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/network/Events/ChooseTileReplyEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/network/Events/ChooseTileReplyEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/network/Events/ChooseTileRequestEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/network/Events/ChooseTileRequestEvent.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,6 +198,7 @@
       <workItem from="1684237644978" duration="3490000" />
       <workItem from="1684246615900" duration="5206000" />
       <workItem from="1684325053480" duration="6000" />
+      <workItem from="1684574868303" duration="6229000" />
     </task>
     <task id="LOCAL-00001" summary="added test methods and fixed some things">
       <created>1681807994835</created>
@@ -427,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684508579311</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="debugging">
+      <created>1684574926078</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1684574926078</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
