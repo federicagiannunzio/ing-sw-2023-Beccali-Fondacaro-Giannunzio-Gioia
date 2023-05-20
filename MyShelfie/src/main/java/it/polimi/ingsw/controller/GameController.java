@@ -136,7 +136,7 @@ public class GameController implements Observer, Serializable {
         initGoalPoints(firstGoalPoints);
         initGoalPoints(secondGoalPoints);
 
-        //Persona goals
+        //Personal goals
         for(Player p: players){
             int random = r.nextInt(11);
             while(personalGoal[random] == -1){

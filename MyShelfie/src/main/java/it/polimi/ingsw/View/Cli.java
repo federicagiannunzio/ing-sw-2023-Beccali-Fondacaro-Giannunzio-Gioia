@@ -159,14 +159,17 @@ public class Cli extends ViewObservable implements View {
         showTilesArray(tilesArray);
         do {
             System.out.println("Which tile do you want to insert? Please select a number.");
-            try{
+            try {
                 tryN = Integer.parseInt(readLine());
-                if(tryN > 3 || tryN < 1)
+                if (tryN > 3 || tryN < 1 || tryN > tilesArray.size()){
                     System.out.println("The number chose must be between 1 and 3. Please try again.");
+                    showTilesArray(tilesArray);
+            }
             }catch(NumberFormatException e){
                 System.out.println("You must insert a number, not a string");
             }
-        }while(tryN > 3 || tryN < 1);
+
+        }while(tryN > 3 || tryN < 1 || tryN > tilesArray.size());
         int n = tryN - 1;
         notifyObserver(obs->obs.sendArrayTileIndex(n));
     }
