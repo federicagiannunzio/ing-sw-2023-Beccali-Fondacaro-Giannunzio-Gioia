@@ -37,7 +37,7 @@ public class ClientSocket extends Client{
             while(connection) {
                 Event event;
                 try {
-                    event = (Event) input.readUnshared();
+                    event = (Event) input.readObject();
                 } catch (IOException | ClassNotFoundException exc) {
                     event = new ErrorEvent(null, "Unable to reach the server");
                 }
@@ -50,8 +50,9 @@ public class ClientSocket extends Client{
     public void sendMessage(Event event) {
         if (connection) {
             try {
-                output.writeUnshared(event);
+                output.writeObject(event);
                 output.flush();
+                output.reset();
             } catch (IOException exc) {
                 notifyObserver(new ErrorEvent(null, "Unable to send message"));
             }

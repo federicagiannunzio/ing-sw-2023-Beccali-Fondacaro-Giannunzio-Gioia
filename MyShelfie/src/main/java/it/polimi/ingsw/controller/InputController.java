@@ -75,6 +75,7 @@ public class InputController implements Serializable {
         int[] row = pickedTileMessage.getRow();
         int[] column = pickedTileMessage.getCol();
         boolean isAvailable = true;
+        isAvailable = gameController.getBoard().adjacentTile(row, column);
         for(int i = 0; i < row.length && isAvailable; i++) {
             isAvailable = gameController.getBoard().checkTile(row[i], column[i]);
         }

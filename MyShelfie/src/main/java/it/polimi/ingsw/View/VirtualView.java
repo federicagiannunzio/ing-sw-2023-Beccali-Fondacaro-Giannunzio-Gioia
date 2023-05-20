@@ -70,7 +70,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showMyPoints(int currentPoints) {
-        clientHandler.sendMessage(new FinalPointsEvent(SERVER_NAME, currentPoints));
+        clientHandler.sendMessage(new CurrentPointsEvent(SERVER_NAME, currentPoints));
 
     }
 

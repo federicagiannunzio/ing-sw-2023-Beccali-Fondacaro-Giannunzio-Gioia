@@ -153,7 +153,7 @@ public class Board implements Serializable {
      */
     public boolean checkTile(int i, int j){
 
-        if(table[i][j].getColor() == Color.BLACK){
+        if(table[i][j] == null || table[i][j].getColor() == Color.BLACK){
             return false;
         }
 
@@ -178,6 +178,32 @@ public class Board implements Serializable {
             return false;
         }
     }
+
+    public boolean adjacentTile(int[] row, int[] col) {
+        int size = row.length;
+        int counter = 0;
+        if (size == 1)
+            return true;
+        if (size == 2) {
+            if ((row[0] == row[1] && (col[0] == (col[1] + 1) || (col[0] == (col[1] - 1))) || col[0] == col[1] && (row[0] == (row[1] + 1) || row[0] == (row[1] - 1))))
+                return true;
+            else
+                return false;
+        }
+        if (size == 3) {
+            if((row[0] == row[1] && (col[0] == (col[1] + 1) || (col[0] == (col[1] - 1))) || col[0] == col[1] && (row[0] == (row[1] + 1) || row[0] == (row[1] - 1))))
+                counter ++;
+            if((row[0] == row[2] && (col[0] == (col[2] + 1) || (col[0] == (col[2] - 1))) || col[0] == col[2] && (row[0] == (row[2] + 1) || row[0] == (row[2] - 1))))
+                counter++;
+            if((row[1] == row[2] && (col[1] == (col[2] + 1) || (col[1] == (col[2] - 1))) || col[1] == col[2] && (row[1] == (row[2] + 1) || row[1] == (row[2] - 1))))
+                counter++;
+            if(counter == 2)
+                return true;
+            else
+                return false;
+            }
+        return false;
+        }
 
     /**
      * sets a position in the table to the Tile given

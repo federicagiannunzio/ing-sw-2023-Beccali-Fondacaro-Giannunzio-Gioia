@@ -31,7 +31,7 @@ public class ThreeColumnsGoal implements CommonGoal, Serializable {
                 for (k = 0; k < j && flag; k++) {
                     if(structure[k][i] == null)
                         flag = false;
-                    if(structure[j][i].getColor() == structure[k][i].getColor())
+                    if(flag && structure[j][i].getColor() == structure[k][i].getColor())
                         flag = false;
                 }
                 if(flag)

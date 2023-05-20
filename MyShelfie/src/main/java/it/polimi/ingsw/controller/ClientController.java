@@ -160,8 +160,8 @@ public class ClientController implements ViewObserver, Observer {
                 taskQueue.execute(()->view.showCommonGoalCompletion(commonGoalCompleted.getUser(),commonGoalCompleted.getCommonGoal(), commonGoalCompleted.getPointsAchieved()));
                 break;
             case CURRENT_POINTS:
-                FinalPointsEvent showCurrentPoints = (FinalPointsEvent) event;
-                taskQueue.execute(()->view.showMyPoints(showCurrentPoints.getFpoints()));
+                CurrentPointsEvent showCurrentPoints = (CurrentPointsEvent) event;
+                taskQueue.execute(()->view.showMyPoints(showCurrentPoints.getPoints()));
                 break;
             case TURN_STATE:
                 TurnStateEvent showTurnState = (TurnStateEvent) event;

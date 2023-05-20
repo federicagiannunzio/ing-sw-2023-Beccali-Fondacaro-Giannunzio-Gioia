@@ -41,7 +41,7 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
         while (inGame) {
             try {
                 synchronized (inputLock) {
-                    event = (Event) input.readUnshared();
+                    event = (Event) input.readObject();
                     if (event.getEventType() == EventType.LOGIN_REQUEST) {
                         serverSocket.addClient(event.getUser(), this);
                     }
@@ -61,8 +61,9 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
         if (inGame) {
             try {
                 synchronized (outputLock){
-                    output.writeUnshared(event);
+                    output.writeObject(event);
                     output.flush();
+                    output.reset();
                 }
             } catch (IOException error) {
                 event = new ErrorEvent(null, "Unable to send message to the client");

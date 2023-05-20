@@ -195,10 +195,11 @@ public class GameController implements Observer, Serializable {
                 if(inputController.pickedTileCheck(chooseTiles, virtualViewMap.get(chooseTiles.getUser()))){
                     choosedTileRow = chooseTiles.getRow();
                     choosedTileColumn = chooseTiles.getCol();
-                    for(int i = 0; i < choosedTileRow.length; i++)
-                        getPlayerByUser(chooseTiles.getUser()).myTiles.add(board.takeTileFromBoard(choosedTileRow[i], choosedTileColumn[i]));
-                    System.out.println(getPlayerByUser(chooseTiles.getUser()).getMyTiles().get(0).getColor());
-                    System.out.println(getPlayerByUser(chooseTiles.getUser()).getMyTiles().get(1).getColor());
+                    for(int i = 0; i < choosedTileRow.length; i++) {
+                        System.out.println(i);
+                        getPlayerByUser(chooseTiles.getUser()).myTiles.add(board.getTile(choosedTileRow[i], choosedTileColumn[i]));
+                        board.setTile(choosedTileRow[i], choosedTileColumn[i], Color.BLACK);
+                    }
                     currentTurn.tilesPlacing();
                 }
                 else{

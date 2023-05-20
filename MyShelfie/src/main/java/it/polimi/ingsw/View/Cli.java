@@ -102,12 +102,15 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void askTilesNumber(){
-        int tryNumberOfTiles;
+        int tryNumberOfTiles = 0;
         do {
-            System.out.println("How many tiles you want to pick?");
-            tryNumberOfTiles = Integer.parseInt(readLine());
-            if(tryNumberOfTiles < 1 || tryNumberOfTiles > 3){
-                System.out.println("The number of tiles must be between 1 and 3. Please try again.");
+            try {
+                System.out.println("How many tiles you want to pick?");
+                tryNumberOfTiles = Integer.parseInt(readLine());
+                if (tryNumberOfTiles < 1 || tryNumberOfTiles > 3)
+                    System.out.println("The number of tiles must be between 1 and 3. Please try again.");
+            }catch(NumberFormatException e){
+                System.out.println("You must insert a number, not a string. Please try again");
             }
         }while(tryNumberOfTiles < 1 || tryNumberOfTiles > 3);
         int numberOfTiles = tryNumberOfTiles;
@@ -120,22 +123,31 @@ public class Cli extends ViewObservable implements View {
         int[] col = new int[tilesNumber];
         System.out.println("Select the tile you want to pick.");
         for(int i = 0; i < tilesNumber; i++){
-            System.out.println("ROW: ");
-            row[i] = Integer.parseInt(readLine());
-            System.out.println("COLUMN: ");
-            col[i] = Integer.parseInt(readLine());
+            try {
+                System.out.println("ROW: ");
+                row[i] = Integer.parseInt(readLine());
+                System.out.println("COLUMN: ");
+                col[i] = Integer.parseInt(readLine());
+            }catch(NumberFormatException e){
+                System.out.println("You must insert a number, not a string. Please try again");
+                i--;
+            }
         }
         notifyObserver(obs -> obs.sendTilePosition(row, col));
     }
 
     @Override
     public void askShelfieColumn() {
-        int tryCol;
+        int tryCol = -1;
         System.out.println("In which column you want to put your tiles?");
         do {
-            tryCol = Integer.parseInt(readLine());
-            if (tryCol >= 5 || tryCol < 0)
-                System.out.println("The inserted number has to be between 0 and 4. Please try again.");
+            try{
+                tryCol = Integer.parseInt(readLine());
+                if (tryCol >= 5 || tryCol < 0)
+                    System.out.println("The inserted number has to be between 0 and 4. Please try again.");
+            }catch(NumberFormatException e){
+                System.out.println("You must insert a number, not a string. Please try again");
+            }
         }while(tryCol >= 5 || tryCol < 0);
         int col = tryCol;
         notifyObserver(obs -> obs.sendShelfieColumn(col));
@@ -143,13 +155,17 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void askPlacingTile(List<Tile> tilesArray){
-        int tryN;
+        int tryN = 0;
         showTilesArray(tilesArray);
         do {
             System.out.println("Which tile do you want to insert? Please select a number.");
-            tryN = Integer.parseInt(readLine());
-            if(tryN > 3 || tryN < 1)
-                System.out.println("The number chose must be between 1 and 3. Please try again.");
+            try{
+                tryN = Integer.parseInt(readLine());
+                if(tryN > 3 || tryN < 1)
+                    System.out.println("The number chose must be between 1 and 3. Please try again.");
+            }catch(NumberFormatException e){
+                System.out.println("You must insert a number, not a string");
+            }
         }while(tryN > 3 || tryN < 1);
         int n = tryN - 1;
         notifyObserver(obs->obs.sendArrayTileIndex(n));
