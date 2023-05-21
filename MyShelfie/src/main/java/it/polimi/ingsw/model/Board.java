@@ -91,6 +91,7 @@ public class Board implements Serializable {
      * @throws IOException if there's an error in the opening of the file
      */
     public void fillTheBoard(int n) throws IOException {
+        inizializeRemainingTiles(n+2);
         JSONArray available = openAvailableCellJson(n);
         for(int i = 0; i < available.length(); i++) {
 
@@ -121,7 +122,7 @@ public class Board implements Serializable {
      * checks if there are no more available Tiles, if so refreshes the board and returns it otherwise return null
      *
      */
-    public void refreshBoard() {
+    public boolean refreshBoard() {
         boolean refresh = false;
         for(int i = 0; i<9; i++) {
             for(int j = 0; j<9; j++) {
@@ -142,7 +143,9 @@ public class Board implements Serializable {
                     }
                 }
             }
+            return true;
         }
+        return false;
     }
 
     /**

@@ -44,11 +44,12 @@ public class TurnController implements Serializable {
     private void startTurn(){
         controller.broadcastGenericMessage("It's " + currentUser + "'s turn!!");
         view = virtualViewMap.get(currentUser);
-        view.showTurnState(currentUser);
+        //view.showTurnState(currentUser);
         view.askChoiceBeginTurn();
     }
 
     private void endTurn(){
+        boolean refresh = false;
         view.showMyPoints(players.get(currentPlayerIndex).getPoints());
         if(!playerFinished)
             playerFinished = players.get(currentPlayerIndex).getMyShelfie().isComplete();
@@ -59,13 +60,22 @@ public class TurnController implements Serializable {
         currentUser = players.get(currentPlayerIndex).getUsername();
         if(playerFinished && players.get(currentPlayerIndex).isYellowChair())
             endGame = true;
+        if(players.size() == 2 && board.getRemainingTiles() <= 17)
+            refresh = board.refreshBoard();
+        else if(players.size() == 3 && board.getRemainingTiles() <= 23)
+            refresh = board.refreshBoard();
+        else if(players.size() == 4 && board.getRemainingTiles() <= 26)
+            refresh = board.refreshBoard();
+        if(refresh)
+            controller.broadcastGenericMessage("Not enough tiles remaining, refreshing the board!");
         if(!endGame)
             startTurn();
         else
             controller.endGame();
     }
 
-    public void beginTurnChoice(Player p){
+    public void beginTurnChoice(){
+            Player p = players.get(currentPlayerIndex);
             int choice = controller.getChoosedChoise();
             switch (choice) {
                 case 1:
@@ -75,6 +85,7 @@ public class TurnController implements Serializable {
                 case 2:
                     System.out.println("2");
                     view.showMyShelfie(p.getPersonalGoal().getBody());
+                    System.out.println(p.getUsername());
                     view.askChoiceBeginTurn();
                     break;
                 case 3:
@@ -90,18 +101,6 @@ public class TurnController implements Serializable {
                     break;
             }
         }
-
-        /*                    if(p.myTiles != null){
-                        try {
-                            tilesPlacing(p);
-                        } catch (FullColumnException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    else
-                        view.showErrorMessage("No tiles selected, skipping placing phase");
-                    pointsUpdating(p);
-                    view.showMyPoints(p.getPoints());*/
 
     public void tilesPicking(){
         int tilesNumber, i;

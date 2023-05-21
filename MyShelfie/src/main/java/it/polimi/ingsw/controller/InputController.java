@@ -87,6 +87,28 @@ public class InputController implements Serializable {
         }
     }
 
+    public boolean numberOfTilesCheck(Event event, VirtualView view){
+        TilesNumberReplyEvent numberOfTiles = ((TilesNumberReplyEvent) event);
+        int tilesNumber = numberOfTiles.getNtiles();
+        int counter = 0;
+        boolean flag = false;
+        for(int i = 0; i < 9 && !flag; i++) {
+            for (int j = 0; j < 9 && !flag; j++) {
+                if (gameController.getBoard().checkTile(i, j))
+                    counter++;
+                if (counter >= tilesNumber)
+                    flag = true;
+            }
+        }
+        if(!flag) {
+            view.showGenericMessage("You can't retrieve that many tiles from the board, try a lower number");
+            view.askTilesNumber();
+            return false;
+        }
+        else
+            return true;
+    }
+
     //da sistemare e rifare
     /**
      * receives a message from the client (receives the position of the shelf in which he wants to put ) and check if the position is empty.
@@ -96,7 +118,9 @@ public class InputController implements Serializable {
      * @return {code @true} id it's a valid position {code @false} otherwise
      *
      */
-    public boolean insertedTileCheck(Event event, VirtualView view) {
+    public boolean insertedTileCheck(Event event, VirtualView view){
+        boolean flag = true;
+        int counter = 0;
         String activePlayerusername = gameController.getActivePlayer();
         PlaceTileReplyEvent tileToPlace= ((PlaceTileReplyEvent) event);
         int column = tileToPlace.getColumn();
@@ -107,9 +131,14 @@ public class InputController implements Serializable {
         }
 
         Shelfie playerShelf = activePlayer.get().getMyShelfie();
-
-        if(playerShelf.getCell(0, column) != null) {
-            view.showGenericMessage("You have already filled this spot");
+        for(int i = 0; i < 6; i++){
+            if(playerShelf.getStructure()[i][column] != null)
+                counter++;
+        }
+        if(counter < gameController.getChoosedTileNumber())
+            flag = false;
+        if(playerShelf.getCell(0, column) != null && flag) {
+            view.showGenericMessage("You can't place that many tiles in this column, choose a new one!");
             view.askShelfieColumn();
             return false;
         }

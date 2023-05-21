@@ -25,7 +25,8 @@ public class personalGoalTest {
 
     @Test
     public void createTheGoal_correctInput_correctOutput() throws Exception {
-        goal.createTheGoal(goal.getId());
+        int id = 7;
+        goal.createTheGoal(id);
         Tile [][] b = goal.getBody();
         assertEquals(Color.PURPLE, b[0][0].getColor());
         assertEquals(Color.BLUE, b[0][2].getColor());

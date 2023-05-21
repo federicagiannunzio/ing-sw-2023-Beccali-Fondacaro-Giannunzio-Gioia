@@ -107,7 +107,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showTurnState(String user) {
-        clientHandler.sendMessage(new TurnStateEvent(SERVER_NAME));
+        clientHandler.sendMessage(new TurnStateEvent(user));
 
     }
 
