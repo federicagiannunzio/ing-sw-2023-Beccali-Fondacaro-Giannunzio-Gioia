@@ -50,6 +50,10 @@ public class ServerSocket implements Runnable{
         server.addClient(user, clientHandler);
     }
 
+    public void disconnectClient(ClientHandler clientHandler){
+        server.disconnectClient(clientHandler);
+    }
+
 
 
 }

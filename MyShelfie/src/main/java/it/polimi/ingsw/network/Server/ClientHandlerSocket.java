@@ -38,24 +38,21 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
     @Override
     public void run() {
         Event event;
-        while (inGame) {
             try {
-                synchronized (inputLock) {
-                    event = (Event) input.readObject();
-                    if (event.getEventType() == EventType.LOGIN_REQUEST) {
-                        serverSocket.addClient(event.getUser(), this);
+                while (!Thread.currentThread().isInterrupted()) {
+                    synchronized (inputLock) {
+                        event = (Event) input.readObject();
+                        if (event.getEventType() == EventType.LOGIN_REQUEST) {
+                            serverSocket.addClient(event.getUser(), this);
+                        }
+                        serverSocket.update(event);
                     }
-                    serverSocket.update(event);
                 }
+                connectedClient.close();
             } catch (IOException | ClassNotFoundException exc) {
                 event = new ErrorEvent(null, "Unable read from client input");
             }
-        }
-        try {
-            connectedClient.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        disconnect();
     }
     public void sendMessage(Event event){
         if (inGame) {
@@ -67,6 +64,7 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
                 }
             } catch (IOException error) {
                 event = new ErrorEvent(null, "Unable to send message to the client");
+                disconnect();
             }
         }
     }
@@ -82,6 +80,7 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
         }
         inGame = false;
         Thread.currentThread().interrupt();
+        serverSocket.disconnectClient(this);
     }
 
 

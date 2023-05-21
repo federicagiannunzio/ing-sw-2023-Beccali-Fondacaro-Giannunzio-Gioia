@@ -63,6 +63,7 @@ public class ClientSocket extends Client{
     public void closeConnection() {
         if (connection) {
             try {
+                readQueue.shutdownNow();
                 socket.close();
                 System.exit(0);
             } catch (IOException exc) {
