@@ -55,6 +55,7 @@ public class ClientSocket extends Client{
                 output.reset();
             } catch (IOException exc) {
                 notifyObserver(new ErrorEvent(null, "Unable to send message"));
+                closeConnection();
             }
         }
     }

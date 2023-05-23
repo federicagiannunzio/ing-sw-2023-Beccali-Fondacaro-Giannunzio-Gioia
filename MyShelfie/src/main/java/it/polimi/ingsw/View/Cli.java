@@ -62,7 +62,7 @@ public class Cli extends ViewObservable implements View {
         }
         String address = tryAddress;
         int port = tryPort;
-        notifyObserver(obs->obs.sendServerInfo(address, port));
+        notifyObserver(obs -> obs.sendServerInfo(address, port));
     }
 
     public void askUsername() {
