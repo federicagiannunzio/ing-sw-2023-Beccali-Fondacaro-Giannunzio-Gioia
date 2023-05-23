@@ -14,7 +14,6 @@ import static java.lang.System.out;
 
 public class Cli extends ViewObservable implements View {
 
-
     private Scanner input;
     private Thread inputThread;
 
@@ -201,7 +200,7 @@ public class Cli extends ViewObservable implements View {
             System.out.print(strColIndxBld);
             for (int j = 0; j < 9; j++) {
                 System.out.print(strColBld);
-                if (structure[i][j] != null) {
+                if (structure[i][j] != null && !structure[i][j].getColor().equals(Color.BLACK)) {
                     StringBuilder tile = new StringBuilder();
                     tile.append(structure[i][j].getColor()).append(" x").append(Color.RESET);
                     System.out.print(tile);

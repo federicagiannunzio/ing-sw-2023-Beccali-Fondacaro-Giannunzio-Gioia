@@ -391,7 +391,7 @@ public class GameController implements Observer, Serializable {
             case 11:
                 return new TwoRowsGoal();
             default:
-                return new CornersGoal();
+                return null;
         }
     }
 

@@ -71,12 +71,9 @@ public class Board implements Serializable {
      */
     public Tile takeTileFromBoard(int i, int j){
         if(!checkTile(i,j)) {
-            try {
-                throw new notAvailableTileException();
-            } catch (notAvailableTileException e) {
-                throw new RuntimeException(e);
-            }
+            return null;
         }
+
         Tile t = table[i][j];
         table[i][j].setColor(Color.BLACK);
         remainingTiles--;
@@ -94,7 +91,6 @@ public class Board implements Serializable {
         inizializeRemainingTiles(n+2);
         JSONArray available = openAvailableCellJson(n);
         for(int i = 0; i < available.length(); i++) {
-
             String position = available.get(i).toString();
             JSONObject pos = new JSONObject(position);
             int row = pos.getInt("r");
@@ -104,12 +100,25 @@ public class Board implements Serializable {
         }
     }
 
+    public void inizializeBlackBoard(int n) throws IOException {
+        inizializeRemainingTiles(n+2);
+        JSONArray available = openAvailableCellJson(n);
+        for(int i = 0; i < available.length(); i++) {
+            String position = available.get(i).toString();
+            JSONObject pos = new JSONObject(position);
+            int row = pos.getInt("r");
+            int column = pos.getInt("c");
+
+            setTile(row, column, Color.BLACK);
+        }
+    }
+
     //maybe we should move this method in the controller
     /**
      *
      * */
     public JSONArray openAvailableCellJson(int index) throws IOException {
-        String data = new String(Files.readAllBytes(Paths.get("MyShelfie/src/main/resources/availableCells.json")));
+        String data = new String(Files.readAllBytes(Paths.get("src/main/resources/availableCells.json")));
         JSONArray jsonArray = new JSONArray(data);
 
         String str = jsonArray.get(index).toString();
@@ -137,8 +146,8 @@ public class Board implements Serializable {
 
         if(refresh){
             for(int i = 0; i<9; i++) {
-                for(int j=0; i<9; j++) {
-                    if(table[i][j].getColor() == Color.BLACK) {
+                for(int j=0; j<9; j++) {
+                    if(table[i][j]!= null && table[i][j].getColor() == Color.BLACK) {
                         table[i][j] = gameBag.pickTile();
                     }
                 }

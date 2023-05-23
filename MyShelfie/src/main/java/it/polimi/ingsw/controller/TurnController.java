@@ -83,18 +83,15 @@ public class TurnController implements Serializable {
                     view.askTilesNumber();
                     break;
                 case 2:
-                    System.out.println("2");
                     view.showMyShelfie(p.getPersonalGoal().getBody());
                     System.out.println(p.getUsername());
                     view.askChoiceBeginTurn();
                     break;
                 case 3:
-                    System.out.println("3");
                     view.showMyShelfie(p.getMyShelfie().getStructure());
                     view.askChoiceBeginTurn();
                     break;
                 case 4:
-                    System.out.println("4");
                     view.showCommonGoals(controller.getCommonGoals().get(0).getGoalsName());
                     view.showCommonGoals(controller.getCommonGoals().get(1).getGoalsName());
                     view.askChoiceBeginTurn();

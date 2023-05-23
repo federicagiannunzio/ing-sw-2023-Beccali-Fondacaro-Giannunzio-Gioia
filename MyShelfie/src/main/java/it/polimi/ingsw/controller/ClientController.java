@@ -52,7 +52,6 @@ public class ClientController implements ViewObserver, Observer {
             System.out.println("Can't connect to the server");
             System.exit(0);
         }
-        //istanza connessione
     }
 
     /**

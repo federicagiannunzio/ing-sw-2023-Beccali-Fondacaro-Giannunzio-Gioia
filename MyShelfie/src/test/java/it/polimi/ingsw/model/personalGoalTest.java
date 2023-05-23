@@ -15,7 +15,7 @@ public class personalGoalTest {
 
     @Before
     public void setUp() {
-        goal = new personalGoal(1);
+        goal = new personalGoal(0);
     }
 
     @After
@@ -25,7 +25,7 @@ public class personalGoalTest {
 
     @Test
     public void createTheGoal_correctInput_correctOutput() throws Exception {
-        int id = 7;
+        int id = 0;
         goal.createTheGoal(id);
         Tile [][] b = goal.getBody();
         assertEquals(Color.PURPLE, b[0][0].getColor());
@@ -39,12 +39,12 @@ public class personalGoalTest {
     //come faccio a verificare che mi arriva un'eccezione?
     @Test
     public void createTheGoal_notExistingID_shouldThrowException() throws Exception {
-        assertThrows(Exception.class, () -> {goal.createTheGoal(0);});
+        assertThrows(Exception.class, () -> {goal.createTheGoal(12);});
     }
 
     @Test
     public void getId_correctInput_correctOutput() {
-        assertEquals(1, goal.getId());
+        assertEquals(0, goal.getId());
     }
 
     @Test
@@ -89,10 +89,14 @@ public class personalGoalTest {
         goal.createTheGoal(goal.getId());
         Shelfie s = new Shelfie();
         Tile [][] m = s.getStructure();
+        Tile t1 = new Tile(Color.PURPLE, 0);
+        Tile t2 = new Tile(Color.BLUE, 0);
+        Tile t3 = new Tile(Color.GREEN, 0);
 
-        m[0][0] = new Tile(Color.PURPLE, 0);
-        m[0][2] = new Tile(Color.BLUE, 0);
-        m[1][4] = new Tile(Color.GREEN, 0);
+        s.setShelfTile(0,0, t1);
+        s.setShelfTile(0,2,t2);
+        s.setShelfTile(1,4,t3);
+
         assertEquals(4, goal.checkpoints(s));
     }
 
