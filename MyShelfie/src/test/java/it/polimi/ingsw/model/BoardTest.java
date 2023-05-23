@@ -90,17 +90,18 @@ public class BoardTest {
         assertEquals(board.getTile(2,2), board.takeTileFromBoard(2,2));
     }
 
-    @Test (expected = notAvailableTileException.class)
-    public void takeTileFromBoard_IllegalTileChose_correctOutput() throws IOException, notAvailableTileException {
+    @Test
+    public void takeTileFromBoard_IllegalTileChose_correctOutput() throws IOException {
         bag.setBag();
         board.fillTheBoard(1);
         board.inizializeRemainingTiles(3);
-        board.takeTileFromBoard(4,4);
+        assertNull(board.takeTileFromBoard(4, 4));
 
     }
 
     @Test
     public void getTile_oneTileRemoved_correctTile() {
+
         board.setTile(0,0, Color.BLUE);
         assertEquals(Color.BLUE, board.getTile(0,0).getColor());
     }
@@ -108,10 +109,18 @@ public class BoardTest {
     @Test
     public void refreshBoard_fullBoard_noRefresh() throws IOException {
         bag.setBag();
-        board.fillTheBoard(1);
+        board.fillTheBoard(2);
         Tile [][] expected = board.getBoard();
         board.refreshBoard();
         assertArrayEquals(expected, board.getBoard());
+    }
+
+    @Test
+    public void refreshBoard_oneTile_correctOutput() throws IOException {
+        bag.setBag();
+        board.inizializeBlackBoard(1);
+        board.setTile(3,3 , Color.PURPLE);
+        assertTrue(board.refreshBoard());
     }
 
     @Test

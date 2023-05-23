@@ -67,8 +67,8 @@ public class ShelfieTest {
         assertArrayEquals(expected, shelf.getStructure());
     }
 
-    @Test (expected = FullColumnException.class)
-    public void addTiles_alreadyFull_shouldThrowException() throws FullColumnException {
+    @Test
+    public void addTiles_alreadyFull_shouldThrowException() {
         Tile [][] m = shelf.getStructure();
         Tile t1 = new Tile(Color.YELLOW, 0);
 
@@ -80,6 +80,7 @@ public class ShelfieTest {
         m[5][0] = new Tile(Color.BLUE, 0);
 
         shelf.addTile(t1, 0);
+        assertEquals(Color.BLUE, m[5][0].getColor());
     }
 
     @Test

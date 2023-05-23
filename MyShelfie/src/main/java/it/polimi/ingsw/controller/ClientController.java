@@ -51,7 +51,6 @@ public class ClientController implements ViewObserver, Observer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //istanza connessione
     }
 
     /**

@@ -36,7 +36,7 @@ public class personalGoal implements Serializable {
      * */
     public void createTheGoal(int id) throws Exception {
         try {
-            String data = new String(Files.readAllBytes(Paths.get("MyShelfie/src/main/resources/goals1.json")));
+            String data = new String(Files.readAllBytes(Paths.get("src/main/resources/goals1.json")));
             JSONArray jsonArray = new JSONArray(data);
 
             String str = jsonArray.get(id).toString();

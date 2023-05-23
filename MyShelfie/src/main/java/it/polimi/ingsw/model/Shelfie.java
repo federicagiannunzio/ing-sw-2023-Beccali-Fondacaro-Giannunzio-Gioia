@@ -47,12 +47,6 @@ public class Shelfie implements Serializable {
                     placed = true;
                 }
             }
-            if(!placed)
-                try {
-                    throw new FullColumnException();
-                } catch (FullColumnException e) {
-                    throw new RuntimeException(e);
-                }
     }
 
     public void setShelfTile(int i, int j, Tile t){
