@@ -16,7 +16,7 @@ public class GameController implements Observer, Serializable {
 
     private List<Player> players;
     private List<String> nicknames;
-    private Map<String, VirtualView> virtualViewMap;
+    public Map<String, VirtualView> virtualViewMap;
     private int currentPlayer;
     private int first;
 
@@ -46,6 +46,10 @@ public class GameController implements Observer, Serializable {
     private Random r = new Random();
 
     public GameController(){
+        initController();
+    }
+
+    public void initController(){
         inputController = new InputController(this);
         inGame = false;
         players = new ArrayList<>();
@@ -112,9 +116,10 @@ public class GameController implements Observer, Serializable {
         } else{
             VView.showLoginResult(false, true, username);
         }
+
     }
 
-    public void startGame() throws Exception {
+     public void startGame() throws Exception {
 
         inGame = true;
 
@@ -163,6 +168,7 @@ public class GameController implements Observer, Serializable {
         for(VirtualView v : virtualViewMap.values()){
             winnerNotify(v, winner.getUsername());
         }
+        initController();
     }
     @Override
     public void update(Event event) {
@@ -243,6 +249,9 @@ public class GameController implements Observer, Serializable {
         }
     }
 
+    public void removePlayer(String user){
+        players.remove(getPlayerByUser(user));
+    }
     public void sendNumberOfUserRequest(VirtualView view) {
         view.askPlayersNumber();
     }

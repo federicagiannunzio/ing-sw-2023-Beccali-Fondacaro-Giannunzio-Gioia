@@ -148,4 +148,8 @@ public class TurnController implements Serializable {
         p.setPoints(personalPoints + commonPoints2 + commonPoints1 + adjacentPoints);
         endTurn();
     }
+
+    public void removeVirtualViewMap(String user){
+        virtualViewMap.remove(user);
+    }
 }

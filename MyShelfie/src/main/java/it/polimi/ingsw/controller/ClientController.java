@@ -49,7 +49,8 @@ public class ClientController implements ViewObserver, Observer {
             client.receiveMessage();
             taskQueue.execute(view::askUsername);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Can't connect to the server");
+            System.exit(0);
         }
     }
 
