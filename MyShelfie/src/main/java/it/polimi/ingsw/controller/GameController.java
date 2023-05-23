@@ -106,27 +106,20 @@ public class GameController implements Observer, Serializable {
             nicknames.add(newPlayer.getUsername());
             virtualViewMap.put(username, VView);
             VView.showLoginResult(true, true, username);
-
+            if(players.size() == maxPlayers){
+                try {
+                    startGame();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
         } else{
             VView.showLoginResult(false, true, username);
         }
 
     }
 
-    private void checkGameStart(){
-        for(Player p : players)
-            System.out.println(p.getUsername());
-        System.out.println(maxPlayers);
-        if(players.size() == maxPlayers && !inGame){
-            try {
-                startGame();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    public void startGame() throws Exception {
+     public void startGame() throws Exception {
 
         inGame = true;
 
@@ -193,7 +186,6 @@ public class GameController implements Observer, Serializable {
             case NUMBER_OF_USERS_REPLY:
                 NumberOfUsersReplyEvent nOfUser = (NumberOfUsersReplyEvent) event;
                 maxPlayers = nOfUser.getNumPlayers();
-                checkGameStart();
                 break;
             case FIRSTPLAYER_REPLY:
                 FirstPlayerReplyEvent firstEvent = (FirstPlayerReplyEvent) event;
