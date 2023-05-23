@@ -5,11 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ac4a4ea-e119-48b5-9da3-0d77e3447c1a" name="Changes" comment="debugging">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/ServerApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Cli.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Cli.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Client/ClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/network/Client/ClientSocket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/ClientController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/ClientController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" afterDir="false" />
     </list>
@@ -71,7 +66,7 @@
       <recent name="C:\Users\tutel\Documents\INGEGNERIA DEL SOFTWARE\MYSHELFIE\ing-sw-2023-Beccali-Fondacaro-Giannunzio-Gioia2\MyShelfie\src\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServerApp">
+  <component name="RunManager" selected="JUnit.it.polimi.ingsw.model in PSP53">
     <configuration name="ClientApp" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.ClientApp" />
       <module name="PSP53" />
@@ -98,7 +93,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="it.polimi.ingsw.model in PSP53" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP53" />
       <extension name="coverage">
         <pattern>
@@ -107,8 +102,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.model" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.BoardTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -158,17 +152,17 @@
     <list>
       <item itemvalue="Application.ClientApp" />
       <item itemvalue="Application.ServerApp" />
+      <item itemvalue="JUnit.it.polimi.ingsw.model in PSP53" />
       <item itemvalue="JUnit.personalGoalTest.createTheGoal_correctInput_correctOutput" />
       <item itemvalue="JUnit.personalGoalTest" />
-      <item itemvalue="JUnit.BoardTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.it.polimi.ingsw.model in PSP53" />
         <item itemvalue="Application.ServerApp" />
         <item itemvalue="Application.ClientApp" />
         <item itemvalue="JUnit.personalGoalTest.createTheGoal_correctInput_correctOutput" />
         <item itemvalue="JUnit.personalGoalTest" />
-        <item itemvalue="JUnit.BoardTest" />
       </list>
     </recent_temporary>
   </component>
@@ -474,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684828113934</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="debugging">
+      <created>1684838820923</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1684838820923</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

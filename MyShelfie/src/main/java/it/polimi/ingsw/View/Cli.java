@@ -54,11 +54,15 @@ public class Cli extends ViewObservable implements View {
         int tryPort = 0;
 
         while (!valid) {
-            System.out.println("Please enter the server address: ");
-            tryAddress = readLine();
-            System.out.println("Please enter the port number: ");
-            tryPort = Integer.parseInt(readLine());
-            valid = checkValidIP(tryAddress);
+            try {
+                System.out.println("Please enter the server address: ");
+                tryAddress = readLine();
+                System.out.println("Please enter the port number: ");
+                tryPort = Integer.parseInt(readLine());
+                valid = checkValidIP(tryAddress);
+            }catch(NumberFormatException e){
+                System.out.println("You must insert a number, not a string. Please try again");
+            }
         }
         String address = tryAddress;
         int port = tryPort;
@@ -73,11 +77,15 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void askPlayersNumber(){
-        int playersNumber, tryPlayersNumber;
+        int playersNumber, tryPlayersNumber = 0;
         System.out.println("Please select the number of players. Choose a number between 2 and 4");
         do {
-            String playerNumberString = readLine();
-            tryPlayersNumber = Integer.parseInt(playerNumberString);
+            try {
+                String playerNumberString = readLine();
+                tryPlayersNumber = Integer.parseInt(playerNumberString);
+            }catch(NumberFormatException e){
+                System.out.println("You must insert a number, not a string. Please try again");
+            }
         }while(tryPlayersNumber > 4 || tryPlayersNumber < 2);
         playersNumber = tryPlayersNumber;
         notifyObserver(obs -> obs.sendPlayersNumber(playersNumber));
