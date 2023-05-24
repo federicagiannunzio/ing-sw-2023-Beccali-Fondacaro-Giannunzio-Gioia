@@ -47,15 +47,15 @@ public class Server{
                         return;
                     gameController.getTurnController().removeVirtualViewMap(user);
                 }
-                System.out.println("a");
                 gameController.removePlayer(user);
                 gameController.virtualViewMap.remove(user);
+
             }
-            if(gameController.isInGame()){
+            //if(gameController.isInGame()){
                 gameController.broadcastGenericMessage("The player " + user + " has disconnected from the game.");
                 gameController.endGame();
                 clientHandlerMap.clear();
-            }
+            //}
         }
 
     }

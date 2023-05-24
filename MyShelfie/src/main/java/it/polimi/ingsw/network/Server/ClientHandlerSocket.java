@@ -71,13 +71,13 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
 
     @Override
     public void disconnect(){
-        if(inGame){
-            try {
-                connectedClient.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+
+        try {
+            connectedClient.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
         inGame = false;
         Thread.currentThread().interrupt();
         serverSocket.disconnectClient(this);
