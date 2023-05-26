@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.controller.FirstController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@Graphics/misc/sfondo_parquet.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="247.0" layoutY="42.0" text="Match ID: 12667238" />
+      <Label layoutX="228.0" layoutY="98.0" text="Players: player1, player2" />
+      <Label layoutX="286.0" layoutY="163.0" text="2/3" />
+   </children>
+</AnchorPane>
