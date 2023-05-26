@@ -32,11 +32,4 @@ public class FirstController {
         stage.show();
     }
 
-    public void switchToSceneSecond3(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 }
