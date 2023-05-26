@@ -120,7 +120,7 @@ public class GameController implements Observer, Serializable {
     }
 
      public void startGame() throws Exception {
-
+         System.out.println("ciao");
         inGame = true;
 
         //bag init
@@ -129,18 +129,19 @@ public class GameController implements Observer, Serializable {
 
         //board init
         board.fillTheBoard(players.size()-2);
-
+         System.out.println("ciao2");
         //Common goals
         CommonGoal firstGoal = pickCommonGoal();
         CommonGoal secondGoal = pickCommonGoal();
         while (secondGoal.equals(firstGoal)){
             secondGoal = pickCommonGoal();
         }
+         System.out.println("ciao3");
         commonGoals.add(firstGoal);
         commonGoals.add(secondGoal);
         initGoalPoints(firstGoalPoints);
         initGoalPoints(secondGoalPoints);
-
+         System.out.println("ciao3");
         //Personal goals
         for(Player p: players){
             int random = r.nextInt(11);
@@ -152,6 +153,7 @@ public class GameController implements Observer, Serializable {
             goal.createTheGoal(random);
             p.setPersonalGoal(goal);
         }
+         System.out.println("ciao3");
 
         currentTurn = new TurnController(this, virtualViewMap);
 
