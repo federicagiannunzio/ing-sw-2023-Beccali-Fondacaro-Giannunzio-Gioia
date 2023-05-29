@@ -12,12 +12,12 @@
             <Image url="@Graphics/misc/sfondo_parquet.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="572.0" fitWidth="546.0">
+      <ImageView fitHeight="572.0" fitWidth="517.0">
          <image>
             <Image url="@Graphics/boards/livingroom.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="298.0" fitWidth="318.0" layoutX="574.0" layoutY="14.0">
+      <ImageView fitHeight="330.0" fitWidth="371.0" layoutX="545.0" layoutY="14.0">
          <image>
             <Image url="@Graphics/boards/bookshelf.png" />
          </image>
@@ -38,9 +38,13 @@
          </image>
       </ImageView>
       <Button layoutX="185.0" layoutY="203.0" minWidth="52.0" mnemonicParsing="false" opacity="0.0" prefHeight="49.0" prefWidth="52.0" text="Button" />
-      <Button layoutX="192.0" layoutY="203.0" minWidth="46.0" mnemonicParsing="false" opacity="0.17" prefHeight="50.0" prefWidth="46.0" text="Button" />
+      <Button layoutX="178.0" layoutY="202.0" minWidth="45.0" mnemonicParsing="false" opacity="0.17" prefHeight="50.0" prefWidth="45.0" text="Button" />
       <Button layoutX="195.0" layoutY="100.0" minWidth="52.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="52.0" text="Button" />
       <Button layoutX="195.0" layoutY="100.0" minWidth="52.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="52.0" text="Button" />
-      <Button layoutX="602.0" layoutY="90.0" minWidth="52.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="52.0" text="Button" />
+      <Button layoutX="647.0" layoutY="29.0" minWidth="28.0" mnemonicParsing="false" opacity="0.61" prefHeight="310.0" prefWidth="54.0" text="2" />
+      <Button layoutX="585.0" layoutY="29.0" minWidth="28.0" mnemonicParsing="false" opacity="0.62" prefHeight="310.0" prefWidth="54.0" text="1" />
+      <Button layoutX="825.0" layoutY="29.0" minWidth="28.0" mnemonicParsing="false" opacity="0.61" prefHeight="309.0" prefWidth="54.0" text="5" />
+      <Button layoutX="704.0" layoutY="29.0" minWidth="28.0" mnemonicParsing="false" opacity="0.6" prefHeight="310.0" prefWidth="54.0" text="3" />
+      <Button layoutX="764.0" layoutY="29.0" minWidth="28.0" mnemonicParsing="false" opacity="0.61" prefHeight="310.0" prefWidth="54.0" text="4" />
    </children>
 </AnchorPane>

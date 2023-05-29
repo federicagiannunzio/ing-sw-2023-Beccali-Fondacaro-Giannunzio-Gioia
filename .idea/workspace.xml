@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ac4a4ea-e119-48b5-9da3-0d77e3447c1a" name="Changes" comment="test fixes">
+    <list default="true" id="7ac4a4ea-e119-48b5-9da3-0d77e3447c1a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/Login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/background.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/FirstController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/FirstController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/resources/LoginScene.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/resources/Second.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/Second.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/GameController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,13 +72,27 @@
       <recent name="C:\Users\tutel\Documents\INGEGNERIA DEL SOFTWARE\MYSHELFIE\ing-sw-2023-Beccali-Fondacaro-Giannunzio-Gioia2\MyShelfie\src\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientApp">
+  <component name="RunManager" selected="Application.MainGui">
     <configuration name="ClientApp" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.ClientApp" />
       <module name="PSP53" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainGui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.View.MainGui" />
+      <module name="PSP53" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\ASUS\Downloads\openjfx-17.0.7_windows-x64_bin-sdk\javafx-sdk-17.0.7\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.View.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -108,21 +127,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="personalGoalTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PSP53" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.personalGoalTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="personalGoalTest.createTheGoal_correctInput_correctOutput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP53" />
       <extension name="coverage">
@@ -151,19 +155,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.MainGui" />
       <item itemvalue="Application.ClientApp" />
       <item itemvalue="Application.ServerApp" />
       <item itemvalue="JUnit.it.polimi.ingsw.model in PSP53" />
       <item itemvalue="JUnit.personalGoalTest.createTheGoal_correctInput_correctOutput" />
-      <item itemvalue="JUnit.personalGoalTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainGui" />
         <item itemvalue="Application.ClientApp" />
         <item itemvalue="Application.ServerApp" />
         <item itemvalue="JUnit.it.polimi.ingsw.model in PSP53" />
         <item itemvalue="JUnit.personalGoalTest.createTheGoal_correctInput_correctOutput" />
-        <item itemvalue="JUnit.personalGoalTest" />
       </list>
     </recent_temporary>
   </component>
@@ -484,7 +488,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684929141197</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="gui start">
+      <created>1685105285380</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1685105285380</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,7 +536,8 @@
     <MESSAGE value="availableCells.json bug fixed" />
     <MESSAGE value="debugging" />
     <MESSAGE value="test fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="test fixes" />
+    <MESSAGE value="gui start" />
+    <option name="LAST_COMMIT_MESSAGE" value="gui start" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
