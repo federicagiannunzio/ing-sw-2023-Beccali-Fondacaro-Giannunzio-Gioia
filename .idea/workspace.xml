@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ac4a4ea-e119-48b5-9da3-0d77e3447c1a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/Login.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/background.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/resources/LoginScene.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/MainGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/View/MainGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/FirstController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/GuiController/FirstController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/Observer/ViewObservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/java/it/polimi/ingsw/controller/Observer/ViewObservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/resources/Connection.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/Connection.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/resources/LobbyScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/LobbyScene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/resources/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/Login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/resources/Second.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/Second.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/GameController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/src/main/resources/welcomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/src/main/resources/welcomeScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/View/Gui.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/ClientController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/Observer/ViewObservable.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/controller/Observer/ViewObservable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyShelfie/target/classes/it/polimi/ingsw/model/FullColumnException.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -495,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685105285380</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="AggiornamentoGui">
+      <created>1685365606914</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1685365606915</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -537,7 +552,8 @@
     <MESSAGE value="debugging" />
     <MESSAGE value="test fixes" />
     <MESSAGE value="gui start" />
-    <option name="LAST_COMMIT_MESSAGE" value="gui start" />
+    <MESSAGE value="AggiornamentoGui" />
+    <option name="LAST_COMMIT_MESSAGE" value="AggiornamentoGui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

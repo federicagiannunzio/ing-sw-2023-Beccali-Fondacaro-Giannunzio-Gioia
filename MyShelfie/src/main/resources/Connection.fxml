@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.controller.FirstController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.controller.GuiController.ConnectionController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0">
          <image>
@@ -20,6 +20,6 @@
       </ImageView>
       <TextField layoutX="233.0" layoutY="210.0" promptText="Server Address" />
       <TextField layoutX="234.0" layoutY="252.0" promptText="Port address" />
-      <Button layoutX="283.0" layoutY="303.0" mnemonicParsing="false" onAction="#switchToSceneSecond2" text="Connect" />
+      <Button layoutX="283.0" layoutY="303.0" mnemonicParsing="false" onAction="#goToLogin" text="Connect" />
    </children>
 </AnchorPane>

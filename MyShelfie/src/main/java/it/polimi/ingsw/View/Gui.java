@@ -1,12 +1,22 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.controller.Observer.ViewObservable;
 import it.polimi.ingsw.model.CommonGoalsName;
 import it.polimi.ingsw.model.Tile;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
 
-public class Gui implements View{
+public class Gui extends ViewObservable implements View{
+
+    public void start() {
+
+
+    }
 
     @Override
     public void askUsername() {

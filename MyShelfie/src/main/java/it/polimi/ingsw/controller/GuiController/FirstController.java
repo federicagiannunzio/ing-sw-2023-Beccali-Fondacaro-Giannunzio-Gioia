@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.GuiController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +23,9 @@ public class FirstController {
         stage.setScene(scene);
         stage.show();
     }
+
+
+
 
     public void switchToSceneSecond2(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Second.fxml"));
