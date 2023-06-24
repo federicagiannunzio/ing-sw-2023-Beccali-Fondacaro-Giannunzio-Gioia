@@ -1,4 +1,7 @@
 package it.polimi.ingsw.controller.GuiController;
+import it.polimi.ingsw.View.Gui;
+import it.polimi.ingsw.View.View;
+import it.polimi.ingsw.controller.Observer.ViewObservable;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -7,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -18,13 +22,15 @@ public class WelcomeScreenController {
     private Stage stage;
     private Parent root;
 
+    private Gui gui;
+
+
+    public void setGUI(Gui gui){
+        this.gui = gui;
+    }
 
     public void goToConnection(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Connection.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        gui.showConnectionScreen();
     }
 
     public void exit(ActionEvent event) throws IOException {

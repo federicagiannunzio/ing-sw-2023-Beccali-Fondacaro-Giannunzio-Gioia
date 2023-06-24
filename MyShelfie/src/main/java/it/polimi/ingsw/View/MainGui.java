@@ -11,27 +11,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-
 public class MainGui extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Gui view = new Gui();
         ClientController clientController = new ClientController(view);
         view.addObserver(clientController);
-
-        Parent root = FXMLLoader.load(getClass().getResource("/welcomeScreen.fxml"));
-        stage.setTitle("MyShelfie board game");
-        stage.setScene(new Scene(root));
-        stage.show();
-        stage.setMinWidth(600);
-        stage.setMinHeight(400);
-
-
+        view.start(stage);
     }
 
     public static void main(String[] args) throws IOException {
         launch(args);
-
     }
 
 }

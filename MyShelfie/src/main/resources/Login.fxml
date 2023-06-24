@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.controller.GuiController.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.controller.GuiController.LoginController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0">
          <image>
             <Image url="@Graphics/misc/sfondo_parquet.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="myTextField" layoutX="218.0" layoutY="209.0" />
-      <Label fx:id="myLabel" layoutX="224.0" layoutY="71.0" text="Welcome!" textAlignment="JUSTIFY">
+      <TextField fx:id="usernameTF" layoutX="218.0" layoutY="209.0" promptText="Username" />
+      <Label layoutX="224.0" layoutY="71.0" text="Welcome!" textAlignment="JUSTIFY">
          <font>
             <Font name="System Bold" size="34.0" />
          </font>
@@ -26,7 +26,8 @@
             <Image url="@Graphics/Publisher material/Title2000x618px.png" />
          </image>
       </ImageView>
-      <Label layoutX="238.0" layoutY="182.0" text="Enter your username" textAlignment="CENTER" />
-      <Button fx:id="myButton" layoutX="274.0" layoutY="260.0" mnemonicParsing="false" onAction="#submit" text="Login" textAlignment="CENTER" />
+      <Label fx:id="label" layoutX="238.0" layoutY="182.0" text="Enter your username" textAlignment="CENTER" />
+      <Button fx:id="loginBT" layoutX="270.0" layoutY="291.0" mnemonicParsing="false" onAction="#submit" text="Login" textAlignment="CENTER" />
+      <TextField fx:id="numberTF" layoutX="218.0" layoutY="248.0" promptText="Number of player" />
    </children>
 </AnchorPane>
