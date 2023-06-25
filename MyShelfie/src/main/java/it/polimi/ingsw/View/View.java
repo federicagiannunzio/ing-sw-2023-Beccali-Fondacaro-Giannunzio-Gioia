@@ -2,9 +2,8 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.model.*;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public interface View {
 
@@ -31,7 +30,6 @@ public interface View {
 
     /**
      * Asks the player the position (coordinates) of the tile that he has picked.
-     *
      */
     void askTilePositionOnBoard(int tilesNumber);
 
@@ -40,6 +38,9 @@ public interface View {
      */
     void askShelfieColumn();
 
+    /**
+     * Asks the player which tile he wants to insert first. It prints the list of the tiles picked and the player has to choose the corresponding number.
+     * */
     void askPlacingTile(List<Tile> tilesPicked);
 
     /**
@@ -48,7 +49,7 @@ public interface View {
     void showBoard(Tile[][] structure);
 
     /**
-     * Shows the shelfie of the player that asked for it.
+     * Shows the shelf of the player that asked for it.
      */
     void showMyShelfie(Tile[][] structure);
 
@@ -82,7 +83,7 @@ public interface View {
     void showGenericMessage(String messageToSend);
 
     /**
-     *
+     * Show error message
      */
     void showErrorMessage(String errorMessage);
 
@@ -100,13 +101,37 @@ public interface View {
      */
     void showDisconnectionMessage(String disconnectedUser);
 
+    /**
+     * Notify all the players who is starting the turn.
+     * */
     void showTurnState(String user);
 
+    /**
+     * Prints a list containing the tiles that the player has picked.
+     * */
     void showTilesArray(List<Tile> tilesPicked);
 
+    /**
+     * Asks the player to select a number. To every number corresponds a different action in the game.
+     **/
     void askChoiceBeginTurn();
 
+    /**
+     *
+     * */
     void showLobby(List<String> nicknameList, int numPlayers);
 
+
+    /***/
     void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username);
+
+    /**
+     * Asks the player with who wants to chat and to type the messages that he wants to send.
+     * */
+    void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender);
+
+    /**
+     * Asks the player to type the messages that he wants to send to the other players
+     * */
+    void groupChat(List<String> bufferMessages);
 }

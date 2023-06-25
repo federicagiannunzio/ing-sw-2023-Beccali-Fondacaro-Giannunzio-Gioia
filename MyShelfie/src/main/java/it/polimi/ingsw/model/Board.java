@@ -42,11 +42,11 @@ public class Board implements Serializable {
     }
 
     /**
-     * sets the number of tiles on the board (at the beginning of the game) base don the number of players
+     * sets the number of tiles on the board (at the beginning of the game). The number of tiles on the board is based on the number of players
      *
      * @param n number of players
      */
-    public void inizializeRemainingTiles(int n) {
+    public void initializeRemainingTiles(int n) {
         switch (n) {
             case 2 -> this.remainingTiles = 29;
             case 3 -> this.remainingTiles = 37;
@@ -55,7 +55,7 @@ public class Board implements Serializable {
     }
 
     /**
-     * returns the tile in a specific position of the board
+     * Returns the tile in a specific position of the board
      *
      * @param i row of the tile that the Player wants to get
      * @param j column of the tile that the Player wants to get
@@ -63,11 +63,10 @@ public class Board implements Serializable {
     public Tile getTile(int i, int j) { return table[i][j];}
 
     /**
-     * check if the tile that the players wants to pick from the table is available,
+     * Takes a tile from the board, checking if it is available
      *
      * @param i row of the tile that the Player wants to get
      * @param j column of the tile that the Player wants to get
-     * @throws  notAvailableTileException
      */
     public Tile takeTileFromBoard(int i, int j){
         if(!checkTile(i,j)) {
@@ -80,15 +79,14 @@ public class Board implements Serializable {
         return t;
     }
 
-    //note: add numbers of player logic
     /**
-     * for each cell of the table picks a tile from the bag and place it in the cell
+     * Fills the board. For each cell of the table picks a tile from the bag and place it in the cell
      *
-     * @param n index ...
+     * @param n number of players - 2
      * @throws IOException if there's an error in the opening of the file
      */
     public void fillTheBoard(int n) throws IOException {
-        inizializeRemainingTiles(n+2);
+        initializeRemainingTiles(n+2);
         JSONArray available = openAvailableCellJson(n);
         for(int i = 0; i < available.length(); i++) {
             String position = available.get(i).toString();
@@ -100,8 +98,13 @@ public class Board implements Serializable {
         }
     }
 
-    public void inizializeBlackBoard(int n) throws IOException {
-        inizializeRemainingTiles(n+2);
+    /**
+     * Sets all the tiles of the board to black
+     *
+     *
+     * */
+    public void initializeBlackBoard(int n) throws IOException {
+        initializeRemainingTiles(n+2);
         JSONArray available = openAvailableCellJson(n);
         for(int i = 0; i < available.length(); i++) {
             String position = available.get(i).toString();
@@ -113,12 +116,13 @@ public class Board implements Serializable {
         }
     }
 
-    //maybe we should move this method in the controller
     /**
-     *
+     * Opens cell's JSON file that contains the coordinates of the cells that have to be filled o the board.
+     * The file contains an array, each cell of the array contains different available cells based on the number of players
+     * @param index the index of the cell of the JSON array in the file that we want to access.
      * */
     public JSONArray openAvailableCellJson(int index) throws IOException {
-        String data = new String(Files.readAllBytes(Paths.get("MyShelfie/src/main/resources/availableCells.json")));
+        String data = new String(Files.readAllBytes(Paths.get("src/main/resources/availableCells.json")));
         JSONArray jsonArray = new JSONArray(data);
 
         String str = jsonArray.get(index).toString();
@@ -128,7 +132,7 @@ public class Board implements Serializable {
     }
 
     /**
-     * checks if there are no more available Tiles, if so refreshes the board and returns it otherwise return null
+     * Checks if there are no more available tiles, if so refreshes the board and returns it otherwise return null
      *
      */
     public boolean refreshBoard() {
@@ -191,6 +195,12 @@ public class Board implements Serializable {
         }
     }
 
+    /**
+     * Check if the tiles that the player has picked are available by checking if there are adjacent tiles
+     *
+     * @param row contains the rows of the tiles picked by the player
+     * @param col contains the columns of the tiles picked by the player
+     * */
     public boolean adjacentTile(int[] row, int[] col) {
         int size = row.length;
         int counter = 0;

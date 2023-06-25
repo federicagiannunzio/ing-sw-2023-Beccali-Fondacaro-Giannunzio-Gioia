@@ -60,7 +60,7 @@ public class Bag implements Serializable {
 
     /**
      * this method should be called only at the beginning of every game,
-     * it generates the array that represents the bag, witch 22 tiles for each color
+     * it generates the array that represents the bag, which contains 22 tiles for each color
      */
     public void setBag() {
         for(int i=0; i<22; i++){

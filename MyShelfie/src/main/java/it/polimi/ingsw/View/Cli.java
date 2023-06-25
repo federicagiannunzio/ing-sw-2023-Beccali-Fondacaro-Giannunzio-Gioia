@@ -3,9 +3,12 @@ package it.polimi.ingsw.View;
 import it.polimi.ingsw.controller.Observer.Observable;
 import it.polimi.ingsw.controller.Observer.ViewObservable;
 import it.polimi.ingsw.model.*;
+import org.w3c.dom.ls.LSInput;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -366,8 +369,10 @@ public class Cli extends ViewObservable implements View {
         System.out.println("Please choose what do you want to do.");
         System.out.println("1) Start my turn.");
         System.out.println("2) View my personal goal.");
-        System.out.println("3) View my shelfie.");
+        System.out.println("3) View my shelf.");
         System.out.println("4) View common goals.");
+        System.out.println("5) Group chat.");
+        System.out.println("6) Private chat.");
     }
 
     public void askChoiceBeginTurn() {
@@ -376,9 +381,9 @@ public class Cli extends ViewObservable implements View {
         int tryChoice;
         do {
             tryChoice = Integer.parseInt(readLine());
-            if(tryChoice < 1 || tryChoice>4)
-                System.out.println("Please insert a valid number. The number should be selected between 1 and 4");
-        } while(tryChoice < 1 || tryChoice>4);
+            if(tryChoice < 1 || tryChoice>6)
+                System.out.println("Please insert a valid number. The number should be selected between 1 and 6");
+        } while(tryChoice < 1 || tryChoice>6);
         choice = tryChoice;
         notifyObserver(obs->obs.sendChoiceBeginTurn(choice));
     }
@@ -392,5 +397,64 @@ public class Cli extends ViewObservable implements View {
         }
     }
 
+    public void groupChat(List<String> bufferMessages){
+        System.out.println("Welcome to the group chat!");
+        System.out.println("If you want to quit the chat please type 'EXIT' ");
+        for( String m: bufferMessages)
+            System.out.println(m);
+        String message = null;
+        List <String> messages = new ArrayList<>();
+        while(!Objects.equals(message, "EXIT")) {
+            message = readLine();
+            if(!Objects.equals(message, "EXIT"))
+                messages.add(message);
+        }
 
+
+        List <String> finalMessages = messages;
+          /*
+        for(String ss: finalMessages) {
+            System.out.println(ss);
+        }
+        */
+
+        notifyObserver(obs->obs.sendChatMessage(null, finalMessages));
+    }
+
+    public void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender) {
+        String message = null;
+        String recipient = null;
+        List<String> messages = new ArrayList<>();
+
+        System.out.println("Which user would you like to send a private message? Please type one of these username: ");
+        for(String user : playersName)
+            if(!Objects.equals(user, sender))
+                System.out.println(user);
+        do {
+            recipient = readLine();
+            if(!playersName.contains(recipient))
+                System.out.println("This user doesn't exist, please type another username");
+            if(!Objects.equals(recipient, sender))
+                System.out.println("You can't send message to yourself, please type another username");
+
+        } while(!playersName.contains(recipient));
+
+        System.out.println("CHATROOM -> " + recipient);
+        System.out.println("If you want to quit the chat please type 'EXIT' ");
+
+        for(ArrayList<String> m:bufferMessages) {
+            if((Objects.equals(m.get(0), sender) && Objects.equals(m.get(1), recipient)) ||(Objects.equals(m.get(0), recipient) && Objects.equals(m.get(1), sender)) )
+                System.out.println(m.get(2));
+        }
+        while(!Objects.equals(message, "EXIT")){
+            message = readLine();
+            if(!Objects.equals(message, "EXIT"))
+                messages.add(message);
+        }
+
+        String finalRecipient = recipient;
+        List<String> finalMessages = messages;
+        notifyObserver(obs->obs.sendChatMessage(finalRecipient, finalMessages));
+
+    }
 }

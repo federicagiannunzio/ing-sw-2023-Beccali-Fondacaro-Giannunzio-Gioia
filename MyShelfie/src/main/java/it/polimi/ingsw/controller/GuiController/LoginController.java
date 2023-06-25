@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.GuiController;
 
+/*
 import it.polimi.ingsw.View.Gui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,3 +53,6 @@ public class LoginController {
         }
     }
 }
+*/
+
+

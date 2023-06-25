@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.Shelfie;
 import it.polimi.ingsw.network.Events.*;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 
 public class InputController implements Serializable {
@@ -23,27 +22,6 @@ public class InputController implements Serializable {
         this.gameController = gameController;
     }
 
-    /**
-     * Verify data sent by the client to server
-     *
-     * @param event message sent by the client
-     * @param view view for the active client
-     * @return {code @true} if it's a valid nickname {code @false} otherwise
-     */
-    public boolean verifyReceivedData(Event event, VirtualView view) {
-
-        switch(event.getEventType()) {
-            case LOGIN_REPLY:
-                LoginReplyEvent loginReplyEvent = (LoginReplyEvent) event;
-                return checkUsernameValidity(loginReplyEvent.getUser(), view);
-            case CHOOSE_TILE_REPLY:
-                return pickedTileCheck(event, view);
-            case PLACE_TILE_REPLY:
-                return insertedTileCheck(event, view);
-            default:
-                return false;
-        }
-    }
 
     /**
      * Check if a username is valid or not
@@ -87,6 +65,9 @@ public class InputController implements Serializable {
         }
     }
 
+    /**
+     * Check if the number of tiles that the player has chose is available.
+     * */
     public boolean numberOfTilesCheck(Event event, VirtualView view){
         TilesNumberReplyEvent numberOfTiles = ((TilesNumberReplyEvent) event);
         int tilesNumber = numberOfTiles.getNtiles();
@@ -109,7 +90,6 @@ public class InputController implements Serializable {
             return true;
     }
 
-    //da sistemare e rifare
     /**
      * receives a message from the client (receives the position of the shelf in which he wants to put ) and check if the position is empty.
      *
@@ -124,13 +104,13 @@ public class InputController implements Serializable {
         String activePlayerusername = gameController.getActivePlayer();
         PlaceTileReplyEvent tileToPlace= ((PlaceTileReplyEvent) event);
         int column = tileToPlace.getColumn();
-        Optional<Player> activePlayer = gameController.getPlayerByUsername(activePlayerusername);
-        if(activePlayer.isEmpty()) {
+        Player activePlayer = gameController.getPlayerByUser(activePlayerusername);
+        if(activePlayer == null) {
             System.out.println("This user doesn't exist");
             return false;
         }
 
-        Shelfie playerShelf = activePlayer.get().getMyShelfie();
+        Shelfie playerShelf = activePlayer.getMyShelfie();
         for(int i = 0; i < 6; i++){
             if(playerShelf.getStructure()[i][column] != null)
                 counter++;

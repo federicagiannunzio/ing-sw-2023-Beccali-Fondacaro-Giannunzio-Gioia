@@ -8,6 +8,7 @@ import it.polimi.ingsw.network.Events.*;
 import it.polimi.ingsw.network.Server.ClientHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VirtualView implements View, Observer {
@@ -129,6 +130,18 @@ public class VirtualView implements View, Observer {
     @Override
     public void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username){
         clientHandler.sendMessage(new LoginReplyEvent(username, usernameAccepted, connectionSuccessful));
+    }
+
+
+    @Override
+    public void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender) {
+      clientHandler.sendMessage(new PrivateChatRequestEvent(SERVER_NAME, playersName, true, bufferMessages, sender));
+    }
+
+
+    public void groupChat(List<String> bufferMessages) {
+        clientHandler.sendMessage(new ChatRequestEvent(SERVER_NAME, null, false, bufferMessages));
+
     }
 
     @Override

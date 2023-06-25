@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller.Observer;
 import it.polimi.ingsw.model.Tile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ViewObserver {
 
@@ -23,6 +24,8 @@ public interface ViewObserver {
     void sendServerInfo(String address, int port);
 
     void sendArrayTileIndex(int index);
+
+    void sendChatMessage(String recipient, List<String> messages);
 
 
 }

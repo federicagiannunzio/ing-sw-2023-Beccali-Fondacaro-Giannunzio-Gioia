@@ -36,7 +36,7 @@ public class personalGoal implements Serializable {
      * */
     public void createTheGoal(int id) throws Exception {
         try {
-            String data = new String(Files.readAllBytes(Paths.get("MyShelfie/src/main/resources/goals1.json")));
+            String data = new String(Files.readAllBytes(Paths.get("src/main/resources/goals1.json")));
             JSONArray jsonArray = new JSONArray(data);
 
             String str = jsonArray.get(id).toString();
@@ -74,7 +74,7 @@ public class personalGoal implements Serializable {
                 }
             }
         } catch (Exception e) {
-            System.out.println("This ID is not valid");
+            System.out.println("Error to access the file");
             throw new Exception();
         }
     }
@@ -115,8 +115,6 @@ public class personalGoal implements Serializable {
         return body;
     }
 
-
-    //(not sure this method should stay here but rather in the controller)
     /**
      * it should be called at the end of a turn to update the total of that player's points
      *

@@ -11,6 +11,7 @@ import it.polimi.ingsw.network.Events.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -39,8 +40,8 @@ public class ClientController implements ViewObserver, Observer {
     /**
      * Sends a message to the server that contains the address and the port to create a connection.
      *
-     * @param address
-     * @param port
+     * @param address the IP address
+     * @param port the port
      */
     public void sendServerInfo(String address, int port) {
         try {
@@ -55,7 +56,9 @@ public class ClientController implements ViewObserver, Observer {
     }
 
     /**
-     * Sends a message to the server with the player number chosen by the user
+     * Sends a message to the server with the number of players chosen by the user
+     *
+     * @param playersNum is the player's number
      */
     public void sendPlayersNumber(int playersNum) {
         client.sendMessage(new NumberOfUsersReplyEvent(this.username, playersNum));
@@ -71,7 +74,9 @@ public class ClientController implements ViewObserver, Observer {
     }
 
     /**
-     * Sends a message to the server that contains the number of tiles
+     * Sends a message to the server that contains the number of tiles that the player wants to pick
+     *
+     * @param numberOfTiles is the number of tiles chosen
      */
     public void sendTilesNumberChosen(int numberOfTiles) {
         client.sendMessage(new TilesNumberReplyEvent(this.username, numberOfTiles));
@@ -79,7 +84,10 @@ public class ClientController implements ViewObserver, Observer {
 
 
     /**
-     * Sends the server the position of the tile that the player wants to pick.
+     * Sends the server the position of the tiles that the player has picked
+     *
+     * @param row contains, for each tile picked, the row number on the board
+     * @param col contains, for each tile picked, the column number on the board
      */
     public void sendTilePosition(int[] row, int[]col) {
         client.sendMessage(new ChooseTileReplyEvent(this.username, row, col));
@@ -95,9 +103,9 @@ public class ClientController implements ViewObserver, Observer {
     }
 
     /**
-     * Sends the server the choice that the player did at the beginning of his turn: He can choose between 4 action.
+     * Sends the server the choice that the player did at the beginning of his turn: he can choose between 6 actions.
      *
-     * @param choice is the number that correspond to that choice
+     * @param choice is the number that correspond to the choice
      */
     public void sendChoiceBeginTurn(int choice) {
         client.sendMessage(new ChoiceBeginTurnEvent(this.username, choice));
@@ -111,9 +119,21 @@ public class ClientController implements ViewObserver, Observer {
      */
     public void sendArrayTileIndex(int index){client.sendMessage(new TileArrayReplyEvent(this.username, index));}
 
+    /**
+     * Sends the server the messages that a player wants to send to the others player
+     *
+     * @param recipient the recipient (if present) of the messages
+     * @param messages list of all the messages that will be sent
+     * */
+    public void sendChatMessage(String recipient, List<String> messages) {
+        client.sendMessage(new ChatMessageEvent(this.username, recipient, messages));
+    }
+
 
     /**
      * Message from the server
+     *
+     * @param event
      */
     @Override
     public void update(Event event) {
@@ -202,6 +222,17 @@ public class ClientController implements ViewObserver, Observer {
                 LoginReplyEvent loginReplyEvent = (LoginReplyEvent) event;
                 taskQueue.execute(()->view.showLoginResult(loginReplyEvent.isUsernameAccepted(), loginReplyEvent.isConnectionSuccessful(), loginReplyEvent.getUser()));
                 break;
+            case CHATINIT:
+                ChatRequestEvent chat = (ChatRequestEvent) event;
+                taskQueue.execute(()->view.groupChat(chat.getBuffer()));
+                break;
+            case PRIVATECHATINIT:
+                PrivateChatRequestEvent privatechat = (PrivateChatRequestEvent) event;
+                taskQueue.execute(()->view.privateChat(privatechat.getUsers(), privatechat.getBuffer(), privatechat.getSender()));
+                break;
+
+
+
         }
     }
 

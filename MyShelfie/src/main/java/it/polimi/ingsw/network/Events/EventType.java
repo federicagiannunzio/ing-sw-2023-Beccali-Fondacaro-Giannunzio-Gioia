@@ -35,5 +35,9 @@ public enum EventType {
     USERCONNECTED,
     USERDISCONNECTED,
 
-    LOBBY
+    LOBBY,
+
+    CHATINIT,
+    PRIVATECHATINIT,
+    CHATMESSAGE
 }

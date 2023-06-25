@@ -34,7 +34,7 @@ public class BoardTest {
 
     @Test
     public void remainingTilesGetterAndSetter_noTilesRemoved_correctOutput() {
-        board.inizializeRemainingTiles(3);
+        board.initializeRemainingTiles(3);
         assertEquals(37, board.getRemainingTiles());
     }
 
@@ -42,7 +42,7 @@ public class BoardTest {
     public void getRemainingTiles_someTilesRemoved_correctOutput() throws IOException, notAvailableTileException {
         bag.setBag();
         board.fillTheBoard(1);
-        board.inizializeRemainingTiles(3);
+        board.initializeRemainingTiles(3);
         Tile t = board.takeTileFromBoard(2,2);
         assertEquals(36, board.getRemainingTiles());
     }
@@ -50,7 +50,7 @@ public class BoardTest {
     @Test
     public void fillTheBoard_fullBoard_correctNumberOfTiles() throws IOException {
         bag.setBag();
-        board.inizializeRemainingTiles(3);
+        board.initializeRemainingTiles(3);
         board.fillTheBoard(1);
         Tile [][] m = board.getBoard();
         int counter = 0;
@@ -69,7 +69,7 @@ public class BoardTest {
     public void checkTiles_legalTileChose_correctOutput() throws IOException {
         bag.setBag();
         board.fillTheBoard(1);
-        board.inizializeRemainingTiles(3);
+        board.initializeRemainingTiles(3);
         assertTrue(board.checkTile(2,2));
     }
 
@@ -77,7 +77,7 @@ public class BoardTest {
     public void checkTiles_IllegalTileChose_correctOutput() throws IOException {
         bag.setBag();
         board.fillTheBoard(1);
-        board.inizializeRemainingTiles(3);
+        board.initializeRemainingTiles(3);
         assertFalse(board.checkTile(4,4));
     }
 
@@ -85,7 +85,7 @@ public class BoardTest {
     public void takeTileFromBoard_legalTileChose_correctOutput() throws IOException, notAvailableTileException {
         bag.setBag();
         board.fillTheBoard(1);
-        board.inizializeRemainingTiles(3);
+        board.initializeRemainingTiles(3);
 
         assertEquals(board.getTile(2,2), board.takeTileFromBoard(2,2));
     }
@@ -94,7 +94,7 @@ public class BoardTest {
     public void takeTileFromBoard_IllegalTileChose_correctOutput() throws IOException {
         bag.setBag();
         board.fillTheBoard(1);
-        board.inizializeRemainingTiles(3);
+        board.initializeRemainingTiles(3);
         assertNull(board.takeTileFromBoard(4, 4));
 
     }
@@ -118,7 +118,7 @@ public class BoardTest {
     @Test
     public void refreshBoard_oneTile_correctOutput() throws IOException {
         bag.setBag();
-        board.inizializeBlackBoard(1);
+        board.initializeBlackBoard(1);
         board.setTile(3,3 , Color.PURPLE);
         assertTrue(board.refreshBoard());
     }

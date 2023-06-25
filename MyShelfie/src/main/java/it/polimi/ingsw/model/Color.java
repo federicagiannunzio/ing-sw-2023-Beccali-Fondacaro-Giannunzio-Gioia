@@ -29,6 +29,9 @@ public enum Color {
         return code;
     }
 
+    /**
+     * Parse to string a color (the color of the tiles).
+     * */
     public String parseToString(Color color) {
         String colorString = null;
         switch(color) {

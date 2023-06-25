@@ -34,10 +34,9 @@ public class Shelfie implements Serializable {
     public Tile getCell(int i, int j) {return structure[i][j];}
 
     /**
-     * receives a Tile and modify the Shelfie
+     * receives a Tile and modify the shelf
      * @param t tile selected from the board
      * @param j counter for columns
-     * @throws FullColumnException is thrown when the column is full
      */
     public void addTile(Tile t, int j){
         boolean placed = false;
@@ -49,12 +48,19 @@ public class Shelfie implements Serializable {
             }
     }
 
+    /**
+     * Insert a tile in a specific position of the shelf
+     *
+     * @param i the row of the shelf in which the tile will be inserted
+     * @param j the column of the shelf in which the tile will be inserted
+     * @param t the tile that will be inserted
+     */
     public void setShelfTile(int i, int j, Tile t){
         this.structure[i][j] = t;
     }
 
     /**
-     * this method calculates the points that must be given to a player due to the groups of adjacent tiles in his shelfie
+     * this method calculates the points that must be given to a player due to the groups of adjacent tiles in his shelf
      * @return are returned the number of points that the player gets for the adjacency of several tiles of the same color
      */
     public int[] adjacentItem(){

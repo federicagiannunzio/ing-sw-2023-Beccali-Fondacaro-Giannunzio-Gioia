@@ -6,10 +6,7 @@ import it.polimi.ingsw.model.*;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class TurnController implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -41,13 +38,19 @@ public class TurnController implements Serializable {
         controller.broadcastGenericMessage("The game is starting!");
         startTurn();
     }
+
+    /**
+     * Notify all the players which one is starting his turn and ask the current player what he wants to do
+     * */
     private void startTurn(){
         controller.broadcastGenericMessage("It's " + currentUser + "'s turn!!");
         view = virtualViewMap.get(currentUser);
-        //view.showTurnState(currentUser);
         view.askChoiceBeginTurn();
     }
 
+    /**
+     * At the end of every turn check if someone has completed his shelf, passes the turn to the next player and refreshes the board if necessary
+     * */
     private void endTurn(){
         boolean refresh = false;
         view.showMyPoints(players.get(currentPlayerIndex).getPoints());
@@ -74,6 +77,9 @@ public class TurnController implements Serializable {
             controller.endGame();
     }
 
+    /**s
+     * Switch case based on the number that the player types at the beginning of his turn. Each umber correspond to a different action of the game
+     * */
     public void beginTurnChoice(){
             Player p = players.get(currentPlayerIndex);
             int choice = controller.getChoosedChoise();
@@ -96,9 +102,36 @@ public class TurnController implements Serializable {
                     view.showCommonGoals(controller.getCommonGoals().get(1).getGoalsName());
                     view.askChoiceBeginTurn();
                     break;
+                case 5:
+                    ArrayList<String> messages = new ArrayList<>();
+                    for(ArrayList<String> s: controller.getMessagesBuffer()) {
+                        if(Objects.equals(s.get(1), "all")) {
+                            messages.add(s.get(2));
+                        }
+                    }
+                    view.groupChat(messages);
+                    view.askChoiceBeginTurn();
+                    break;
+                case 6:
+                    ArrayList<ArrayList<String>> privateMessages = new ArrayList<>();
+                    for(ArrayList<String> s: controller.getMessagesBuffer()) {
+                        if(!Objects.equals(s.get(1), "all")) {
+                            ArrayList<String> pm = new ArrayList<>();
+                            pm.add(s.get(0));
+                            pm.add(s.get(1));
+                            pm.add(s.get(2));
+                            privateMessages.add(pm);
+                        }
+                    }
+                    view.privateChat(controller.getNicknames(), privateMessages, currentUser);
+                    view.askChoiceBeginTurn();
+                    break;
             }
         }
 
+    /**
+     * Sends a message to the current player to pick the tiles from the board
+     * */
     public void tilesPicking(){
         int tilesNumber, i;
         Player p = players.get(currentPlayerIndex);
@@ -111,6 +144,9 @@ public class TurnController implements Serializable {
         }
     }
 
+    /**
+     * Sends a message to the current player to choose the column in which the player will place the tiles
+     * */
     public void tilesPlacing(){
         Player p = players.get(currentPlayerIndex);
         if(!p.getMyTiles().isEmpty()) {
@@ -120,6 +156,9 @@ public class TurnController implements Serializable {
             pointsUpdating();
     }
 
+    /**
+     *Update the points of that player
+     * */
     public void pointsUpdating(){
         int personalPoints, commonPoints1 = 0, commonPoints2 = 0, adjacentPoints;
         int[] pointsArr = new int[5];
@@ -149,6 +188,11 @@ public class TurnController implements Serializable {
         endTurn();
     }
 
+    /**
+     * Remove the virtual view that correspond to the player specified
+     *
+     * @param user the user which virtual view will be removed
+     * */
     public void removeVirtualViewMap(String user){
         virtualViewMap.remove(user);
     }

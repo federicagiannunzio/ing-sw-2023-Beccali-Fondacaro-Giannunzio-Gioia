@@ -42,6 +42,9 @@ public class GameController implements Observer, Serializable {
     private int choosedArrayIndex;
     private boolean flag;
 
+    //for the chat
+    ArrayList<ArrayList<String>> messagesBuffer = new ArrayList();
+
 
     private Random r = new Random();
 
@@ -67,6 +70,12 @@ public class GameController implements Observer, Serializable {
         return board;
     }
 
+    public InputController getInputController() { return inputController;}
+
+    public Map<String, VirtualView> getVirtualViewMap() {
+        return virtualViewMap;
+    }
+
     public TurnController getTurnController() {
         return currentTurn;
     }
@@ -77,7 +86,9 @@ public class GameController implements Observer, Serializable {
 
     public List<Integer> getSecondGoalPoints(){return secondGoalPoints;}
 
-    private void initGoalPoints(List<Integer> list){
+    public ArrayList<ArrayList<String>> getMessagesBuffer() {return messagesBuffer;}
+
+    public void initGoalPoints(List<Integer> list){
         list.add(8);
         list.add(6);
         list.add(4);
@@ -90,6 +101,10 @@ public class GameController implements Observer, Serializable {
         return i;
     }
 
+    /**
+     *
+     *
+     * */
     public void playerJoin(String username, ClientHandler handler){
         VirtualView VView = new VirtualView(handler);
         if(maxPlayers == 0) {
@@ -119,8 +134,8 @@ public class GameController implements Observer, Serializable {
 
     }
 
+    /***/
      public void startGame() throws Exception {
-         System.out.println("ciao");
         inGame = true;
 
         //bag init
@@ -129,19 +144,16 @@ public class GameController implements Observer, Serializable {
 
         //board init
         board.fillTheBoard(players.size()-2);
-         System.out.println("ciao2");
         //Common goals
         CommonGoal firstGoal = pickCommonGoal();
         CommonGoal secondGoal = pickCommonGoal();
         while (secondGoal.equals(firstGoal)){
             secondGoal = pickCommonGoal();
         }
-         System.out.println("ciao3");
         commonGoals.add(firstGoal);
         commonGoals.add(secondGoal);
         initGoalPoints(firstGoalPoints);
         initGoalPoints(secondGoalPoints);
-         System.out.println("ciao3");
         //Personal goals
         for(Player p: players){
             int random = r.nextInt(11);
@@ -153,12 +165,15 @@ public class GameController implements Observer, Serializable {
             goal.createTheGoal(random);
             p.setPersonalGoal(goal);
         }
-         System.out.println("ciao3");
+
 
         currentTurn = new TurnController(this, virtualViewMap);
 
     }
 
+    /**
+     *
+     * */
     public void endGame(){
         Player winner = players.get(0);
         for(Player p: players){
@@ -172,6 +187,8 @@ public class GameController implements Observer, Serializable {
         }
         initController();
     }
+
+
     @Override
     public void update(Event event) {
 
@@ -191,7 +208,7 @@ public class GameController implements Observer, Serializable {
                 break;
             case FIRSTPLAYER_REPLY:
                 FirstPlayerReplyEvent firstEvent = (FirstPlayerReplyEvent) event;
-                first = players.indexOf(getPlayerByUsername(firstEvent.getFirstPlayer()));
+                first = players.indexOf(getPlayerByUser(firstEvent.getFirstPlayer()));
                 break;
             case TILES_NUMBER_REPLY:
                 TilesNumberReplyEvent chooseNumber = (TilesNumberReplyEvent) event;
@@ -237,100 +254,66 @@ public class GameController implements Observer, Serializable {
                 else
                     virtualViewMap.get(tileArray.getUser()).askPlacingTile(getPlayerByUser(tileArray.getUser()).getMyTiles());
                 break;
+            case CHATMESSAGE:
+                ChatMessageEvent chatMessageEvent = (ChatMessageEvent) event;
+                String recipient = chatMessageEvent.getRecipient();
+                String sender = chatMessageEvent.getUser();
+
+                if(recipient!=null) {
+                    for(String message : chatMessageEvent.getMessages()) {
+                        ArrayList<String> a = new ArrayList<>();
+                        a.add(sender);
+                        a.add(recipient);
+                        a.add(sender + ": " + message);
+                        messagesBuffer.add(a);
+                    }
+                } else {
+                    for(String message : chatMessageEvent.getMessages()) {
+                        ArrayList<String> a = new ArrayList<>();
+
+                        a.add(sender);
+                        a.add("all");
+                        a.add(sender + ": " + message);
+                        messagesBuffer.add(a);
+                    }
+                }
+                break;
         }
 
     }
 
-    public void sendLogInRequest(VirtualView view, String username) {
-        view.showLoginResult(true, true, username);
-    }
-
+    /**
+     * The server sends a message to all the players
+     *
+     * @param string the message from the server
+     * */
     public void broadcastGenericMessage(String string){
         for(Player player : players){
             getVirutalViewByUser(player.getUsername()).showGenericMessage(string);
         }
     }
 
+    /**
+     * Removes a player from the list of players
+     *
+     * @param user the player that will be removed
+     * */
     public void removePlayer(String user){
         players.remove(getPlayerByUser(user));
     }
-    public void sendNumberOfUserRequest(VirtualView view) {
-        view.askPlayersNumber();
-    }
 
-    public void sendFirstPlayerRequest(VirtualView view) {
-        view.askFirstPLayer(players.stream().map( (p) -> p.getUsername()).collect(Collectors.toList()));
-    }
-
-    public void sendTilesNumberRequest(VirtualView view) {
-        view.askTilesNumber();
-    }
-    public void placeTilesRequest(VirtualView view, List<Tile> tilesList) {
-        view.askPlacingTile(tilesList);
-    }
-
-    public void tilesArrayRequest(VirtualView view, List<Tile> tilesList) {
-        view.showTilesArray(tilesList);
-    }
-
-    public void showBoardCommand(VirtualView view) {
-        view.showBoard(board.getBoard());
-    }
-
-    public void showShelfieCommand(VirtualView view, Shelfie playerShelfie) {
-        view.showMyShelfie(playerShelfie.getStructure());
-    }
-
-    public void sendCommonGoalCommand(VirtualView view, CommonGoal goal) {
-        view.showCommonGoals(goal.getGoalsName());
-    }
-
-    public void showCurrentPointsCommand(VirtualView view, Player player) {
-        view.showMyPoints(player.getPoints());
-    }
-
-    public void sendTurnStateRequest(VirtualView view, Player p) {
-        view.showTurnState(p.getUsername());
-    }
-
-    public void CommonGoalNotify(VirtualView view, CommonGoal goal, Player p, int points) {
-        view.showCommonGoalCompletion(p.getUsername(), goal.getGoalsName().name(), points);
-    }
 
     public void winnerNotify(VirtualView view, String user){
         view.showWinMessage(user);
     }
 
-    public List<Player> getPlayers(){
-        List<Player> tmp = new ArrayList<>();
-        tmp.addAll(players);
-        return tmp;
-    }
 
-    public Optional<Player> getPlayerByUsername(String username){
-        Player tmp = null;
-        for(Player p : players){
-            if(p.getUsername().equals(username)){
-                tmp = p;
-            }
-        }
-        return tmp == null ? Optional.empty() : Optional.of(tmp);
+    public List<Player> getPlayers() {
+        return players;
     }
 
     public int getChoosedTileNumber(){
         return choosedTileNumber;
-    }
-
-    public int[] getChoosedTileRow(){
-        return choosedTileRow;
-    }
-
-    public int[] getChoosedTileColumn(){
-        return choosedTileColumn;
-    }
-
-    public int getChoosedColumn(){
-        return choosedColumn;
     }
 
     public int getChoosedChoise(){
@@ -395,6 +378,10 @@ public class GameController implements Observer, Serializable {
             default:
                 return null;
         }
+    }
+
+    public void addPlayer(Player p) {
+        players.add(p);
     }
 
 }
