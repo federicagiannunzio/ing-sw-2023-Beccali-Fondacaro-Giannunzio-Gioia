@@ -81,6 +81,7 @@ public class TurnController implements Serializable {
      * Switch case based on the number that the player types at the beginning of his turn. Each umber correspond to a different action of the game
      * */
     public void beginTurnChoice(){
+        if(players.size() != 0) {
             Player p = players.get(currentPlayerIndex);
             int choice = controller.getChoosedChoise();
             switch (choice) {
@@ -104,8 +105,8 @@ public class TurnController implements Serializable {
                     break;
                 case 5:
                     ArrayList<String> messages = new ArrayList<>();
-                    for(ArrayList<String> s: controller.getMessagesBuffer()) {
-                        if(Objects.equals(s.get(1), "all")) {
+                    for (ArrayList<String> s : controller.getMessagesBuffer()) {
+                        if (Objects.equals(s.get(1), "all")) {
                             messages.add(s.get(2));
                         }
                     }
@@ -114,8 +115,8 @@ public class TurnController implements Serializable {
                     break;
                 case 6:
                     ArrayList<ArrayList<String>> privateMessages = new ArrayList<>();
-                    for(ArrayList<String> s: controller.getMessagesBuffer()) {
-                        if(!Objects.equals(s.get(1), "all")) {
+                    for (ArrayList<String> s : controller.getMessagesBuffer()) {
+                        if (!Objects.equals(s.get(1), "all")) {
                             ArrayList<String> pm = new ArrayList<>();
                             pm.add(s.get(0));
                             pm.add(s.get(1));
@@ -128,6 +129,7 @@ public class TurnController implements Serializable {
                     break;
             }
         }
+    }
 
     /**
      * Sends a message to the current player to pick the tiles from the board

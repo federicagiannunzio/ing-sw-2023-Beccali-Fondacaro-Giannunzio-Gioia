@@ -243,6 +243,10 @@ public class Cli extends ViewObservable implements View {
         System.out.println(strRowBld);
     }
 
+    public boolean checkValidConnection(String connectionType){
+        return connectionType.matches("Socket") || connectionType.matches("socket") || connectionType.matches("RMI") || connectionType.matches("rmi");
+    }
+
 
     @Override
     public void showCommonGoals(CommonGoalsName name) {
