@@ -243,6 +243,10 @@ public class Cli extends ViewObservable implements View {
         System.out.println(strRowBld);
     }
 
+    public boolean checkValidConnection(String connectionType){
+        return connectionType.matches("Socket") || connectionType.matches("socket") || connectionType.matches("RMI") || connectionType.matches("rmi");
+    }
+
 
     @Override
     public void showCommonGoals(CommonGoalsName name) {
@@ -434,10 +438,10 @@ public class Cli extends ViewObservable implements View {
             recipient = readLine();
             if(!playersName.contains(recipient))
                 System.out.println("This user doesn't exist, please type another username");
-            if(!Objects.equals(recipient, sender))
+            if(Objects.equals(recipient, sender))
                 System.out.println("You can't send message to yourself, please type another username");
 
-        } while(!playersName.contains(recipient));
+        } while(!playersName.contains(recipient) || Objects.equals(recipient, sender));
 
         System.out.println("CHATROOM -> " + recipient);
         System.out.println("If you want to quit the chat please type 'EXIT' ");

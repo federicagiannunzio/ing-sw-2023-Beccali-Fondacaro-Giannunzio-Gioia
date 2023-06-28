@@ -64,6 +64,7 @@ public class GameController implements Observer, Serializable {
         board = new Board(bag);
         this.firstGoalPoints = new ArrayList<>();
         this.secondGoalPoints = new ArrayList<>();
+        this.maxPlayers = 0;
     }
 
     public Board getBoard() {
@@ -175,15 +176,18 @@ public class GameController implements Observer, Serializable {
      *
      * */
     public void endGame(){
-        Player winner = players.get(0);
-        for(Player p: players){
-            if(p.getPoints() > winner.getPoints()){
-                winner = p;
+        Player winner;
+        System.out.println("A");
+        if(players.size() != maxPlayers) {
+            winner = players.get(0);
+            for (Player p : players) {
+                if (p.getPoints() > winner.getPoints()) {
+                    winner = p;
+                }
             }
-        }
-
-        for(VirtualView v : virtualViewMap.values()){
-            winnerNotify(v, winner.getUsername());
+            for(VirtualView v : virtualViewMap.values()){
+                winnerNotify(v, winner.getUsername());
+            }
         }
         initController();
     }

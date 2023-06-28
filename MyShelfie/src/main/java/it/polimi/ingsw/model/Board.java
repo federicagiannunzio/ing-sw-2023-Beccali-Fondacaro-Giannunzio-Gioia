@@ -122,7 +122,7 @@ public class Board implements Serializable {
      * @param index the index of the cell of the JSON array in the file that we want to access.
      * */
     public JSONArray openAvailableCellJson(int index) throws IOException {
-        String data = new String(Files.readAllBytes(Paths.get("src/main/resources/availableCells.json")));
+        String data = new String(Files.readAllBytes(Paths.get("MyShelfie/src/main/resources/availableCells.json")));
         JSONArray jsonArray = new JSONArray(data);
 
         String str = jsonArray.get(index).toString();
