@@ -51,11 +51,9 @@ public class Server{
                 gameController.virtualViewMap.remove(user);
 
             }
-            //if(gameController.isInGame()){
                 gameController.broadcastGenericMessage("The player " + user + " has disconnected from the game.");
                 gameController.endGame();
                 clientHandlerMap.clear();
-            //}
         }
 
     }

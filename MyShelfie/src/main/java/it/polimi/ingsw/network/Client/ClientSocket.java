@@ -40,6 +40,8 @@ public class ClientSocket extends Client{
                     event = (Event) input.readObject();
                 } catch (IOException | ClassNotFoundException exc) {
                     event = new ErrorEvent(null, "Unable to reach the server");
+                    System.out.println("Unable to reach the server, closing connection...");
+                    closeConnection();
                 }
                 notifyObserver(event);
             }

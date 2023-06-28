@@ -14,18 +14,6 @@ public abstract class ViewObservable {
         observers.add(observer);
     }
 
-    public void addAllObservers(List<ViewObserver> observerList) {
-        observers.addAll(observerList);
-    }
-
-    public void removeObserver(ViewObserver observer){
-        observers.remove(observer);
-    }
-
-    public void removeAllObservers(List<ViewObserver> observerList) {
-        observers.removeAll(observerList);
-    }
-
     protected void notifyObserver(Consumer<ViewObserver> consumer) {
         for (ViewObserver observer : observers) {
             consumer.accept(observer);

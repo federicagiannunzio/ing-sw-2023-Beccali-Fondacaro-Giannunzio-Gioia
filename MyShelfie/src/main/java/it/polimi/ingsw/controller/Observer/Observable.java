@@ -19,15 +19,6 @@ public class Observable {
     }
 
     /**
-     * Removes an observer.
-     *
-     * @param observer the observer that will be removed
-     * */
-    public void removeObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    /**
      * Notifies all the current observers through the update method and passes to them a {@link Event}.
      *
      * @param event the message to be passed to the observers.

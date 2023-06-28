@@ -135,7 +135,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender) {
-      clientHandler.sendMessage(new PrivateChatRequestEvent(SERVER_NAME, playersName, true, bufferMessages, sender));
+      clientHandler.sendMessage(new PrivateChatRequestEvent(SERVER_NAME, playersName, bufferMessages, sender));
     }
 
 

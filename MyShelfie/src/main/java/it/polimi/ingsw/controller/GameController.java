@@ -32,15 +32,12 @@ public class GameController implements Observer, Serializable {
     private boolean inGame;
     private TurnController currentTurn;
     private InputController inputController;
-
-    //per il turn controller
     private int choosedTileNumber;
     private int choosedTileRow[];
     private int choosedTileColumn[];
     private int choosedColumn;
     private int choosedChoice;
     private int choosedArrayIndex;
-    private boolean flag;
 
     //for the chat
     ArrayList<ArrayList<String>> messagesBuffer = new ArrayList();
@@ -177,7 +174,6 @@ public class GameController implements Observer, Serializable {
      * */
     public void endGame(){
         Player winner;
-        System.out.println("A");
         if(players.size() != maxPlayers) {
             winner = players.get(0);
             for (Player p : players) {
@@ -197,15 +193,6 @@ public class GameController implements Observer, Serializable {
     public void update(Event event) {
 
         switch (event.getEventType()){
-            /*case LOGIN_REQUEST:
-                LoginRequestEvent login = (LoginRequestEvent) event;
-                inputController.checkUsernameValidity(login.getUser(), )
-                if(playerJoin(login.getUser())){
-                    //send to client
-                }else{
-                    //send to client
-                }
-                break;*/
             case NUMBER_OF_USERS_REPLY:
                 NumberOfUsersReplyEvent nOfUser = (NumberOfUsersReplyEvent) event;
                 maxPlayers = nOfUser.getNumPlayers();

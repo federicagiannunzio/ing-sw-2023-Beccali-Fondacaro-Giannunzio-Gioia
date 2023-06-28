@@ -126,25 +126,6 @@ public class InputController implements Serializable {
     }
 
     /**
-     * Check player number reply message.
-     * The client send to the server the number of player that wants for this game.
-     *
-     * @param event message from the client
-     *
-     */
-    public boolean playerNumberReplyCheck(Event event, VirtualView view) {
-        NumberOfUsersReplyEvent playerNumberMessage = (NumberOfUsersReplyEvent) event;
-
-        if(playerNumberMessage.getNumPlayers() > 4 && playerNumberMessage.getNumPlayers() < 1) {
-            return true;
-        } else {
-            view.showGenericMessage("Please select a valid number of players");
-            view.askPlayersNumber();
-            return false;
-        }
-    }
-
-    /**
      * check if the message is sent from the active player
      *
      * @param event message from client

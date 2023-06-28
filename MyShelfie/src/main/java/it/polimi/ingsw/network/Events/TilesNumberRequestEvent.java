@@ -2,7 +2,6 @@ package it.polimi.ingsw.network.Events;
 
 
 public class TilesNumberRequestEvent extends Event{
-    private int numberOfTiles;
 
     public TilesNumberRequestEvent(String user) {
         super(user, EventType.TILES_NUMBER_REQUEST);

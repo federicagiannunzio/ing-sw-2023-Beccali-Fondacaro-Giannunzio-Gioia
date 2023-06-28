@@ -1,6 +1,5 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.controller.Observer.Observable;
 import it.polimi.ingsw.controller.Observer.ViewObservable;
 import it.polimi.ingsw.model.*;
 import org.w3c.dom.ls.LSInput;
@@ -243,11 +242,6 @@ public class Cli extends ViewObservable implements View {
         System.out.println(strRowBld);
     }
 
-    public boolean checkValidConnection(String connectionType){
-        return connectionType.matches("Socket") || connectionType.matches("socket") || connectionType.matches("RMI") || connectionType.matches("rmi");
-    }
-
-
     @Override
     public void showCommonGoals(CommonGoalsName name) {
         switch(name) {
@@ -416,12 +410,6 @@ public class Cli extends ViewObservable implements View {
 
 
         List <String> finalMessages = messages;
-          /*
-        for(String ss: finalMessages) {
-            System.out.println(ss);
-        }
-        */
-
         notifyObserver(obs->obs.sendChatMessage(null, finalMessages));
     }
 
