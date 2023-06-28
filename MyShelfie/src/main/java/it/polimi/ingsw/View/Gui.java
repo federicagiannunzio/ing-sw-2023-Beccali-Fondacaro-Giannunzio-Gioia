@@ -1,6 +1,6 @@
 package it.polimi.ingsw.View;
 
-/*
+
 import it.polimi.ingsw.controller.GuiController.ConnectionController;
 import it.polimi.ingsw.controller.GuiController.LobbySceneController;
 import it.polimi.ingsw.controller.GuiController.LoginController;
@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gui extends ViewObservable implements View {
@@ -131,6 +132,16 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
+    public void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender) {
+
+    }
+
+    @Override
+    public void groupChat(List<String> bufferMessages) {
+
+    }
+
+    @Override
     public void askPlayersNumber() {
         System.out.println("asking player number");
         sendPlayerNumber(LSController.getPlayerNumber());
@@ -237,5 +248,5 @@ public class Gui extends ViewObservable implements View {
     }
 
 }
-*/
+
 
