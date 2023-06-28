@@ -127,6 +127,16 @@ public class TurnController implements Serializable {
                     view.privateChat(controller.getNicknames(), privateMessages, currentUser);
                     view.askChoiceBeginTurn();
                     break;
+                case 7:
+                    for(Player player: controller.getPlayers()) {
+                        if(!player.getUsername().equals(currentUser)) {
+                            view.showGenericMessage("   " + player.getUsername());
+                            view.showMyShelfie(player.getMyShelfie().getStructure());
+                        }
+                    }
+                    view.askChoiceBeginTurn();
+                    break;
+
             }
         }
     }
