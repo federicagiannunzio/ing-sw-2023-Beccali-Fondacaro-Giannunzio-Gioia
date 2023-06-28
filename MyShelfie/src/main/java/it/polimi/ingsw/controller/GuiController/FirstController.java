@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller.GuiController;
 
-
+/*
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -37,5 +37,7 @@ public class FirstController {
     }
 
 }
+
+ */
 
 

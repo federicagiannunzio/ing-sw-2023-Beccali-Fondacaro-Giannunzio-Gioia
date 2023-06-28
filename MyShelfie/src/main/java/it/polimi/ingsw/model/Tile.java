@@ -29,7 +29,7 @@ public class Tile implements Serializable {
     /**
      * returns the id of this tile
      *
-     * @ return id
+     * @return id
      */
     public int getId() {
         return id;

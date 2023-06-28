@@ -1,6 +1,4 @@
-package it.polimi.ingsw.controller.Observer;
-
-import it.polimi.ingsw.View.View;
+package it.polimi.ingsw.Observer;
 
 import java.util.ArrayList;
 import java.util.List;

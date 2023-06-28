@@ -135,7 +135,7 @@ public class TurnController implements Serializable {
      * Sends a message to the current player to pick the tiles from the board
      * */
     public void tilesPicking(){
-        int tilesNumber, i;
+        int tilesNumber;
         Player p = players.get(currentPlayerIndex);
         tilesNumber = controller.getChoosedTileNumber();
         if(p.getMyTiles().isEmpty())
@@ -197,5 +197,9 @@ public class TurnController implements Serializable {
      * */
     public void removeVirtualViewMap(String user){
         virtualViewMap.remove(user);
+    }
+
+    public Map<String, VirtualView> getVirtualViewMap() {
+        return virtualViewMap;
     }
 }

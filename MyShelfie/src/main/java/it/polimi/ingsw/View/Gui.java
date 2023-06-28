@@ -1,6 +1,6 @@
 package it.polimi.ingsw.View;
 
-
+/*
 import it.polimi.ingsw.controller.GuiController.ConnectionController;
 import it.polimi.ingsw.controller.GuiController.LobbySceneController;
 import it.polimi.ingsw.controller.GuiController.LoginController;
@@ -248,5 +248,7 @@ public class Gui extends ViewObservable implements View {
     }
 
 }
+
+ */
 
 

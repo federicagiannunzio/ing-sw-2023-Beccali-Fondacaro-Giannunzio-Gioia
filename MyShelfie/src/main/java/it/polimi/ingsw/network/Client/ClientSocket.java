@@ -1,13 +1,11 @@
 package it.polimi.ingsw.network.Client;
 
-import it.polimi.ingsw.controller.Observer.Observable;
 import it.polimi.ingsw.network.Events.ErrorEvent;
 import it.polimi.ingsw.network.Events.Event;
 
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

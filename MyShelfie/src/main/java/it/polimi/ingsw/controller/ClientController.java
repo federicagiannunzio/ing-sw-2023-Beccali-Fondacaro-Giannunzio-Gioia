@@ -1,16 +1,14 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.controller.Observer.Observer;
+import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.View.View;
-import it.polimi.ingsw.controller.Observer.ViewObserver;
-import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.network.Client.Client;
 
 import it.polimi.ingsw.network.Client.ClientSocket;
 import it.polimi.ingsw.network.Events.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
