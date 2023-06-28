@@ -1,6 +1,6 @@
 package it.polimi.ingsw.View;
 
-/*
+
 import it.polimi.ingsw.controller.ClientController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,4 +28,3 @@ public class MainGui extends Application {
 }
 
 
- */

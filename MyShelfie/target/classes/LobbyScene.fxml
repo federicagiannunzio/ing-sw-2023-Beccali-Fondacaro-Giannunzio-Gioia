@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0">
          <image>
-            <Image url="@Graphics/misc/sfondo_parquet.jpg" />
+            <Image url="@Graphics/misc/sfondo parquet.jpg" />
          </image>
       </ImageView>
       <Label fx:id="matchID" layoutX="243.0" layoutY="132.0" text="Match ID:  12667238" />

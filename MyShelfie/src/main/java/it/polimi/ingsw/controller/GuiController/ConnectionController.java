@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller.GuiController;
 
-/*
+
 import it.polimi.ingsw.View.Gui;
 import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.controller.ClientController;
@@ -55,4 +55,4 @@ public class ConnectionController{
     }
 
 }
-*/
+
