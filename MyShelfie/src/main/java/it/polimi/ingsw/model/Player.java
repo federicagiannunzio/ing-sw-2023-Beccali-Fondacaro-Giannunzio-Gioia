@@ -105,11 +105,17 @@ public class Player implements Serializable {
         }
 
         /**
-         * Sets {@link #commonFlag1} true if the player completes the first common goal
+         * Sets {@link #commonFlag1} false if the player completes the first common goal
          *
-         * @param isFirst boolean to say if the player is the first player
-         * */
+         * @param flag is false if the player has completed the goal
+         */
         public void setCommonFlag1(boolean flag){this.commonFlag1 = flag;}
+
+        /**
+         * Sets {@link #commonFlag1} false if the player completes the second common goal
+         *
+         * @param flag is false if the player has completed the goal
+         */
         public void setCommonFlag2(boolean flag){this.commonFlag2 = flag;}
 
         public boolean getCommonFlag1(){return commonFlag1;}
