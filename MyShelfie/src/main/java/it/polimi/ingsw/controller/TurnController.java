@@ -7,7 +7,9 @@ import it.polimi.ingsw.model.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
-
+/**
+ * This Class contains all methods used to manage every single turn of the match.
+ */
 public class TurnController implements Serializable {
     private static final long serialVersionUID = 1L;
     private String currentUser;
@@ -21,13 +23,26 @@ public class TurnController implements Serializable {
     private boolean endGame;
     private boolean playerFinished;
 
-    public TurnController(GameController GameController, Map<String, VirtualView> virtualViewMap){
-        this.controller = GameController;
-        this.board = GameController.getBoard();
+    /**
+     * Constructor of the Turn Controller.
+     *
+     * @param virtualViewMap Virtual View Map of all Clients.
+     * @param gameController Game Controller.
+     */
+    public TurnController(GameController gameController, Map<String, VirtualView> virtualViewMap){
+        this.controller = gameController;
+        this.board = gameController.getBoard();
         this.virtualViewMap = virtualViewMap;
         initTurn();
     }
 
+
+    /**
+     * Initializes a new turn in the game.
+     * This method sets up the initial state for a turn, including determining the first player,
+     * setting them as the current user, and broadcasting a generic message to indicate the start of the game.
+     * After initialization, the {@link #startTurn()} method is called to begin the turn.
+     */
     private void initTurn(){
         players = controller.getPlayers();
         Random rand = new Random();
@@ -78,7 +93,8 @@ public class TurnController implements Serializable {
     }
 
     /**s
-     * Switch case based on the number that the player types at the beginning of his turn. Each umber correspond to a different action of the game
+     * Switch case based on the number that the player types at the beginning of his turn
+     * Each umber correspond to a different action of the game
      * */
     public void beginTurnChoice(){
         if(players.size() != 0) {
@@ -169,8 +185,10 @@ public class TurnController implements Serializable {
     }
 
     /**
-     *Update the points of that player
-     * */
+     Updates the points for the current player based on their personal and common goals, as well as adjacent tiles points.
+     The player's total points are calculated by summing up their personal points, common goal points, and adjacent item points,
+     and the turn is ended.
+     */
     public void pointsUpdating(){
         int personalPoints, commonPoints1 = 0, commonPoints2 = 0, adjacentPoints;
         int[] pointsArr = new int[5];

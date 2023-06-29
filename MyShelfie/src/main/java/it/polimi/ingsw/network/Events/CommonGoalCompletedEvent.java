@@ -1,5 +1,8 @@
 package it.polimi.ingsw.network.Events;
 
+/**
+ * Event to notify the players that someone has completed a common goal
+ * */
 public class CommonGoalCompletedEvent extends Event{
 
     private final int pointsAchieved;

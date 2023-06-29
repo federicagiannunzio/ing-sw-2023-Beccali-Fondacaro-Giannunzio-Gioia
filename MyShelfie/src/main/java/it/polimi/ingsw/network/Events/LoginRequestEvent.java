@@ -1,5 +1,8 @@
 package it.polimi.ingsw.network.Events;
 
+/**
+ * Event used by the client to request a login to the server.
+ */
 public class LoginRequestEvent extends Event{
 
     public LoginRequestEvent(String user) {

@@ -3,6 +3,7 @@ package it.polimi.ingsw.network.Events;
 import java.util.ArrayList;
 import java.util.List;
 
+/**Event that permits the client to enter the private chat with another client*/
 public class PrivateChatRequestEvent extends Event{
     private List<String> users;
     private ArrayList<ArrayList<String>> buffer;

@@ -1,10 +1,11 @@
 package it.polimi.ingsw.model;
-
-
 import java.io.Serializable;
 
+/**
+ * Interface for the common goals
+ * */
 public interface CommonGoal extends Serializable {
-    public CommonGoalsName name = null;
+    CommonGoalsName name = null;
 
     boolean commonGoalAlg(Shelfie s);
 

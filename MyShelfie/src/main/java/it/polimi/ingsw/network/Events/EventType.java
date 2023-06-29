@@ -1,5 +1,9 @@
 package it.polimi.ingsw.network.Events;
 
+
+/**
+ * This enum contains all the events type available and used by the server and clients.
+ */
 public enum EventType {
     BOARD,
     SERVER_INFO,
@@ -8,8 +12,6 @@ public enum EventType {
     CHOICEBEGINTURN_REPLY,
     SHOWCOMMONGOALS,
     COMMONGOAL_COMPLETED,
-    FIRSTPLAYER_REQUEST,
-    FIRSTPLAYER_REPLY,
     LOGIN_REQUEST,
     LOGIN_REPLY,
     NUMBER_OF_USERS_REQUEST,
@@ -22,20 +24,14 @@ public enum EventType {
     PLACE_TILE_REPLY,
     CURRENT_POINTS,
     WINNER_NOTIFY,
-    LOSER_NOTIFY,
-    FINAL_POINTS,
     TURN_STATE,
     ERRORMESSAGE,
-
     GENERICMESSAGE,
     TILE_ARRAY_REQUEST,
     TILE_ARRAY_REPLY,
-
     USERCONNECTED,
     USERDISCONNECTED,
-
     LOBBY,
-
     CHATINIT,
     PRIVATECHATINIT,
     CHATMESSAGE

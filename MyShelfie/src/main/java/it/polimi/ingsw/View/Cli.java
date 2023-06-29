@@ -88,22 +88,6 @@ public class Cli extends ViewObservable implements View {
         notifyObserver(obs -> obs.sendPlayersNumber(playersNumber));
     }
 
-    @Override
-    public void askFirstPLayer(List<String> usersOnGame) {
-        System.out.println("Your the first player that has connected. Please choose the player who will starts the game.");
-        System.out.println("These are the players online: ");
-        for(String users : usersOnGame)
-            System.out.println(users + ", ");
-        String tryUserChosen;
-        do {
-            System.out.println("Type the exact name of the player.");
-            tryUserChosen = readLine();
-            if(!usersOnGame.contains(tryUserChosen))
-                System.out.println("This username is not valid. Please try again.");
-        } while(!usersOnGame.contains(tryUserChosen));
-        String userChosen = tryUserChosen;
-        notifyObserver(obs -> obs.sendFirstPlayerChosen(userChosen));
-    }
 
     @Override
     public void askTilesNumber(){

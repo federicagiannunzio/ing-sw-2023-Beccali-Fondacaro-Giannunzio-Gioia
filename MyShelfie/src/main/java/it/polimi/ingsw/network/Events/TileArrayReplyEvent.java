@@ -1,5 +1,8 @@
 package it.polimi.ingsw.network.Events;
-
+/**
+ * Event used to send the server the index of the cell pf the array that contains the tile
+ * that the player wants to place in the shelf
+ * */
 public class TileArrayReplyEvent extends Event{
 
     private final int ntiles;

@@ -7,11 +7,19 @@ import java.util.List;
 
 public interface ViewObserver {
 
+    /**
+     * Sends a message to the server with the username of that client.
+     *
+     * @String username the username of the player
+     * */
     void sendUsername(String username);
 
+    /**
+     * Sends the chosen number of players for the game
+     *
+     * @param playersNum xthe number of player chosen
+     * */
     void sendPlayersNumber(int playersNum);
-
-    void sendFirstPlayerChosen(String usernameFirst);
 
     void sendTilesNumberChosen(int numberOfTiles);
 

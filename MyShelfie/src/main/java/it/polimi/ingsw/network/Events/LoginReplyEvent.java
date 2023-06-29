@@ -1,5 +1,8 @@
 package it.polimi.ingsw.network.Events;
 
+/**
+ * Event used to confirm or discard a login request of a client.
+ */
 public class LoginReplyEvent extends Event{
 
     public final boolean usernameAccepted;

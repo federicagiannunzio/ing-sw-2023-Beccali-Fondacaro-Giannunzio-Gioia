@@ -1,6 +1,8 @@
 package it.polimi.ingsw.network.Events;
 
-
+/**
+ * Event used to send to the server the number of players picked by the client.
+ */
 public class NumberOfUsersReplyEvent extends Event{
     int numPlayers;
     public NumberOfUsersReplyEvent(String user, int numPlayers) {

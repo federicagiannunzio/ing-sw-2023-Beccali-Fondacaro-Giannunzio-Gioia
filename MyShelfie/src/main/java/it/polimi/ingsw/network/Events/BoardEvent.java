@@ -10,22 +10,10 @@ import java.util.Arrays;
  */
 public class BoardEvent extends Event{
     private final Tile[][] board;
-
-    /**
-     * Default constructor.
-     *
-     * @param board The board to share in the message.
-     */
     public BoardEvent(String user, Tile[][] board) {
         super(user,EventType.BOARD);
         this.board = board;
     }
-
-    /**
-     * Returns the board contained in the message.
-     *
-     * @return the current matrix of the board.
-     */
     public Tile[][] getBoard() {
         return board;
     }

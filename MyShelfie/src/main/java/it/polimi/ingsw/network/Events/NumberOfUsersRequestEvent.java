@@ -1,5 +1,9 @@
 package it.polimi.ingsw.network.Events;
 
+/**
+ * Event used to ask the client the maximum number of players of the game.
+ */
+
 public class NumberOfUsersRequestEvent extends Event{
 
     public NumberOfUsersRequestEvent(String user) {

@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.Tile;
 
 import java.util.Arrays;
 
+/**
+ * Event used to send the client the shelf that will be printed
+ * */
 public class ShowShelfiesEvent extends Event{
     private final Tile[][] shelfie;
     public ShowShelfiesEvent(String user, Tile[][] shelfie) {

@@ -1,9 +1,8 @@
 package it.polimi.ingsw.network.Events;
 
-import it.polimi.ingsw.model.Tile;
-
-import java.util.ArrayList;
-
+/**
+ * Event used to send the server the tiles picked by a player
+ * */
 public class ChooseTileReplyEvent extends Event {
     private final int[] row;
     private final int[] col;

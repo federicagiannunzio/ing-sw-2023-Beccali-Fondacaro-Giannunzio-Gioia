@@ -11,26 +11,14 @@ public class Shelfie implements Serializable {
     private Tile[][] structure;
 
     /**
-     * creates a new shelfie
+     * Creates a new shelfie
      */
     public Shelfie() {
         this.structure = new Tile[6][5];
     }
-
-    /**
-     * this method is a getter of the current shelfie
-     * @return is returned the current shelfie
-     */
     public Tile[][] getStructure() {
         return structure;
     }
-
-    /**
-     * method used to select a certain cell of the shelfie
-     * @param i counter for rows
-     * @param j counter for columns
-     * @return is returned the selected tile
-     */
     public Tile getCell(int i, int j) {return structure[i][j];}
 
     /**
@@ -93,8 +81,8 @@ public class Shelfie implements Serializable {
         return points;
     }
     /**
-     * recursive algorithm that checks the tiles around and calls back the function if they are equal increasing the counter
-     * @param structure starting tile from which the adjacencies are controlled
+     * Recursive algorithm that checks the tiles around and calls back the function if they are equal increasing the counter
+     * @param structure starting tile from which the adjacency are controlled
      * @param i counter for rows
      * @param j counter for columns
      * @param visited boolean that expresses whether a tile has already been checked or not
@@ -116,7 +104,7 @@ public class Shelfie implements Serializable {
     }
 
     /**
-     * boolean algorithm that returns true if the cell given is not null and has not been visited before
+     * Boolean algorithm that returns true if the cell given is not null and has not been visited before
      * @param structure given tile of which we must check if it is null or if it has already been visited
      * @param i counter for rows
      * @param j counter for columns

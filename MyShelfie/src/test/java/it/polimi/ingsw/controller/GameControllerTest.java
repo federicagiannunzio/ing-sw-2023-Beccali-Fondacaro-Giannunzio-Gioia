@@ -39,19 +39,6 @@ public class GameControllerTest {
 
             }
         };
-
-        //p1 = new Player("Federica", 0, true);
-        //p2 = new Player("Andrea", 1, false);
-        //p3 = new Player("Pietro", 2, false);
-        //p4 = new Player("Giorgio", 3, false);
-
-        //Server server = new Server(gameController);
-        //server.addClient("Federica", clientHandler);
-        //server.addClient("Andrea", clientHandler);
-        //server.addClient("Pietro", clientHandler);
-        //server.addClient("Giorgio", clientHandler);
-
-
     }
 
     @After
@@ -173,11 +160,6 @@ public class GameControllerTest {
     }
 
     @Test
-    public void update_test() {
-
-    }
-
-    @Test
     public void removePlayerTest_correctOutput() {
         gameController.playerJoin("Federica", clientHandler);
         gameController.playerJoin("Andrea", clientHandler);
@@ -214,25 +196,6 @@ public class GameControllerTest {
         assertEquals(gameController.getPlayerByUser("Federica"), p1);
     }
 
-    @Test
-    public void getChoosedTileNumberTest() {
-
-    }
-
-    @Test
-    public void getChoosedChoice() {
-
-    }
-
-    @Test
-    public void isInGame() {
-
-    }
-
-    @Test
-    public void getActivePlayer() {
-
-    }
 
     @Test
     public void getVirtualViewByUserTest_correctOutput() {

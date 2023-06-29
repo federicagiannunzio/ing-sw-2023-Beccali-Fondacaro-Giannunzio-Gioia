@@ -8,15 +8,19 @@ import it.polimi.ingsw.network.Events.*;
 
 import java.io.Serializable;
 
-
+/**
+ * This Class verifies that all messages sent by client contain valid information.
+ */
 public class InputController implements Serializable {
 
     private final GameController gameController;
 
 
     /**
-     * constructor of the class
-     * */
+     * Constructor of the Input Controller Class.
+     *
+     * @param gameController Game Controller.
+     */
     public InputController(GameController gameController) {
 
         this.gameController = gameController;
@@ -42,7 +46,7 @@ public class InputController implements Serializable {
     }
 
     /**
-     *receives a message from the client (receives position in the board of the tile that he wants to pick) and check if the tile is available
+     *Receives a message from the client (receives position in the board of the tile that he wants to pick) and check if the tile is available
      *
      * @param event message from the client
      * @param view view for the active client
@@ -91,7 +95,7 @@ public class InputController implements Serializable {
     }
 
     /**
-     * receives a message from the client (receives the position of the shelf in which he wants to put ) and check if the position is empty.
+     * Receives a message from the client (receives the position of the shelf in which he wants to put ) and check if the position is empty.
      *
      * @param event message from the client
      * @param view view for the active client
@@ -125,13 +129,4 @@ public class InputController implements Serializable {
         return true;
     }
 
-    /**
-     * check if the message is sent from the active player
-     *
-     * @param event message from client
-     * @return {code @true} id it's a valid position {code @false} otherwise
-     */
-    public boolean checkUser(Event event) {
-        return event.getUser().equals(gameController.getActivePlayer());
-    }
 }

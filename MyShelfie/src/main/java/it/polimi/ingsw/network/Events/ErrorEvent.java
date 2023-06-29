@@ -1,5 +1,8 @@
 package it.polimi.ingsw.network.Events;
 
+/**
+ * Message to notify an error to the client
+ */
 public class ErrorEvent extends Event {
 
     private final String error;

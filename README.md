@@ -1,17 +1,17 @@
-# MYSHELFIE BOARD GAME - Software Engineering Final Project
-## Group Members
+# ing-sw-2023-Beccali-Fondacaro-Giannunzio-Gioia
+# Prova Finale Ingegneria del Software A.A 2022/2023
+
+## Group Member
 - Giorgio Beccali
 - Andrea Fondacaro
 - Pietro Gioia
 - Federica Giannunzio
 
-
-## Features Implemented 
-- Rule set
+## Implemented features
+- Full Rule set
 - CLI
 - Socket
-- 1 advanced features
-    - Chat
+- Advanced Features
+  - Chat
 
-## JAR Instructions
-
+## JAR

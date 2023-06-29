@@ -1,5 +1,8 @@
 package it.polimi.ingsw.network.Events;
 
+/**
+ * Message to notify a disconnection to the other players.
+ */
 public class DisconnectionMessageEvent extends Event {
     private final String nicknameDisconnected;
 

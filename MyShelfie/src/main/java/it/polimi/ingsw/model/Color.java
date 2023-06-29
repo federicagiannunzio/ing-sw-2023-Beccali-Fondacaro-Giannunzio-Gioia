@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 /**
- * this enum defines tile's colors.
+ * This enum defines tile's colors.
  */
 public enum Color {
     //Color end string, color reset

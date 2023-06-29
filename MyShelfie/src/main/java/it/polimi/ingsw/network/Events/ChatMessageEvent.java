@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.Events;
 
 import java.util.List;
 
+/**Event to send the server the messages that a player wants to send to all the others*/
 public class ChatMessageEvent extends Event{
     private boolean priv;
     private String recipient;

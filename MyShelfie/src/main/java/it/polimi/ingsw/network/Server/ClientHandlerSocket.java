@@ -3,15 +3,15 @@ package it.polimi.ingsw.network.Server;
 import it.polimi.ingsw.network.Events.ErrorEvent;
 import it.polimi.ingsw.network.Events.Event;
 import it.polimi.ingsw.network.Events.EventType;
-import it.polimi.ingsw.network.Events.LoginRequestEvent;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-import static java.lang.Thread.sleep;
+/**
+ * Socket implementation of the {@link ClientHandler} interface.
+ */
 
 public class ClientHandlerSocket implements ClientHandler, Runnable {
 
@@ -25,6 +25,12 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
 
     private boolean inGame = true;
 
+    /**
+     * Default constructor.
+     *
+     * @param serverSocket the socket of the server
+     * @param socket       the client connecting
+     */
     public ClientHandlerSocket(ServerSocket serverSocket, Socket socket) throws IOException {
 
         this.connectedClient = socket;
@@ -54,6 +60,12 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
             }
         disconnect();
     }
+
+    /**
+     * Sends a message to the client via socket
+     *
+     * @param event the message to be sent
+     */
     public void sendMessage(Event event){
         if (inGame) {
             try {
@@ -69,6 +81,9 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
         }
     }
 
+    /**
+     * Disconnect the socket
+     */
     @Override
     public void disconnect(){
 
@@ -83,8 +98,4 @@ public class ClientHandlerSocket implements ClientHandler, Runnable {
         serverSocket.disconnectClient(this);
     }
 
-
-    public void finishGame(){
-        this.inGame = false;
-    }
 }
