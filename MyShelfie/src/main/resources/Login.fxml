@@ -10,17 +10,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.controller.GuiController.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.controller.GuiController.LoginController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" focusTraversable="true">
          <image>
-            <Image url="@Graphics/misc/sfondo parquet.jpg" />
+            <Image url="@assets/misc/sfondo%20parquet.jpg" />
          </image>
       </ImageView>
       <TextField fx:id="usernameTF" layoutX="46.0" layoutY="214.0" opacity="0.54" promptText="Username" styleClass="button1" stylesheets="@Login.css" />
       <ImageView fitHeight="76.0" fitWidth="225.0" layoutX="191.0" layoutY="55.0">
          <image>
-            <Image url="@Graphics/Publisher material/Title 2000x618px.png" />
+            <Image url="@assets/Publisher%20material/Title%202000x618px.png" />
          </image>
          <effect>
             <DropShadow />

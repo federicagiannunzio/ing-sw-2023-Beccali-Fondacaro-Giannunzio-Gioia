@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.controller.GuiController.LobbySceneController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.controller.GuiController.LobbySceneController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0">
          <image>
@@ -39,7 +39,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Button layoutX="276.0" layoutY="300.0" mnemonicParsing="false" stylesheets="@Login.css" text="Button">
+      <Button layoutX="276.0" layoutY="300.0" mnemonicParsing="false" onAction="#goToGame" stylesheets="@Login.css" text="Play">
          <effect>
             <DropShadow />
          </effect>

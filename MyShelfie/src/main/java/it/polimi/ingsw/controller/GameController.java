@@ -165,6 +165,7 @@ public class GameController implements Observer, Serializable {
             p.setPersonalGoal(goal);
         }
 
+        //manda un messaggio in broadcast che segnala l'inizio del gioco
 
         currentTurn = new TurnController(this, virtualViewMap);
 

@@ -1,13 +1,11 @@
 package it.polimi.ingsw.View;
 
-/*
-import it.polimi.ingsw.controller.GuiController.ConnectionController;
-import it.polimi.ingsw.controller.GuiController.LobbySceneController;
-import it.polimi.ingsw.controller.GuiController.LoginController;
-import it.polimi.ingsw.controller.GuiController.WelcomeScreenController;
-import it.polimi.ingsw.controller.Observer.ViewObservable;
+
+import it.polimi.ingsw.controller.GuiController.*;
+import it.polimi.ingsw.Observer.*;
 import it.polimi.ingsw.model.CommonGoalsName;
 import it.polimi.ingsw.model.Tile;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.System.out;
+
 public class Gui extends ViewObservable implements View {
 
     Stage stage;
@@ -26,6 +26,7 @@ public class Gui extends ViewObservable implements View {
     ConnectionController CSController;
     LoginController LSController;
     LobbySceneController LoSController;
+    GameSceneController GSController;
 
     public void start(Stage stage) throws IOException {
 
@@ -94,15 +95,31 @@ public class Gui extends ViewObservable implements View {
             stage.setScene(lobbyScreenScene);
             stage.show();
         }catch (IOException e){
-            System.out.println(e);
+            System.out.println("exception " + e + " " + e.getMessage() + " " + e.getCause());
+        }
+    }
+    public void showGameScreen(){
+        try {
+            FXMLLoader GameScreenFXML = new FXMLLoader(getClass().getResource("/GameScene.fxml"));
+            Scene GameScreenScene = new Scene(GameScreenFXML.load());
+            GameSceneController GameSceneController = GameScreenFXML.getController();
+            GSController = GameSceneController;
+            GameSceneController.setGUI(this);
+
+            stage.setScene(GameScreenScene);
+            stage.show();
+        }catch (IOException e){
+            System.out.println("exception " + e + " " + e.getCause());
         }
     }
 
 
+    //CONNECTION
     public void sendServerInfo(String addr, int port){
-        notifyObserver(obs -> obs.sendServerInfo(addr, port, connectionType));
+        notifyObserver(obs -> obs.sendServerInfo(addr, port));
     }
 
+    //LOGIN
     @Override
     public void askUsername(){
         System.out.println("asking user name");
@@ -133,16 +150,6 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender) {
-
-    }
-
-    @Override
-    public void groupChat(List<String> bufferMessages) {
-
-    }
-
-    @Override
     public void askPlayersNumber() {
         System.out.println("asking player number");
         sendPlayerNumber(LSController.getPlayerNumber());
@@ -156,6 +163,8 @@ public class Gui extends ViewObservable implements View {
     public void askFirstPLayer(List<String> usersOnGame) {
         System.out.println("showLobby");
     }
+
+    //LOBBY
 
     @Override
     public void showLobby(List<String> nicknameList, int numPlayers) {
@@ -172,9 +181,53 @@ public class Gui extends ViewObservable implements View {
         LoSController.playerQuit(disconnectedUser);
     }
 
+    //GAME
+
+    @Override
+    public void askChoiceBeginTurn() {
+        if(GSController == null){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        Platform.runLater(() -> {
+            GSController.turnManager();
+        });
+        //manda di default 2,4 per aggiornare gli obiettivi personali e comuni, 3 per la shelfie aggiornata
+        //così va in loop infinito
+    }
+
+    public void sendTurnSelection(int i){
+        notifyObserver(obs->obs.sendChoiceBeginTurn(i));
+    }
+
+    @Override
+    public void showTurnState(String user) {
+        if(GSController == null){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        Platform.runLater(() -> {
+            GSController.showAlert("", user + "started his turn");
+            GSController.showTurnButton(false);
+        });
+    }
+
+    @Override
+    public void showBoard(Tile[][] structure) {
+        Platform.runLater(()->{
+            GSController.updateBoard(structure);
+        });
+    }
+
     @Override
     public void askTilesNumber() {
-
+        //GSController.setTilesPicker();
     }
 
     @Override
@@ -184,7 +237,11 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void askShelfieColumn() {
+        GSController.setShelfieColumnPicker();
+    }
 
+    public void sendShelfieColumn(int column){
+        notifyObserver(obs -> obs.sendShelfieColumn(column));
     }
 
     @Override
@@ -193,33 +250,42 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showBoard(Tile[][] structure) {
-
-    }
-
-    @Override
     public void showMyShelfie(Tile[][] structure) {
-
+        GSController.updatePlayerShelfie(structure);
     }
 
     @Override
     public void showCommonGoals(CommonGoalsName name) {
-
+        GSController.updateCommonGoals();
     }
 
     @Override
     public void showMyPoints(int currentPoints) {
-
+        GSController.updatePoints();
     }
 
     @Override
     public void showCommonGoalCompletion(String username, String commonGoal, int pointsAchieved) {
-
+        GSController.showAlert(username + " has completed " + commonGoal + " common goal.", username + " has achieved " + pointsAchieved + " points.");
     }
 
     @Override
     public void showWinMessage(String winner) {
+        GSController.showWinner(winner);
+    }
 
+    @Override
+    public void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender) {
+
+    }
+
+    @Override
+    public void groupChat(List<String> bufferMessages) {
+
+    }
+
+    public void sendGroupMessage(List<String> finalMessages){
+        notifyObserver(obs->obs.sendChatMessage(null, finalMessages));
     }
 
     @Override
@@ -234,22 +300,10 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showTurnState(String user) {
-
-    }
-
-    @Override
     public void showTilesArray(List<Tile> tilesPicked) {
 
     }
 
-    @Override
-    public void askChoiceBeginTurn() {
-
-    }
-
 }
-
- */
 
 

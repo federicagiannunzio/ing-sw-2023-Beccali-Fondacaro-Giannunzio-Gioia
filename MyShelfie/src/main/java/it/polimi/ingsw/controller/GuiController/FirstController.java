@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller.GuiController;
 
-/*
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -29,7 +29,7 @@ public class FirstController {
 
 
     public void switchToSceneSecond2(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Second.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/GameScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -38,6 +38,6 @@ public class FirstController {
 
 }
 
- */
+
 
 
