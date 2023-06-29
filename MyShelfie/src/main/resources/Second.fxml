@@ -201,7 +201,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Label layoutX="661.0" layoutY="639.0" prefHeight="92.0" prefWidth="274.0" text="ChatField" />
+      <Label layoutX="661.0" layoutY="639.0" prefHeight="92.0" prefWidth="274.0" text="'ChatField'" />
       <Button layoutX="741.0" layoutY="549.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="178.0" stylesheets="@Second.css" text="Show other players' shelfie">
          <effect>
             <DropShadow />
