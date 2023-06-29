@@ -1,7 +1,7 @@
-# ing-sw-2023-Beccali-Fondacaro-Giannunzio-Gioia
+
 # Prova Finale Ingegneria del Software A.A 2022/2023
 
-## Group Member
+## Group Members
 - Giorgio Beccali
 - Andrea Fondacaro
 - Pietro Gioia
