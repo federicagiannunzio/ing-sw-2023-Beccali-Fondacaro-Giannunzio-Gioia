@@ -98,6 +98,7 @@ public class Gui extends ViewObservable implements View {
         }
     }
 
+
     public void sendServerInfo(String addr, int port){
         notifyObserver(obs -> obs.sendServerInfo(addr, port, connectionType));
     }
