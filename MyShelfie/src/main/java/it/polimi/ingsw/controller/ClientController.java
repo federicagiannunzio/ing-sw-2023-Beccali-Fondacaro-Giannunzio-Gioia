@@ -4,15 +4,18 @@ import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.network.Client.Client;
-
 import it.polimi.ingsw.network.Client.ClientSocket;
 import it.polimi.ingsw.network.Events.*;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * This class is part of the client side
+ * It is an interpreter between the network and a generic view
+ * It receives the messages, wraps/unwraps and pass them to the network/view
+ */
 public class ClientController implements ViewObserver, Observer {
     private String username;
     private Client client;
@@ -20,6 +23,11 @@ public class ClientController implements ViewObserver, Observer {
 
     private View view;
 
+    /**
+     * Default constructor
+     *
+     * @param view the view to be controlled.
+     */
     public ClientController(View view) {
         this.view = view;
         taskQueue = Executors.newSingleThreadExecutor();
@@ -63,15 +71,6 @@ public class ClientController implements ViewObserver, Observer {
     }
 
     /**
-     * Sends a message to the server that contains the username of the first player.
-     *
-     * @param usernameFirst the username of the first player
-     */
-    public void sendFirstPlayerChosen(String usernameFirst){
-        client.sendMessage( new FirstPlayerReplyEvent(this.username, usernameFirst));
-    }
-
-    /**
      * Sends a message to the server that contains the number of tiles that the player wants to pick
      *
      * @param numberOfTiles is the number of tiles chosen
@@ -101,7 +100,7 @@ public class ClientController implements ViewObserver, Observer {
     }
 
     /**
-     * Sends the server the choice that the player did at the beginning of his turn: he can choose between 6 actions.
+     * Sends the server the choice that the player did at the beginning of his turn: he can choose between 7 actions.
      *
      * @param choice is the number that correspond to the choice
      */
@@ -131,7 +130,7 @@ public class ClientController implements ViewObserver, Observer {
     /**
      * Message from the server
      *
-     * @param event
+     * @param event is the specific message that the server will send
      */
     @Override
     public void update(Event event) {
@@ -144,10 +143,6 @@ public class ClientController implements ViewObserver, Observer {
             case NUMBER_OF_USERS_REQUEST:
                 NumberOfUsersRequestEvent numberOfUsersRequest = (NumberOfUsersRequestEvent)  event;
                 taskQueue.execute(()->view.askPlayersNumber());
-                break;
-            case FIRSTPLAYER_REQUEST:
-                FirstPlayerRequestEvent firstPlayerRequest = (FirstPlayerRequestEvent) event;
-                taskQueue.execute(()->view.askFirstPLayer(firstPlayerRequest.getUsersOnGame()));
                 break;
             case TILES_NUMBER_REQUEST:
                 TilesNumberRequestEvent tilesNumberRequest = (TilesNumberRequestEvent) event;

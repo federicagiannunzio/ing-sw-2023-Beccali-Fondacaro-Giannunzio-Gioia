@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.Events;
 
 import java.util.List;
 
+/**Event that permits the client to enter the public chat*/
 public class ChatRequestEvent extends Event{
 
     private List<String> users;

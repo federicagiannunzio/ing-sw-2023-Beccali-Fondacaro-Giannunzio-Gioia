@@ -7,7 +7,10 @@ import it.polimi.ingsw.network.Events.Event;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Main server class that starts a socket server.
+ * It can handle different types of connections.
+ */
 public class Server{
     private final GameController gameController;
     private final Map<ClientHandler, String> clientHandlerMap;
@@ -19,6 +22,12 @@ public class Server{
         this.disconnectLock = new Object();
     }
 
+    /**
+     * Adds a client to be managed by the server instance.
+     *
+     * @param user      the nickname associated with the client.
+     * @param clientHandler the ClientHandler associated with the client.
+     */
     public void addClient(String user, ClientHandler clientHandler){
         if(!gameController.isInGame()){
             clientHandlerMap.put(clientHandler, user);
@@ -29,10 +38,21 @@ public class Server{
         }
     }
 
+    /**
+     * Forwards a received message from the client to the GameController.
+     *
+     * @param event the message to be forwarded.
+     */
+
     public void update(Event event){
         gameController.update(event);
     }
 
+    /**
+     * Handles the disconnection of a client.
+     *
+     * @param clientHandler the client disconnecting.
+     */
     public void disconnectClient(ClientHandler clientHandler){
         String user = clientHandlerMap.get(clientHandler);
         boolean flag = false;

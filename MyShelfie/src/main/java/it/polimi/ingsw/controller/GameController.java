@@ -5,11 +5,13 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.Events.*;
 import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.network.Server.ClientHandler;
-
-
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * This class controls the evolution of the game
+ * Messages are read and responses are elaborated
+ */
 public class GameController implements Observer, Serializable {
 
     private List<Player> players;
@@ -31,7 +33,6 @@ public class GameController implements Observer, Serializable {
     private TurnController currentTurn;
     private InputController inputController;
 
-    //per il turn controller
     private int choosedTileNumber;
     private int choosedTileRow[];
     private int choosedTileColumn[];
@@ -40,16 +41,21 @@ public class GameController implements Observer, Serializable {
     private int choosedArrayIndex;
     private boolean flag;
 
-    //for the chat
     ArrayList<ArrayList<String>> messagesBuffer = new ArrayList();
 
 
     private Random r = new Random();
 
+    /**
+     * Default constructor
+     * */
     public GameController(){
         initController();
     }
 
+    /**
+     * Initializes the controller
+     * */
     public void initController(){
         inputController = new InputController(this);
         inGame = false;
@@ -87,6 +93,9 @@ public class GameController implements Observer, Serializable {
 
     public ArrayList<ArrayList<String>> getMessagesBuffer() {return messagesBuffer;}
 
+    /**
+     * Initializes the list that contains common goal's points.
+     * */
     public void initGoalPoints(List<Integer> list){
         list.add(8);
         list.add(6);
@@ -94,6 +103,9 @@ public class GameController implements Observer, Serializable {
         list.add(2);
     }
 
+    /**
+     * Remove the first element from the array that contains common goal's points
+     * */
     public int popGoalPoints(List<Integer> points){
         int i = points.get(0);
         points.remove(0);
@@ -101,8 +113,12 @@ public class GameController implements Observer, Serializable {
     }
 
     /**
+     * When a new client join the game, this method create a new player, it adds it to the list of players and
+     * creates a new virtual view associated to that client. If the client is not the first to join, check if the
+     * username chosen is valid.
      *
-     *
+     * @param username the username of the player that has just connected
+     * @param handler the client handler associated to that client
      * */
     public void playerJoin(String username, ClientHandler handler){
         VirtualView VView = new VirtualView(handler);
@@ -133,7 +149,10 @@ public class GameController implements Observer, Serializable {
 
     }
 
-    /***/
+    /**
+     Starts the game by initializing the necessary components and setting the game state to "in-game".
+     @throws Exception if an error occurs during game initialization.
+     */
      public void startGame() throws Exception {
         inGame = true;
 
@@ -171,11 +190,11 @@ public class GameController implements Observer, Serializable {
     }
 
     /**
-     *
-     * */
+     *Ends the game and determines the winner
+     After determining the winner and notifying the virtual views, the method initializes the controller for a new game
+     */
     public void endGame(){
         Player winner;
-        System.out.println("A");
         if(players.size() != maxPlayers) {
             winner = players.get(0);
             for (Player p : players) {
@@ -191,26 +210,19 @@ public class GameController implements Observer, Serializable {
     }
 
 
+
+    /**
+     * Updates the state of the game based on the provided event
+     *
+     * @param event the event to process and update the game state
+     */
     @Override
     public void update(Event event) {
 
         switch (event.getEventType()){
-            /*case LOGIN_REQUEST:
-                LoginRequestEvent login = (LoginRequestEvent) event;
-                inputController.checkUsernameValidity(login.getUser(), )
-                if(playerJoin(login.getUser())){
-                    //send to client
-                }else{
-                    //send to client
-                }
-                break;*/
             case NUMBER_OF_USERS_REPLY:
                 NumberOfUsersReplyEvent nOfUser = (NumberOfUsersReplyEvent) event;
                 maxPlayers = nOfUser.getNumPlayers();
-                break;
-            case FIRSTPLAYER_REPLY:
-                FirstPlayerReplyEvent firstEvent = (FirstPlayerReplyEvent) event;
-                first = players.indexOf(getPlayerByUser(firstEvent.getFirstPlayer()));
                 break;
             case TILES_NUMBER_REPLY:
                 TilesNumberReplyEvent chooseNumber = (TilesNumberReplyEvent) event;
@@ -305,6 +317,13 @@ public class GameController implements Observer, Serializable {
     }
 
 
+
+    /**
+     *Notifies the specified {@link VirtualView} about the winner of the game.
+     *
+     * @param view The {@link VirtualView} to notify.
+     * @param user The username of the winner.
+     */
     public void winnerNotify(VirtualView view, String user){
         view.showWinMessage(user);
     }
@@ -330,6 +349,11 @@ public class GameController implements Observer, Serializable {
         return inGame;
     }
 
+    /**
+     * Returns the {@link Player} that corresponds to the username specified
+     *
+     * @param username the username of the Player
+     * */
     public Player getPlayerByUser(String username){
         for(Player p : players)
             if(p.getUsername().equals(username))
@@ -348,6 +372,9 @@ public class GameController implements Observer, Serializable {
         return this.nicknames;
     }
 
+    /**
+     * This method choose randomly a common goal to set for the game
+     * */
     private CommonGoal pickCommonGoal(){
 
         int random = r.nextInt(11);
@@ -382,6 +409,11 @@ public class GameController implements Observer, Serializable {
         }
     }
 
+    /***
+     * Adds a {@link Player} to the list of players
+     *
+     * @param p the player that will be added
+     */
     public void addPlayer(Player p) {
         players.add(p);
     }

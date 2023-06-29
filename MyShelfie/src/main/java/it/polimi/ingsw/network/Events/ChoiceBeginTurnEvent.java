@@ -1,5 +1,6 @@
 package it.polimi.ingsw.network.Events;
 
+ /**Events to send the server the number that correspond to an action chosen by the player*/
 public class ChoiceBeginTurnEvent extends Event {
     int choice;
 

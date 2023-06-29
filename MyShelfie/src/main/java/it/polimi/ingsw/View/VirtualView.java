@@ -9,6 +9,11 @@ import it.polimi.ingsw.network.Server.ClientHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Hides the network implementation from the controller.
+ * The controller calls methods from this class as if it was a normal view.
+ * Instead, a network protocol is used to communicate with the real view on the client side.
+ */
 public class VirtualView implements View, Observer {
     private final ClientHandler clientHandler;
     public static final String SERVER_NAME = "server";
@@ -24,11 +29,6 @@ public class VirtualView implements View, Observer {
     @Override
     public void askPlayersNumber() {
         clientHandler.sendMessage(new NumberOfUsersRequestEvent(SERVER_NAME));
-    }
-
-    @Override
-    public void askFirstPLayer(List<String> usersOnGame) {
-        clientHandler.sendMessage(new FirstPlayerRequestEvent(SERVER_NAME, usersOnGame));
     }
 
     @Override

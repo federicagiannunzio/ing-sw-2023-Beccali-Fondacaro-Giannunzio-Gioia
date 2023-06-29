@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.Events;
 
 /**
- * Message that contains the number of tiles that the player wants to take.
+ * Event used to send to the server the number of tiles the player wants to pick
  */
 public class TilesNumberReplyEvent extends Event{
 

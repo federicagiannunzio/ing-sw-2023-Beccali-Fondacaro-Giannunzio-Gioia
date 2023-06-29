@@ -1,5 +1,8 @@
 package it.polimi.ingsw.network.Events;
 
+/**
+ * Event to notify generic information to the user.
+ */
 public class GenericMessageEvent extends Event {
     private final String message;
 

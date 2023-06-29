@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.Events;
 
 /**
- * Message that contains the cell selected by the player.
+ * Event used to ask the player which tiles wants to pick. It that contains the number of tiles chosen by the player
  */
 
 public class ChooseTileRequestEvent extends Event{

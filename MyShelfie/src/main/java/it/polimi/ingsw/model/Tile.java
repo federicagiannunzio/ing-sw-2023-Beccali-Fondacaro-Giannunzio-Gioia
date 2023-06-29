@@ -17,26 +17,15 @@ public class Tile implements Serializable {
         this.id = id;
     }
 
-    /**
-     * return the color of this tile
-     *
-     * @return color
-     * */
     public Color getColor() {
         return color;
     }
-
-    /**
-     * returns the id of this tile
-     *
-     * @return id
-     */
     public int getId() {
         return id;
     }
 
     /**
-     * sets the color of this tile
+     * Sets the color of this tile
      * */
     public void setColor(Color color) {
         this.color = color;

@@ -2,6 +2,10 @@ package it.polimi.ingsw.network.Events;
 
 import java.io.Serializable;
 
+/**
+ * Abstract message class which must be extended by each event type.
+ * Both server and clients will communicate using this generic type of message.
+ */
 public abstract class Event implements Serializable {
     private final String user;
     private final EventType eventType;

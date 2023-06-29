@@ -1,6 +1,9 @@
 package it.polimi.ingsw.network.Events;
 
 
+/**
+ * Event used to ask the client how many tiles wants to pick
+ */
 public class TilesNumberRequestEvent extends Event{
 
     public TilesNumberRequestEvent(String user) {

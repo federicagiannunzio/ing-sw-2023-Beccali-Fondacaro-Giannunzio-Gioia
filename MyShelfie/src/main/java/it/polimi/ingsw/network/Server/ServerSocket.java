@@ -6,7 +6,9 @@ import java.io.*;
 import java.net.Socket;
 import java.lang.*;
 
-
+/**
+ * Socket server that handles all the new socket connection.
+ */
 public class ServerSocket implements Runnable{
 
     private java.net.ServerSocket serverSocket;
@@ -42,14 +44,31 @@ public class ServerSocket implements Runnable{
         }
     }
 
+    /**
+     * Forwards a received message from the client to the Server
+     *
+     * @param event the message to be forwarded
+     */
     public void update(Event event){
         server.update(event);
     }
+
+    /**
+     * Handles the addition of a new client
+     *
+     * @param user      the nickname of the new client
+     * @param clientHandler the ClientHandler of the new client
+     */
 
     public void addClient(String user, ClientHandler clientHandler){
         server.addClient(user, clientHandler);
     }
 
+    /**
+     * Handles a client disconnection
+     *
+     * @param clientHandler the ClientHandler of the disconnecting client
+     */
     public void disconnectClient(ClientHandler clientHandler){
         server.disconnectClient(clientHandler);
     }

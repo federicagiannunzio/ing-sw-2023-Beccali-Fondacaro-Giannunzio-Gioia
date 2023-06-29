@@ -17,7 +17,7 @@ public class personalGoal implements Serializable {
     private final Tile[][] body;
 
     /**
-     * constructor of the class personalGoal
+     * Constructor of the class personalGoal
      *
      * @param id identifies uniquely the goal
      * */
@@ -29,8 +29,8 @@ public class personalGoal implements Serializable {
     }
 
     /**
-     * this method should be called at the beginning of the game
-     * it sets the right combination of tiles for that goal
+     * This method should be called at the beginning of the game
+     * It sets the right combination of tiles for that goal
      *
      * @param id identifies uniquely the goal
      * */
@@ -78,12 +78,6 @@ public class personalGoal implements Serializable {
             throw new Exception();
         }
     }
-
-    /**
-     * returns goal's id
-     *
-     * @return id
-     */
     public int getId() {
         return id;
     }
@@ -116,7 +110,7 @@ public class personalGoal implements Serializable {
     }
 
     /**
-     * it should be called at the end of a turn to update the total of that player's points
+     * It should be called at the end of a turn to update the total of that player's points
      *
      * @param pshelfie player's shelf
      * @return amount of points related to the personal goal

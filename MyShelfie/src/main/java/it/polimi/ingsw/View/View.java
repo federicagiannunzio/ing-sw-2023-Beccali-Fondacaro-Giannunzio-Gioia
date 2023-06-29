@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Defines a generic view to be implemented by each view type
+ */
 public interface View {
 
     /**
@@ -17,11 +20,6 @@ public interface View {
      * Asks the first user connected how many players he wants to play with
      */
     void askPlayersNumber();
-
-    /**
-     * Asks the first user connected to choose the first player.
-     */
-    void askFirstPLayer(List<String> usersOnGame);
 
     /**
      * Asks the player how many tiles he wants to pick.
@@ -122,11 +120,17 @@ public interface View {
     void showLobby(List<String> nicknameList, int numPlayers);
 
 
-    /***/
+    /**
+     * Shows to the user if the Login succeeded
+     *
+     * @param usernameAccepted     indicates if the chosen nickname has been accepted
+     * @param connectionSuccessful indicates if the connection has been successful
+     * @param username             the nickname of the player to be greeted
+     */
     void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username);
 
     /**
-     * Asks the player with who wants to chat and to type the messages that he wants to send.
+     * Asks the player with who wants to chat and to type the messages that he wants to send
      * */
     void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender);
 

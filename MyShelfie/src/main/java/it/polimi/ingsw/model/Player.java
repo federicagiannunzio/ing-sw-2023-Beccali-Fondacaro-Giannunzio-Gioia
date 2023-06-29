@@ -17,7 +17,7 @@ public class Player implements Serializable {
 
 
         /**
-        * constructor of the player class
+        * Constructor of the player class
         *
         * @param username player's username
         * @param id player's id
@@ -54,25 +54,31 @@ public class Player implements Serializable {
             myTiles.remove(k);
         }
 
+        /**
+         * Removes a tile from the array that contains the tiles that the player has picked.
+         *
+         * @param index the index of the cell of the array
+         * @return t the removed tile
+         * */
         public Tile popTile(int index){
             Tile t;
             t = this.myTiles.get(index);
             this.myTiles.remove(index);
             return t;
         }
+
         /**
-        * set the goal associated to this player
+        * Set the goal associated to this player
         *
         * @param personalGoal goal of the player
         */
-
         public void setPersonalGoal(personalGoal personalGoal) {
 
             this.pGoal = personalGoal;
         }
 
         /**
-         * if this player is the first to finish the game, set endGame at 1
+         * If this player is the first to finish the game, set endGame at 1
          *
          */
         public void setEndGame() {
@@ -81,7 +87,7 @@ public class Player implements Serializable {
         }
 
         /**
-         * sets the points to this player
+         * Sets the points to this player
          *
          * @param p number of points that has to be set
         * */
@@ -90,91 +96,47 @@ public class Player implements Serializable {
         }
 
         /**
-         * set if player is first player
+         * Sets if player is first player
          *
-         *  @param isFirst boolean to say if the player is the first player
+         * @param isFirst boolean to say if the player is the first player
         * */
         public void setFirst(boolean isFirst) {
         this.yellowChair = isFirst;
         }
 
+        /**
+         * Sets {@link #commonFlag1} true if the player completes the first common goal
+         *
+         * @param isFirst boolean to say if the player is the first player
+         * */
         public void setCommonFlag1(boolean flag){this.commonFlag1 = flag;}
         public void setCommonFlag2(boolean flag){this.commonFlag2 = flag;}
 
         public boolean getCommonFlag1(){return commonFlag1;}
         public boolean getCommonFlag2(){return commonFlag2;}
-
-
-        /**
-        * returns player's id
-        *
-        * @return id of the Player
-        */
         public int getId() {
             return id;
         }
-
-        /**
-        * returns player's username
-        *
-        * @return username of the Player
-        */
         public String getUsername() {
 
             return username;
         }
-
-        /**
-        * returns the total of the points
-        *
-        * @return points
-        * */
         public int getPoints() {
             return points;
         }
-
-        /**
-        * returns true if the player ends the game
-        *
-        * @return endGame (boolean True or False)
-        */
         public boolean isEndGame() {
 
             return endGame;
         }
-
-        /**
-        * return true if the player starts the game
-        *
-        * @return yellowChair (boolean True or False)
-        * */
         public boolean isYellowChair() {
             return yellowChair;
         }
-
-        /**
-        * returns this Player's shelfie
-        *
-        * @return myShelfie
-        */
         public Shelfie getMyShelfie() {
             return myShelfie;
         }
-
-        /**
-        * returns this Player's personal goal
-        *
-        * @return player's personal goal
-        */
         public personalGoal getPersonalGoal() {
             return pGoal;
         }
-
-        /**
-        * returns this Player's picked tiles from the board
-        *
-        * @return player's picked tiles (in the arrayList)
-        */
         public ArrayList<Tile> getMyTiles() {
             return myTiles;
         }
