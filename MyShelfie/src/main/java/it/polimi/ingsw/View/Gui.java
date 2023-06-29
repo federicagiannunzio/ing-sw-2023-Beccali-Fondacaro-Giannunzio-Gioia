@@ -159,11 +159,6 @@ public class Gui extends ViewObservable implements View {
         notifyObserver(obs -> obs.sendPlayersNumber(playersNumber));
     }
 
-    @Override
-    public void askFirstPLayer(List<String> usersOnGame) {
-        System.out.println("showLobby");
-    }
-
     //LOBBY
 
     @Override
