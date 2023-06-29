@@ -3,14 +3,12 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.View.VirtualView;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.Events.*;
-import it.polimi.ingsw.controller.Observer.Observer;
+import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.network.Server.ClientHandler;
 
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class GameController implements Observer, Serializable {
 

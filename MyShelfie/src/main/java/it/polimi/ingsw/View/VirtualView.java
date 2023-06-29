@@ -1,13 +1,11 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.controller.Observer.Observer;
-import it.polimi.ingsw.model.Board;
+import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.model.CommonGoalsName;
 import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.Events.*;
 import it.polimi.ingsw.network.Server.ClientHandler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,7 +133,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender) {
-      clientHandler.sendMessage(new PrivateChatRequestEvent(SERVER_NAME, playersName, true, bufferMessages, sender));
+      clientHandler.sendMessage(new PrivateChatRequestEvent(SERVER_NAME, playersName, bufferMessages, sender));
     }
 
 

@@ -1,6 +1,4 @@
-package it.polimi.ingsw.controller.Observer;
-
-import it.polimi.ingsw.View.View;
+package it.polimi.ingsw.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +10,6 @@ public abstract class ViewObservable {
 
     public void addObserver(ViewObserver observer){
         observers.add(observer);
-    }
-
-    public void addAllObservers(List<ViewObserver> observerList) {
-        observers.addAll(observerList);
-    }
-
-    public void removeObserver(ViewObserver observer){
-        observers.remove(observer);
-    }
-
-    public void removeAllObservers(List<ViewObserver> observerList) {
-        observers.removeAll(observerList);
     }
 
     protected void notifyObserver(Consumer<ViewObserver> consumer) {

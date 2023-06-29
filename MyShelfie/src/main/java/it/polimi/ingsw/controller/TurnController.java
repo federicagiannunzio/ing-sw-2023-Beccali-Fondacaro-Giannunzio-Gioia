@@ -127,6 +127,16 @@ public class TurnController implements Serializable {
                     view.privateChat(controller.getNicknames(), privateMessages, currentUser);
                     view.askChoiceBeginTurn();
                     break;
+                case 7:
+                    for(Player player: controller.getPlayers()) {
+                        if(!player.getUsername().equals(currentUser)) {
+                            view.showGenericMessage("   " + player.getUsername());
+                            view.showMyShelfie(player.getMyShelfie().getStructure());
+                        }
+                    }
+                    view.askChoiceBeginTurn();
+                    break;
+
             }
         }
     }
@@ -135,7 +145,7 @@ public class TurnController implements Serializable {
      * Sends a message to the current player to pick the tiles from the board
      * */
     public void tilesPicking(){
-        int tilesNumber, i;
+        int tilesNumber;
         Player p = players.get(currentPlayerIndex);
         tilesNumber = controller.getChoosedTileNumber();
         if(p.getMyTiles().isEmpty())
@@ -197,5 +207,9 @@ public class TurnController implements Serializable {
      * */
     public void removeVirtualViewMap(String user){
         virtualViewMap.remove(user);
+    }
+
+    public Map<String, VirtualView> getVirtualViewMap() {
+        return virtualViewMap;
     }
 }

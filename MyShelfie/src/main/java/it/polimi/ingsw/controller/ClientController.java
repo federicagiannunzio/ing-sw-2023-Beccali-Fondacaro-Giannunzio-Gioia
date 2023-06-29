@@ -1,16 +1,14 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.controller.Observer.Observer;
+import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.View.View;
-import it.polimi.ingsw.controller.Observer.ViewObserver;
-import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.network.Client.Client;
 
 import it.polimi.ingsw.network.Client.ClientSocket;
 import it.polimi.ingsw.network.Events.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -227,42 +225,12 @@ public class ClientController implements ViewObserver, Observer {
                 taskQueue.execute(()->view.groupChat(chat.getBuffer()));
                 break;
             case PRIVATECHATINIT:
-                PrivateChatRequestEvent privatechat = (PrivateChatRequestEvent) event;
-                taskQueue.execute(()->view.privateChat(privatechat.getUsers(), privatechat.getBuffer(), privatechat.getSender()));
+                PrivateChatRequestEvent privateChat = (PrivateChatRequestEvent) event;
+                taskQueue.execute(()->view.privateChat(privateChat.getUsers(), privateChat.getBuffer(), privateChat.getSender()));
                 break;
 
 
 
-        }
-    }
-
-
-    /**
-     * Validates the given IPv4 address by using a regex.
-     *
-     * @param ip the string of the ip address to be validated
-     * @return {@code true} if the ip is valid, {@code false} otherwise.
-     */
-    public static boolean isValidIpAddress(String ip) {
-        String regex = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
-        return ip.matches(regex);
-    }
-
-    /**
-     * Checks if the given port string is in the range of allowed ports.
-     *
-     * @param portStr the ports to be checked.
-     * @return {@code true} if the port is valid, {@code false} otherwise.
-     */
-    public static boolean isValidPort(String portStr) {
-        try {
-            int port = Integer.parseInt(portStr);
-            return port >= 1 && port <= 65535;
-        } catch (NumberFormatException e) {
-            return false;
         }
     }
 }

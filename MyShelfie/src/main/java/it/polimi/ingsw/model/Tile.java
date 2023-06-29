@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Tile implements Serializable {
     private Color color;
-    private int id;
+    private final int id;
 
     /**
      * default constructor
@@ -26,11 +26,10 @@ public class Tile implements Serializable {
         return color;
     }
 
-    //valutare di toglierlo perchè in realtà non serve al momento
     /**
      * returns the id of this tile
      *
-     * @ return id
+     * @return id
      */
     public int getId() {
         return id;

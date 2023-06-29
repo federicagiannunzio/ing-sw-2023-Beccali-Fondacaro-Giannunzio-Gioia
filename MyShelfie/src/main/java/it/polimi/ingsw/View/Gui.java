@@ -1,12 +1,11 @@
 package it.polimi.ingsw.View;
 
-
+/*
 import it.polimi.ingsw.controller.GuiController.ConnectionController;
 import it.polimi.ingsw.controller.GuiController.LobbySceneController;
 import it.polimi.ingsw.controller.GuiController.LoginController;
 import it.polimi.ingsw.controller.GuiController.WelcomeScreenController;
 import it.polimi.ingsw.controller.Observer.ViewObservable;
-import it.polimi.ingsw.controller.Observer.ViewObserver;
 import it.polimi.ingsw.model.CommonGoalsName;
 import it.polimi.ingsw.model.Tile;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +17,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.System.out;
 
 public class Gui extends ViewObservable implements View {
 
@@ -103,7 +100,7 @@ public class Gui extends ViewObservable implements View {
 
 
     public void sendServerInfo(String addr, int port){
-        notifyObserver(obs -> obs.sendServerInfo(addr, port));
+        notifyObserver(obs -> obs.sendServerInfo(addr, port, connectionType));
     }
 
     @Override
@@ -252,5 +249,7 @@ public class Gui extends ViewObservable implements View {
     }
 
 }
+
+ */
 
 

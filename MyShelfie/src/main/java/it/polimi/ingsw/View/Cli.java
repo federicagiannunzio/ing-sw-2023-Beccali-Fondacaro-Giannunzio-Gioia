@@ -1,17 +1,12 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.controller.Observer.Observable;
-import it.polimi.ingsw.controller.Observer.ViewObservable;
+import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.model.*;
-import org.w3c.dom.ls.LSInput;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 
 import static java.lang.System.out;
 
@@ -377,6 +372,7 @@ public class Cli extends ViewObservable implements View {
         System.out.println("4) View common goals.");
         System.out.println("5) Group chat.");
         System.out.println("6) Private chat.");
+        System.out.println("7) View other players' shelf");
     }
 
     public void askChoiceBeginTurn() {
@@ -385,9 +381,9 @@ public class Cli extends ViewObservable implements View {
         int tryChoice;
         do {
             tryChoice = Integer.parseInt(readLine());
-            if(tryChoice < 1 || tryChoice>6)
-                System.out.println("Please insert a valid number. The number should be selected between 1 and 6");
-        } while(tryChoice < 1 || tryChoice>6);
+            if(tryChoice < 1 || tryChoice>7)
+                System.out.println("Please insert a valid number. The number should be selected between 1 and 7");
+        } while(tryChoice < 1 || tryChoice>7);
         choice = tryChoice;
         notifyObserver(obs->obs.sendChoiceBeginTurn(choice));
     }
