@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller.GuiController;
 
-/*
+
 import it.polimi.ingsw.View.Gui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,7 +33,7 @@ public class LoginController {
             System.out.println(username);
             gui.sendUserName(username);
             gui.sendPlayerNumber(Integer.parseInt(numberTF.getText()));
-            gui.showLobbyScreen();
+            gui.showGameScreen();
         }
     }
 
@@ -54,6 +54,5 @@ public class LoginController {
     }
 }
 
- */
 
 

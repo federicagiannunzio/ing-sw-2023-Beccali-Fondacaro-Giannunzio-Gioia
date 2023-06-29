@@ -1,9 +1,8 @@
 package it.polimi.ingsw.controller.GuiController;
 
-/*
 import it.polimi.ingsw.View.Gui;
 import it.polimi.ingsw.View.View;
-import it.polimi.ingsw.controller.Observer.ViewObservable;
+import it.polimi.ingsw.Observer.ViewObservable;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -40,7 +39,6 @@ public class WelcomeScreenController {
     }
 }
 
- */
 
 
 
