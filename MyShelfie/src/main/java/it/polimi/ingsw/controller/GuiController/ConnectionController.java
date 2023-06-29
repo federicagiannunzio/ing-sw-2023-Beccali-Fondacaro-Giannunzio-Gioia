@@ -51,7 +51,7 @@ public class ConnectionController{
         System.out.println(port);
 
         gui.sendServerInfo(addrTF.getText().trim(), port);
-        gui.showLoginScreen();
+        //gui.showLoginScreen();
     }
 
 }

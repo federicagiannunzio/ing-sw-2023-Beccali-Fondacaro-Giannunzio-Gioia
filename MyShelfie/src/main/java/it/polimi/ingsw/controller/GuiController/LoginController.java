@@ -33,7 +33,7 @@ public class LoginController {
             System.out.println(username);
             gui.sendUserName(username);
             gui.sendPlayerNumber(Integer.parseInt(numberTF.getText()));
-            gui.showGameScreen();
+            //gui.showGameScreen();
         }
     }
 

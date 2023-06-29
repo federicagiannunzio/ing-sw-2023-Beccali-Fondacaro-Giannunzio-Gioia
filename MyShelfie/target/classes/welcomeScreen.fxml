@@ -17,7 +17,7 @@
                 <GaussianBlur radius="4.27" />
             </effect>
          <image>
-            <Image url="@assets/misc/sfondo%20parquet.jpg" />
+            <Image url="@assets/Publisher%20material/Display_5.jpg" />
          </image>
         </ImageView>
         <ImageView fitHeight="109.0" fitWidth="306.0" layoutX="155.0" layoutY="63.0">

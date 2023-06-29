@@ -3,10 +3,7 @@ package it.polimi.ingsw.View;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.System.out;
 
@@ -122,6 +119,8 @@ public class Cli extends ViewObservable implements View {
                 i--;
             }
         }
+        Arrays.stream(row).forEach((a)-> System.out.println(a));
+        Arrays.stream(col).forEach((a)-> System.out.println(a));
         notifyObserver(obs -> obs.sendTilePosition(row, col));
     }
 

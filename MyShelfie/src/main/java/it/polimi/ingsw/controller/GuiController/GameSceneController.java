@@ -16,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.image.Image;
 
+import java.util.List;
+
 public class GameSceneController {
 
     private Gui gui;
@@ -26,6 +28,7 @@ public class GameSceneController {
 
     private boolean isSelectingColumn = false;
     private boolean isSelectingTiles = false;
+    int tilesToPicNumber;
     int pickedTilesNumber;
     private int[] pickedRow;
     private int[] pickedColumn;
@@ -52,6 +55,11 @@ public class GameSceneController {
     private GridPane chatGrid;
 
     @FXML
+    private Label turnLabel;
+    @FXML
+    private GridPane tilesNumberGrid;
+
+    @FXML
     private GridPane boardGrid;
     @FXML
     private GridPane playerShelfie;
@@ -63,22 +71,23 @@ public class GameSceneController {
     public void turnManager(){
         switch (turnState){
             case 0:
-                showAlert("", "It's your turn!");
+                System.out.println("Starting turn");
+                //showAlert("", "It's your turn!");
+                System.out.println("Updating personal goal, state: " + turnState);
+                gui.sendTurnSelection(2);
                 showTurnButton(true);
                 turnState++;
                 break;
             case 1:
-                System.out.println("Updating personal goal, state: " + turnState);
-                gui.sendTurnSelection(2);
-                turnState++;
-            case 2:
                 System.out.println("Updating common goals, state: " + turnState);
                 gui.sendTurnSelection(4);
                 turnState++;
-            case 3:
+                break;
+            case 2:
                 System.out.println("Updating shelfie, state: " + turnState);
                 gui.sendTurnSelection(3);
                 turnState++;
+                break;
             default:
                 System.out.println("Waiting for turn selection, state: " + turnState);
         }
@@ -91,18 +100,31 @@ public class GameSceneController {
 
         boardGrid.setAlignment(Pos.CENTER);
         boardGrid.setPadding(new Insets(10));
+        boardGrid.getChildren().clear();
 
-        for(int column = 0; column < board.length; column++){
-            for(int row = 0; row < board.length; row++){
-                if(board[column][row] != null){
-                    System.out.println("color:" + (board[column][row]).getColor().parseToString(board[column][row].getColor()));
+        for(int row = 0; row < board.length; row++){
+            for(int column = 0; column < board.length; column++){
+                if(board[row][column] != null){
+                    //System.out.println("color:" + (board[column][row]).getColor().parseToString(board[column][row].getColor()));
                     Button button = new Button();
                     button.setPrefSize(cellWidth, cellHeight);
+                    int buttonRow = row;
+                    int buttonColumn = column;
                     button.setOnAction(actionEvent -> {
-
+                        if(pickedTilesNumber < tilesToPicNumber){
+                            //button.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+                            pickedRow[pickedTilesNumber] = buttonRow;
+                            pickedColumn[pickedTilesNumber] = buttonColumn;
+                            pickedTilesNumber++;
+                        }
+                        if(pickedTilesNumber == tilesToPicNumber && tilesToPicNumber != 0){
+                            gui.sendTilesPositionOnBoard(pickedRow, pickedColumn);
+                            pickedTilesNumber = 0;
+                            tilesToPicNumber = 0;
+                        }
                     });
                     Image image = null;
-                    switch ((board[column][row]).getColor()){
+                    switch ((board[row][column]).getColor()){
                         case CLEAR -> image = null;
                         case BLUE -> image = new Image("assets/item tiles/Cornici1.1.png");
                         case GREEN -> image = new Image("assets/item tiles/Gatti1.1.png");
@@ -121,9 +143,9 @@ public class GameSceneController {
                         button.setVisible(false);
                     }
                     button.setPadding(new Insets(0));
-                    boardGrid.add(button,row,column);
+                    boardGrid.add(button,column,row);
                 }else{
-                    System.out.println("null");
+                    //System.out.println("null");
                 }
             }
         }
@@ -135,16 +157,12 @@ public class GameSceneController {
 
         playerShelfie.setAlignment(Pos.CENTER);
         playerShelfie.setPadding(new Insets(10));
+        playerShelfie.getChildren().clear();
 
-        for(int column = 0; column < shelfie.length; column++){
-            for(int row = 0; row < shelfie.length; row++){
+        for(int column = 0; column < 6; column++){
+            for(int row = 0; row < 5; row++){
                 if(shelfie[column][row] != null){
-                    System.out.println("color:" + (shelfie[column][row]).getColor().parseToString(shelfie[column][row].getColor()));
-                    Button button = new Button();
-                    button.setPrefSize(cellWidth, cellHeight);
-                    button.setOnAction(actionEvent -> {
-
-                    });
+                    //System.out.println("color:" + (shelfie[column][row]).getColor().parseToString(shelfie[column][row].getColor()));
                     Image image = null;
                     switch ((shelfie[column][row]).getColor()){
                         case CLEAR -> image = null;
@@ -155,19 +173,12 @@ public class GameSceneController {
                         case PURPLE -> image = new Image("assets/item tiles/Piante1.1.png");
                         case CYAN -> image = new Image("assets/item tiles/Trofei1.1.png");
                     }
-                    if(image != null){
-                        ImageView imageView = new ImageView(image);
-                        imageView.setFitWidth(cellWidth);  // Imposta la larghezza dell'immagine
-                        imageView.setFitHeight(cellHeight);
-                        button.setGraphic(imageView);
-                    }else{
-                        button.setGraphic(null);
-                        button.setVisible(false);
-                    }
-                    button.setPadding(new Insets(0));
-                    playerShelfie.add(button,row,column);
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitWidth(cellWidth);  // Imposta la larghezza dell'immagine
+                    imageView.setFitHeight(cellHeight);
+                    playerShelfie.add(imageView,row,column);
                 }else{
-                    System.out.println("null");
+                    //System.out.println("null");
                 }
             }
         }
@@ -181,30 +192,31 @@ public class GameSceneController {
 
     }
 
-    public void askTileNumber(){
-
+    public void askTilesNumber(){
+        turnLabel.setVisible(true);
+        tilesNumberGrid.setVisible(true);
+        turnLabel.setText("How many tiles you want to pick?");
     }
 
-    public void setTilesPicker(int tilesNumber){
-        isSelectingTiles = true;
-        pickedRow = new int[tilesNumber];
-        pickedColumn = new int[tilesNumber];
+    @FXML
+    private void pickTile(ActionEvent event){
+        int number = Integer.parseInt(((Button) event.getSource()).getText());
+        gui.sendTilesNumber(number);
+        tilesToPicNumber = number;
+        tilesNumberGrid.setVisible(false);
     }
 
-    private void clickOnTiles(ActionEvent event) {
-        Button clickedButton = (Button) event.getSource();
-        if(isSelectingTiles = true){
-
-
-
-            gui.sendShelfieColumn(Integer.parseInt(clickedButton.getText()));
-            isSelectingTiles = false;
-        }
-        //i pulsanti della colonna hanno come testo il numero della colonna (e visibilità impostata su zero)
+    public void askTilesPositionOnBoard(){
+        turnLabel.setVisible(true);
+        turnLabel.setText("Select " + tilesToPicNumber + " tiles on the board");
+        pickedRow = new int[tilesToPicNumber];
+        pickedColumn = new int[tilesToPicNumber];
     }
 
-    public void setShelfieColumnPicker(){
+    public void askShelfieColumn(){
         isSelectingColumn = true;
+        turnLabel.setVisible(true);
+        turnLabel.setText("In which column you want to put your tiles?");
     }
 
     @FXML
@@ -215,6 +227,20 @@ public class GameSceneController {
             isSelectingColumn = false;
         }
         //i pulsanti della colonna hanno come testo il numero della colonna (e visibilità impostata su zero)
+    }
+
+    public void askTilesOrder(List<Tile> tileList){
+        if(tileList.size() == 1){
+            //è l'ultima da mandare -> è finito il turno
+            endOfTurn();
+        }
+        gui.sendPlacingTile(0);
+    }
+
+    private void endOfTurn(){
+        showTurnButton(false);
+        turnLabel.setVisible(false);
+        turnState = 0;
     }
 
     public void showTurnButton(boolean show){
@@ -241,6 +267,7 @@ public class GameSceneController {
         gui.sendTurnSelection(1);
         showTurnButton(false);
     }
+
 
     @FXML
     private void showPointButtonAction(ActionEvent event){

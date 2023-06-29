@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.System.out;
@@ -123,6 +124,7 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void askUsername(){
         System.out.println("asking user name");
+        Platform.runLater(()->showLoginScreen());
     }
 
     public void sendUserName(String username){
@@ -134,6 +136,7 @@ public class Gui extends ViewObservable implements View {
 
         if (usernameAccepted && connectionSuccessful) {
             System.out.println("Hi, " + username + "! You connected to the server.");
+            Platform.runLater(()->showGameScreen());
         } else if (connectionSuccessful) {
             askUsername();
         } else if (usernameAccepted) {
@@ -188,13 +191,14 @@ public class Gui extends ViewObservable implements View {
             }
         }
         Platform.runLater(() -> {
-            GSController.turnManager();
+            Platform.runLater(()->GSController.turnManager());
         });
         //manda di default 2,4 per aggiornare gli obiettivi personali e comuni, 3 per la shelfie aggiornata
         //così va in loop infinito
     }
 
     public void sendTurnSelection(int i){
+        System.out.println("Sending turn request to server: " + i);
         notifyObserver(obs->obs.sendChoiceBeginTurn(i));
     }
 
@@ -209,12 +213,12 @@ public class Gui extends ViewObservable implements View {
         }
         Platform.runLater(() -> {
             GSController.showAlert("", user + "started his turn");
-            GSController.showTurnButton(false);
         });
     }
 
     @Override
     public void showBoard(Tile[][] structure) {
+        System.out.println("Updating the board...");
         Platform.runLater(()->{
             GSController.updateBoard(structure);
         });
@@ -222,41 +226,62 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void askTilesNumber() {
-        //GSController.setTilesPicker();
+        System.out.println("Ask tiles number");
+        Platform.runLater(()->GSController.askTilesNumber());
+    }
+
+    public void sendTilesNumber(int numberOfTiles){
+        System.out.println("Sending tiles number: " + numberOfTiles);
+        notifyObserver(obs -> obs.sendTilesNumberChosen(numberOfTiles));
     }
 
     @Override
     public void askTilePositionOnBoard(int tilesNumber) {
+        System.out.println("Ask tiles position on board");
+        Platform.runLater(()->GSController.askTilesPositionOnBoard());
+    }
 
+    public void sendTilesPositionOnBoard(int[] row, int[] col){
+        System.out.println("Sending tiles position on board: ");
+        Arrays.stream(row).forEach((a)-> System.out.println(a));
+        Arrays.stream(col).forEach((a)-> System.out.println(a));
+        notifyObserver(obs -> obs.sendTilePosition(row, col));
     }
 
     @Override
     public void askShelfieColumn() {
-        GSController.setShelfieColumnPicker();
+        System.out.println("Ask shelfie column");
+        Platform.runLater(()->GSController.askShelfieColumn());
     }
 
     public void sendShelfieColumn(int column){
+        System.out.println("Sending column number: " + column);
         notifyObserver(obs -> obs.sendShelfieColumn(column));
     }
 
     @Override
     public void askPlacingTile(List<Tile> tilesPicked) {
+        System.out.println("Ask placingTile column");
+        GSController.askTilesOrder(tilesPicked);
+    }
 
+    public void sendPlacingTile(int index){
+        notifyObserver(obs->obs.sendArrayTileIndex(index));
     }
 
     @Override
     public void showMyShelfie(Tile[][] structure) {
-        GSController.updatePlayerShelfie(structure);
+        Platform.runLater(()->GSController.updatePlayerShelfie(structure));
     }
 
     @Override
     public void showCommonGoals(CommonGoalsName name) {
-        GSController.updateCommonGoals();
+        Platform.runLater(()->GSController.updateCommonGoals());
     }
 
     @Override
     public void showMyPoints(int currentPoints) {
-        GSController.updatePoints();
+        Platform.runLater(()->GSController.updatePoints());
     }
 
     @Override
@@ -287,6 +312,7 @@ public class Gui extends ViewObservable implements View {
     public void showGenericMessage(String messageToSend) {
         //usato anche per segnalare l'inizio del gioco (init turn nel turn controller)
         //usato anche per segnalare l'inizio del turno di un giocatore
+        Platform.runLater(() -> GSController.showAlert("", messageToSend));
     }
 
     @Override
