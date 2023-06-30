@@ -384,10 +384,17 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void groupChat(List<String> bufferMessages) {
-
+        System.out.println("Retrive messages: " + bufferMessages);
+        Platform.runLater(()->GSController.showChat(bufferMessages));
     }
 
+    /**
+     * This method send the message to the group chat.
+     *
+     * @param finalMessages
+     */
     public void sendGroupMessage(List<String> finalMessages){
+        System.out.println("Sending messages: " + finalMessages);
         notifyObserver(obs->obs.sendChatMessage(null, finalMessages));
     }
 
@@ -401,8 +408,13 @@ public class Gui extends ViewObservable implements View {
         //usato anche per segnalare l'inizio del turno di un giocatore
         if(messageToSend.equals("The game is starting!")){
             Platform.runLater(() -> showGameScreen());
+        }else{
+            if(GSController == null){
+                Platform.runLater(() -> LSController.showAlert(messageToSend));
+            }else{
+                Platform.runLater(() -> GSController.showAlert("", messageToSend));
+            }
         }
-        Platform.runLater(() -> GSController.showAlert("", messageToSend));
     }
 
     /**

@@ -11,10 +11,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,8 +34,9 @@ public class GameSceneController {
     private int[] pickedColumn;
 
     private int points = 0;
-
     boolean first = true;
+
+    private List<String> chatMessages;
 
     @FXML
     private Button showpointButton;
@@ -69,6 +72,13 @@ public class GameSceneController {
     private GridPane boardGrid;
     @FXML
     private GridPane playerShelfie;
+
+    @FXML
+    private TextField messageTF;
+    @FXML
+    private Label chatBox;
+    @FXML
+    private Button chatSubmit;
 
     public void setGUI(Gui gui){
         this.gui = gui;
@@ -333,14 +343,48 @@ public class GameSceneController {
      */
     @FXML
     private void chatButtonAction(ActionEvent event){
-
         gui.sendTurnSelection(5);
+    }
 
+    /**
+     * This method handles the renspinse of the server after chat request.
+     *
+     * @param messages previous messages.
+     */
+    public void showChat(List<String> messages){
         if(chatGrid.isVisible()){
             chatGrid.setVisible(false);
+            showTurnButton(true);
+
+            gui.sendGroupMessage(chatMessages);
         }else{
-            chatGrid.setVisible(false);
+            String text = "";
+            for (String str : messages) {
+                text += str;
+                text += "\n";
+            }
+            chatMessages = new ArrayList<>();
+            chatBox.setText(text);
+            messageTF.setText("");
+            chatGrid.setVisible(true);
+            showTurnButton(false);
+            chatButton.setVisible(true);
         }
+    }
+
+    /**
+     * This method handles the button that sned the chat mesage.
+     *
+     * @param event button clicked.
+     */
+    @FXML
+    private void sendChatMessage(ActionEvent event){
+        String messageText = messageTF.getText();
+        chatMessages.add(messageText);
+        String chatBoxText = chatBox.getText();
+        chatBoxText += messageText + "\n";
+        chatBox.setText(chatBoxText);
+        messageTF.setText("");
     }
 
     /**
@@ -366,15 +410,15 @@ public class GameSceneController {
         showPoints(points, false);
     }
 
-    /*
-     * This method handles the button that shows the shelfie of the
-     * other players.
+    /**
+     * This method handles the button that update the playerShelfie.
      *
      * @param event button clicked.
+     */
     @FXML
-    private void showOthersShelfieButtonAction(ActionEvent event){
+    private void updateShelfieButtonAction(ActionEvent event){
         gui.sendTurnSelection(3);
-    }*/
+    }
 
     /**
      * This method handles the button that shows to the player
