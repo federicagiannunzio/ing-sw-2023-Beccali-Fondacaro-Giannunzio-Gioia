@@ -84,7 +84,7 @@ public class LoginController {
     }
 
     /**
-     * GIORGIO
+     * Generic method to show an alert view
      * @param info
      */
     public void showAlert(String info){

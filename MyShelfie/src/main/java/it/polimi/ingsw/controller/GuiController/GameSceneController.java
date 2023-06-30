@@ -82,7 +82,7 @@ public class GameSceneController {
     }
 
     /**
-     * At the end of each turn this method update the board by removing
+     * At the begin of each turn this method update the board by removing
      * the tiles that the player selected.
      *
      * @param board that needs to be modified.
@@ -177,7 +177,7 @@ public class GameSceneController {
     }
 
     /**
-     *
+     *This method is called by the numberButton to choose how many tiles the player want to pick
      * @param event
      */
     @FXML
@@ -187,6 +187,9 @@ public class GameSceneController {
         tilesNumberGrid.setVisible(false);
     }
 
+    /**
+     * This method is set to init the picking of the tiles from the board.
+     */
     public void askTilesPositionOnBoard(int tilesNumber){
         turnLabel.setVisible(true);
         tilesToPicNumber = tilesNumber; //in caso di selezione errata così il conteggio riparte
@@ -272,7 +275,8 @@ public class GameSceneController {
     }
 
     /**
-     * GIORGIO
+     * This method is called by the buttons representing the selected tiles
+     * to decide which to place first
      * @param event
      */
     @FXML
@@ -284,7 +288,8 @@ public class GameSceneController {
 
     /**
      * At the end of each turn this method handles the alert that shows
-     * the player the points he has.
+     * the player the points he has. it can also be called during the
+     * game using a specific button
      *
      * @param points of the player that is ending his turn.
      * @param endOfTurn end of player's turn.
@@ -308,7 +313,8 @@ public class GameSceneController {
     }
 
     /**
-     * GIORGIO
+     * This method is used to show or hide the buttons you use to select
+     * choices during your turn
      * @param show
      */
     public void showTurnButton(boolean show){
@@ -360,16 +366,15 @@ public class GameSceneController {
         showPoints(points, false);
     }
 
-    /**
+    /*
      * This method handles the button that shows the shelfie of the
      * other players.
      *
      * @param event button clicked.
-     */
     @FXML
     private void showOthersShelfieButtonAction(ActionEvent event){
         gui.sendTurnSelection(3);
-    }
+    }*/
 
     /**
      * This method handles the button that shows to the player
@@ -383,7 +388,7 @@ public class GameSceneController {
     }
 
     /**
-     * This method (select two commongoals at the start of the game)? GIORGIO
+     * This method is used to show the common goals when server sends them
      * @param name
      */
     public void updateCommonGoals(CommonGoalsName name){
@@ -459,7 +464,7 @@ public class GameSceneController {
     }
 
     /**
-     * GIORGIO
+     * Generic method to show an alert view
      * @param header
      * @param info
      */
