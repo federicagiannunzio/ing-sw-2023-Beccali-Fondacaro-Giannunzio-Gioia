@@ -1,9 +1,11 @@
 package it.polimi.ingsw.model;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,6 +14,7 @@ import java.util.Random;
 
 public class personalGoal implements Serializable {
     private final int id;
+    private final String filePath = "/goals1.json";
     private int tilesCount;
     private ArrayList<Color> achieved;
     private final Tile[][] body;
@@ -36,7 +39,9 @@ public class personalGoal implements Serializable {
      * */
     public void createTheGoal(int id) throws Exception {
         try {
-            String data = new String(Files.readAllBytes(Paths.get("MyShelfie/src/main/resources/goals1.json")));
+            InputStream inputStream = Board.class.getResourceAsStream(filePath);
+            String data = IOUtils.toString(inputStream);
+            //String data = new String(Files.readAllBytes(Paths.get("/resources/goals1.json")));
             JSONArray jsonArray = new JSONArray(data);
 
             String str = jsonArray.get(id).toString();
