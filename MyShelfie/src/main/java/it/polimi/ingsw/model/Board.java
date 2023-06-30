@@ -1,14 +1,17 @@
 package it.polimi.ingsw.model;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Board implements Serializable {
     private int remainingTiles;
+    private final String filePath = "/availableCells.json";
     private Tile[][] table;
     private Bag gameBag;
 
@@ -122,7 +125,9 @@ public class Board implements Serializable {
      * @param index the index of the cell of the JSON array in the file that we want to access.
      * */
     public JSONArray openAvailableCellJson(int index) throws IOException {
-        String data = new String(Files.readAllBytes(Paths.get("MyShelfie/src/main/resources/availableCells.json")));
+        InputStream inputStream = Board.class.getResourceAsStream(filePath);
+        String data = IOUtils.toString(inputStream);
+        //String data = new String(Files.readAllBytes(Paths.get("/resources/availableCells.json")));
         JSONArray jsonArray = new JSONArray(data);
 
         String str = jsonArray.get(index).toString();
