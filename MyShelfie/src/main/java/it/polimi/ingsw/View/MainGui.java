@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
+/**
+ * This is the Main JavaFX class which starts the main stage and scene.
+ */
 public class MainGui extends Application {
     @Override
     public void start(Stage stage) throws Exception {

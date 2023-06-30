@@ -20,6 +20,9 @@ import java.util.List;
 
 import static java.lang.System.out;
 
+/**
+ * This class implements all methods of View. Is used for the Graphic User Interface.
+ */
 public class Gui extends ViewObservable implements View {
 
     Stage stage;
@@ -43,6 +46,10 @@ public class Gui extends ViewObservable implements View {
 
     }
 
+    /**
+     * This method shows the first scene that appears
+     * to the player when starting the game.
+     */
     public void showWelcomeScreen(){
         try {
             FXMLLoader welcomeScreenFXML = new FXMLLoader(getClass().getResource("/welcomeScreen.fxml"));
@@ -58,6 +65,10 @@ public class Gui extends ViewObservable implements View {
         }
     }
 
+    /**
+     * This method shows the second scene, where the player
+     * enters the server address and the port.
+     */
     public void showConnectionScreen(){
         try {
             FXMLLoader connectionScreenFXML = new FXMLLoader(getClass().getResource("/Connection.fxml"));
@@ -72,6 +83,11 @@ public class Gui extends ViewObservable implements View {
             System.out.println(e);
         }
     }
+
+    /**
+     * This method shows the third scene, where the player enters
+     * his username and the numbers of players of the match.
+     */
     public void showLoginScreen(){
         try {
             FXMLLoader loginScreenFXML = new FXMLLoader(getClass().getResource("/Login.fxml"));
@@ -100,6 +116,10 @@ public class Gui extends ViewObservable implements View {
             System.out.println("exception " + e + " " + e.getMessage() + " " + e.getCause());
         }
     }
+
+    /**
+     * This method shows the fourth scene, where the entire game takes place.
+     */
     public void showGameScreen(){
         try {
             FXMLLoader GameScreenFXML = new FXMLLoader(getClass().getResource("/GameScene.fxml"));
