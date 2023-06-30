@@ -21,6 +21,9 @@ public abstract class ViewObservable {
     }
 
 
+    /**
+     * Notify all the observers
+     * */
     protected void notifyObserver(Consumer<ViewObserver> consumer) {
         for (ViewObserver observer : observers) {
             consumer.accept(observer);

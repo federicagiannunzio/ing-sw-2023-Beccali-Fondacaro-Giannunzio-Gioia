@@ -10,6 +10,7 @@
 ## Implemented features
 - Full Rule set
 - CLI
+- GUI
 - Socket
 - Advanced Features
   - Chat
