@@ -18,6 +18,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class implements the first scene that the player faces when starting the game.
+ */
 public class WelcomeScreenController {
     private Scene scene;
     private Stage stage;
@@ -30,10 +33,23 @@ public class WelcomeScreenController {
         this.gui = gui;
     }
 
+    /**
+     * If the player click the 'Play Game' button this method takes him to the
+     * connection scene.
+     *
+     * @param event button 'Play Game' clicked.
+     * @throws IOException
+     */
     public void goToConnection(ActionEvent event) throws IOException {
         gui.showConnectionScreen();
     }
 
+    /**
+     * If the player click the 'Exit' button this method finishes the game.
+     *
+     * @param event button 'Exit' clicked.
+     * @throws IOException
+     */
     public void exit(ActionEvent event) throws IOException {
        System.exit(0);
     }

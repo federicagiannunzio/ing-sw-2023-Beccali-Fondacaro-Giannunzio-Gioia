@@ -64,7 +64,8 @@ public class TurnController implements Serializable {
     }
 
     /**
-     * At the end of every turn check if someone has completed his shelf, passes the turn to the next player and refreshes the board if necessary
+     * At the end of every turn check if someone has completed his shelf,
+     * passes the turn to the next player and refreshes the board if necessary
      * */
     private void endTurn(){
         boolean refresh = false;

@@ -17,6 +17,9 @@ import javafx.scene.image.Image;
 
 import java.util.List;
 
+/**
+ * This class implements the main scene of the game, where each match is played.
+ */
 public class GameSceneController {
 
     private Gui gui;
@@ -78,6 +81,12 @@ public class GameSceneController {
         }
     }
 
+    /**
+     * At the begin of each turn this method update the board by removing
+     * the tiles that the player selected.
+     *
+     * @param board that needs to be modified.
+     */
     public void updateBoard(Tile[][] board){
 
         double cellHeight = boardGrid.getCellBounds(0,0).getHeight()-10;
@@ -127,6 +136,12 @@ public class GameSceneController {
         }
     }
 
+    /**
+     * This method update the personal shelfie by
+     * adding the tiles that the player selected.
+     *
+     * @param shelfie that needs to be updated.
+     */
     public void updatePlayerShelfie(Tile[][] shelfie){
         double cellHeight = playerShelfie.getCellBounds(0,0).getHeight()-10;
         double cellWidth = playerShelfie.getCellBounds(0,0).getWidth()-10;
@@ -151,12 +166,20 @@ public class GameSceneController {
         }
     }
 
+    /**
+     * This method is set to ask the player how many tiles
+     * he wants to select.
+     */
     public void askTilesNumber(){
         turnLabel.setVisible(true);
         tilesNumberGrid.setVisible(true);
         turnLabel.setText("How many tiles you want to pick?");
     }
 
+    /**
+     *This method is called by the numberButton to choose how many tiles the player want to pick
+     * @param event
+     */
     @FXML
     private void pickTile(ActionEvent event){
         int number = Integer.parseInt(((Button) event.getSource()).getText());
@@ -164,6 +187,9 @@ public class GameSceneController {
         tilesNumberGrid.setVisible(false);
     }
 
+    /**
+     * This method is set to init the picking of the tiles from the board.
+     */
     public void askTilesPositionOnBoard(int tilesNumber){
         turnLabel.setVisible(true);
         tilesToPicNumber = tilesNumber; //in caso di selezione errata così il conteggio riparte
@@ -172,12 +198,20 @@ public class GameSceneController {
         pickedColumn = new int[tilesToPicNumber];
     }
 
+    /**
+     * This method is set to ask the player the column of his shelfie where
+     * he wants to put his selected tiles.
+     */
     public void askShelfieColumn(){
         isSelectingColumn = true;
         turnLabel.setVisible(true);
         turnLabel.setText("In which column you want to put your tiles?");
     }
 
+    /**
+     * This method handles the click of the button of the column of the shelfie.
+     * @param event button clicked.
+     */
     @FXML
     private void clickOnColumn(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
@@ -188,6 +222,12 @@ public class GameSceneController {
         //i pulsanti della colonna hanno come testo il numero della colonna (e visibilità impostata su zero)
     }
 
+    /**
+     * This method ask the player the order of positioning in the selected column of
+     * his shelfie of the tiles he has selected.
+     *
+     * @param tileList tiles that the player selected.
+     */
     public void askTilesOrder(List<Tile> tileList){
         turnLabel.setVisible(true);
         turnLabel.setText("Which tile do you want to insert?");
@@ -234,6 +274,11 @@ public class GameSceneController {
 
     }
 
+    /**
+     * This method is called by the buttons representing the selected tiles
+     * to decide which to place first
+     * @param event
+     */
     @FXML
     private void pickTilePosition(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
@@ -241,6 +286,14 @@ public class GameSceneController {
         gui.sendPlacingTile(Integer.parseInt(clickedButton.getText()) - 1);
     }
 
+    /**
+     * At the end of each turn this method handles the alert that shows
+     * the player the points he has. it can also be called during the
+     * game using a specific button
+     *
+     * @param points of the player that is ending his turn.
+     * @param endOfTurn end of player's turn.
+     */
     public void showPoints(int points, boolean endOfTurn){
         if(endOfTurn){
             this.points = points;
@@ -249,6 +302,9 @@ public class GameSceneController {
        showAlert("", "You have: " + points + " points");
     }
 
+    /**
+     * This method handles the end of turn.
+     */
     private void endOfTurn(){
         showTurnButton(false);
         turnLabel.setVisible(false);
@@ -256,6 +312,11 @@ public class GameSceneController {
         first = true;
     }
 
+    /**
+     * This method is used to show or hide the buttons you use to select
+     * choices during your turn
+     * @param show
+     */
     public void showTurnButton(boolean show){
         chatButton.setVisible(show);
         updateShelfieButton.setVisible(show);
@@ -265,6 +326,11 @@ public class GameSceneController {
         personalGoalButton.setVisible(show);
     }
 
+    /**
+     * This method handles the button that allows the player to chat.
+     *
+     * @param event button clicked.
+     */
     @FXML
     private void chatButtonAction(ActionEvent event){
 
@@ -277,6 +343,12 @@ public class GameSceneController {
         }
     }
 
+    /**
+     * This method handles the button that allows the player to start selecting
+     * tiles from the board.
+     *
+     * @param event button clicked.
+     */
     @FXML
     private void selectTilesButtonAction(ActionEvent event){
         gui.sendTurnSelection(1);
@@ -284,21 +356,41 @@ public class GameSceneController {
     }
 
 
+    /**
+     * This button handles the button that shows the player his points.
+     *
+     * @param event button clicked.
+     */
     @FXML
     private void showPointButtonAction(ActionEvent event){
         showPoints(points, false);
     }
 
+    /*
+     * This method handles the button that shows the shelfie of the
+     * other players.
+     *
+     * @param event button clicked.
     @FXML
     private void showOthersShelfieButtonAction(ActionEvent event){
         gui.sendTurnSelection(3);
-    }
+    }*/
 
+    /**
+     * This method handles the button that shows to the player
+     * the common goals of the match.
+     *
+     * @param event button clicked.
+     */
     @FXML
     private void showCommonGoalButtonAction(ActionEvent event){
         gui.sendTurnSelection(4);
     }
 
+    /**
+     * This method is used to show the common goals when server sends them
+     * @param name
+     */
     public void updateCommonGoals(CommonGoalsName name){
         String goalName = "";
         if(name != null){
@@ -344,6 +436,11 @@ public class GameSceneController {
         showAlert("Common goal", goalName);
     }
 
+    /**
+     * This method handles the button that shows to the player his personal goal.
+     *
+     * @param event button clicked.
+     */
     @FXML
     private void showPersonalGoalButtonAction(ActionEvent event){
         if(personalGoalButton.getText().equals("End")){
@@ -358,10 +455,19 @@ public class GameSceneController {
         }
     }
 
+    /**
+     * This method shows the alert where is nominated the winner player.
+     * @param winner username of the player that has won the match.
+     */
     public void showWinner(String winner){
         showAlert("Game over", winner + "is the winner!");
     }
 
+    /**
+     * Generic method to show an alert view
+     * @param header
+     * @param info
+     */
     public void showAlert(String header, String info){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("MyShelfie");
@@ -370,6 +476,12 @@ public class GameSceneController {
         alert.showAndWait();
     }
 
+    /**
+     * This method is set to get the image of the tiles selected.
+     *
+     * @param color of the tile.
+     * @return image of the tile.
+     */
     private Image getTileImage(Color color){
         Image image = null;
         switch (color){

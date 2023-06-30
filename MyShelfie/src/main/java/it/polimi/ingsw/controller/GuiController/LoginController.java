@@ -10,6 +10,9 @@ import javafx.scene.control.*;
 
 import java.util.Objects;
 
+/**
+ * This class implements the scene where te player insert his credentials.
+ */
 public class LoginController {
 
     private Gui gui;
@@ -25,6 +28,9 @@ public class LoginController {
         this.gui = gui;
     }
 
+    /**
+     * This method is set to handle the username entered by the player.
+     */
     private void sendUsername(){
         String username = TF.getText();
         if (username.length() == 0){
@@ -35,6 +41,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * This method is set to handle the number of player of the
+     * match inserted by the player.
+     */
     private void sendPlayerNumber(){
         try {
             int number = Integer.parseInt(TF.getText());
@@ -49,6 +59,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * This method handles the button that allows the player to enter the game.
+     *
+     * @param event button clicked.
+     */
     public void submit(ActionEvent event){
         if(Objects.equals(TF.getPromptText(), "Username")){
             sendUsername();
@@ -57,6 +72,9 @@ public class LoginController {
         }
     }
 
+    /**
+     * This method ask the player the numeber of players he wants.
+     */
     public void askPlayerNumber(){
         loginBT.setVisible(true);
         TF.setPromptText("Number of players");
@@ -65,6 +83,10 @@ public class LoginController {
         loginBT.setText("Send");
     }
 
+    /**
+     * Generic method to show an alert view
+     * @param info
+     */
     public void showAlert(String info){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("MyShelfie");

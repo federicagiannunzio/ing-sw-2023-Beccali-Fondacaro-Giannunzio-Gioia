@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class implements the scene where users connect to server.
+ */
 public class ConnectionController{
 
     private Scene scene;
@@ -35,6 +38,12 @@ public class ConnectionController{
         this.gui = gui;
     }
 
+    /**
+     * This method handles the connection of the player to server.
+     *
+     * @param event
+     * @throws IOException if the entered informations are not valid.
+     */
     public void connectToServer(ActionEvent event) throws IOException {
 
         final int port;
