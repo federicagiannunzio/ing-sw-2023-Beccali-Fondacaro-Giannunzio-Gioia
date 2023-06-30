@@ -136,12 +136,18 @@ public class Gui extends ViewObservable implements View {
     }
 
 
-    //CONNECTION
+    /**
+     * This method handles connection.
+     * @param addr
+     * @param port
+     */
     public void sendServerInfo(String addr, int port){
         notifyObserver(obs -> obs.sendServerInfo(addr, port));
     }
 
-    //LOGIN
+    /**
+     * Thism method handles login.
+     */
     @Override
     public void askUsername(){
         System.out.println("asking user name");
@@ -152,6 +158,12 @@ public class Gui extends ViewObservable implements View {
         notifyObserver(obs -> obs.sendUsername(username));
     }
 
+    /**
+     * This method shows login results.
+     * @param usernameAccepted     indicates if the chosen nickname has been accepted.
+     * @param connectionSuccessful indicates if the connection has been successful.
+     * @param username             the nickname of the player to be greeted.
+     */
     @Override
     public void showLoginResult(boolean usernameAccepted, boolean connectionSuccessful, String username){
 
@@ -172,6 +184,7 @@ public class Gui extends ViewObservable implements View {
 
     }
 
+
     @Override
     public void askPlayersNumber() {
         System.out.println("asking player number");
@@ -183,8 +196,6 @@ public class Gui extends ViewObservable implements View {
         notifyObserver(obs -> obs.sendPlayersNumber(playersNumber));
     }
 
-    //LOBBY
-
     @Override
     public void showLobby(List<String> nicknameList, int numPlayers) {
         System.out.println("showLobby");
@@ -195,6 +206,11 @@ public class Gui extends ViewObservable implements View {
         LoSController.playerJoin(connectedUser);
     }
 
+    /**
+     * This method is set to show the disconnection message.
+     *
+     * @param disconnectedUser the user that has just disconnected.
+     */
     @Override
     public void showDisconnectionMessage(String disconnectedUser) {
         LoSController.playerQuit(disconnectedUser);
@@ -237,6 +253,11 @@ public class Gui extends ViewObservable implements View {
         });
     }
 
+    /**
+     * This method is set to show the board.
+     *
+     * @param structure board.
+     */
     @Override
     public void showBoard(Tile[][] structure) {
         System.out.println("Updating the board...");
@@ -290,38 +311,77 @@ public class Gui extends ViewObservable implements View {
         notifyObserver(obs->obs.sendArrayTileIndex(index));
     }
 
+    /**
+     * This method is set to show the shelfie of the player that asks for it.
+     *
+     * @param structure shelfie.
+     */
     @Override
     public void showMyShelfie(Tile[][] structure) {
         Platform.runLater(()->GSController.updatePlayerShelfie(structure));
     }
 
+    /**
+     * This method is set to dhow the common goals.
+     *
+     * @param name of the goal.
+     */
     @Override
     public void showCommonGoals(CommonGoalsName name) {
         System.out.println("Showing common goals...");
         Platform.runLater(()->GSController.updateCommonGoals(name));
     }
 
+    /**
+     * This method is set to show a message whenever a player
+     * completes a common goal.
+     *
+     * @param username of the player that reached the goal.
+     * @param commonGoal that has been completed.
+     * @param pointsAchieved that the player obtain.
+     */
     @Override
     public void showCommonGoalCompletion(String username, String commonGoal, int pointsAchieved) {
         GSController.showAlert(username + " has completed " + commonGoal + " common goal.", username + " has achieved " + pointsAchieved + " points.");
     }
 
+    /**
+     * This method is set to show the points of the current player.
+     *
+     * @param currentPoints
+     */
     @Override
     public void showMyPoints(int currentPoints) {
         System.out.println("Show points("+currentPoints+")");
         Platform.runLater(()->GSController.showPoints(currentPoints, true));
     }
 
+    /**
+     * This method is set to show the win message.
+     * @param winner the username of the winner.
+     */
     @Override
     public void showWinMessage(String winner) {
         GSController.showWinner(winner);
     }
 
+    /**
+     * This method handles the private chat.
+     *
+     * @param playersName
+     * @param bufferMessages
+     * @param sender
+     */
     @Override
     public void privateChat(List<String> playersName, ArrayList<ArrayList<String>> bufferMessages, String sender) {
 
     }
 
+    /**
+     * This method handles the group chat.
+     *
+     * @param bufferMessages
+     */
     @Override
     public void groupChat(List<String> bufferMessages) {
 
@@ -331,6 +391,10 @@ public class Gui extends ViewObservable implements View {
         notifyObserver(obs->obs.sendChatMessage(null, finalMessages));
     }
 
+    /**
+     * Method used to report the start of the match, or the start of the turn.
+     * @param messageToSend the message to be shown.
+     */
     @Override
     public void showGenericMessage(String messageToSend) {
         //usato anche per segnalare l'inizio del gioco (init turn nel turn controller)
@@ -341,11 +405,20 @@ public class Gui extends ViewObservable implements View {
         Platform.runLater(() -> GSController.showAlert("", messageToSend));
     }
 
+    /**
+     * This method is set to show error message.
+     *
+     * @param errorMessage
+     */
     @Override
     public void showErrorMessage(String errorMessage) {
 
     }
 
+    /**
+     * This method is set to show the tiles picked.
+     * @param tilesPicked
+     */
     @Override
     public void showTilesArray(List<Tile> tilesPicked) {
 
