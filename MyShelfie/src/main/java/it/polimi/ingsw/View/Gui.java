@@ -3,6 +3,7 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.controller.GuiController.*;
 import it.polimi.ingsw.Observer.*;
+import it.polimi.ingsw.model.CommonGoal;
 import it.polimi.ingsw.model.CommonGoalsName;
 import it.polimi.ingsw.model.Tile;
 import javafx.application.Platform;
@@ -136,7 +137,6 @@ public class Gui extends ViewObservable implements View {
 
         if (usernameAccepted && connectionSuccessful) {
             System.out.println("Hi, " + username + "! You connected to the server.");
-            Platform.runLater(()->showGameScreen());
         } else if (connectionSuccessful) {
             askUsername();
         } else if (usernameAccepted) {
@@ -155,10 +155,11 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void askPlayersNumber() {
         System.out.println("asking player number");
-        sendPlayerNumber(LSController.getPlayerNumber());
+        Platform.runLater(()->LSController.askPlayerNumber());
     }
 
     public void sendPlayerNumber(int playersNumber){
+        System.out.println("Sending player number " + playersNumber + "...");
         notifyObserver(obs -> obs.sendPlayersNumber(playersNumber));
     }
 
@@ -238,7 +239,7 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void askTilePositionOnBoard(int tilesNumber) {
         System.out.println("Ask tiles position on board");
-        Platform.runLater(()->GSController.askTilesPositionOnBoard());
+        Platform.runLater(()->GSController.askTilesPositionOnBoard(tilesNumber));
     }
 
     public void sendTilesPositionOnBoard(int[] row, int[] col){
@@ -262,7 +263,7 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void askPlacingTile(List<Tile> tilesPicked) {
         System.out.println("Ask placingTile column");
-        GSController.askTilesOrder(tilesPicked);
+        Platform.runLater(() -> GSController.askTilesOrder(tilesPicked));
     }
 
     public void sendPlacingTile(int index){
@@ -276,17 +277,19 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showCommonGoals(CommonGoalsName name) {
-        Platform.runLater(()->GSController.updateCommonGoals());
-    }
-
-    @Override
-    public void showMyPoints(int currentPoints) {
-        Platform.runLater(()->GSController.updatePoints());
+        System.out.println("Showing common goals...");
+        Platform.runLater(()->GSController.updateCommonGoals(name));
     }
 
     @Override
     public void showCommonGoalCompletion(String username, String commonGoal, int pointsAchieved) {
         GSController.showAlert(username + " has completed " + commonGoal + " common goal.", username + " has achieved " + pointsAchieved + " points.");
+    }
+
+    @Override
+    public void showMyPoints(int currentPoints) {
+        System.out.println("Show points("+currentPoints+")");
+        Platform.runLater(()->GSController.showPoints(currentPoints, true));
     }
 
     @Override
@@ -312,6 +315,9 @@ public class Gui extends ViewObservable implements View {
     public void showGenericMessage(String messageToSend) {
         //usato anche per segnalare l'inizio del gioco (init turn nel turn controller)
         //usato anche per segnalare l'inizio del turno di un giocatore
+        if(messageToSend.equals("The game is starting!")){
+            Platform.runLater(() -> showGameScreen());
+        }
         Platform.runLater(() -> GSController.showAlert("", messageToSend));
     }
 

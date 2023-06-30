@@ -8,33 +8,61 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
 
+import java.util.Objects;
+
 public class LoginController {
 
     private Gui gui;
 
     @FXML
-    private TextField usernameTF;
+    private Label label;
     @FXML
-    private TextField numberTF;
+    private TextField TF;
     @FXML
     private Button loginBT;
-    @FXML
-    private Label label;
 
     public void setGUI(Gui gui){
         this.gui = gui;
     }
 
-    public void submit(ActionEvent event){
-        String username = usernameTF.getText();
+    private void sendUsername(){
+        String username = TF.getText();
         if (username.length() == 0){
-            showAlert("Insert at least one character!");
+            showAlert("Enter at least one character!");
         }else{
             System.out.println(username);
             gui.sendUserName(username);
-            gui.sendPlayerNumber(Integer.parseInt(numberTF.getText()));
-            //gui.showGameScreen();
         }
+    }
+
+    private void sendPlayerNumber(){
+        try {
+            int number = Integer.parseInt(TF.getText());
+            if(number >= 2 && number <= 4){
+                gui.sendPlayerNumber(number);
+                loginBT.setVisible(false);
+            }else{
+                label.setText("Enter a valid number (2-4)");
+            }
+        }catch (Exception e){
+            label.setText("Enter a valid number (2-4)");
+        }
+    }
+
+    public void submit(ActionEvent event){
+        if(Objects.equals(TF.getPromptText(), "Username")){
+            sendUsername();
+        }else if(Objects.equals(TF.getPromptText(), "Number of players")){
+            sendPlayerNumber();
+        }
+    }
+
+    public void askPlayerNumber(){
+        loginBT.setVisible(true);
+        TF.setPromptText("Number of players");
+        TF.setText("");
+        label.setText("Enter number of players (2-4)");
+        loginBT.setText("Send");
     }
 
     public void showAlert(String info){
@@ -45,13 +73,6 @@ public class LoginController {
         alert.showAndWait();
     }
 
-    public int getPlayerNumber(){
-        try {
-            return Integer.parseInt(numberTF.getText().trim());
-        }catch (Error e){
-            return 0;
-        }
-    }
 }
 
 

@@ -17,7 +17,7 @@
             <Image url="@assets/misc/sfondo%20parquet.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameTF" layoutX="46.0" layoutY="214.0" opacity="0.54" promptText="Username" styleClass="button1" stylesheets="@Login.css" />
+      <TextField fx:id="TF" layoutX="206.0" layoutY="207.0" opacity="0.54" promptText="Username" styleClass="button1" stylesheets="@Login.css" />
       <ImageView fitHeight="76.0" fitWidth="225.0" layoutX="191.0" layoutY="55.0">
          <image>
             <Image url="@assets/Publisher%20material/Title%202000x618px.png" />
@@ -26,7 +26,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Label fx:id="label" layoutX="55.0" layoutY="180.0" text="Enter your username:" textAlignment="CENTER">
+      <Label fx:id="label" layoutX="215.0" layoutY="173.0" text="Enter your username:" textAlignment="CENTER">
          <font>
             <Font name="Eras Bold ITC" size="18.0" />
          </font></Label>
@@ -37,11 +37,5 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <TextField fx:id="numberTF" layoutX="336.0" layoutY="214.0" opacity="0.54" promptText="Number of player" styleClass="button1" stylesheets="@Login.css" />
-      <Label layoutX="328.0" layoutY="180.0" text="Enter the number of player:">
-         <font>
-            <Font name="Eras Bold ITC" size="18.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

@@ -119,8 +119,6 @@ public class Cli extends ViewObservable implements View {
                 i--;
             }
         }
-        Arrays.stream(row).forEach((a)-> System.out.println(a));
-        Arrays.stream(col).forEach((a)-> System.out.println(a));
         notifyObserver(obs -> obs.sendTilePosition(row, col));
     }
 
